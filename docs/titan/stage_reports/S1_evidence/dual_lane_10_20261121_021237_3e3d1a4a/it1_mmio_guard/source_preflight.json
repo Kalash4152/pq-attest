@@ -1,0 +1,49 @@
+{
+  "state": "PASS",
+  "declarations": {
+    "package:noc_pkg": "rtl/dual_lane/NOC_PKG.sv:34",
+    "module:picorv32": "rtl/riscv/picorv32.v:62",
+    "module:picorv32_regs": "rtl/riscv/picorv32.v:2174",
+    "module:picorv32_pcpi_mul": "rtl/riscv/picorv32.v:2197",
+    "module:picorv32_pcpi_fast_mul": "rtl/riscv/picorv32.v:2318",
+    "module:picorv32_pcpi_div": "rtl/riscv/picorv32.v:2420",
+    "module:picorv32_axi": "rtl/riscv/picorv32.v:2517",
+    "module:picorv32_axi_adapter": "rtl/riscv/picorv32.v:2731",
+    "module:picorv32_wb": "rtl/riscv/picorv32.v:2815",
+    "module:picorv32_adapter": "rtl/riscv/picorv32_adapter.sv:3",
+    "module:addr_decode": "rtl/riscv/addr_decode.sv:3",
+    "module:uart_tx": "rtl/riscv/uart_tx.sv:1",
+    "module:uart_mmio": "rtl/riscv/uart_mmio.sv:3",
+    "module:gpio": "rtl/riscv/gpio.sv:3",
+    "module:tile_status": "rtl/riscv/tile_status.sv:18",
+    "module:tile_top": "rtl/riscv/tile_top.sv:3",
+    "module:mem_bram": "rtl/riscv/mem_bram.sv:3",
+    "module:tile_mem_wrapper": "rtl/riscv/tile_mem_wrapper.sv:3",
+    "module:tmem_app_bridge": "rtl/riscv/tmem_app_bridge.sv:25",
+    "module:meas_window_reader": "rtl/riscv/meas_window_reader.sv:15",
+    "module:cpu_tile_noc": "rtl/riscv/cpu_tile_noc.sv:22",
+    "module:tb_r10_mmio_guard": "sim_riscv/tb_r10_mmio_guard.sv:4"
+  },
+  "scanned_files": [
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\dual_lane\\NOC_PKG.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\picorv32.v",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\picorv32_adapter.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\addr_decode.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\uart_tx.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\uart_mmio.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\gpio.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\tile_status.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\tile_top.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\mem_bram.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\tile_mem_wrapper.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\tmem_app_bridge.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\meas_window_reader.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\rtl\\riscv\\cpu_tile_noc.sv",
+    "C:\\vivado_verilog_proj\\_t1r\\sim_riscv\\tb_r10_mmio_guard.sv"
+  ],
+  "defines": [
+    "PQ_MAC_ON",
+    "CPU_TILE_MODULE=cpu_tile_noc"
+  ],
+  "scope": "active named module/package declarations"
+}

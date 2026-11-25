@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\vivado_verilog_proj\_titan\scripts\dual_lane.py", line 751, in <module>
+    if __name__=='__main__': sys.exit(main())
+                                      ~~~~^^
+  File "C:\vivado_verilog_proj\_titan\scripts\dual_lane.py", line 745, in main
+    protected_preflight(); rtl_lint_preflight()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\vivado_verilog_proj\_titan\scripts\dual_lane.py", line 100, in protected_preflight
+    if changed:raise PreflightFailure('protected-source hash mismatch: '+', '.join(changed))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+dual_lane_preflight.PreflightFailure: protected-source hash mismatch: NOC_PQATTEST.srcs/sources_1/new/kmac_128.sv, NOC_PQATTEST.srcs/sources_1/new/kmac_absorb.sv, NOC_PQATTEST.srcs/sources_1/new/kmac_pkg.sv, NOC_PQATTEST.srcs/sources_1/new/NOC_DATAPTAH.sv, NOC_PQATTEST.srcs/sources_1/new/NOC_XY_ROUTING.sv, NOC_PQATTEST.srcs/sources_1/new/pq_attest_protocol_pkg.sv, NOC_PQATTEST.srcs/sources_1/new/pq_attest_request.sv, NOC_PQATTEST.srcs/sources_1/new/pq_attest_response.sv, NOC_PQATTEST.srcs/sources_1/new/pq_kdf.sv, NOC_PQATTEST.srcs/sources_1/new/pq_kdf_message_builder.sv, NOC_PQATTEST.srcs/sources_1/new/pq_kdf_pkg.sv, NOC_PQATTEST.srcs/sources_1/new/pq_kdf_sp800185_encoder.sv, NOC_PQATTEST.srcs/sources_1/new/SHA3_256.sv, NOC_PQATTEST.srcs/sources_1/new/SHA3_ABSORB.sv, NOC_PQATTEST.srcs/sources_1/new/SHA3_PAD.sv, NOC_PQATTEST.srcs/sources_1/new/SHA3_PKG.sv, NOC_PQATTEST.srcs/sources_1/new/TRNG_CONDITIONER.sv, NOC_PQATTEST.srcs/sources_1/new/TRNG_HEALTH.sv, NOC_PQATTEST.srcs/sources_1/new/TRNG_PKG.sv, NOC_PQATTEST.srcs/sources_1/new/TRNG_SOURCE.sv

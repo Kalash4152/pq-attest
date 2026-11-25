@@ -1,0 +1,48 @@
+{
+  "it4r_b0_closure": {
+    "completion_in_20ns_periods": "260753"
+  },
+  "it4r_b0_lifecycle": {
+    "completion_in_20ns_periods": "260753"
+  },
+  "it4r_b0_error": {
+    "completion_in_20ns_periods": "9115"
+  },
+  "it4r_b0_inflight": {
+    "completion_in_20ns_periods": "109120"
+  },
+  "it4r_b0_contention": {
+    "completion_in_20ns_periods": "10182"
+  },
+  "it4r_b0_phase_sweep": {
+    "completion_in_20ns_periods": "287831"
+  },
+  "it4r_b0_attack_approve_changed": {
+    "completion_in_20ns_periods": "8952"
+  },
+  "it4r_b0_attack_reject_changed": {
+    "completion_in_20ns_periods": "11554"
+  },
+  "it4r_b0_hasher": {
+    "completion_in_20ns_periods": "38260"
+  },
+  "it4r_b0_decoder": {
+    "completion_in_20ns_periods": "59"
+  },
+  "it4r_b0_mmio_guard": {
+    "completion_in_20ns_periods": "2008"
+  },
+  "it4r_b0_i9_integ": {
+    "completion_in_20ns_periods": "7060"
+  },
+  "it4r_b0_matched_secure": {
+    "completion_in_20ns_periods": "13551",
+    "read_latency_median_cycles": "32",
+    "write_latency_median_cycles": "32"
+  },
+  "it4r_b0_matched_secure_contended": {
+    "completion_in_20ns_periods": "13988",
+    "read_latency_median_cycles": "32",
+    "write_latency_median_cycles": "32"
+  }
+}

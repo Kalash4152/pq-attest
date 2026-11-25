@@ -125,6 +125,28 @@
    "line_sha256": "34be3afcf9261ea5d2bae95e2ef276237ce65c39f7c49064536e06d1c059906f",
    "source": "always_comb begin",
    "reason": "generated P7 copy of the same NI RX block (scripts/prepare_p7ni.py): same always-ready consumer argument (S1 rule 2026-10-21) (I-9 copy, scripts/prepare_i9.py: same inherited line, +47 lines; M-F1 rev 8)"
+  },
+  {
+   "path": "rtl/dual_lane/noc_network_interface_p7_t1.sv",
+   "line": 1484,
+   "line_sha256": "b709b36f5d7caaec16213e9d6978726dbc6ec16a78b53b13dca26715e3f44ab5",
+   "source": "rx_mac_tag_q[",
+   "reason": "Stage 0 generator copy of the pinned I-9 waiver. Statement is byte-identical; one provenance header added. rx MAC word capture: 2-bit counter rx_mac_cnt_q, 4 positions x 32 bits (decoder, not a priority chain); NI measured 263-412 LUTs OOC; same line in the generated P7 NI variant (scripts/prepare_p7ni.py, +3 header/parameter lines) (I-9 copy, scripts/prepare_i9.py: same inherited line, +47 lines; M-F1 rev 8)"
+  },
+  {
+   "path": "rtl/dual_lane/noc_network_interface_p7_t1.sv",
+   "line": 1610,
+   "line_sha256": "b0cb6c89eaf89223ceb240332cb10d72a88d906417720f57caced81a8908dd74",
+   "source": "rx_mac_tag[{rx_mac_cnt_q, 5'd0} +: FLIT_WIDTH] =",
+   "reason": "Stage 0 generator copy of the pinned I-9 waiver. Statement is byte-identical; one provenance header added. rx MAC word capture: 2-bit counter rx_mac_cnt_q, 4 positions x 32 bits (decoder, not a priority chain); NI measured 263-412 LUTs OOC; same line in the generated P7 NI variant (scripts/prepare_p7ni.py, +3 header/parameter lines) (I-9 copy, scripts/prepare_i9.py: same inherited line, +47 lines; M-F1 rev 8)"
+  },
+  {
+   "path": "rtl/dual_lane/noc_network_interface_p7_t1.sv",
+   "line": 991,
+   "rule": "valid_ready_comb",
+   "line_sha256": "34be3afcf9261ea5d2bae95e2ef276237ce65c39f7c49064536e06d1c059906f",
+   "source": "always_comb begin",
+   "reason": "Stage 0 generator copy of the pinned I-9 waiver. Statement is byte-identical; one provenance header added. generated P7 copy of the same NI RX block (scripts/prepare_p7ni.py): same always-ready consumer argument (S1 rule 2026-10-21) (I-9 copy, scripts/prepare_i9.py: same inherited line, +47 lines; M-F1 rev 8)"
   }
  ]
 }

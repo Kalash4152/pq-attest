@@ -1,0 +1,72 @@
+{
+  "it1_closure": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "7405af2eabbd8a137c0ddf2bf4dd2eec6003dd50c075a6920b54cabc81f6a1ff",
+    "observations_matched": true
+  },
+  "it1_lifecycle": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "f8b1d47c66e9289c6f93a130333c8127a5b2351cbb2c6fe400f4af6de8334df4",
+    "observations_matched": true
+  },
+  "it1_error": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "7e09d3ab1a0fb0a4f8d78c05f105783e35cbe0d39dc09fba7c7ed2d46268dab0",
+    "observations_matched": true
+  },
+  "it1_inflight": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "8dd5feb7d4c26286de8d3f3425ea37677d24c8810e67ea7b52d889635631be8c",
+    "observations_matched": true
+  },
+  "it1_contention": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "2ba776af3a1ec6ab6d7147e357bd95201fa3937000051e851ed0315963a090fb",
+    "observations_matched": true
+  },
+  "it1_phase_sweep": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "8ddacf18d37ea4712eb45db63b5565f6b24e14d8264a208de5de787e07958c7e",
+    "observations_matched": true
+  },
+  "it1_attack_approve_changed": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "5c04fa2d754e07ac8da230779944ab9caa457d760ddfbee6913b6b62e76be108",
+    "observations_matched": true
+  },
+  "it1_attack_reject_changed": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "1c60bfa57b1096430238e6ba6b85cfa7db4827c8af03a75e9709eb9f17bbad92",
+    "observations_matched": true
+  },
+  "it1_hasher": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "f5e996bee4fc34918354d8e437ef6394505c55f4c7246a2ab9444315313108f0",
+    "observations_matched": true
+  },
+  "it1_decoder": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "ca11043623e504f626535c988c1ac206131724fd91a250e2549d31a98ca32bae",
+    "observations_matched": true
+  },
+  "it1_mmio_guard": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "f9e3b2fd58302ba131c8cb437ca05808c91983501170662d5d1ef0fdac394995",
+    "observations_matched": true
+  },
+  "it1_i9_integ": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "0befe1827fbc7b7aac296ffbda8ced28bb6e50d14be964b40280daf3bc8c18fd",
+    "observations_matched": true
+  },
+  "it1_matched_secure": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "de7f18bf82b517b64f7f883bfb3b82f6bef51dd040340ba0ee36e10f51235732",
+    "observations_matched": true
+  },
+  "it1_matched_secure_contended": {
+    "archived_run": "dual_lane_10_20261114_114143_ce2c2eba",
+    "historical_log_sha256": "bc2936c5a6fc8d89a84b298de20e94ef4ef6442bf712fc832d41ef75fb4a7ffa",
+    "observations_matched": true
+  }
+}

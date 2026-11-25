@@ -1,0 +1,15 @@
+{
+  "state": "PASS",
+  "declarations": {
+    "package:noc_pkg": "rtl/dual_lane/NOC_PKG.sv:34",
+    "package:titan_pkg": "rtl/dual_lane/titan_pkg.sv:3",
+    "module:tb_titan_pkg": "rtl/dual_lane/titan/tb_titan_pkg.sv:2"
+  },
+  "scanned_files": [
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\NOC_PKG.sv",
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\titan_pkg.sv",
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\titan\\tb_titan_pkg.sv"
+  ],
+  "defines": [],
+  "scope": "active named module/package declarations"
+}

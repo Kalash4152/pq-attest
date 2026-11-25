@@ -1,0 +1,62 @@
+[
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\m1\\results\\g0\\g0_m1_sweep.csv",
+    "bytes": 177,
+    "sha256": "205e45067fa1439241b8c52eefeef0388d66ad33bbe5c2d4bc9a88e6bf3bcb44"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\m1\\results\\g0\\witness_m1.vcd",
+    "bytes": 37929404,
+    "sha256": "19f90cf59ef49d25267926864bf2ff9496f420303557ed46bdeb2eefd8d2191c"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\m1\\simulation.txt",
+    "bytes": 2825,
+    "sha256": "b217ac6392abf4b0bb15a42720b3ecd3325e5cf0212d49dac834bc1df9b16d94"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\m2\\results\\g0\\g0_m2_sweep.csv",
+    "bytes": 89,
+    "sha256": "62a5b7440adefed3b5e44b765c8bf1d254977e15b78df7afe10f5d0045c8f82a"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\m2\\results\\g0\\witness_m2.vcd",
+    "bytes": 31110698,
+    "sha256": "346be70c854473e80431df3fa462b1538c140afd74ff14109e2770bd7dd36126"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\m2\\simulation.txt",
+    "bytes": 1560,
+    "sha256": "b5589d13347160d16332c06fd69a09752db57428a83428061d5cba63a707f088"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\m3\\results\\g0\\g0_m3_sweep.csv",
+    "bytes": 65,
+    "sha256": "4ff7b535f1bff38d7541fc360bedc9f75bbc984a7fb6735bdbead271608eff63"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\m3\\results\\g0\\witness_m3.vcd",
+    "bytes": 24182813,
+    "sha256": "649f2656da6b3a697058fd15e78b4aa2faedbfcfd2b66538dfd2994dd1571a8c"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\m3\\simulation.txt",
+    "bytes": 1403,
+    "sha256": "2b6ca1e680347267505b9784da32dc258cadbaa0827a136625c7c289afdd9865"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\sd\\results\\g0\\g0_sd_sweep.csv",
+    "bytes": 104,
+    "sha256": "4c22b8ae311e1b57715b7fbe93c722358bd64c3ecd60988b244693f1abe55aeb"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\sd\\results\\g0\\witness_sd.vcd",
+    "bytes": 18386553,
+    "sha256": "2afef9bbfed0149936d4410784e1bb3775f622d89698aa50297623a19f1fb979"
+  },
+  {
+    "path": "C:\\vivado_verilog_proj\\_g0d11_20261121\\attempt3\\sd\\simulation.txt",
+    "bytes": 1466,
+    "sha256": "9683d327db241f4099aed1fa94635a1ede6223a1c220fb65d5b1c80bef209889"
+  }
+]

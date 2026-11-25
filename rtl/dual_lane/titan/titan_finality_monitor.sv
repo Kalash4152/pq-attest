@@ -1,0 +1,138 @@
+`timescale 1ns/1ps
+// Passive B0 checker. Only registered simulation jobs include this source.
+module titan_finality_monitor #(
+    parameter bit ASSERT_VIOLATIONS = 1
+)(
+    input logic clk, rst,
+    input logic [5:0] issued, issue_tag, issue_write,
+    input logic [5:0] epoch_bump, revoke_now, authorized,
+    input logic front_head, commit_v,
+    input logic [2:0] front_src, commit_src,
+    input logic front_tag, commit_tag,
+    input logic [31:0] commit_address, commit_data,
+    input logic [5:0] response, response_tag, response_write,
+    input logic [5:0] read_delivered, read_tag,
+    input logic [5:0][1:0] slot_expired, bridge_timeout
+);
+    typedef enum logic [1:0] {EMPTY, OPEN, RESPONDED, TIMED_OUT} state_t;
+    typedef struct packed {
+        state_t state;
+        logic write_req;
+        logic reached_memory;
+        logic bridge_timed_out;
+        logic [5:0] epoch_at_issue;
+        int unsigned issue_cycle;
+    } transaction_t;
+
+    transaction_t txn [6][2];
+    logic [5:0] shadow_epoch [6];
+    int unsigned cycle, p1, p2, p3, p4, sd, m3, maxlat;
+
+    task automatic event_line(input string kind, input int tile, input bit tag);
+        $display("TITAN_EVENT %0d,%s,%0d,%0d,%0d",
+                 cycle, kind, tile, tag, shadow_epoch[tile]);
+    endtask
+
+    task automatic violation(input string kind, input int tile, input bit tag);
+        event_line(kind, tile, tag);
+        if (ASSERT_VIOLATIONS)
+            $error("TITAN-%s at %0t tile=%0d tag=%0d", kind, $time, tile, tag);
+    endtask
+
+    // No design state is driven by the checker. Blocking assignments give
+    // an explicit event order if observation points coincide on one edge.
+    always @(posedge clk) begin
+        if (rst) begin
+            cycle = 0;
+            p1 = 0;
+            p2 = 0;
+            p3 = 0;
+            p4 = 0;
+            sd = 0;
+            m3 = 0;
+            maxlat = 0;
+            for (int tile = 0; tile < 6; tile++) begin
+                shadow_epoch[tile] = '0;
+                for (int tag = 0; tag < 2; tag++)
+                    txn[tile][tag] = '0; // TITAN_RESET_TABLE
+            end
+        end else begin
+            cycle++;
+            for (int tile = 0; tile < 6; tile++) begin
+                if (issued[tile]) begin
+                    int tag;
+                    tag = int'(issue_tag[tile]); // TITAN_TAG_INDEX
+                    if (txn[tile][tag].state == OPEN) begin
+                        p3++;
+                        violation("P3", tile, issue_tag[tile]);
+                    end
+                    txn[tile][tag] = '{
+                        state: OPEN, write_req: issue_write[tile], reached_memory: 0,
+                        bridge_timed_out: 0, epoch_at_issue: shadow_epoch[tile], issue_cycle: cycle
+                    };
+                end
+                for (int tag = 0; tag < 2; tag++)
+                    if (bridge_timeout[tile][tag] && txn[tile][tag].state == OPEN)
+                        txn[tile][tag].bridge_timed_out = 1;
+            end
+
+            if (front_head && front_src < 6 && txn[front_src][front_tag].state == OPEN)
+                txn[front_src][front_tag].reached_memory = 1;
+
+            if (commit_v && commit_src < 6) begin
+                if (txn[commit_src][commit_tag].state == EMPTY ||
+                    !txn[commit_src][commit_tag].write_req || !authorized[commit_src] ||
+                    revoke_now[commit_src] ||
+                    txn[commit_src][commit_tag].epoch_at_issue != shadow_epoch[commit_src]) begin // TITAN_P1_CHECK
+                    p1++;
+                    violation("P1", int'(commit_src), commit_tag);
+                end
+                if (txn[commit_src][commit_tag].bridge_timed_out) begin
+                    m3++;
+                    event_line("M3", int'(commit_src), commit_tag);
+                    $display("TITAN_COMMIT address=%08h data=%08h", commit_address, commit_data);
+                end
+            end
+
+            for (int tile = 0; tile < 6; tile++) begin
+                if (response[tile]) begin
+                    if (txn[tile][response_tag[tile]].state == RESPONDED) begin
+                        p4++;
+                        violation("P4", tile, response_tag[tile]);
+                    end else if (txn[tile][response_tag[tile]].state != OPEN ||
+                                 txn[tile][response_tag[tile]].write_req != response_write[tile]) begin
+                        p3++;
+                        violation("P3", tile, response_tag[tile]);
+                    end else begin
+                        if (cycle - txn[tile][response_tag[tile]].issue_cycle > maxlat)
+                            maxlat = cycle - txn[tile][response_tag[tile]].issue_cycle;
+                        txn[tile][response_tag[tile]].state = RESPONDED;
+                    end
+                end
+                if (read_delivered[tile] &&
+                    (!authorized[tile] || revoke_now[tile] ||
+                     txn[tile][read_tag[tile]].state != RESPONDED ||
+                     txn[tile][read_tag[tile]].write_req ||
+                     txn[tile][read_tag[tile]].epoch_at_issue != shadow_epoch[tile])) begin
+                    p2++;
+                    violation("P2", tile, read_tag[tile]);
+                end
+                for (int tag = 0; tag < 2; tag++) begin
+                    if (slot_expired[tile][tag] && txn[tile][tag].state == OPEN) begin
+                        if (txn[tile][tag].reached_memory) begin
+                            sd++;
+                            event_line("SD", tile, bit'(tag));
+                        end
+                        txn[tile][tag].state = TIMED_OUT;
+                    end
+                end
+                if (epoch_bump[tile])
+                    shadow_epoch[tile]++;
+            end
+        end
+    end
+
+    // P6 needs a complete, observable credit ledger at quiescence.
+    final $display("TITAN_SUMMARY P1=%0d P2=%0d P3=%0d P4=%0d P6=X M3=%0d SD=%0d maxlat=%0d",
+                   p1, p2, p3, p4, m3, sd, maxlat);
+endmodule

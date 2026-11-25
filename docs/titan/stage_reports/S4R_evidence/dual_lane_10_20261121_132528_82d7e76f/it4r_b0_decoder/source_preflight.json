@@ -1,0 +1,16 @@
+{
+  "state": "PASS",
+  "declarations": {
+    "module:addr_decode": "rtl/riscv/addr_decode.sv:3",
+    "module:tb_addr_decode_v10": "sim_riscv/tb_addr_decode_v10.sv:16"
+  },
+  "scanned_files": [
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\riscv\\addr_decode.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\sim_riscv\\tb_addr_decode_v10.sv"
+  ],
+  "defines": [
+    "PQ_MAC_ON",
+    "CPU_TILE_MODULE=cpu_tile_noc"
+  ],
+  "scope": "active named module/package declarations"
+}

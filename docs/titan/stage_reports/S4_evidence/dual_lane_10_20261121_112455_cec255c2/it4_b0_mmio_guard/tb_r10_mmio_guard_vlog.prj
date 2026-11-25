@@ -1,0 +1,25 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  -i "C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/vectors" -i "C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/sim_riscv/include" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/picorv32.v" \
+
+sv xil_defaultlib  -i "C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/vectors" -i "C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/sim_riscv/include" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/dual_lane/NOC_PKG.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/addr_decode.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/cpu_tile_noc.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/gpio.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/meas_window_reader.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/mem_bram.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/picorv32_adapter.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/tile_mem_wrapper.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/tile_status.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/tile_top.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/tmem_app_bridge.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/uart_mmio.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/rtl/riscv/uart_tx.sv" \
+"C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/snapshot/sim_riscv/tb_r10_mmio_guard.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "C:/vivado_verilog_proj/_t4r/reports/dual_lane_10_20261121_112455_cec255c2/it4_b0_mmio_guard/workspace/dual_job.sim/sim_1/behav/xsim/glbl.v"
+
+# Do not sort compile order
+nosort

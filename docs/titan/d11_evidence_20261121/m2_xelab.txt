@@ -1,0 +1,99 @@
+Vivado Simulator v2024.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/xilinx_vivado/Vivado/2024.1/bin/unwrapped/win64.o/xelab.exe --relax --debug typical --mt off xil_defaultlib.tb_g0_m2 -s tb_g0_m2
+Turned off multi-threading.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/SHA3_PKG.sv" Line 1. Module sha3_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/SHA3_PKG.sv" Line 1. Module sha3_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_fault_status.sv" Line 1. Module noc_fault_status doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" Line 41. Module noc_credit_control_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_fault_status.sv" Line 1. Module noc_fault_status doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package xil_defaultlib.noc_pkg
+Compiling package xil_defaultlib.noc_p7_pkg
+Compiling package xil_defaultlib.keccak_pkg
+Compiling package xil_defaultlib.kmac_pkg
+Compiling package xil_defaultlib.pq_kdf_pkg
+Compiling package xil_defaultlib.pq_measurement_pkg
+Compiling package xil_defaultlib.sha3_pkg
+Compiling package xil_defaultlib.pq_attest_pkg
+Compiling module xil_defaultlib.rst_bridge
+Compiling module xil_defaultlib.noc_fifo(DEPTH=32'b0100)
+Compiling module xil_defaultlib.noc_router_datapath
+Compiling module xil_defaultlib.noc_xy_routing
+Compiling module xil_defaultlib.NOC_ARBITER(N=3)
+Compiling module xil_defaultlib.NOC_ARBITER(N=5)
+Compiling module xil_defaultlib.NOC_ALLOCATOR_default
+Compiling module xil_defaultlib.noc_credit_control_default
+Compiling module xil_defaultlib.noc_crossbar
+Compiling module xil_defaultlib.noc_fifo(DEPTH=32'b01100)
+Compiling module xil_defaultlib.noc_router_default
+Compiling module xil_defaultlib.noc_mesh_3x2_default
+Compiling module xil_defaultlib.noc_ingress_parser_default
+Compiling module xil_defaultlib.noc_ingress_parser(PORT=1)
+Compiling module xil_defaultlib.noc_ingress_parser(PORT=2)
+Compiling module xil_defaultlib.noc_ingress_parser(PORT=3)
+Compiling module xil_defaultlib.noc_ingress_parser(PORT=4)
+Compiling module xil_defaultlib.noc_ingress_parser(PORT=5)
+Compiling module xil_defaultlib.noc_ingress_quarantine_default
+Compiling module xil_defaultlib.noc_ingress_merge2
+Compiling module xil_defaultlib.noc_attest_gate(BYPASS_GATE=1'b0...
+Compiling module xil_defaultlib.noc_network_interface_p7(CONTROL...
+Compiling module xil_defaultlib.noc_attest_gate(BYPASS_GATE=1'b0...
+Compiling module xil_defaultlib.noc_network_interface_p7(CONTROL...
+Compiling module xil_defaultlib.noc_attest_gate(BYPASS_GATE=1'b0...
+Compiling module xil_defaultlib.noc_network_interface_p7(CONTROL...
+Compiling module xil_defaultlib.noc_attest_gate(BYPASS_GATE=1'b0...
+Compiling module xil_defaultlib.noc_attest_gate(BYPASS_GATE=1'b0...
+Compiling module xil_defaultlib.noc_attest_gate(BYPASS_GATE=1'b0...
+Compiling module xil_defaultlib.noc_network_interface_p7(CONTROL...
+Compiling module xil_defaultlib.l2_arbiter(OVH=4)
+Compiling module xil_defaultlib.kmac_absorb
+Compiling module xil_defaultlib.kmac_encode(CUSTOM_BYTES=14,MSG_...
+Compiling module xil_defaultlib.keccak_theta
+Compiling module xil_defaultlib.keccak_rho
+Compiling module xil_defaultlib.keccak_pi
+Compiling module xil_defaultlib.keccak_chi
+Compiling module xil_defaultlib.keccak_iota
+Compiling module xil_defaultlib.keccak_round
+Compiling module xil_defaultlib.keccak_f1600
+Compiling module xil_defaultlib.kmac128(CUSTOM_BYTES=14,MSG_BYTE...
+Compiling module xil_defaultlib.l2_kmac_engine
+Compiling module xil_defaultlib.noc_network_interface_p7(LOCAL_T...
+Compiling module xil_defaultlib.noc_l2_auth_p7(BYPASS_MAC=1'b0,B...
+Compiling module xil_defaultlib.noc_network_interface_p7(LOCAL_T...
+Compiling module xil_defaultlib.noc_l2_auth_p7(TILE=4,PEER=3,TX_...
+Compiling module xil_defaultlib.noc_l2_p7_pair(BYPASS_MAC=1'b0,B...
+Compiling module xil_defaultlib.kmac_encode(MSG_BYTES=65)
+Compiling module xil_defaultlib.kmac128_xp(MSG_BYTES=65)
+Compiling module xil_defaultlib.pq_kmac_share_xp
+Compiling module xil_defaultlib.pq_kdf_xk
+Compiling module xil_defaultlib.sha3_256_xp
+Compiling module xil_defaultlib.pq_measurement_xp_default
+Compiling module xil_defaultlib.pq_attestation_tag_xk
+Compiling module xil_defaultlib.pq_attestation_controller
+Compiling module xil_defaultlib.pq_attest_endpoint(K3_ENFORCE=1'...
+Compiling module xil_defaultlib.kmac128(MSG_BYTES=65)
+Compiling module xil_defaultlib.pq_kmac_share
+Compiling module xil_defaultlib.pq_rot_verifier(TIMEOUT_CYCLES=2...
+Compiling module xil_defaultlib.noc_fault_status
+Compiling module xil_defaultlib.pq_noc_subsystem_p7(TB_INJECT=1'...
+Compiling module xil_defaultlib.tb_g0_m2
+WARNING: [XSIM 43-3373] "C:/vivado_verilog_proj/_g0d11_20261121/intake/sim/g0/tb_g0_m2.sv" Line 118. System function $value$plusargs is used as system task. This system function should have a LHS e.g. x=$value$plusargs().
+Built simulation snapshot tb_g0_m2

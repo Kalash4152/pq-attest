@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "tool_version": "2024.1",
+  "vivado": "C:/xilinx_vivado/Vivado/2024.1/bin/vivado.bat",
+  "python": "C:/Users/kalas/AppData/Local/Programs/Python/Python313/python.exe",
+  "part": "xc7a100tcsg324-1",
+  "clock_ns": 20.0,
+  "retry_limit": 0,
+  "decisions": {
+    "OD-1": {
+      "state": "ACCEPTED",
+      "proposal": "Q-C + R-B",
+      "accepted_by": "Kalash",
+      "acceptance_date": "2026-10-08",
+      "instruction": "Approve the proposed offline profile; work through the L2/NI revision and document it before implementation."
+    },
+    "OD-2": {
+      "state": "ACCEPTED",
+      "proposal": "fixed sixteen-word zero error response; per-cause control[10:7] status map per Revision 4 K-2",
+      "accepted_by": "Kalash",
+      "acceptance_date": "2026-10-08",
+      "instruction": "Approve the proposed offline profile; work through the L2/NI revision and document it before implementation."
+    },
+    "OD-3": {
+      "state": "ACCEPTED",
+      "proposal": "trusted RoT/CRYPTO demo root only; TILE_00..05; external boot epoch",
+      "accepted_by": "Kalash",
+      "acceptance_date": "2026-10-08",
+      "instruction": "Approve the proposed offline profile; work through the L2/NI revision and document it before implementation."
+    },
+    "OD-4": {
+      "state": "ACCEPTED",
+      "proposal": "explicit 64-bit per-peer sequence and boot epoch; pre-delivery and pre-slot auth commit",
+      "accepted_by": "Kalash",
+      "acceptance_date": "2026-10-08",
+      "instruction": "Approve the proposed offline profile; work through the L2/NI revision and document it before implementation."
+    },
+    "OD-5": {
+      "state": "ACCEPTED",
+      "proposal": "drain second challenge; RoT authority; trusted retry; reset blocks",
+      "accepted_by": "Kalash",
+      "acceptance_date": "2026-10-08",
+      "instruction": "Approve the proposed offline profile; work through the L2/NI revision and document it before implementation."
+    },
+    "OD-6": {
+      "state": "ACCEPTED",
+      "proposal": "four-pattern N-8 matrix as documented",
+      "accepted_by": "Kalash",
+      "acceptance_date": "2026-10-08",
+      "instruction": "Approve the proposed offline profile; work through the L2/NI revision and document it before implementation."
+    }
+  },
+  "hardware_validated": false,
+  "soc_integration_complete": false,
+  "allow_independent_work": true,
+  "python_reference": {
+    "zip": "Pq_Attest_final.zip",
+    "sha256": "047bb5a981050f11a572a60e850f7c7511ff5d636f7903c6a8d239891003c6a0",
+    "root": "software/pq_attest_final",
+    "members": {
+      "PQ_Attest/software/attestation_protocol.py": "4faed19def40afd1bdc83afbd51d4f33582f1561cedebd1730ef283a75f278fc",
+      "PQ_Attest/software/attestation_ref.py": "c07e19d39850ab8be7f4723a7ead99d9d6cef059b9d515172956320d31c0d5d5",
+      "PQ_Attest/software/attestation_vectors.py": "a863e146b53d6042db5e9e0c199456853f05f7beb42338afd95c596948bc92fb",
+      "PQ_Attest/software/cross_module_regression.py": "878473d1c0dfbad10f2e4a6a924666ecef8eb21a3e02b25636aa83ad105264fe",
+      "PQ_Attest/software/kdf_vectors.py": "ea392626e6568e242fa1248b23ada88928323f3e07695331f374ac7d38d64425",
+      "PQ_Attest/software/kdf_verification.py": "c3cc56741a4abf060152e3856fca1a4bb2720c935ee0d7ac460c3e7f49a23919",
+      "PQ_Attest/software/keccak_ref.py": "80cbd3a8c2cc73065ab153be7ba21c204c5d529f3951c1f7187ea9580baa1824",
+      "PQ_Attest/software/kmac128_ref.py": "ac8076e665b6b838c58b9b3458b6e3cd16101fbab4dc0d90fbc78f90497ce394",
+      "PQ_Attest/software/measurement_ref.py": "a56b3041bcfa0871f85d47d18cdb865088878d7f80236a493fdb6bffd6de6fe7",
+      "PQ_Attest/software/run_all_tests.py": "a199d2f2aed36667fdf849fa66b9c3dfa42823b0724ed5faf59efced0b205d7e",
+      "PQ_Attest/software/security_regression.py": "8af86805e066749048d7ec753b5dfa4229c7e9f945067ca2f47537283b0d5945",
+      "PQ_Attest/software/sha3_256_ref.py": "0894d7de7bff8ffde89c5c27f836b2aded0e1b9e0ba072071c9811d985e8200e",
+      "PQ_Attest/software/trng_conditioning_ref.py": "e73daf65de104012fca3066576ffcd045fb50fa640bdfa2e3e580725c154f8a0",
+      "PQ_Attest/software/trng_vectors.py": "c3a7f602e057c90379b8d5d32f8609894d0b5de6bb79191e5209e4c3118ff914",
+      "PQ_Attest/trng_healthtests.py": "5fa592936666c980fa961e92627ab24b76b201147f5dad9e5e02f20337eb7b56"
+    },
+    "historical_zips": {
+      "PQ_Attest (2).zip": "62abec084e61a9900a829f1d0d1d1be1f3c71558c972ce1358477795e2e3fb67",
+      "PQ_Attest (3).zip": "538cc7764d5119ac63f81f160d9815b212c3c0998d80b7a36f535ca71dac48ea"
+    },
+    "suite_timeout_s": 120,
+    "system_tile_key_bytes": 32,
+    "immutable": true
+  },
+  "active_increment": "I-T1",
+  "tile_key_bytes": 32,
+  "revision4": {
+    "document": "docs/CODEX_INSTRUCTIONS_R4_FINAL_2026-10-08.md",
+    "adopted_instruction": "start make changes according to plan , nd pick up where u left off",
+    "active_increment": "I-1",
+    "vivado_executor": "Codex isolated batch, explicitly authorized by Kalash",
+    "execution_authorization": "Run the I-1 Vivado jobs here now",
+    "stop_after_increment": true
+  }
+}

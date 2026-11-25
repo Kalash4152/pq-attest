@@ -1,0 +1,5 @@
+CONFIG: TOP=tb_g0_sd CHECKS=6 TB_INJECT=1 CLOCK_NS=20
+CHECKS : 6
+ERRORS : 2
+RESULT : FAIL
+$finish called at time : 32890 ns : File "C:/vivado_verilog_proj/_g0d11_20261121/intake/sim/g0/tb_g0_sd.sv" Line 241

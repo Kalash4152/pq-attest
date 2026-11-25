@@ -3,6 +3,36 @@
   "intake_head": "1e3141cda7bc7dccc28d6974016f7a418415e297",
   "files": [
     {
+      "path": "NOC_PQATTEST.srcs/sim_1/new/ni_tb.sv",
+      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/ni_tb.sv",
+      "before": "0fd6080fb5069298407c74babf6a2b0eaac44cb07c9f3fb5202c366b1e9fd107",
+      "after": "52f78041ecfa9bc586643e94f79552ef19dc1fcfee7e0319d05186c06f0908c6"
+    },
+    {
+      "path": "NOC_PQATTEST.srcs/sim_1/new/tb_noc_l2_auth.sv",
+      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/tb_noc_l2_auth.sv",
+      "before": null,
+      "after": "d526b607416b2b4b42d81cbcda2e5af107af7ba868f12e37139e74afc2a0574e"
+    },
+    {
+      "path": "NOC_PQATTEST.srcs/sim_1/new/tb_noc_perf.sv",
+      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/tb_noc_perf.sv",
+      "before": null,
+      "after": "a05f1aaf968db52dd9e01702a70dc174c7b9f851189ada2274f5cf6cbf8e9404"
+    },
+    {
+      "path": "NOC_PQATTEST.srcs/sim_1/new/tb_pq_full_chain.sv",
+      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/tb_pq_full_chain.sv",
+      "before": null,
+      "after": "0bbdef38bd5b1be94067588084dc7c42691fc3ec37cf1f29c1f7d04e56d9370e"
+    },
+    {
+      "path": "NOC_PQATTEST.srcs/sim_1/new/tb_stg_8_golden.sv",
+      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/tb_stg_8_golden.sv",
+      "before": null,
+      "after": "0ebfe4b7a6284b977993ba90b14b04c846b620f1b2c0b1a4b0d0c36d92a0f7ed"
+    },
+    {
       "path": "docs/BASELINE_CURRENT.md",
       "payload": "files/docs/BASELINE_CURRENT.md",
       "before": null,
@@ -12,7 +42,43 @@
       "path": "docs/DECISION_REGISTER.md",
       "payload": "files/docs/DECISION_REGISTER.md",
       "before": null,
-      "after": "009e4895bc1a8a2e396dbc32415d65b0000868082bcc065a3392d197fce92070"
+      "after": "9a4cc210dc0d7109bad62746d398afab8b2dad9845de318e80ca298c5c594e63"
+    },
+    {
+      "path": "docs/DUAL_LANE_CHECKPOINT_2026-10-08.md",
+      "payload": "files/docs/DUAL_LANE_CHECKPOINT_2026-10-08.md",
+      "before": null,
+      "after": "62a41e0707c3e484ee5eee87c59ead341e77a73e124f42f9a04d1d6b0eadf68b"
+    },
+    {
+      "path": "docs/HANDOFF_2026-09-26.md",
+      "payload": "files/docs/HANDOFF_2026-09-26.md",
+      "before": null,
+      "after": "df5572d1212a1535dc78e41188034d1d09bf9ef007daf4101370d5962291ee47"
+    },
+    {
+      "path": "docs/I1_DELIVERY_2026-10-08.md",
+      "payload": "files/docs/I1_DELIVERY_2026-10-08.md",
+      "before": null,
+      "after": "25385d5c939db4c7592c5db10419c1369284ad6f7f5a829df7e716b554a38463"
+    },
+    {
+      "path": "docs/PQ_ATTEST_AI_HANDOFF_2026-10-01.md",
+      "payload": "files/docs/PQ_ATTEST_AI_HANDOFF_2026-10-01.md",
+      "before": null,
+      "after": "43069c13e7d0ccabc614c79fc06a5ddf41e2b4922de22a527ebdd54ac599612f"
+    },
+    {
+      "path": "docs/STAGE_MAP.md",
+      "payload": "files/docs/STAGE_MAP.md",
+      "before": null,
+      "after": "5fb48b5e49d64f7bc32370650fa2ba2a877b8cf8af4f22e2872aee605f648dfd"
+    },
+    {
+      "path": "docs/STATUS.md",
+      "payload": "files/docs/STATUS.md",
+      "before": null,
+      "after": "45b189d5624ad2bed019b55192c7746418f3013555b2fc623ff6d74a6d7e5df1"
     },
     {
       "path": "docs/decisions/.gitattributes",
@@ -57,12 +123,6 @@
       "after": "60d44d6d02e8c318292a99b780d039fe7fbfdac5c9868bc5e6accc7662294319"
     },
     {
-      "path": "docs/decisions/dual_lane_config.json",
-      "payload": "files/docs/decisions/dual_lane_config.json",
-      "before": null,
-      "after": "73dcbb48b4f779b5e130dd36e66227207bf368212f0a6b7390b5423a6664e3fc"
-    },
-    {
       "path": "docs/decisions/I6_CONTRACT.md",
       "payload": "files/docs/decisions/I6_CONTRACT.md",
       "before": null,
@@ -91,6 +151,12 @@
       "payload": "files/docs/decisions/M-F1-rev10-WHOLE-IMEM-MEASUREMENT.md",
       "before": null,
       "after": "64b4b43f42d956b53fa3e6161e2e756f32ce2e5c73195e93f9797e21b99dae73"
+    },
+    {
+      "path": "docs/decisions/M-F1-rev11-TITAN-EPOCH-STATUS.md",
+      "payload": "files/docs/decisions/M-F1-rev11-TITAN-EPOCH-STATUS.md",
+      "before": null,
+      "after": "14383ea2f57edd4439055fff37092f48e174b647d9844e75c3945cdb4e230d0b"
     },
     {
       "path": "docs/decisions/M-F1-rev6-conflicts.md",
@@ -225,40 +291,10 @@
       "after": "7efd57ecb44f5a1861a69dcf455b0ca8e4ed4d7fe24437e489ed57a04aed1c95"
     },
     {
-      "path": "docs/DUAL_LANE_CHECKPOINT_2026-10-08.md",
-      "payload": "files/docs/DUAL_LANE_CHECKPOINT_2026-10-08.md",
+      "path": "docs/decisions/dual_lane_config.json",
+      "payload": "files/docs/decisions/dual_lane_config.json",
       "before": null,
-      "after": "62a41e0707c3e484ee5eee87c59ead341e77a73e124f42f9a04d1d6b0eadf68b"
-    },
-    {
-      "path": "docs/HANDOFF_2026-09-26.md",
-      "payload": "files/docs/HANDOFF_2026-09-26.md",
-      "before": null,
-      "after": "df5572d1212a1535dc78e41188034d1d09bf9ef007daf4101370d5962291ee47"
-    },
-    {
-      "path": "docs/I1_DELIVERY_2026-10-08.md",
-      "payload": "files/docs/I1_DELIVERY_2026-10-08.md",
-      "before": null,
-      "after": "25385d5c939db4c7592c5db10419c1369284ad6f7f5a829df7e716b554a38463"
-    },
-    {
-      "path": "docs/PQ_ATTEST_AI_HANDOFF_2026-10-01.md",
-      "payload": "files/docs/PQ_ATTEST_AI_HANDOFF_2026-10-01.md",
-      "before": null,
-      "after": "43069c13e7d0ccabc614c79fc06a5ddf41e2b4922de22a527ebdd54ac599612f"
-    },
-    {
-      "path": "docs/STAGE_MAP.md",
-      "payload": "files/docs/STAGE_MAP.md",
-      "before": null,
-      "after": "5fb48b5e49d64f7bc32370650fa2ba2a877b8cf8af4f22e2872aee605f648dfd"
-    },
-    {
-      "path": "docs/STATUS.md",
-      "payload": "files/docs/STATUS.md",
-      "before": null,
-      "after": "45b189d5624ad2bed019b55192c7746418f3013555b2fc623ff6d74a6d7e5df1"
+      "after": "1340cb2d99fe32e0bc454c3dd348db501689c857f9e3496d79533f740533cb57"
     },
     {
       "path": "docs/verification/I1_HARNESS_REQUALIFICATION.md",
@@ -273,34 +309,22 @@
       "after": "281cc03ab62358df03c1a2e80eb613cc5174736ed3f3ce3681675d729d594b82"
     },
     {
-      "path": "NOC_PQATTEST.srcs/sim_1/new/ni_tb.sv",
-      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/ni_tb.sv",
-      "before": "0fd6080fb5069298407c74babf6a2b0eaac44cb07c9f3fb5202c366b1e9fd107",
-      "after": "52f78041ecfa9bc586643e94f79552ef19dc1fcfee7e0319d05186c06f0908c6"
+      "path": "rtl/dual_lane/NOC_PKG.sv",
+      "payload": "files/rtl/dual_lane/NOC_PKG.sv",
+      "before": null,
+      "after": "e428af103c9a0096f47f9ad97215a33b919dc9035c2a5e9d1255ff9fdd33a7be"
     },
     {
-      "path": "NOC_PQATTEST.srcs/sim_1/new/tb_noc_l2_auth.sv",
-      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/tb_noc_l2_auth.sv",
+      "path": "rtl/dual_lane/SHA3_256_xp.sv",
+      "payload": "files/rtl/dual_lane/SHA3_256_xp.sv",
       "before": null,
-      "after": "d526b607416b2b4b42d81cbcda2e5af107af7ba868f12e37139e74afc2a0574e"
+      "after": "38f372d6b541bc75cd06fbb2fb76dd243b1d6372df3f9e90f47f2828920e0234"
     },
     {
-      "path": "NOC_PQATTEST.srcs/sim_1/new/tb_noc_perf.sv",
-      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/tb_noc_perf.sv",
+      "path": "rtl/dual_lane/SHA3_PAD.sv",
+      "payload": "files/rtl/dual_lane/SHA3_PAD.sv",
       "before": null,
-      "after": "a05f1aaf968db52dd9e01702a70dc174c7b9f851189ada2274f5cf6cbf8e9404"
-    },
-    {
-      "path": "NOC_PQATTEST.srcs/sim_1/new/tb_pq_full_chain.sv",
-      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/tb_pq_full_chain.sv",
-      "before": null,
-      "after": "0bbdef38bd5b1be94067588084dc7c42691fc3ec37cf1f29c1f7d04e56d9370e"
-    },
-    {
-      "path": "NOC_PQATTEST.srcs/sim_1/new/tb_stg_8_golden.sv",
-      "payload": "files/NOC_PQATTEST.srcs/sim_1/new/tb_stg_8_golden.sv",
-      "before": null,
-      "after": "0ebfe4b7a6284b977993ba90b14b04c846b620f1b2c0b1a4b0d0c36d92a0f7ed"
+      "after": "41ff37e0694bfce7348b75866f4d460b384dae534a1f9220dcff6497338d5743"
     },
     {
       "path": "rtl/dual_lane/allocator_la.sv",
@@ -501,6 +525,12 @@
       "after": "84a9bea5569a6a61b9d9a47717e0828565359d1ab1f26ebdd0ca5f9883500933"
     },
     {
+      "path": "rtl/dual_lane/noc_l2_auth_p7_t1.sv",
+      "payload": "files/rtl/dual_lane/noc_l2_auth_p7_t1.sv",
+      "before": null,
+      "after": "7ec19056bef7d85c45ae11bc097257b16d8ff6706b3b33fbbaa97ecb1f75b68e"
+    },
+    {
       "path": "rtl/dual_lane/noc_l2_p7_pair.sv",
       "payload": "files/rtl/dual_lane/noc_l2_p7_pair.sv",
       "before": null,
@@ -511,6 +541,12 @@
       "payload": "files/rtl/dual_lane/noc_l2_p7_pair_i9.sv",
       "before": null,
       "after": "8dbdc1ae919cb756be647572adf39c0bf2414d65d2e2b2b8e155d0ada280accb"
+    },
+    {
+      "path": "rtl/dual_lane/noc_l2_p7_pair_t1.sv",
+      "payload": "files/rtl/dual_lane/noc_l2_p7_pair_t1.sv",
+      "before": null,
+      "after": "3be1384d1eada081ffd92b615312e253cd3bec9ae7a6484c7f1ae807c7418abe"
     },
     {
       "path": "rtl/dual_lane/noc_network_interface.sv",
@@ -531,16 +567,16 @@
       "after": "e3729b0550ce2520474920528e106d4b049db17997e3ee837a4f042029602f97"
     },
     {
+      "path": "rtl/dual_lane/noc_network_interface_p7_t1.sv",
+      "payload": "files/rtl/dual_lane/noc_network_interface_p7_t1.sv",
+      "before": null,
+      "after": "6a9f2e9dcc64d1017d06827563a6f4dd9d4133addeeb77c0713033a92738a238"
+    },
+    {
       "path": "rtl/dual_lane/noc_p7_pkg.sv",
       "payload": "files/rtl/dual_lane/noc_p7_pkg.sv",
       "before": null,
       "after": "8a10decc6d39c5b1dcb097f2aa638e8fb348e88d7a2fb85a696083d3a5ffe4f0"
-    },
-    {
-      "path": "rtl/dual_lane/NOC_PKG.sv",
-      "payload": "files/rtl/dual_lane/NOC_PKG.sv",
-      "before": null,
-      "after": "e428af103c9a0096f47f9ad97215a33b919dc9035c2a5e9d1255ff9fdd33a7be"
     },
     {
       "path": "rtl/dual_lane/noc_router_datapath_la.sv",
@@ -639,6 +675,12 @@
       "after": "871a7953123bdad803fa0e848f89f8b3ae5334b649b00ff93cdec25d94205d26"
     },
     {
+      "path": "rtl/dual_lane/pq_noc_subsystem_p7_t1.sv",
+      "payload": "files/rtl/dual_lane/pq_noc_subsystem_p7_t1.sv",
+      "before": null,
+      "after": "a6ed8474c99c6d834e4a8090a2e057176d0853855a5765b98f6e9505030ca424"
+    },
+    {
       "path": "rtl/dual_lane/pq_rot_verifier.sv",
       "payload": "files/rtl/dual_lane/pq_rot_verifier.sv",
       "before": null,
@@ -663,22 +705,202 @@
       "after": "a9bb46233a45546f9162f067c318f397160fd2d6e6b9a563963f4b9177268ff3"
     },
     {
-      "path": "rtl/dual_lane/SHA3_256_xp.sv",
-      "payload": "files/rtl/dual_lane/SHA3_256_xp.sv",
-      "before": null,
-      "after": "38f372d6b541bc75cd06fbb2fb76dd243b1d6372df3f9e90f47f2828920e0234"
-    },
-    {
-      "path": "rtl/dual_lane/SHA3_PAD.sv",
-      "payload": "files/rtl/dual_lane/SHA3_PAD.sv",
-      "before": null,
-      "after": "41ff37e0694bfce7348b75866f4d460b384dae534a1f9220dcff6497338d5743"
-    },
-    {
       "path": "rtl/dual_lane/t4_provenance.json",
       "payload": "files/rtl/dual_lane/t4_provenance.json",
       "before": null,
       "after": "e659cf4df27d9de76f122fe5180bf14fcfee7f8df21f4924c3be9ad8270d30a3"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s4/pq_noc_subsystem_p7_t1.sv",
+      "payload": "files/rtl/dual_lane/titan/s4/pq_noc_subsystem_p7_t1.sv",
+      "before": null,
+      "after": "bbd6e133fd50273eed4fbf589765965f24c710b8c3816c3e50c0d66c2e129236"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s4/titan_epoch_mut_bad_grant.sv",
+      "payload": "files/rtl/dual_lane/titan/s4/titan_epoch_mut_bad_grant.sv",
+      "before": null,
+      "after": "c38e15ab26183233933c17837a0999264442d09633d390ca0384f542a9261606"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s4/titan_epoch_mut_drop_revoke.sv",
+      "payload": "files/rtl/dual_lane/titan/s4/titan_epoch_mut_drop_revoke.sv",
+      "before": null,
+      "after": "a64f6ecdfdee911d9a8a48b0b8e60ccc17b676a25bf4fc3449d4d441c817acb2"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s4/titan_epoch_mut_early_wrap.sv",
+      "payload": "files/rtl/dual_lane/titan/s4/titan_epoch_mut_early_wrap.sv",
+      "before": null,
+      "after": "d361df6bac64df20636ed7a4afa3433e2c231f36ca6f3def759de3871f7215b0"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s4r/pq_noc_subsystem_p7_t1.sv",
+      "payload": "files/rtl/dual_lane/titan/s4r/pq_noc_subsystem_p7_t1.sv",
+      "before": null,
+      "after": "fdb6427097bc2af9f0d55499f363664947d3d3933a24986f654bdf81602782df"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s4r/titan_epoch_mut_held_high.sv",
+      "payload": "files/rtl/dual_lane/titan/s4r/titan_epoch_mut_held_high.sv",
+      "before": null,
+      "after": "61f107da4f0f0f7686526c3f5140dacfb1ab74ae8d0e3ce94baa4a85a6535518"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s4r/titan_epoch_mut_revoke.sv",
+      "payload": "files/rtl/dual_lane/titan/s4r/titan_epoch_mut_revoke.sv",
+      "before": null,
+      "after": "9b7176476895f126cf130b6940fc656486de182b3268e0be8f4e663931a9553a"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s4r/titan_epoch_mut_trusted_fail.sv",
+      "payload": "files/rtl/dual_lane/titan/s4r/titan_epoch_mut_trusted_fail.sv",
+      "before": null,
+      "after": "8da9e78d092daa3a496aea1001348a716c829db609242270073255a56166592b"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s5/pq_noc_subsystem_p7_t1.sv",
+      "payload": "files/rtl/dual_lane/titan/s5/pq_noc_subsystem_p7_t1.sv",
+      "before": null,
+      "after": "c7fcfb9b584710b2af61212c46a00a9168f3d309dfe2ecfc7667622aef71ac5a"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s5/titan_stamp_mut_no_hold.sv",
+      "payload": "files/rtl/dual_lane/titan/s5/titan_stamp_mut_no_hold.sv",
+      "before": null,
+      "after": "b88b078727147d2993ce0f10bd65d1ab303f27c8945265e236bffff8026e52d8"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s5/titan_stamp_mut_non_memory.sv",
+      "payload": "files/rtl/dual_lane/titan/s5/titan_stamp_mut_non_memory.sv",
+      "before": null,
+      "after": "15a84a3c91e1f0baef8a7969c4e3e81d65a9a9dea06ba4ead5afb540fb0c2a74"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s5/titan_stamp_mut_trust_app.sv",
+      "payload": "files/rtl/dual_lane/titan/s5/titan_stamp_mut_trust_app.sv",
+      "before": null,
+      "after": "a15bbebbac9251afa66c4fe2f29157eaf3fd6f509586edcab09ed37a348d3877"
+    },
+    {
+      "path": "rtl/dual_lane/titan/s5r/pq_noc_subsystem_p7_t1.sv",
+      "payload": "files/rtl/dual_lane/titan/s5r/pq_noc_subsystem_p7_t1.sv",
+      "before": null,
+      "after": "5792a0fa575fa8f8126ff323a8087cb1429a7b11d73ac265e233870cdb40f900"
+    },
+    {
+      "path": "rtl/dual_lane/titan/tb_titan_epoch.sv",
+      "payload": "files/rtl/dual_lane/titan/tb_titan_epoch.sv",
+      "before": null,
+      "after": "1992bc69c0b79c84d3ecdc6d9792140301a574f8befab45ca84e38cf041d3e67"
+    },
+    {
+      "path": "rtl/dual_lane/titan/tb_titan_epoch_r1.sv",
+      "payload": "files/rtl/dual_lane/titan/tb_titan_epoch_r1.sv",
+      "before": null,
+      "after": "d2212ca84479190a52100a33239a16e1d3ff242f41c593f6954742b6c83679aa"
+    },
+    {
+      "path": "rtl/dual_lane/titan/tb_titan_epoch_subsystem.sv",
+      "payload": "files/rtl/dual_lane/titan/tb_titan_epoch_subsystem.sv",
+      "before": null,
+      "after": "420f9999d64eec9342ecba0c39d5226a5eac04c7e6d902e405bdab9e1afc6236"
+    },
+    {
+      "path": "rtl/dual_lane/titan/tb_titan_epoch_subsystem_r1.sv",
+      "payload": "files/rtl/dual_lane/titan/tb_titan_epoch_subsystem_r1.sv",
+      "before": null,
+      "after": "48b423f2b6642b6c05f0745ff1a17e240af36cb1dcb08c6b732a8d91d5e8f8f3"
+    },
+    {
+      "path": "rtl/dual_lane/titan/tb_titan_mon_unit.sv",
+      "payload": "files/rtl/dual_lane/titan/tb_titan_mon_unit.sv",
+      "before": null,
+      "after": "6d204421a313e72d0b90a3819fb56cda3aa2002ff5f61ce0b2d659d64dc76f62"
+    },
+    {
+      "path": "rtl/dual_lane/titan/tb_titan_pkg.sv",
+      "payload": "files/rtl/dual_lane/titan/tb_titan_pkg.sv",
+      "before": null,
+      "after": "d74b0a3746fbf2812ca03c3e358fe8c8e0d73fbf86020362b02eeaf97b9581ea"
+    },
+    {
+      "path": "rtl/dual_lane/titan/tb_titan_stamp.sv",
+      "payload": "files/rtl/dual_lane/titan/tb_titan_stamp.sv",
+      "before": null,
+      "after": "49bb5f4d467b89c4f351b7a5214ac64c02f8dddfcc8b7a3a7c77be443e235b17"
+    },
+    {
+      "path": "rtl/dual_lane/titan/tb_titan_stamp_subsystem.sv",
+      "payload": "files/rtl/dual_lane/titan/tb_titan_stamp_subsystem.sv",
+      "before": null,
+      "after": "f2e6e3ae22b31ccfc8cafa3236b3670e156b175f66e99aa77e9a9446b06fbef0"
+    },
+    {
+      "path": "rtl/dual_lane/titan/tb_titan_stamp_subsystem_r1.sv",
+      "payload": "files/rtl/dual_lane/titan/tb_titan_stamp_subsystem_r1.sv",
+      "before": null,
+      "after": "839e2b09e593e7aa01a384a97c7802cf2d40db0b6a55ea8d5269b135fb19c5d8"
+    },
+    {
+      "path": "rtl/dual_lane/titan/titan_epoch_stamp.sv",
+      "payload": "files/rtl/dual_lane/titan/titan_epoch_stamp.sv",
+      "before": null,
+      "after": "58ad898afe7409e38520f5ac88dedbd37e75b278bf827b261da88ab921b45120"
+    },
+    {
+      "path": "rtl/dual_lane/titan/titan_epoch_tracker.sv",
+      "payload": "files/rtl/dual_lane/titan/titan_epoch_tracker.sv",
+      "before": null,
+      "after": "638b88051c6d6ea180460c83227b634e9ef726f45ffd0a7d576c723d58cd734d"
+    },
+    {
+      "path": "rtl/dual_lane/titan/titan_epoch_tracker_r1.sv",
+      "payload": "files/rtl/dual_lane/titan/titan_epoch_tracker_r1.sv",
+      "before": null,
+      "after": "0b5da812b7eeec72a7c41022738d3d23f363459df430f6bc9a96b079b12b1f81"
+    },
+    {
+      "path": "rtl/dual_lane/titan/titan_finality_monitor.sv",
+      "payload": "files/rtl/dual_lane/titan/titan_finality_monitor.sv",
+      "before": null,
+      "after": "c9ae2c1594f9bd0addf263e289cbe41f52d5bb4b70e9172c3207c7fa7ccbf39b"
+    },
+    {
+      "path": "rtl/dual_lane/titan/titan_mon_bind.sv",
+      "payload": "files/rtl/dual_lane/titan/titan_mon_bind.sv",
+      "before": null,
+      "after": "a9bead8c4baa209624a382ab15f404d93f0066134ed220dc6eeb37a14b36698c"
+    },
+    {
+      "path": "rtl/dual_lane/titan/titan_mon_mut_p1.sv",
+      "payload": "files/rtl/dual_lane/titan/titan_mon_mut_p1.sv",
+      "before": null,
+      "after": "c2e5bc91ae1e9b14feb1aaa6b5db0386e32efb3296a727a1031a62c3c924a939"
+    },
+    {
+      "path": "rtl/dual_lane/titan/titan_mon_mut_reset.sv",
+      "payload": "files/rtl/dual_lane/titan/titan_mon_mut_reset.sv",
+      "before": null,
+      "after": "ebad1b07ad0456a31d72932b6d214ffdfaad5d029a27bf2cad414dc5ebe838fb"
+    },
+    {
+      "path": "rtl/dual_lane/titan/titan_mon_mut_tag.sv",
+      "payload": "files/rtl/dual_lane/titan/titan_mon_mut_tag.sv",
+      "before": null,
+      "after": "92159dc588c40517c731d020ccac784d35cb70c9eda3fc086f8c8d45036f671b"
+    },
+    {
+      "path": "rtl/dual_lane/titan_pkg.sv",
+      "payload": "files/rtl/dual_lane/titan_pkg.sv",
+      "before": null,
+      "after": "f5ed0e4a14e93a30445ba86085c0bc43a1e8619de787c081d679590c817ab6e9"
+    },
+    {
+      "path": "rtl/dual_lane/titan_provenance.json",
+      "payload": "files/rtl/dual_lane/titan_provenance.json",
+      "before": null,
+      "after": "8703b9dfbd13226e519dfc66843196b8fefa1f510a49e445642163a908b9c507"
     },
     {
       "path": "rtl/dual_lane/variant_provenance.json",
@@ -807,6 +1029,12 @@
       "after": "28e4a2d90311edf2cedee5f8d7f2b8b341541c8f8dbbed5e448400bcf4ad067c"
     },
     {
+      "path": "scripts/check_titan.py",
+      "payload": "files/scripts/check_titan.py",
+      "before": null,
+      "after": "80ab53fdb15c579a4d26a966140335a21c5401893b745135be67e8bc1101d800"
+    },
+    {
       "path": "scripts/checkpoint_dual_lane.py",
       "payload": "files/scripts/checkpoint_dual_lane.py",
       "before": null,
@@ -912,7 +1140,7 @@
       "path": "scripts/dual_lane_jobs.json",
       "payload": "files/scripts/dual_lane_jobs.json",
       "before": null,
-      "after": "683b3ec91829b3c132c64294fd34c04a70668a9e45b3b1c7f3c7d642a7f0b4d6"
+      "after": "69069e8aa09dea5901607ab95762175a8284432b0da41c0af306d279bbf57a55"
     },
     {
       "path": "scripts/dual_lane_lowmem_export.tcl",
@@ -1080,7 +1308,7 @@
       "path": "scripts/make_merged_sources.py",
       "payload": "files/scripts/make_merged_sources.py",
       "before": null,
-      "after": "e19d6eed59d02c369fb4f4400e13bcc2f8a75daec7a21fdbb4d5c44faf51f82c"
+      "after": "99c225b54a9f187ed52d89eb141e1ae37c8f759f0e5f8e07c999423f8db7782b"
     },
     {
       "path": "scripts/make_release.py",
@@ -1123,6 +1351,12 @@
       "payload": "files/scripts/merged_bitstream_sources.tcl",
       "before": null,
       "after": "52e51cf1ae26c157e1be6a0191fbed4d59a0d65f6d8d71a4a1e59a0aac767fd0"
+    },
+    {
+      "path": "scripts/merged_bitstream_sources_titan.tcl",
+      "payload": "files/scripts/merged_bitstream_sources_titan.tcl",
+      "before": null,
+      "after": "6a6f4a9c10eafda542c563da76535cf05be205802a71b5e4446ed7b69f573d6e"
     },
     {
       "path": "scripts/merged_block_design.tcl",
@@ -1236,7 +1470,7 @@
       "path": "scripts/prepare_dual_lane.py",
       "payload": "files/scripts/prepare_dual_lane.py",
       "before": null,
-      "after": "c45aeb04e7ce51bf3e8623116cf1720d18dfcc6c790ba74d62e328f792483081"
+      "after": "53179589b836e48d3a984c15f4ecfdf534e9324c83f921bd9c64888ee3e73b32"
     },
     {
       "path": "scripts/prepare_i6.py",
@@ -1329,6 +1563,12 @@
       "after": "6f5ea1f35659f49f6580037d1a9cf9fcf1d7eef474ec97bd767ac94f44ff8524"
     },
     {
+      "path": "scripts/prepare_titan.py",
+      "payload": "files/scripts/prepare_titan.py",
+      "before": null,
+      "after": "bebdc726e7dd545c490bb6805ae1d87cf71cb657af3fbb925c4385142e263751"
+    },
+    {
       "path": "scripts/py_rtl_profile_32.py",
       "payload": "files/scripts/py_rtl_profile_32.py",
       "before": null,
@@ -1371,6 +1611,54 @@
       "after": "eb90ccb8615df30c1e99777b5c83b4b64dbfe6c17cdc38bbf9c1ea53eec85e58"
     },
     {
+      "path": "scripts/register_titan_stage0.py",
+      "payload": "files/scripts/register_titan_stage0.py",
+      "before": null,
+      "after": "e29417e8aee7426f31bb912c010604325789a1e2486228e46982cc04c4f80adb"
+    },
+    {
+      "path": "scripts/register_titan_stage1.py",
+      "payload": "files/scripts/register_titan_stage1.py",
+      "before": null,
+      "after": "3ffde7f187b505dda229fcf2cebc64fa79ee6da6aa5de37233561b7ce06a051e"
+    },
+    {
+      "path": "scripts/register_titan_stage2.py",
+      "payload": "files/scripts/register_titan_stage2.py",
+      "before": null,
+      "after": "9e49abaf69c6ef9628e67a9c74101e7626c2aa8b3e2f8e9dc91f823f5bae4b01"
+    },
+    {
+      "path": "scripts/register_titan_stage3.py",
+      "payload": "files/scripts/register_titan_stage3.py",
+      "before": null,
+      "after": "afffc6caa1a312540238a9454b7e9dac7baa74b2b0d8d2b76cf4a05797f37bd6"
+    },
+    {
+      "path": "scripts/register_titan_stage4.py",
+      "payload": "files/scripts/register_titan_stage4.py",
+      "before": null,
+      "after": "1cf5fdc54e3dfcba16a80599eaa9a7306f14c09fb748fba97fd5fc9f886acd47"
+    },
+    {
+      "path": "scripts/register_titan_stage4r.py",
+      "payload": "files/scripts/register_titan_stage4r.py",
+      "before": null,
+      "after": "1ff552d75b3cdaca16da2b0e024051d471e7c194ea682c3cff2e618f68fc6e82"
+    },
+    {
+      "path": "scripts/register_titan_stage5.py",
+      "payload": "files/scripts/register_titan_stage5.py",
+      "before": null,
+      "after": "3f2982368feefd0a6f2de25a7b2cb6bf48531b74b67842ac396572bf942c10fd"
+    },
+    {
+      "path": "scripts/register_titan_stage5r.py",
+      "payload": "files/scripts/register_titan_stage5r.py",
+      "before": null,
+      "after": "ff1693786afbf42454253734e8a34291a49869091c6f328a9e93c147e938bb95"
+    },
+    {
       "path": "scripts/release_expected.tcl",
       "payload": "files/scripts/release_expected.tcl",
       "before": null,
@@ -1386,7 +1674,7 @@
       "path": "scripts/rtl_lint_waivers.json",
       "payload": "files/scripts/rtl_lint_waivers.json",
       "before": null,
-      "after": "23bfe0c8819e63351e8eb839c1f721ea73938249156f4f55f05ed9d6c59a2427"
+      "after": "2f5cbb4f6ce64fefb53aaee4223a3bca9703c31af839c86583a3c5790fe98fab"
     },
     {
       "path": "scripts/run_dual_lane_10.tcl",
@@ -1585,6 +1873,72 @@
       "payload": "files/scripts/test_track_a.py",
       "before": null,
       "after": "149bac8e152e3956fb72eabb891e9eabf541a4aa8f782aa4478b7d234491206c"
+    },
+    {
+      "path": "scripts/titan/README.md",
+      "payload": "files/scripts/titan/README.md",
+      "before": null,
+      "after": "8e505e6d80e5bd24f2a6ce1c0f83f9878c1abb5cb165334c8c1fb891e44de896"
+    },
+    {
+      "path": "scripts/titan/compare_stage0.py",
+      "payload": "files/scripts/titan/compare_stage0.py",
+      "before": null,
+      "after": "886bed3ffa2482fe4ff1d38b195c1ac7ef0b612a1e588b26ad4f7d234467a2d0"
+    },
+    {
+      "path": "scripts/titan/export_arnav.py",
+      "payload": "files/scripts/titan/export_arnav.py",
+      "before": null,
+      "after": "fd218993cad614d4bded8b684ea31883a9b29d0f265976afc0f08af5809e3a5d"
+    },
+    {
+      "path": "scripts/titan/make_replay_root.py",
+      "payload": "files/scripts/titan/make_replay_root.py",
+      "before": null,
+      "after": "e837735fd1c326b626e14ca74fd6f6c9a3e44a3db4138c46fe92ae2ece022a7d"
+    },
+    {
+      "path": "scripts/titan/parse_log.py",
+      "payload": "files/scripts/titan/parse_log.py",
+      "before": null,
+      "after": "5f70eb524cf09cdf33127d120e9a81747201ec757f70aa708415d56ee515ef47"
+    },
+    {
+      "path": "scripts/titan/prepare_monitor_controls.py",
+      "payload": "files/scripts/titan/prepare_monitor_controls.py",
+      "before": null,
+      "after": "5d87976532d320c2e063676364e71cb891c78a5706f44d43873a17d2d0fb94e0"
+    },
+    {
+      "path": "scripts/titan/prepare_stage4.py",
+      "payload": "files/scripts/titan/prepare_stage4.py",
+      "before": null,
+      "after": "fbb945d44b65d54cbc6326f5cf81be78f5bba574367f9ee3c68da87b5720ac41"
+    },
+    {
+      "path": "scripts/titan/prepare_stage4r.py",
+      "payload": "files/scripts/titan/prepare_stage4r.py",
+      "before": null,
+      "after": "d5acb271368ca84bf6d0a087932e4bb48bdfd34b27f342bce208cbcacbf35363"
+    },
+    {
+      "path": "scripts/titan/prepare_stage5.py",
+      "payload": "files/scripts/titan/prepare_stage5.py",
+      "before": null,
+      "after": "5bf4a8e6c53144fdbe1c61e50f6d118f6c915c86be369b6c90ae662491468d9b"
+    },
+    {
+      "path": "scripts/titan/prepare_stage5r.py",
+      "payload": "files/scripts/titan/prepare_stage5r.py",
+      "before": null,
+      "after": "c78034096889761ce8751d5d3af27f76c3763583d3e4f757cea9f4d7d82c68d5"
+    },
+    {
+      "path": "scripts/titan/test_parse_log.py",
+      "payload": "files/scripts/titan/test_parse_log.py",
+      "before": null,
+      "after": "f9782f21e80b8b2c387eb2877ef0e147d47c4be0822e146c6fe01a752eb7cfea"
     },
     {
       "path": "scripts/update_NOC_PQATTEST_xpr.tcl",

@@ -1,0 +1,39 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  -i "C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/vectors" -i "C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/sim_riscv/include" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/picorv32.v" \
+
+sv xil_defaultlib  -i "C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/vectors" -i "C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/sim_riscv/include" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/dual_lane/NOC_PKG.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pkg.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/NOC_PQATTEST.srcs/sources_1/new/SHA3_PKG.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/NOC_PQATTEST.srcs/sources_1/new/SHA3_256.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/NOC_PQATTEST.srcs/sources_1/new/SHA3_ABSORB.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/dual_lane/SHA3_PAD.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/addr_decode.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/cpu_tile_noc.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/gpio.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/meas_imem_hasher.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/meas_window_reader.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/mem_bram.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/picorv32_adapter.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_chi.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/dual_lane/pq_keccak_f1600.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/dual_lane/pq_keccak_iota.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pi.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_rho.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_round.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_theta.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/dual_lane/merged/pq_soc_merged_core.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/tile_mem_wrapper.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/tile_status.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/tile_top.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/tmem_app_bridge.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/uart_mmio.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/riscv/uart_tx.sv" \
+"C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/snapshot/rtl/dual_lane/merged/tb_merged_attack_v10_v2.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "C:/vivado_verilog_proj/_t0r/reports/dual_lane_10_20261120_205551_19008444/it0_attack_t1/workspace/dual_job.sim/sim_1/behav/xsim/glbl.v"
+
+# Do not sort compile order
+nosort

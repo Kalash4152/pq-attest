@@ -25,6 +25,7 @@
 #define FAULT_REMOTE_ERR     3u
 #define FAULT_TIMEOUT        4u
 #define FAULT_LOCAL_UNMAPPED 5u
+#define FAULT_DENIED         6u
 
 /* A3: a faulting load returns BUS_POISON | code; bus faults raise PicoRV32 IRQ line BUS_ERR_IRQ */
 #define BUS_POISON           0xBADBE000u

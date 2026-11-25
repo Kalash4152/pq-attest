@@ -1,0 +1,20 @@
+{
+  "state": "PASS",
+  "declarations": {
+    "package:noc_pkg": "rtl/dual_lane/NOC_PKG.sv:34",
+    "module:noc_attest_gate": "rtl/dual_lane/noc_attest_gate.sv:2",
+    "module:titan_epoch_tracker_r1": "rtl/dual_lane/titan/s4r/titan_epoch_mut_held_high.sv:2",
+    "module:tb_titan_epoch_r1": "rtl/dual_lane/titan/tb_titan_epoch_r1.sv:2",
+    "module:tb_titan_epoch_r1_revoke": "rtl/dual_lane/titan/tb_titan_epoch_r1.sv:85",
+    "module:tb_titan_epoch_r1_held_high": "rtl/dual_lane/titan/tb_titan_epoch_r1.sv:88",
+    "module:tb_titan_epoch_r1_trusted_fail": "rtl/dual_lane/titan/tb_titan_epoch_r1.sv:91"
+  },
+  "scanned_files": [
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\dual_lane\\NOC_PKG.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\dual_lane\\noc_attest_gate.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\dual_lane\\titan\\s4r\\titan_epoch_mut_held_high.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\dual_lane\\titan\\tb_titan_epoch_r1.sv"
+  ],
+  "defines": [],
+  "scope": "active named module/package declarations"
+}

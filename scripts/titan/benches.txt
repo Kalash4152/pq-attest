@@ -1,0 +1,15 @@
+job | top | pass_regex | metric_regex
+it1_closure | tb_merged_closure_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_lifecycle | tb_merged_closure_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_error | tb_merged_error_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_inflight | tb_merged_inflight_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_contention | tb_merged_contention_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_phase_sweep | tb_merged_phase_sweep_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_attack_approve_changed | tb_merged_attack_v10_v2 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_attack_reject_changed | tb_merged_attack_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_hasher | tb_meas_imem_hasher_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_decoder | tb_addr_decode_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_mmio_guard | tb_r10_mmio_guard | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_i9_integ | tb_i9_integ | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_matched_secure | tb_matched_memory_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b
+it1_matched_secure_contended | tb_matched_memory_v10 | ^RESULT\s*:\s*PASS[^\S\n]*$ | ^\$finish called at time\s*:\s*([\d.]+)\s*(ps|ns|us|ms)\b

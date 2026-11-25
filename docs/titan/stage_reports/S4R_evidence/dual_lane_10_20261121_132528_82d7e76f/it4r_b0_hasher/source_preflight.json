@@ -1,0 +1,44 @@
+{
+  "state": "PASS",
+  "declarations": {
+    "package:keccak_pkg": "NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pkg.sv:4",
+    "package:sha3_pkg": "NOC_PQATTEST.srcs/sources_1/new/SHA3_PKG.sv:1",
+    "module:keccak_theta": "NOC_PQATTEST.srcs/sources_1/new/pq_keccak_theta.sv:2",
+    "module:keccak_rho": "NOC_PQATTEST.srcs/sources_1/new/pq_keccak_rho.sv:2",
+    "module:keccak_pi": "NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pi.sv:36",
+    "module:keccak_chi": "NOC_PQATTEST.srcs/sources_1/new/pq_keccak_chi.sv:2",
+    "module:keccak_iota": "rtl/dual_lane/pq_keccak_iota.sv:21",
+    "module:keccak_round": "NOC_PQATTEST.srcs/sources_1/new/pq_keccak_round.sv:28",
+    "module:keccak_f1600": "rtl/dual_lane/pq_keccak_f1600.sv:35",
+    "module:sha3_pad": "rtl/dual_lane/SHA3_PAD.sv:1",
+    "module:sha3_absorb": "NOC_PQATTEST.srcs/sources_1/new/SHA3_ABSORB.sv:1",
+    "module:sha3_256": "NOC_PQATTEST.srcs/sources_1/new/SHA3_256.sv:3",
+    "module:sha3_256_xp": "rtl/dual_lane/SHA3_256_xp.sv:4",
+    "module:meas_imem_hasher": "rtl/riscv/meas_imem_hasher.sv:4",
+    "module:tb_meas_imem_hasher_v10": "sim_riscv/tb_meas_imem_hasher_v10.sv:2"
+  },
+  "scanned_files": [
+    "C:\\vivado_verilog_proj\\_t4rr\\NOC_PQATTEST.srcs\\sources_1\\new\\pq_keccak_pkg.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\NOC_PQATTEST.srcs\\sources_1\\new\\SHA3_PKG.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\NOC_PQATTEST.srcs\\sources_1\\new\\pq_keccak_theta.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\NOC_PQATTEST.srcs\\sources_1\\new\\pq_keccak_rho.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\NOC_PQATTEST.srcs\\sources_1\\new\\pq_keccak_pi.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\NOC_PQATTEST.srcs\\sources_1\\new\\pq_keccak_chi.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\dual_lane\\pq_keccak_iota.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\NOC_PQATTEST.srcs\\sources_1\\new\\pq_keccak_round.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\dual_lane\\pq_keccak_f1600.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\dual_lane\\SHA3_PAD.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\NOC_PQATTEST.srcs\\sources_1\\new\\SHA3_ABSORB.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\NOC_PQATTEST.srcs\\sources_1\\new\\SHA3_256.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\dual_lane\\SHA3_256_xp.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\rtl\\riscv\\meas_imem_hasher.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\sim_riscv\\tb_meas_imem_hasher_v10.sv",
+    "C:\\vivado_verilog_proj\\_t4rr\\sim_riscv\\include\\demo_fw_v3.svh",
+    "C:\\vivado_verilog_proj\\_t4rr\\sim_riscv\\include\\imem_hasher_v10_vectors.svh"
+  ],
+  "defines": [
+    "PQ_MAC_ON",
+    "CPU_TILE_MODULE=cpu_tile_noc"
+  ],
+  "scope": "active named module/package declarations"
+}

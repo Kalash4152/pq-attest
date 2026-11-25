@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  -i "C:/vivado_verilog_proj/_t5rr/reports/dual_lane_10_20261121_135030_abd7e1b2/it5r_b0_decoder/snapshot/vectors" -i "C:/vivado_verilog_proj/_t5rr/reports/dual_lane_10_20261121_135030_abd7e1b2/it5r_b0_decoder/snapshot/sim_riscv/include" \
+"C:/vivado_verilog_proj/_t5rr/reports/dual_lane_10_20261121_135030_abd7e1b2/it5r_b0_decoder/snapshot/rtl/riscv/addr_decode.sv" \
+"C:/vivado_verilog_proj/_t5rr/reports/dual_lane_10_20261121_135030_abd7e1b2/it5r_b0_decoder/snapshot/sim_riscv/tb_addr_decode_v10.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "C:/vivado_verilog_proj/_t5rr/reports/dual_lane_10_20261121_135030_abd7e1b2/it5r_b0_decoder/workspace/dual_job.sim/sim_1/behav/xsim/glbl.v"
+
+# Do not sort compile order
+nosort

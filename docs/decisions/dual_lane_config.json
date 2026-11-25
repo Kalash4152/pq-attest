@@ -82,7 +82,7 @@
     "system_tile_key_bytes": 32,
     "immutable": true
   },
-  "active_increment": "I-27-R2",
+  "active_increment": "I-T5R",
   "tile_key_bytes": 32,
   "revision4": {
     "document": "docs/CODEX_INSTRUCTIONS_R4_FINAL_2026-10-08.md",

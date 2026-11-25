@@ -1,0 +1,5 @@
+CONFIG: TOP=tb_g0_m3 CHECKS=3 TB_INJECT=1 CLOCK_NS=20
+CHECKS : 3
+ERRORS : 1
+RESULT : FAIL
+$finish called at time : 108770 ns : File "C:/vivado_verilog_proj/_g0d11_20261121/intake/sim/g0/tb_g0_m3.sv" Line 195

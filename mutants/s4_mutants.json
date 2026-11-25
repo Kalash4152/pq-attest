@@ -1,0 +1,26 @@
+[
+  {
+    "id": "revoke",
+    "file": "rtl/dual_lane/titan/titan_epoch_tracker_r1.sv",
+    "anchor": "assign advance = authorized && !was_authorized;",
+    "replacement": "assign advance = authorized ^ was_authorized;",
+    "targeted_check": "EDGE_REVOKE",
+    "expected": "KILL"
+  },
+  {
+    "id": "held_high",
+    "file": "rtl/dual_lane/titan/titan_epoch_tracker_r1.sv",
+    "anchor": "assign advance = authorized && !was_authorized;",
+    "replacement": "assign advance = authorized;",
+    "targeted_check": "EDGE_HELD",
+    "expected": "KILL"
+  },
+  {
+    "id": "trusted_fail",
+    "file": "rtl/dual_lane/titan/titan_epoch_tracker_r1.sv",
+    "anchor": "assign advance = authorized && !was_authorized;",
+    "replacement": "assign advance = (authorized && !was_authorized) || trusted_fail;",
+    "targeted_check": "EDGE_TRUSTED",
+    "expected": "KILL"
+  }
+]

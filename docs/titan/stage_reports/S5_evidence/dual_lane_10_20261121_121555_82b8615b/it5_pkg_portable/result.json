@@ -1,0 +1,151 @@
+{
+  "state": "PASS_FRESH",
+  "expected": {
+    "id": "it5_pkg_portable",
+    "kind": "simulation",
+    "top": "tb_titan_pkg",
+    "selection": "I-T5",
+    "sources": [
+      "rtl/dual_lane/NOC_PKG.sv",
+      "rtl/dual_lane/titan_pkg.sv",
+      "rtl/dual_lane/titan/tb_titan_pkg.sv"
+    ],
+    "defines": [],
+    "checks": 2067,
+    "dependencies": [],
+    "independent": true,
+    "build_timeout": 1200,
+    "sim_timeout": 600,
+    "tb_time_limit": "10us",
+    "include_dirs": [],
+    "config": {
+      "TOP": "tb_titan_pkg",
+      "CHECKS": 2067
+    },
+    "required_lines": [
+      [
+        "^TITAN_PKG_CONTROL_VECTORS=2048 EPOCH_REPLACEMENTS=131072 LEGACY_TAGS=2 MESSAGE_CODES=16$",
+        1
+      ],
+      [
+        "^\\$finish called at time\\s*:",
+        1
+      ]
+    ],
+    "checks_basis": "Profile width, 2048 raw controls, 2 legacy tags, 16 message codes"
+  },
+  "started": "2026-11-21T06:45:58.013382+00:00",
+  "ended": "2026-11-21T06:47:17.197140+00:00",
+  "fresh_run": "dual_lane_10_20261121_121555_82b8615b",
+  "identity": "b2afe0ae6e5bef448c26e126cbd140aa89c15f3dd599120fbf3d1e79275982ff",
+  "observed": {
+    "checks": 2067,
+    "errors": 0,
+    "result": "PASS",
+    "config": {
+      "TOP": "tb_titan_pkg",
+      "CHECKS": 2067
+    }
+  },
+  "process": {
+    "export": {
+      "bat": "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\launch.bat",
+      "startUTC": "2026-11-21T06:45:59.0121426Z",
+      "endUTC": "2026-11-21T06:47:05.2588269Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "timeoutSeconds": 1200
+    },
+    "compile": {
+      "bat": "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\compile.bat",
+      "startUTC": "2026-11-21T06:47:06.1162367Z",
+      "endUTC": "2026-11-21T06:47:08.2540751Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "timeoutSeconds": 1200
+    },
+    "elaborate": {
+      "bat": "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\elaborate.bat",
+      "startUTC": "2026-11-21T06:47:08.7615988Z",
+      "endUTC": "2026-11-21T06:47:11.0888046Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "timeoutSeconds": 1200
+    },
+    "simulate": {
+      "bat": "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\simulate.bat",
+      "startUTC": "2026-11-21T06:47:11.7713438Z",
+      "endUTC": "2026-11-21T06:47:15.7555567Z",
+      "exitCode": 0,
+      "timedOut": false,
+      "timeoutSeconds": 600,
+      "attempts": 1,
+      "retry_history": []
+    }
+  },
+  "defines_applied": [],
+  "top": "tb_titan_pkg",
+  "source_manifest": {
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\NOC_PKG.sv": "e428af103c9a0096f47f9ad97215a33b919dc9035c2a5e9d1255ff9fdd33a7be",
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\titan_pkg.sv": "f5ed0e4a14e93a30445ba86085c0bc43a1e8619de787c081d679590c817ab6e9",
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\titan\\tb_titan_pkg.sv": "d74b0a3746fbf2812ca03c3e358fe8c8e0d73fbf86020362b02eeaf97b9581ea",
+    "C:\\vivado_verilog_proj\\_t5r\\scripts\\dual_lane_export.tcl": "51672893ff9eb5cd4650c363245d6f76750f49a6f326644073d8138061f3e3b5",
+    "C:\\vivado_verilog_proj\\_t5r\\scripts\\dual_lane.py": "5c4c071a5720164fec469c119f08a03fa1ac1edbcdb8cc0d9f09d31695c7aace",
+    "C:\\vivado_verilog_proj\\_t5r\\scripts\\dual_lane_verify.py": "7f12fc31d01873c21abebb5ae60574a922398b4a790a6c6c218509412f460539",
+    "C:\\vivado_verilog_proj\\_t5r\\scripts\\controlled_diagnostics.py": "490e69302163012e8379592b759ce5207fcb69c0ed4ab09d3628c7ce3d47f677",
+    "C:\\vivado_verilog_proj\\_t5r\\scripts\\dual_lane_preflight.py": "7ca39000edd51cb20cbcaa14d13469483abac7e1d134044a8bf30b79677bcfe5",
+    "C:\\vivado_verilog_proj\\_t5r\\scripts\\dual_lane_support.ps1": "b65f7a0803221bc5005a0daa34974faff2d2158c468fd64ade61359e850b3427",
+    "C:\\vivado_verilog_proj\\_t5r\\scripts\\wp0_support.ps1": "e03473a9f65189e5c5974f3af2f6931dd22f0ea9d01ae5cd37c7aacdf549d25f",
+    "C:\\vivado_verilog_proj\\_t5r\\docs\\decisions\\dual_lane_config.json": "46a8811e4050567801cdd7d6cffaead7ba1cd1358fc4658fbf7b4590c849c3bd",
+    "C:\\vivado_verilog_proj\\_t5r\\scripts\\dual_lane_jobs.json": "37511211237c254eb6f64a24e562f472b1dbc24d433518c756173f1b1bc1e541"
+  },
+  "retry_history": [],
+  "artifacts": {
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\compiled_sources.json": "ec8eb209a6e7ed0c8fe84539f61f2193fbb62e24eb9063c25025f9701d9f0cf6",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\export-path.txt": "0344aecce638633a4672f927854df2337711e3785beb7e7d7afb60d7c7f9e451",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\export.process-spec.json": "4c315cc458cfacfe85f1704e8d21644b0ba725a48f3668aa96c909ad62d5a940",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\job.tcl": "ec75f42772aecf93318b82c52b4257f62b9c15fcb3d9ae6369a523604e6a2dca",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\launch.bat": "cb45fa7fe52041ada6bf4c588b5bd49fc089f8ac618d268f7c0549fe7fda8080",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\process_export.owner.json": "194443fd704a74c3e30bd989b83a5cf234a9656b483d331bb1a01d92dac93ca1",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\process_export.status.json": "741e623644d60bdeecf1468877e6ccfce87f07f49dfb80bd726b6965b4fa7365",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\process_export.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\process_export.stdout.log": "34fef502a31e04b18f6a11d3d13332e06f7cb66324b9e94c9af46b1e3d71a8c3",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\runtime_compiled_sources.json": "bc25d89998a55f6460ea96484af7146641ec92b1d9768cab9b8e27741efd78cd",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\sources_after.json": "cea8df3eb1fb98c27ffe9745b7e2c0e55f9efd9581562410432659c0ab57605d",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\sources_before.json": "cea8df3eb1fb98c27ffe9745b7e2c0e55f9efd9581562410432659c0ab57605d",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\source_preflight.json": "86db651d4d2f1529d16f58026c226fbf9d476d429ad207b49cccf704887754b4",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\vivado.log": "4571a561e69016f2a5ff80646cafb2904da37b1f2802ea56b72f8b8bf7313ea8",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.ip_user_files\\README.txt": "fe9e48b0b3fcff2e6267f4bc6bdef859fa1201c41ac49c473b9e414120b0a8c4",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\compile.bat": "5c4b0dcda69bc6ca9a397eb2d0b9692181970f7e5e2db75bb8323fdd6622acbf",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\compile.log": "7f2edcac2eae331251352b04e262f8a80d11438caf03ab2d8bfefbf02f9b023a",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\compile.process-spec.json": "3f700181f07bd57d960158328a753e6f54463b06fa8057aaa9061fec8af7eb21",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\elaborate.bat": "c676ed92c2176005e93efb6f86bcca9a28d5b7f0ce6ce084ccb3c5e9138ec3cd",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\elaborate.log": "067d23d27c2a306f68e808cf928ab21f401219bcfcbb49ab0d7253f1cb145014",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\elaborate.process-spec.json": "f862ec25cd833dbacb983e4b3eb38647e6c6b3380f565f0b12b0a262b647504f",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_compile.owner.json": "dfe45bdcbc02b7dee171f76c884b9727202c096594445fc65b0f178a2a554f6c",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_compile.status.json": "fbea550b3012194d903f3e2858c671ac27680adeacbe245f2e7431ec286863cf",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_compile.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_compile.stdout.log": "ba8c5876c04c5e4d4be436c88e29785e9aecce4ebea863b1a65aed87f65466bf",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_elaborate.owner.json": "d387096e32d086a9de42ead960f6a314f5301e20ebeb138de8c0f47e0d6d427f",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_elaborate.status.json": "924f405ae887060474fe0c692720fba6f88116c7013b284446b727c84027fa74",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_elaborate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_elaborate.stdout.log": "494d412de774002dac18a7143f3e9488033694677a3876f9e6adfff73df34494",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_simulate.owner.json": "75b0768d51b0eb8d52a3aeb7721af3c0e02f17a6b02c130d76e072789271113d",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_simulate.status.json": "ed834f260f0c1d3b9553e1475e1c0f4952cdcd5cc2ce0d3b7e7925893709de4f",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_simulate.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\process_simulate.stdout.log": "11dbfb61a5a7ecebf5ce266cf497062e99fded3973fcb67d4d82ee1d8c188789",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\simulate.bat": "726e2dae574b340b4462eeb523efe2176216dab2d45f16665e732e6ea20cf350",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\simulate.log": "83f54faa1ed6ffefddc4bd6a17823c97a324103d529961b787a1c9e242d0e2e9",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\simulate.process-spec.json": "2bc27f250e63306610c8d207546243a7839799a8d15b1366501dab63ca3f0717",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\simulate_38744.backup.log": "22944ac01e40ac569d2ff1d2db449f8af8576ef6b2cef16cab3201002a05799d",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\tb_titan_pkg.tcl": "9e6b1f991e6bfa7ee476298bd7b18b9560a5d37874b6e2153bf5c5de2171cca8",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\tb_titan_pkg_vlog.prj": "4fbf604e01f7482b3c9f39a24b41840eaec7a077e255de9d5e86f09f9461b95d",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\xvlog.log": "7f2edcac2eae331251352b04e262f8a80d11438caf03ab2d8bfefbf02f9b023a",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\xsim.dir\\tb_titan_pkg_behav\\Compile_Options.txt": "12b0af443fb3f1629185f017031f3d7ebe633dfea58059eb782342bee1c85e52",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\xsim.dir\\tb_titan_pkg_behav\\TempBreakPointFile.txt": "89bd34ab9b7056058ec7acc5470f6ec95f1ef47b9aeb329d53e24d38b9607451",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\xsim.dir\\tb_titan_pkg_behav\\xsimcrash.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\xsim.dir\\tb_titan_pkg_behav\\xsimk.exe": "395d0cf4a4434c384a052f5762f8072fecd7a0b15c257479ece3e5a70fdcb306",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\xsim.dir\\tb_titan_pkg_behav\\xsimkernel.log": "cade7c40831f4c324e9464f4333410f43786291218021713a2b9d55c16e8d340",
+    "C:\\vivado_verilog_proj\\_t5r\\reports\\dual_lane_10_20261121_121555_82b8615b\\it5_pkg_portable\\workspace\\dual_job.sim\\sim_1\\behav\\xsim\\xsim.dir\\tb_titan_pkg_behav\\xsim_script.tcl": "2623fe92d2f1807a5344a6360fc198d43b969eaee142aab93f02343186284b4a"
+  }
+}

@@ -1,0 +1,18 @@
+
+=================================================================
+ TITAN VERIFICATION SCOREBOARD RECONCILIATION (Mode: B0_EXISTING)
+=================================================================
+Metric       | Monitor Count    | Scoreboard Model | Status
+-----------------------------------------------------------------
+P1           | 0                | 0                | MATCH
+P2           | 0                | 0                | MATCH
+P3           | 0                | 0                | MATCH
+P4           | 0                | 0                | MATCH
+P6           | 0                | 0                | MATCH
+M1           | 0                | 0                | MATCH
+M2           | 0                | 0                | MATCH
+M3           | 0                | 0                | MATCH
+SD           | 0                | 0                | MATCH
+=================================================================
+
+[PASS] Scoreboard and Monitor in 100% agreement.

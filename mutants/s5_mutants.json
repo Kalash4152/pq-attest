@@ -1,0 +1,26 @@
+[
+  {
+    "id": "no_hold",
+    "file": "rtl/dual_lane/titan/titan_epoch_stamp.sv",
+    "anchor": "hold_valid ? held_epoch : epoch",
+    "replacement": "epoch",
+    "targeted_check": "STAMP_HOLD",
+    "expected": "KILL"
+  },
+  {
+    "id": "non_memory",
+    "file": "rtl/dual_lane/titan/titan_epoch_stamp.sv",
+    "anchor": "memory_head ? set_epoch(app_control, EPOCH_W_MAX'(stamp_epoch)) : app_control",
+    "replacement": "set_epoch(app_control, EPOCH_W_MAX'(stamp_epoch))",
+    "targeted_check": "STAMP_NON_MEMORY",
+    "expected": "KILL"
+  },
+  {
+    "id": "trust_app",
+    "file": "rtl/dual_lane/titan/titan_epoch_stamp.sv",
+    "anchor": "set_epoch(app_control, EPOCH_W_MAX'(stamp_epoch))",
+    "replacement": "app_control",
+    "targeted_check": "STAMP_OVERWRITE",
+    "expected": "KILL"
+  }
+]

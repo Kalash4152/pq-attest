@@ -1,0 +1,75 @@
+# Arnav — NoC files for the G0 B0 replay
+
+Use the list below when compiling a subsystem-only G0 bench. The source list is the B0 RTL portion of the accepted I-9 integration job copied into I-T1. The G0 bench replaces tb_i9_integ.sv as the top. Compile one G0 bench per top with Vivado/XSim 2024.1, define PQ_MAC_ON, set TB_INJECT=1 in that bench instance, and pass the repository root as an include directory for the literal vectors/full_chain.svh path. Keep relative paths. The normal G0 harness has no dependency on the RISC-V core, board RTL or a TITAN variant.
+
+## What we need back from you
+
+- The four final bench files tb_g0_m1.sv, tb_g0_m2.sv, tb_g0_m3.sv and tb_g0_sd.sv.
+- Any helper/vector include they need beyond the pinned tree, with its include path and SHA-256. The r2 benches call load_row(0); our vectors/full_chain.svh defines load_chain. If your corrected bench uses the pinned helper, name that path and confirm the intended fixture row.
+- Your exact compile/elaborate/run command or source list and defines, repository commit, and per-bench result logs, witness traces and scoreboard outputs. If a bench uses additional RTL or a different top, list those dependencies explicitly.
+
+## Pinned RTL inputs already available on our side
+
+Hashes below describe bytes in the accepted S1 replay tree, not Git-normalized blobs. Add one corrected G0 top after these sources.
+
+| Path | SHA-256 |
+|---|---|
+| `rtl/dual_lane/NOC_PKG.sv` | `e428af103c9a0096f47f9ad97215a33b919dc9035c2a5e9d1255ff9fdd33a7be` |
+| `rtl/dual_lane/noc_p7_pkg.sv` | `8a10decc6d39c5b1dcb097f2aa638e8fb348e88d7a2fb85a696083d3a5ffe4f0` |
+| `NOC_PQATTEST.srcs/sources_1/new/NOC_FIFO.sv` | `abaadfd2551f06e659034b61e77d0551982c188af2e63559f6c6b5d825c4c175` |
+| `NOC_PQATTEST.srcs/sources_1/new/NOC_CROSSBAR.sv` | `467e35f8633c3cddcddc6302304bd9bb86f7e046c1e615d37d783b68fbcc95c3` |
+| `NOC_PQATTEST.srcs/sources_1/new/NOC_XY_ROUTING.sv` | `6b92bf51f142279a37272372bbdda75b1412ac930772dd17ded3d41c454d7416` |
+| `NOC_PQATTEST.srcs/sources_1/new/NOC_arbiter.sv` | `4ad8600ce9ec5e9d9cfd41c99679e251e922ea5c2989753a985dd67e41b086a2` |
+| `NOC_PQATTEST.srcs/sources_1/new/allocator.sv` | `cfafbd752c1f67f3d4eb9719f8382cf7fad9e96bf5e97b1e4815fdeb12b50907` |
+| `NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv` | `959739e48db58d0d0ab0e4e26a90a5e41e0c1ac94cfc7fc4e68c202257ccca30` |
+| `NOC_PQATTEST.srcs/sources_1/new/NOC_DATAPTAH.sv` | `2c77b62919e2fe1f67e2267c1344847d170f6fc4451b35c9589332ecf8cc1565` |
+| `NOC_PQATTEST.srcs/sources_1/new/noc_router.sv` | `6bd5d99794358361d07df834b7141b0cfb2c952e0dbd5f427549bf583b85f773` |
+| `NOC_PQATTEST.srcs/sources_1/new/noc_mesh_3x2.sv` | `1bd171567ae2fc1708ccae8f5b0b56d461813de581b1cc7774d9aa2bf0e451cd` |
+| `NOC_PQATTEST.srcs/sources_1/new/noc_addr_decoder.sv` | `f1e5d609fe922ee74910b5edab6b4ba5bf3e1d7f18741956a2c2298d8e95e4f0` |
+| `NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pkg.sv` | `b7193273caa6b89e27574ceed588a4dd4bd572247813fa63dfeae2906dd91e3f` |
+| `NOC_PQATTEST.srcs/sources_1/new/SHA3_PKG.sv` | `10240034c96f88b6dc47e52a057d0de8dc9924e832db1cb3bcc122872c889ef3` |
+| `NOC_PQATTEST.srcs/sources_1/new/kmac_pkg.sv` | `ef83b37a79de495197a3919944a5e6150a6f64a35e17425988195284cf12d13b` |
+| `NOC_PQATTEST.srcs/sources_1/new/pq_kdf_pkg.sv` | `375bb22ab9358a16c444277217dfa9b037f44800c4935ff5089a8be90c50d8b0` |
+| `NOC_PQATTEST.srcs/sources_1/new/pq_measurement_pkg.sv` | `92e04ef9c30d4ae92726f36bcd6c7bfece1026cdc30b814234decf65ed22a883` |
+| `NOC_PQATTEST.srcs/sources_1/new/pqattest_stg7_pkg.sv` | `ee8d0cc0280d281de2dbdd7232c0b31238082f254299b19a7155fcddf76299cb` |
+| `NOC_PQATTEST.srcs/sources_1/new/pq_keccak_theta.sv` | `322adee9c6c6c21ee5bec8b3b2dff18fd64e297b983be7115e853660299d67a4` |
+| `NOC_PQATTEST.srcs/sources_1/new/pq_keccak_rho.sv` | `d3354ec0ff08d51392f69794e93dcfd64120740ae477d055f4dae0179cc91256` |
+| `NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pi.sv` | `f65862c501eaf17bee03b90c97fc22efa9718f6e8513a5dc0dd80f2f97c550f2` |
+| `NOC_PQATTEST.srcs/sources_1/new/pq_keccak_chi.sv` | `17bf94c2fa5e2ec7b77de9b512f2dfe7f3c1226bc39d536316b110f94d59be41` |
+| `rtl/dual_lane/pq_keccak_iota.sv` | `d84b125dc8119c1b2f68421d62ef28b239df367f2692e9c4840ec384cc29b369` |
+| `NOC_PQATTEST.srcs/sources_1/new/pq_keccak_round.sv` | `c3feda08b6af0121f0a216978bed74a1ab06821e9e2d02f569d7d02833d8b40f` |
+| `rtl/dual_lane/pq_keccak_f1600.sv` | `3d763b0af3cd58ef5cab103dfdd665881b8eca6c06e292dd2e0cf0b430038758` |
+| `rtl/dual_lane/SHA3_PAD.sv` | `41ff37e0694bfce7348b75866f4d460b384dae534a1f9220dcff6497338d5743` |
+| `NOC_PQATTEST.srcs/sources_1/new/SHA3_ABSORB.sv` | `79e5eade0bea45604b7dc747f7a580775a5e67dd43fa49f1dafac7a25af3e98f` |
+| `NOC_PQATTEST.srcs/sources_1/new/SHA3_256.sv` | `700a4a9aa57691dd578c1c82ba7755a04353ed88ff7e04bd6825aee6db5f6ce5` |
+| `NOC_PQATTEST.srcs/sources_1/new/kmac_encode.sv` | `9f25a1d240d70da8eceb86d232f531614ba202cffc80f3a26b601ecc49d4f712` |
+| `NOC_PQATTEST.srcs/sources_1/new/kmac_absorb.sv` | `bf567d45f9154a48b4f3583ab15619eaba5beac21656774ad0b7b7a28a25d640` |
+| `rtl/dual_lane/kmac_128_a5.sv` | `4b5c867d5cffc5ca2811ef785b0bb381f5b5a1be401ae3d85c1fc3f6671685bb` |
+| `NOC_PQATTEST.srcs/sources_1/new/pq_kdf.sv` | `596f0cc2ee669eea21837d30e54e238d494c908b1613279b6a72ddfe56c508cc` |
+| `rtl/dual_lane/pq_measurement.sv` | `76c7ebf003609620f662c8a8f7ef04a7e18347fb5fd7507d8112c140b56799dc` |
+| `NOC_PQATTEST.srcs/sources_1/new/pqattest_stg7.sv` | `c7962f81086754088daf7c87fe27ac12c10ed4e82725ec463213bb7b142d5319` |
+| `rtl/dual_lane/SHA3_256_xp.sv` | `38f372d6b541bc75cd06fbb2fb76dd243b1d6372df3f9e90f47f2828920e0234` |
+| `rtl/dual_lane/kmac_128_xp_a5.sv` | `e0302fd5503dc5ddd322432731016e8a7d3d335d9f829bfbf51ab34461017b04` |
+| `rtl/dual_lane/pq_kmac_share_xp.sv` | `43d2b25e4cce85ba9eb1c2891c9a0c8575b15662ed9ec883c0fc1e42f238106b` |
+| `rtl/dual_lane/pq_measurement_xp.sv` | `ba9ac9fc58bbc2a8983dc3ff67f344eff57043735730d67a0f64c4ac2928f326` |
+| `rtl/dual_lane/pq_attest_protocol_s3.sv` | `a467d34cca95b9a37794c76159a931ba26ea7819630c7f414f5d2f51e81d0cb4` |
+| `rtl/dual_lane/pq_kmac_share.sv` | `2131259352a437d27837bc352a2d788d220fba79dc5c97886ef2dfb2e69506be` |
+| `rtl/dual_lane/pq_kdf_xk.sv` | `9670eaa6a327a9ccd0603adb2680489446e2f84e59a33827effc77da4abc6f44` |
+| `rtl/dual_lane/pq_attestation_tag_xk.sv` | `dd0eaca4b609a725d541e0f4f2601af788ebcbf857a0255f36559fa08828b103` |
+| `rtl/dual_lane/noc_network_interface_p7_i9.sv` | `e3729b0550ce2520474920528e106d4b049db17997e3ee837a4f042029602f97` |
+| `rtl/dual_lane/l2_arbiter.sv` | `794a454d75e55e0152045ce20cb2ce311c72020faff1e4ba8911f3cca8b70907` |
+| `rtl/dual_lane/l2_kmac_engine.sv` | `ce45854dab8e4554dc8cbe6b2979254304cdf7462ba93e7158233f1f18ba8b42` |
+| `rtl/dual_lane/noc_l2_auth_p7_i9.sv` | `84a9bea5569a6a61b9d9a47717e0828565359d1ab1f26ebdd0ca5f9883500933` |
+| `rtl/dual_lane/noc_l2_p7_pair_i9.sv` | `8dbdc1ae919cb756be647572adf39c0bf2414d65d2e2b2b8e155d0ada280accb` |
+| `rtl/dual_lane/noc_ingress_quarantine.sv` | `90671f9c8ee4cacc67d686fa4c9550325ddc46d672c886dff19975201c2f02af` |
+| `rtl/dual_lane/noc_ingress_parser.sv` | `a6fe871dcb86f952d6eae37a83de41fde24e4232393e152b34e1d61ec79fb1ae` |
+| `rtl/dual_lane/pq_attest_endpoint.sv` | `9cb038b294cf014bc55f59fab19fe2883fac2e0fbf9522d560e498336bbb1c1d` |
+| `rtl/dual_lane/noc_attest_gate.sv` | `f05881987d3bffbba6ed5ee1c6d99bfa7b5b11f50d549ba73c9b0a6627ba7235` |
+| `rtl/dual_lane/noc_fault_status.sv` | `16591d516ccdf95d4691a41d53240faf29ec30a44fb2cfd57d739d8a5275f14f` |
+| `rtl/dual_lane/pq_rot_verifier.sv` | `e9894b57ca05e2d1acf1baa3fcfe320d3462f29f40936fadbdd4af0c537dedaa` |
+| `rtl/dual_lane/rst_bridge.sv` | `2c6adf573e0170b84162ea7b66bdcaa5cbf9dfc8f87a30bde34963aabe8ab519` |
+| `rtl/dual_lane/pq_noc_subsystem_p7_i9.sv` | `871a7953123bdad803fa0e848f89f8b3ae5334b649b00ff93cdec25d94205d26` |
+
+## Baseline include
+
+`vectors/full_chain.svh` — SHA-256 `eb38c2501903229287ab650c8c590fd1660d0b95f02814dafbcd3a05c03564f6`. The fixed benches may name additional includes.

@@ -1,0 +1,21 @@
+{
+  "state": "PASS",
+  "declarations": {
+    "package:noc_pkg": "rtl/dual_lane/NOC_PKG.sv:34",
+    "module:noc_attest_gate": "rtl/dual_lane/noc_attest_gate.sv:2",
+    "module:titan_epoch_gate_event": "rtl/dual_lane/titan/s4/titan_epoch_mut_drop_revoke.sv:4",
+    "module:titan_epoch_tracker": "rtl/dual_lane/titan/s4/titan_epoch_mut_drop_revoke.sv:24",
+    "module:tb_titan_epoch": "rtl/dual_lane/titan/tb_titan_epoch.sv:2",
+    "module:tb_titan_epoch_bad_grant": "rtl/dual_lane/titan/tb_titan_epoch.sv:132",
+    "module:tb_titan_epoch_drop_revoke": "rtl/dual_lane/titan/tb_titan_epoch.sv:135",
+    "module:tb_titan_epoch_early_wrap": "rtl/dual_lane/titan/tb_titan_epoch.sv:138"
+  },
+  "scanned_files": [
+    "C:\\vivado_verilog_proj\\_t4r\\rtl\\dual_lane\\NOC_PKG.sv",
+    "C:\\vivado_verilog_proj\\_t4r\\rtl\\dual_lane\\noc_attest_gate.sv",
+    "C:\\vivado_verilog_proj\\_t4r\\rtl\\dual_lane\\titan\\s4\\titan_epoch_mut_drop_revoke.sv",
+    "C:\\vivado_verilog_proj\\_t4r\\rtl\\dual_lane\\titan\\tb_titan_epoch.sv"
+  ],
+  "defines": [],
+  "scope": "active named module/package declarations"
+}

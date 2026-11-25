@@ -1,0 +1,22 @@
+{
+  "protected_inputs_verified": 48,
+  "guarded_entries": 296,
+  "stage0_overlays": {
+    "scripts/prepare_titan.py": "a326ecf7b897f309253ae7975a4d63d434296832920824c7d5a91d3a490e0263",
+    "scripts/check_titan.py": "b46d187f7f1ca9d628425f62829375a5a3d3a7d5569529164c581ee406de8b81",
+    "scripts/register_titan_stage0.py": "b939108e637d4f58e42bc4c7f30b01f4662376be2cd40b7fd7bce946ea689fb8",
+    "scripts/prepare_dual_lane.py": "d6d5642f48239ee7c6594a25902de80e000d04e74425f070ce6a64ce8e3ccf49",
+    "scripts/dual_lane_jobs.json": "4a7d21aadd33a7bd96f65c71c67a31cf77deed969d838c30aea65c1c689c7329",
+    "scripts/rtl_lint_waivers.json": "2f5cbb4f6ce64fefb53aaee4223a3bca9703c31af839c86583a3c5790fe98fab",
+    "scripts/make_merged_sources.py": "2fb01a41f5c031908b2b063960c6c610ac02b69dee9289e506ba581ea2797eb1",
+    "scripts/merged_bitstream_sources_titan.tcl": "9f5c4e54886439d6736ad97c81da7ecb8c3378b31836151e27d605706f96c210",
+    "docs/decisions/dual_lane_config.json": "b4d7d2a49a14c13dab196bb530565ba9248fb34208f0452b01a111d8bc42bfcd",
+    "rtl/dual_lane/merged/pq_soc_merged_core.sv": "557319c7586b53074aa44172a98090dda6a0bc016906aede89730e63211e0b6d",
+    "rtl/dual_lane/titan_provenance.json": "8703b9dfbd13226e519dfc66843196b8fefa1f510a49e445642163a908b9c507",
+    "rtl/dual_lane/noc_l2_auth_p7_t1.sv": "ccccf08cadfc46b278579a7d0b46e3ef7d296d90ff4ef8119467d51eaa1b4533",
+    "rtl/dual_lane/noc_l2_p7_pair_t1.sv": "21dc4673e7d8605487fd752827b2ae61e79f7df41cbcb3b4d4f7ee142ca5883d",
+    "rtl/dual_lane/noc_network_interface_p7_t1.sv": "b48decdf2c800c228bf6b73fdce20da3a58dd25d3acec378d94ddc9d8ea0f8f7",
+    "rtl/dual_lane/pq_noc_subsystem_p7_t1.sv": "9fc6418ce994f2ca0d22df7393f767527492ba4a9f29989d50ecddbb28d77a4b"
+  },
+  "baseline": "b9e41c383473802267c8c3d604e329770d708ab5"
+}

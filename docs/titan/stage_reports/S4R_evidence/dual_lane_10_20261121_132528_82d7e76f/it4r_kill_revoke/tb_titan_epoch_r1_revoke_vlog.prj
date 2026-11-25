@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"C:/vivado_verilog_proj/_t4rr/reports/dual_lane_10_20261121_132528_82d7e76f/it4r_kill_revoke/snapshot/rtl/dual_lane/NOC_PKG.sv" \
+"C:/vivado_verilog_proj/_t4rr/reports/dual_lane_10_20261121_132528_82d7e76f/it4r_kill_revoke/snapshot/rtl/dual_lane/noc_attest_gate.sv" \
+"C:/vivado_verilog_proj/_t4rr/reports/dual_lane_10_20261121_132528_82d7e76f/it4r_kill_revoke/snapshot/rtl/dual_lane/titan/s4r/titan_epoch_mut_revoke.sv" \
+"C:/vivado_verilog_proj/_t4rr/reports/dual_lane_10_20261121_132528_82d7e76f/it4r_kill_revoke/snapshot/rtl/dual_lane/titan/tb_titan_epoch_r1.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "C:/vivado_verilog_proj/_t4rr/reports/dual_lane_10_20261121_132528_82d7e76f/it4r_kill_revoke/workspace/dual_job.sim/sim_1/behav/xsim/glbl.v"
+
+# Do not sort compile order
+nosort

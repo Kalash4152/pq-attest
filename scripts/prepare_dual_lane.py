@@ -1350,7 +1350,24 @@ def build_registry(check_files=True):
     i27=legacy['increments']['I-27']
     import register_i27r2
     i27r2=register_i27r2.append_jobs(jobs)
-    return dict(schema=2,active_increment='I-27-R2',jobs=jobs,increments={'I-1':i1,'I-2':i2,'I-3':i3,'I-4':i4,'B-1':b1,'B-2':b2,'B-3':b3,'F234-REV6':f234,'B-4':b4,'I-5':i5,'S3':s3,'I-6':i6,'I-7':i7,'I-8':i8,'S4':s4,'I-9':i9,'I-10':i10,'I-11':i11,'I-12':i12,'I-13':i13,'I-14':i14,'I-15':i15,'I-16':i16,'I-17':i17,'I-18':i18,'I-19':i19,'I-20':i20,'I-21':i21,'I-22':i22,'I-23':i23,'I-24':i24,'I-25':i25,'I-26':i26,'R10-P0':r10p0,'R10-COV':r10cov,'I-27':i27,'I-27-R2':i27r2},stages=[dict(id=i,dependencies=d,jobs=j) for i,d,j in stages])
+    from register_titan_stage0 import append_jobs as titan_stage0_jobs
+    it0_first=titan_stage0_jobs(jobs)
+    it0=titan_stage0_jobs(jobs, revision=1)
+    from register_titan_stage1 import append_jobs as titan_stage1_jobs
+    it1=titan_stage1_jobs(jobs)
+    from register_titan_stage2 import append_jobs as titan_stage2_jobs
+    it2=titan_stage2_jobs(jobs)
+    from register_titan_stage3 import append_jobs as titan_stage3_jobs
+    it3=titan_stage3_jobs(jobs)
+    from register_titan_stage4 import append_jobs as titan_stage4_jobs
+    it4=titan_stage4_jobs(jobs)
+    from register_titan_stage5 import append_jobs as titan_stage5_jobs
+    it5=titan_stage5_jobs(jobs)
+    from register_titan_stage4r import append_jobs as titan_stage4r_jobs
+    it4r=titan_stage4r_jobs(jobs)
+    from register_titan_stage5r import append_jobs as titan_stage5r_jobs
+    it5r=titan_stage5r_jobs(jobs)
+    return dict(schema=2,active_increment='I-T5R',jobs=jobs,increments={'I-1':i1,'I-2':i2,'I-3':i3,'I-4':i4,'B-1':b1,'B-2':b2,'B-3':b3,'F234-REV6':f234,'B-4':b4,'I-5':i5,'S3':s3,'I-6':i6,'I-7':i7,'I-8':i8,'S4':s4,'I-9':i9,'I-10':i10,'I-11':i11,'I-12':i12,'I-13':i13,'I-14':i14,'I-15':i15,'I-16':i16,'I-17':i17,'I-18':i18,'I-19':i19,'I-20':i20,'I-21':i21,'I-22':i22,'I-23':i23,'I-24':i24,'I-25':i25,'I-26':i26,'R10-P0':r10p0,'R10-COV':r10cov,'I-27':i27,'I-27-R2':i27r2,'I-T0-FIRST':it0_first,'I-T0':it0,'I-T1':it1,'I-T2':it2,'I-T3':it3,'I-T4':it4,'I-T5':it5,'I-T4R':it4r,'I-T5R':it5r},stages=[dict(id=i,dependencies=d,jobs=j) for i,d,j in stages])
 
 def main():
     generate_credit_window(ROOT)

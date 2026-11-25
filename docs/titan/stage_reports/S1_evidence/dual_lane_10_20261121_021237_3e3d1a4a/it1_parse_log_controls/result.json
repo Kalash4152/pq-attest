@@ -1,0 +1,47 @@
+{
+  "state": "PASS_FRESH",
+  "expected": {
+    "id": "it1_parse_log_controls",
+    "kind": "python",
+    "script": "scripts/titan/test_parse_log.py",
+    "sources": [],
+    "oracle_files": [
+      "scripts/titan/parse_log.py",
+      "scripts/matched_latency.py",
+      "scripts/titan/test_parse_log.py"
+    ],
+    "dependencies": [],
+    "independent": true,
+    "selection": "I-T1",
+    "sim_timeout": 60,
+    "positive_marker": "^TITAN_PARSE_LOG: PASS cases=4 rejected=3$"
+  },
+  "started": "2026-11-20T20:42:39.014682+00:00",
+  "ended": "2026-11-20T20:42:39.133558+00:00",
+  "fresh_run": "dual_lane_10_20261121_021237_3e3d1a4a",
+  "identity": "2c1ce69b265f6febd81ebc7328a08954e6a6d63973bef3677285152c96f892dc",
+  "observed": {
+    "exitCode": 0
+  },
+  "source_manifest": {
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\titan\\parse_log.py": "5f70eb524cf09cdf33127d120e9a81747201ec757f70aa708415d56ee515ef47",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\matched_latency.py": "760aef584f99bdf027e5bab223b56d3af95a1858f3f59ec12126fa68dc632d0f",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\titan\\test_parse_log.py": "f9782f21e80b8b2c387eb2877ef0e147d47c4be0822e146c6fe01a752eb7cfea",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\dual_lane.py": "5c4c071a5720164fec469c119f08a03fa1ac1edbcdb8cc0d9f09d31695c7aace",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\dual_lane_verify.py": "7f12fc31d01873c21abebb5ae60574a922398b4a790a6c6c218509412f460539",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\controlled_diagnostics.py": "490e69302163012e8379592b759ce5207fcb69c0ed4ab09d3628c7ce3d47f677",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\dual_lane_preflight.py": "7ca39000edd51cb20cbcaa14d13469483abac7e1d134044a8bf30b79677bcfe5",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\dual_lane_support.ps1": "b65f7a0803221bc5005a0daa34974faff2d2158c468fd64ade61359e850b3427",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\wp0_support.ps1": "e03473a9f65189e5c5974f3af2f6931dd22f0ea9d01ae5cd37c7aacdf549d25f",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\dual_lane_export.tcl": "51672893ff9eb5cd4650c363245d6f76750f49a6f326644073d8138061f3e3b5",
+    "C:\\vivado_verilog_proj\\_t1r\\docs\\decisions\\dual_lane_config.json": "3c33362db48619fed47d88a4367f025a81592880d80a114170f31354069212ab",
+    "C:\\vivado_verilog_proj\\_t1r\\scripts\\dual_lane_jobs.json": "1194de6e16e4b70d14c4318d9babb8ba50c3372af11742d5a8494479e9c38ca4"
+  },
+  "artifacts": {
+    "C:\\vivado_verilog_proj\\_t1r\\reports\\dual_lane_10_20261121_021237_3e3d1a4a\\it1_parse_log_controls\\sources_after.json": "dce8675d954976e33c0b19df77ac7e8cbb7d9154ab4302f597858ac284450c0b",
+    "C:\\vivado_verilog_proj\\_t1r\\reports\\dual_lane_10_20261121_021237_3e3d1a4a\\it1_parse_log_controls\\sources_before.json": "dce8675d954976e33c0b19df77ac7e8cbb7d9154ab4302f597858ac284450c0b",
+    "C:\\vivado_verilog_proj\\_t1r\\reports\\dual_lane_10_20261121_021237_3e3d1a4a\\it1_parse_log_controls\\source_preflight.json": "ddbaca6454086c053e6e60beb8400f837929fde0e55ebd6147cfa784ea0f857b",
+    "C:\\vivado_verilog_proj\\_t1r\\reports\\dual_lane_10_20261121_021237_3e3d1a4a\\it1_parse_log_controls\\stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:\\vivado_verilog_proj\\_t1r\\reports\\dual_lane_10_20261121_021237_3e3d1a4a\\it1_parse_log_controls\\stdout.log": "01a6d40fe291a9164967b3203f5e3ee5d36ff2d45c0d33aae942b4e63cf70d2d"
+  }
+}

@@ -1,0 +1,44 @@
+`timescale 1ns/1ps
+// Recompute the accepted gate event from its existing inputs (M-F1 rev 11 H1).
+module titan_epoch_gate_event #(
+    parameter bit ATTESTABLE = 1,
+    parameter bit BYPASS_ISSUER = 0,
+    parameter bit BYPASS_REVOKE = 0
+)(
+    input logic authenticated_head,
+    input noc_pkg::coord_t source,
+    input noc_pkg::msg_type_e message_type,
+    input logic [10:0] control,
+    output logic auth_update_v, auth_is_grant
+);
+    import noc_pkg::*;
+    logic accepted, accepted_revoke;
+    assign accepted = authenticated_head && ATTESTABLE &&
+                      (BYPASS_ISSUER || source == tile_to_coord(TILE_ROT));
+    assign auth_is_grant = accepted && message_type == MSG_ATTEST_GRANT && control[10:7] == 4'd1;
+    assign accepted_revoke = accepted && message_type == MSG_ATTEST_REVOKE && !BYPASS_REVOKE;
+    assign auth_update_v = auth_is_grant || accepted_revoke;
+endmodule
+
+module titan_epoch_tracker #(
+    parameter int EPOCH_W = 6
+)(
+    input logic clk, rst, auth_update_v, auth_is_grant,
+    output logic [EPOCH_W-1:0] epoch_o,
+    output logic epoch_wrap_o
+);
+    if (EPOCH_W < 1 || EPOCH_W > 6) begin : bad_epoch_width
+        initial $fatal(1, "TITAN EPOCH_W must be in 1..6");
+    end
+
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            epoch_o <= '0;
+            epoch_wrap_o <= 0;
+        end else begin
+            epoch_wrap_o <= auth_update_v && (&epoch_o);
+            if (auth_update_v)
+                epoch_o <= epoch_o + 1'b1;
+        end
+    end
+endmodule

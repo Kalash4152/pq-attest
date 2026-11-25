@@ -1,0 +1,106 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/NOC_PKG.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_p7_pkg.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/NOC_FIFO.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_fifo
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/NOC_CROSSBAR.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_crossbar
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/NOC_XY_ROUTING.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_xy_routing
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/NOC_arbiter.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module NOC_ARBITER
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/allocator.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module NOC_ALLOCATOR
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_credit_control
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/NOC_DATAPTAH.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_router_datapath
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_router.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_router
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_mesh_3x2.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_mesh_3x2
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/noc_addr_decoder.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_addr_decoder
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pkg.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/SHA3_PKG.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/kmac_pkg.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pq_kdf_pkg.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pq_measurement_pkg.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pqattest_stg7_pkg.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_theta.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module keccak_theta
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_rho.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module keccak_rho
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pi.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module keccak_pi
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_chi.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module keccak_chi
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_keccak_iota.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module keccak_iota
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pq_keccak_round.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module keccak_round
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_keccak_f1600.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module keccak_f1600
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/SHA3_PAD.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sha3_pad
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/SHA3_ABSORB.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sha3_absorb
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/SHA3_256.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sha3_256
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/kmac_encode.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module kmac_encode
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/kmac_absorb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module kmac_absorb
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/kmac_128_a5.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module kmac128
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pq_kdf.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_kdf
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_measurement.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_measurement
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/NOC_PQATTEST.srcs/sources_1/new/pqattest_stg7.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_attestation_tag
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/SHA3_256_xp.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sha3_256_xp
+WARNING: [VRFC 10-3380] identifier 'ctrl_state' is used before its declaration [C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/SHA3_256_xp.sv:70]
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/kmac_128_xp_a5.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module kmac128_xp
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_kmac_share_xp.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_kmac_share_xp
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_measurement_xp.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_measurement_xp
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_attest_protocol_s3.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_attestation_controller
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_kmac_share.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_kmac_share
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_kdf_xk.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_kdf_xk
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_attestation_tag_xk.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_attestation_tag_xk
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_network_interface_p7_i9.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_network_interface_p7
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/l2_arbiter.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module l2_arbiter
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/l2_kmac_engine.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module l2_kmac_engine
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_l2_auth_p7_i9.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_l2_auth_p7
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_l2_p7_pair_i9.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_l2_p7_pair
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_ingress_quarantine.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_ingress_quarantine
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_ingress_parser.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_ingress_parser
+INFO: [VRFC 10-311] analyzing module noc_ingress_merge2
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_attest_endpoint.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_attest_endpoint
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_attest_gate.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_attest_gate
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/noc_fault_status.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module noc_fault_status
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_rot_verifier.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_rot_verifier
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/rst_bridge.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rst_bridge
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_t4rr/rtl/dual_lane/pq_noc_subsystem_p7_i9.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pq_noc_subsystem_p7
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/vivado_verilog_proj/_g0d11_20261121/intake/sim/g0/tb_g0_sd.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_g0_sd

@@ -1,0 +1,86 @@
+[
+  {
+    "case": "m1",
+    "command": [
+      "C:/xilinx_vivado/Vivado/2024.1/bin/xsim.bat",
+      "tb_g0_m1",
+      "-tclbatch",
+      "bounded.tcl"
+    ],
+    "exit": 0,
+    "seconds": 17.91,
+    "result": [
+      "FAIL"
+    ],
+    "checks": [
+      "21"
+    ],
+    "errors": [
+      "19"
+    ],
+    "monitor_event_rows": 0
+  },
+  {
+    "case": "m2",
+    "command": [
+      "C:/xilinx_vivado/Vivado/2024.1/bin/xsim.bat",
+      "tb_g0_m2",
+      "-tclbatch",
+      "bounded.tcl"
+    ],
+    "exit": 0,
+    "seconds": 12.21,
+    "result": [
+      "FAIL"
+    ],
+    "checks": [
+      "7"
+    ],
+    "errors": [
+      "7"
+    ],
+    "monitor_event_rows": 0
+  },
+  {
+    "case": "m3",
+    "command": [
+      "C:/xilinx_vivado/Vivado/2024.1/bin/xsim.bat",
+      "tb_g0_m3",
+      "-tclbatch",
+      "bounded.tcl"
+    ],
+    "exit": 0,
+    "seconds": 8.52,
+    "result": [
+      "FAIL"
+    ],
+    "checks": [
+      "3"
+    ],
+    "errors": [
+      "1"
+    ],
+    "monitor_event_rows": 0
+  },
+  {
+    "case": "sd",
+    "command": [
+      "C:/xilinx_vivado/Vivado/2024.1/bin/xsim.bat",
+      "tb_g0_sd",
+      "-tclbatch",
+      "bounded.tcl"
+    ],
+    "exit": 0,
+    "seconds": 5.56,
+    "result": [
+      "FAIL"
+    ],
+    "checks": [
+      "6"
+    ],
+    "errors": [
+      "2"
+    ],
+    "monitor_event_rows": 0
+  }
+]

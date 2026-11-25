@@ -1,0 +1,20 @@
+{
+  "state": "PASS",
+  "declarations": {
+    "package:noc_pkg": "rtl/dual_lane/NOC_PKG.sv:34",
+    "package:titan_pkg": "rtl/dual_lane/titan_pkg.sv:3",
+    "module:titan_epoch_stamp": "rtl/dual_lane/titan/s5/titan_stamp_mut_non_memory.sv:4",
+    "module:tb_titan_stamp": "rtl/dual_lane/titan/tb_titan_stamp.sv:2",
+    "module:tb_titan_stamp_no_hold": "rtl/dual_lane/titan/tb_titan_stamp.sv:68",
+    "module:tb_titan_stamp_non_memory": "rtl/dual_lane/titan/tb_titan_stamp.sv:71",
+    "module:tb_titan_stamp_trust_app": "rtl/dual_lane/titan/tb_titan_stamp.sv:74"
+  },
+  "scanned_files": [
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\NOC_PKG.sv",
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\titan_pkg.sv",
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\titan\\s5\\titan_stamp_mut_non_memory.sv",
+    "C:\\vivado_verilog_proj\\_t5r\\rtl\\dual_lane\\titan\\tb_titan_stamp.sv"
+  ],
+  "defines": [],
+  "scope": "active named module/package declarations"
+}
