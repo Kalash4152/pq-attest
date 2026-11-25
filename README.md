@@ -3,7 +3,7 @@
 **Post-quantum hardware attestation and authorization enforcement for a RISC-V network-on-chip SoC, on an AMD Artix-7 FPGA.**
 
 PQ-Attest is a multi-tile system-on-chip. A hardware root of trust (RoT) measures a RISC-V tile, verifies a KMAC/SHA-3
-based attestation response, and only then authorizes that tile to reach protected memory across a credit-based 3×2 mesh
+based attestation response, and only then authorizes that tile to reach protected memory across a credit-based 3Ã—2 mesh
 network-on-chip. Authorization can be revoked at runtime.
 
 This repository holds the RTL, testbenches, verification harness, generators, firmware, FPGA build flow, reports and
@@ -34,29 +34,29 @@ revocation); see [TITAN](#titan-research-extension) below.
 
 ```
             x=0                     x=1                     x=2
-  y=0  ┌──────────────┐        ┌──────────────┐        ┌──────────────┐
-       │ Tile 0       │◄──────►│ Tile 1       │◄──────►│ Tile 2       │
-       │ CPU B        │        │ plain tile   │        │ protected    │
-       │ (never auth) │        │              │        │ memory 16 KB │
-       └──────▲───────┘        └──────▲───────┘        └──────▲───────┘
-              │                       │                       │
-  y=1  ┌──────▼───────┐        ┌──────▼───────┐        ┌──────▼───────┐
-       │ Tile 3       │◄──────►│ Tile 4       │◄──────►│ Tile 5       │
-       │ CPU A +      │  L2    │ Root of      │        │ test / attack│
-       │ attest. end- │ KMAC   │ trust        │        │ injector     │
-       │ point        │◄══════►│ (verifier)   │        │              │
-       └──────────────┘        └──────────────┘        └──────────────┘
-   3×2 mesh · XY routing · credit-based virtual channels · one link register per hop (LINK_PIPE=1)
+  y=0  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+       â”‚ Tile 0       â”‚â—„â”€â”€â”€â”€â”€â”€â–ºâ”‚ Tile 1       â”‚â—„â”€â”€â”€â”€â”€â”€â–ºâ”‚ Tile 2       â”‚
+       â”‚ CPU B        â”‚        â”‚ plain tile   â”‚        â”‚ protected    â”‚
+       â”‚ (never auth) â”‚        â”‚              â”‚        â”‚ memory 16 KB â”‚
+       â””â”€â”€â”€â”€â”€â”€â–²â”€â”€â”€â”€â”€â”€â”€â”˜        â””â”€â”€â”€â”€â”€â”€â–²â”€â”€â”€â”€â”€â”€â”€â”˜        â””â”€â”€â”€â”€â”€â”€â–²â”€â”€â”€â”€â”€â”€â”€â”˜
+              â”‚                       â”‚                       â”‚
+  y=1  â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”        â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”        â”Œâ”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”
+       â”‚ Tile 3       â”‚â—„â”€â”€â”€â”€â”€â”€â–ºâ”‚ Tile 4       â”‚â—„â”€â”€â”€â”€â”€â”€â–ºâ”‚ Tile 5       â”‚
+       â”‚ CPU A +      â”‚  L2    â”‚ Root of      â”‚        â”‚ test / attackâ”‚
+       â”‚ attest. end- â”‚ KMAC   â”‚ trust        â”‚        â”‚ injector     â”‚
+       â”‚ point        â”‚â—„â•â•â•â•â•â•â–ºâ”‚ (verifier)   â”‚        â”‚              â”‚
+       â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+   3Ã—2 mesh Â· XY routing Â· credit-based virtual channels Â· one link register per hop (LINK_PIPE=1)
 ```
 
 | Block | Implementation |
 |---|---|
-| Cores | 2 × PicoRV32 (RV32I) with instruction/data memories, MMIO status, UART, GPIO |
+| Cores | 2 Ã— PicoRV32 (RV32I) with instruction/data memories, MMIO status, UART, GPIO |
 | Interconnect | 6 routers, credit/VC flow control, XY routing, 32-bit flits; network interfaces with per-slot timeouts |
 | Attestation | SHA-3-256 measurement of the tile (whole instruction memory in revision 10), KMAC-128 key derivation and tag, nonce/epoch freshness, bounded BUSY retry |
 | Link authentication | KMAC on control messages (CHALLENGE/RESPONSE/GRANT/REVOKE) between tiles 3 and 4, with one shared L2 engine under RoT priority |
 | Enforcement | Per-tile authorization gate, ingress source checks, quarantine, and a tile-2 memory front end that checks authority at the side-effect point |
-| Clocking | 100 MHz board clock → MMCM → one 50 MHz (20 ns) design clock |
+| Clocking | 100 MHz board clock â†’ MMCM â†’ one 50 MHz (20 ns) design clock |
 
 Design decisions are recorded in [docs/DECISION_REGISTER.md](docs/DECISION_REGISTER.md) and [docs/decisions/](docs/decisions/).
 The wire format is frozen through numbered interface revisions (`M-F1`).
@@ -70,12 +70,12 @@ utilisation is not ASIC area.
 |---|---:|---:|---:|---:|---:|---|
 | Revision 10 release (main project, owner build, 15 Nov 2026) | 39,962 | 29,187 | 20 | +0.182 ns | +0.007 ns | [R10_OWNER_GUI_BUILD](reports/R10_OWNER_GUI_BUILD_20261115.md) |
 | RC1, revision 9 | 34,952 | 25,328 | 20 | +0.120 ns | +0.009 ns | release record |
-| Attestation subsystem, real-pin N-13 top (S4 area package) | 32,708 | 30,841 | – | +0.275 ns | +0.052 ns | [S4 gate](reports/S4_GATE_20261105_REV1.md) |
+| Attestation subsystem, real-pin N-13 top (S4 area package) | 32,708 | 30,841 | â€“ | +0.275 ns | +0.052 ns | [S4 gate](reports/S4_GATE_20261105_REV1.md) |
 
 - **Release image:** `pq_merged_board_top.bit`, SHA-256 `7a81ddf2c8f6c10bf5410f04dc5f55fc0fe2748575b3a85fc30f56c345fdd20e`.
   The binary is not committed.
 - **Matched secure memory access (revision 10):** read and write medians 32 cycles each (I-27).
-- **Area work:** −14 % LUT on the attestation subsystem through architecture sharing, specialisation, fan-out replication
+- **Area work:** âˆ’14 % LUT on the attestation subsystem through architecture sharing, specialisation, fan-out replication
   and per-block synthesis strategy. See [docs/methodology/AREA_TIMING_PLAYBOOK.md](docs/methodology/AREA_TIMING_PLAYBOOK.md).
 
 ## Verification approach
@@ -111,6 +111,7 @@ Method documents are in [docs/methodology/](docs/methodology/). Gate reports for
 | `reports/` | Gate reports, build reports and area/timing studies (per-job raw logs are archived separately) |
 | `docs/` | Status, decisions, interface revisions, methodology, plans, reviews |
 | `site/` | PQ-Attest SoC Explorer website (interactive 3D view, flows, evidence browser) |
+| `archive/` | Historical HDL snapshots (pre-recovery copies, mutants, planned snapshots); not built |
 
 ## Getting started
 
@@ -143,11 +144,11 @@ Branch [`titan`](../../tree/titan). TITAN adds **bounded transaction finality un
 
 | Stage | Status |
 |---|---|
-| S0–S3 | Baseline, B0 golden regression, passive finality monitor, interface package. **PASS**, 30 fresh jobs |
+| S0â€“S3 | Baseline, B0 golden regression, passive finality monitor, interface package. **PASS**, 30 fresh jobs |
 | S4R | Per-tile epoch tracker (advances on the rising edge of authorization). **PASS**, 19 fresh |
 | S5R | Request epoch stamp with backpressure hold. **PASS**, 20 fresh, 14/14 baseline matches |
 | G0 | Reachability review of the baseline races. Open |
-| S6–S14 | Commit guard, denial, read filter, CPU outcomes, comparison modes, FPGA/ASIC. Planned |
+| S6â€“S14 | Commit guard, denial, read filter, CPU outcomes, comparison modes, FPGA/ASIC. Planned |
 
 TITAN is unpublished research. Keep this repository private until the paper is submitted.
 
@@ -170,4 +171,4 @@ TITAN is unpublished research. Keep this repository private until the paper is s
 - Website dependencies: see [site/LICENSES.md](site/LICENSES.md).
 
 ## License
-Copyright © 2026 Kalash Bheda and the PQ-Attest team. **All rights reserved** until a license is chosen. See [LICENSE](LICENSE).
+Copyright Â© 2026 Kalash Bheda and the PQ-Attest team. **All rights reserved** until a license is chosen. See [LICENSE](LICENSE).
