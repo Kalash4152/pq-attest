@@ -1,0 +1,69 @@
+RUN i27_profile
+i27_profile: PASS_FRESH 
+RUN i27_board_profile
+i27_board_profile: PASS_FRESH 
+RUN i27_release_controls
+i27_release_controls: PASS_FRESH 
+RUN i27_mutation_controls
+i27_mutation_controls: PASS_FRESH 
+RUN i27_hasher
+i27_hasher: PASS_FRESH 
+RUN i27_decoder
+i27_decoder: PASS_FRESH 
+RUN i27_mmio_guard
+i27_mmio_guard: PASS_FRESH 
+RUN i27_hasher_control
+i27_hasher_control: PASS_FRESH 
+RUN i27_decoder_control
+i27_decoder_control: PASS_FRESH 
+RUN i27_mmio_control
+i27_mmio_control: PASS_FRESH 
+RUN i27_closure
+i27_closure: PASS_FRESH 
+RUN i27_lifecycle
+i27_lifecycle: PASS_FRESH 
+RUN i27_error
+i27_error: PASS_FRESH 
+RUN i27_inflight
+i27_inflight: PASS_FRESH 
+RUN i27_contention
+i27_contention: PASS_FRESH 
+RUN i27_phase_sweep
+i27_phase_sweep: PASS_FRESH 
+RUN i27_inflight_control
+i27_inflight_control: PASS_FRESH 
+RUN i27_contention_control
+i27_contention_control: PASS_FRESH 
+RUN i27_phase_control
+i27_phase_control: PASS_FRESH 
+RUN i27_attack_reject_changed
+i27_attack_reject_changed: PASS_FRESH 
+RUN i27_attack_approve_changed
+i27_attack_approve_changed: INVALID expected 6/0 PASS; observed 6/1 FAIL
+RUN i27_i9_integ
+i27_i9_integ: PASS_FRESH 
+RUN i27_project_controls
+i27_project_controls: PASS_FRESH 
+RUN i27_matched_secure
+i27_matched_secure: PASS_FRESH 
+RUN i27_matched_fixed
+i27_matched_fixed: PASS_FRESH 
+RUN i27_matched_secure_contended
+i27_matched_secure_contended: PASS_FRESH 
+RUN i27_matched_fixed_contended
+i27_matched_fixed_contended: PASS_FRESH 
+RUN i27_matched_data
+i27_matched_data: PASS_FRESH 
+NOC_PACKAGES_ACCEPTED=0/5
+PQ_PACKAGES_ACCEPTED=0/5
+DUAL_LANE_STATUS=BLOCKED
+SOURCE_IDENTITY=dee22ceec8dc09e421f6a43e93890ffb21a391cb244022a314d179742a9d25c8
+PYTHON_REFERENCE_ZIP=Pq_Attest_final.zip
+PYTHON_REFERENCE_SHA256=047bb5a981050f11a572a60e850f7c7511ff5d636f7903c6a8d239891003c6a0
+TILE_KEY_BYTES=32
+PYTHON_RTL_COMPATIBILITY=NOT_RUN
+EVIDENCE_DIR=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261114_073825_0fc50ad4
+HARDWARE_VALIDATED=NO
+SOC_INTEGRATION_COMPLETE=NO
+ACTIVE_INCREMENT=I-27
+INCREMENT_STATUS=FAIL

@@ -1,0 +1,9 @@
+{
+  "pid": 6704,
+  "started": "2026-11-14T01:18:15.941290+05:30",
+  "until": "2026-11-14T11:30:00+05:30",
+  "state": "ACTIVE",
+  "system_request_accepted": true,
+  "display_required": false,
+  "power_settings_changed": false
+}

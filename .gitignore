@@ -1,0 +1,27 @@
+# Vivado / XSim products
+*.runs/
+*.cache/
+*.sim/
+*.hw/
+*.ip_user_files/
+.Xil/
+*.jou
+*.log
+*.pb
+*.wdb
+*.dcp
+*.bit
+*.bin
+*.str
+xsim.dir/
+webtalk*
+# Python
+__pycache__/
+*.pyc
+# Website
+site/node_modules/
+site/dist/
+site/test-results/
+# Local harness state
+automation/dual_lane.lock
+reports/dual_lane_10_*/

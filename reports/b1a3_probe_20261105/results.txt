@@ -1,0 +1,6 @@
+enc_shared_base LUT=1066 FF=902
+enc_shared_a3 LUT=867 FF=900
+enc_l2_base LUT=989 FF=1085
+enc_l2_a3 LUT=993 FF=1084
+cnt32 LUT=17 FF=512
+cnt16sat LUT=81 FF=256

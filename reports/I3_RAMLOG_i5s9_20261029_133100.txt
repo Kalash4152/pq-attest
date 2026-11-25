@@ -1,0 +1,26 @@
+﻿13:31:01 GATE free=3.55GB pagefile=20480MB need free>=1GB pagefile>=8192MB
+13:31:03 STARTED select=i5 scheduler=38772 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261029_133103_f98617a1 log=C:\Users\kalas\AppData\Local\Temp\i3_i5s9_20261029_133100.log
+13:31:04 free=3.5GB
+13:31:11 DONE s2_vectors_check state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[] free=3.41GB
+13:33:12 DONE s2_attacks state=PASS_FRESH xsimkernel_peak=13988KB proc_peak[vivado=566MB xelab=197MB xsim=216MB xsimk=13MB xvlog=53MB] free=3.42GB
+13:35:06 DONE s2_mut_mac_off state=PASS_FRESH xsimkernel_peak=13912KB proc_peak[vivado=566MB xelab=198MB xsim=208MB xsimk=13MB xvlog=53MB] free=3.49GB
+13:36:05 free=2.96GB
+13:37:03 DONE s2_mut_bind_ctl state=PASS_FRESH xsimkernel_peak=13900KB proc_peak[vivado=571MB xelab=197MB xsim=212MB xsimk=13MB xvlog=52MB] free=3.41GB
+13:38:41 DONE s2_mut_id_off state=PASS_FRESH xsimkernel_peak=13944KB proc_peak[vivado=565MB xelab=182MB xsim=207MB xsimk=11MB xvlog=45MB] free=3.27GB
+13:39:18 DONE s2_mut_st_dest state=PASS_FRESH xsimkernel_peak=13968KB proc_peak[vivado=566MB xelab=187MB xsim=207MB xsimk=11MB xvlog=40MB] free=2.91GB
+13:39:48 DONE s2_mut_st_vc state=PASS_FRESH xsimkernel_peak=13944KB proc_peak[vivado=565MB xelab=190MB xsim=207MB xsimk=11MB xvlog=67MB] free=3.1GB
+13:40:17 DONE s2_mut_seq_off state=PASS_FRESH xsimkernel_peak=13932KB proc_peak[vivado=567MB xelab=172MB xsim=208MB] free=3.06GB
+13:40:48 DONE s2_mut_epoch_off state=PASS_FRESH xsimkernel_peak=13928KB proc_peak[vivado=565MB xelab=193MB xsim=208MB xsimk=11MB xvlog=31MB] free=2.98GB
+13:41:07 free=2.85GB
+13:41:17 DONE s2_mut_seq_wrap state=PASS_FRESH xsimkernel_peak=13952KB proc_peak[vivado=564MB xelab=185MB xsim=208MB] free=2.98GB
+13:41:48 DONE s2_mut_len_off state=PASS_FRESH xsimkernel_peak=13960KB proc_peak[vivado=564MB xelab=189MB xsim=207MB xsimk=11MB] free=3GB
+13:42:18 DONE s2_sf1_flood state=PASS_FRESH xsimkernel_peak=17696KB proc_peak[vivado=566MB xelab=197MB xsim=207MB xsimk=11MB xvlog=53MB] free=3.05GB
+13:42:49 DONE s2_mut_rl_off state=PASS_FRESH xsimkernel_peak=17704KB proc_peak[vivado=565MB xelab=197MB xsim=208MB xsimk=15MB xvlog=31MB] free=3.01GB
+13:43:22 DONE n81p7_sys state=PASS_FRESH xsimkernel_peak=28728KB proc_peak[vivado=566MB xelab=267MB xsim=212MB xsimk=28MB xvlog=40MB] free=2.89GB
+13:43:54 DONE n81p7_n0 state=PASS_FRESH xsimkernel_peak=28816KB proc_peak[vivado=567MB xelab=245MB xsim=212MB xvlog=31MB] free=3.07GB
+13:44:29 DONE n81p7_long state=PASS_FRESH xsimkernel_peak=28780KB proc_peak[vivado=554MB xelab=267MB xsim=212MB] free=2.83GB
+13:45:02 DONE n81p7_long_n0 state=PASS_FRESH xsimkernel_peak=28864KB proc_peak[vivado=566MB xelab=270MB xsim=217MB xsimk=22MB xvlog=31MB] free=3.1GB
+13:45:28 DONE n81p7_ni_t0w16 state=PASS_FRESH xsimkernel_peak=13416KB proc_peak[vivado=579MB xelab=132MB xsim=206MB xsimk=11MB] free=2.89GB
+13:45:59 DONE n81p7_ni_t0w1 state=PASS_FRESH xsimkernel_peak=13448KB proc_peak[vivado=565MB xelab=132MB xsim=207MB xvlog=31MB] free=2.79GB
+13:46:07 free=2.45GB
+13:46:23 scheduler exited stopped=False

@@ -1,0 +1,9 @@
+{
+  "source": "NOC_PQATTEST.srcs/sources_1/new/tb6_1.sv",
+  "source_sha256": "13d1252de7a941e816a315a8d1eb428600bd49ac9323efe63e98f4fe5d2ffa77",
+  "variant": "sim/dual_lane/n6_credit_window/tb6_1.sv",
+  "variant_sha256": "50ef9e2dcc94caed660e341dc02b054f88b397841767161c33fb8f58353f3695",
+  "scope": "Credit loss active only inside the original T4/T5 task; all 126 checks retained",
+  "original_unchanged": true,
+  "diff": "--- NOC_PQATTEST.srcs/sources_1/new/tb6_1.sv\n+++ sim/dual_lane/n6_credit_window/tb6_1.sv\n@@ -1173,6 +1173,9 @@\n     // Main\n     //--------------------------------------------------------------------------\n \n+    // Simulation-only window for the credit-loss negative control.\n+    logic credit_mutation_active = 1'b0;\n+\n     initial begin\n         checks = 0; errors = 0; cycle_count = 0; stress_tx_count = 0;\n         t7_monitor_enable = 1'b0;\n@@ -1194,7 +1197,11 @@\n         check_conserved(\"T2\");\n \n         // N-6 stress.\n+        credit_mutation_active = 1'b1;\n+        $display(\"MUTATION_WINDOW: T5 ENTER\");\n         test_credit_exhaustion_return;\n+        @(negedge clk); credit_mutation_active = 1'b0;\n+        $display(\"MUTATION_WINDOW: T5 EXIT\");\n         test_response_vc_independence;\n         test_bidirectional;\n         check_conserved(\"T7\");\n"
+}

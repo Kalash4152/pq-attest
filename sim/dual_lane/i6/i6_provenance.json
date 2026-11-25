@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "tool": "scripts/prepare_i6.py",
+  "copies": [
+    {
+      "original": "NOC_PQATTEST.srcs/sim_1/new/tb_n2p7_rtt.sv",
+      "copy": "NOC_PQATTEST.srcs/sim_1/new/tb_n2p7_rtt_i6.sv",
+      "original_sha256": "a78c581b248f7675fa42481bff000e74e3778426c04ba772cd85e8ac87ae8454",
+      "copy_sha256": "6f6eef3d809aedf1ea8d49085808a2b9f5de1ce8e28a68b5fcb63f0f18102577"
+    },
+    {
+      "original": "NOC_PQATTEST.srcs/sim_1/new/tb_p7_c4.sv",
+      "copy": "NOC_PQATTEST.srcs/sim_1/new/tb_p7_c4_i6.sv",
+      "original_sha256": "848feddad3e6fb76cbfd2f2168ea1313573caaa34b6bc4ca2c958966c474b175",
+      "copy_sha256": "e87518960a8b4e3927fdfb6fe8776c53a2142b21e94f032249b8d99e6f3aa90b"
+    },
+    {
+      "original": "NOC_PQATTEST.srcs/sim_1/new/tb_p7_gate_data.sv",
+      "copy": "NOC_PQATTEST.srcs/sim_1/new/tb_p7_gate_data_i6.sv",
+      "original_sha256": "6cc31e7d78bb408b3a81271033d1e29ac618ed21475f3b2df87ecf18e0b0d734",
+      "copy_sha256": "25ac53fbb09c8df0ed07e2f582860cba35e039d7acba551dba08c8de6b31709b"
+    },
+    {
+      "original": "NOC_PQATTEST.srcs/sim_1/new/tb_p7_ingress.sv",
+      "copy": "NOC_PQATTEST.srcs/sim_1/new/tb_p7_ingress_i6.sv",
+      "original_sha256": "1e5c8aecdf7151082ef2956bc0929330f648e3d1795c65cd661b3f8a8ec95c13",
+      "copy_sha256": "2508e769cfb2051e67a9c9c6102a1b1ad60b499697adee92a5bf862895323bba"
+    },
+    {
+      "original": "NOC_PQATTEST.srcs/sim_1/new/tb_p7_refuse_grant.sv",
+      "copy": "NOC_PQATTEST.srcs/sim_1/new/tb_p7_refuse_grant_i6.sv",
+      "original_sha256": "e9af0e83d0995876331b9ec2cd3db493d7a17008cb69d13d806116de4d883644",
+      "copy_sha256": "5ab3c90af4bce7c3c6a1ed309d9b82ff0f0f02a67a7d11b0f88fe3d896bf7754"
+    },
+    {
+      "original": "sim/dual_lane/f234/tb_sys_f234_body.svh",
+      "copy": "sim/dual_lane/f234/tb_sys_f234_body_i6.svh",
+      "original_sha256": "803a98fde1fda64fccddbee8a5ee386ba85e0233c7440bec4011808d8bb566bf",
+      "copy_sha256": "66a6b1b9d1a7b9d12b408c63fcfa7ba420223404b8cbd9fc50dbd8dfb40ebba1"
+    },
+    {
+      "original": "NOC_PQATTEST.srcs/sim_1/new/tb_sys_f234_p7.sv",
+      "copy": "NOC_PQATTEST.srcs/sim_1/new/tb_sys_f234_p7_i6.sv",
+      "original_sha256": "ff94a4b3aa55a8b9b82f9fcdd3aff25d270580db5269e9a7c62ac34a2051747c",
+      "copy_sha256": "c7a40a1b2b2c71bf23168e93eb4e875c778c78e71294225b426bc040bba491d3"
+    },
+    {
+      "original": "NOC_PQATTEST.srcs/sim_1/new/tb_pq_endpoint_unit.sv",
+      "copy": "NOC_PQATTEST.srcs/sim_1/new/tb_pq_endpoint_unit_i6.sv",
+      "original_sha256": "6e38b477b52747ee0a552edab4fad72b6b54a020d723471415f7aee877ddf397",
+      "copy_sha256": "4680681f0c4339ae2cb33180c44758db8ee167dd82e29d24a1de36f0f330645f"
+    }
+  ]
+}

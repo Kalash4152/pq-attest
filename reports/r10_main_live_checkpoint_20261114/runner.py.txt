@@ -1,0 +1,58 @@
+import sys,os,json,hashlib,re,datetime,shutil,subprocess
+from pathlib import Path
+ROOT=Path('C:/vivado_verilog_proj/NOC_PQATTEST');TMP=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT/'scripts'))
+from seed_campaign import system_awake,run
+from merged_release import validate
+STATE=TMP/'status.json'
+def status(stage,**kw):STATE.write_text(json.dumps(dict(pid=os.getpid(),stage=stage,time=datetime.datetime.now().astimezone().isoformat(),**kw),indent=2)+'\n')
+def note(text):
+ with (ROOT/'reports/R10_EXECUTION_CHECKPOINT_20261113.md').open('a',encoding='utf-8') as f:f.write('\n'+text+'\n')
+def payload(raw):
+ pos=2+int.from_bytes(raw[:2],'big');assert raw[pos:pos+2]==b'\0\1';pos+=2
+ while True:
+  k=chr(raw[pos]);pos+=1;nbytes=4 if k=='e' else 2;n=int.from_bytes(raw[pos:pos+nbytes],'big');pos+=nbytes;value=raw[pos:pos+n];pos+=n
+  if k=='e':assert pos==len(raw);return value
+try:
+ with system_awake():
+  assert not (ROOT/'automation/dual_lane.lock').exists()
+  rec=json.loads((ROOT/'NOC_PQATTEST.runs_merged/merged_board/release_result.json').read_text());validate(rec,ROOT/'NOC_PQATTEST.runs_merged/merged_board')
+  status('MAIN_PROJECT_BUILD_RUNNING');note('## Main-project build authorized by continue,14 Nov22:09\nActual MAIN NOC_PQATTEST.xpr is now being synchronized and rebuilt, using the copy-qualified script.\nRunner C:/vivado_verilog_proj/_r10main/run.py; status _r10main/status.json. Preserve .xpr uncommitted.\nPrevious main image/checkpoint preserved in _r10main/previous_main_build with hashes. Do not duplicate builds.\nOnly board and final freeze/site remain after actual main gate PASS. No hardware programming.\n')
+  run(['C:/xilinx_vivado/Vivado/2024.1/bin/vivado.bat','-mode','batch','-nojournal','-log',str(TMP/'gui_vivado.log'),'-source',str(TMP/'test.tcl')],TMP,TMP/'gui_stdout.txt',10800)
+  text=(TMP/'gui_stdout.txt').read_text(errors='replace');assert re.search(r'^R10_MAIN_GUI: PASS idempotent=YES sources=73 whole_design_opened=YES$',text,re.M)
+  impl=ROOT/'NOC_PQATTEST.runs/impl_merged';gate=(impl/'gate/gate_summary.txt').read_text();assert re.search(r'^VERDICT PASS(?: |$)',gate,re.M)
+  metrics={k:float(re.search(r'^MG_'+k+r'=(\S+)',gate,re.M)[1]) for k in ['LUT','FF','BRAM','WNS','WHS']};assert metrics['LUT']<=47550 and min(metrics['WNS'],metrics['WHS'])>=0
+  bit=impl/'pq_merged_board_top.bit';raw=bit.read_bytes();p_sha=hashlib.sha256(payload(raw)).hexdigest();reference=json.loads((ROOT/'reports/R10_GUI_BITSTREAM_COMPARISON_20261114.json').read_text())['payload_sha256']
+  assert p_sha==reference,'main configuration differs from qualified release/copy; needs review'
+  validate(rec,ROOT/'NOC_PQATTEST.runs_merged/merged_board')
+  facts=dict(metrics=metrics,bitstream=str(bit),sha256=hashlib.sha256(raw).hexdigest(),payload_sha256=p_sha,matches_both_g4_and_copy=True,hardware_validated=False,formal_proof=False)
+  ev=ROOT/'reports/r10_main_project_20261114';ev.mkdir(exist_ok=True)
+  for src,name in [(TMP/'gui_stdout.txt','gui_stdout.txt'),(TMP/'gui_vivado.log','gui_vivado.log'),(TMP/'test.tcl','main_test.tcl'),(impl/'gate/gate_summary.txt','gate_summary.txt'),(ROOT/'NOC_PQATTEST.runs/synth_merged/runme.log','synthesis_runme.log'),(impl/'runme.log','implementation_runme.log'),(TMP/'run.py','runner.py.txt'),(TMP/'previous_main_build/hashes.json','previous_image_hashes.json')]:shutil.copyfile(src,ev/name)
+  (ev/'result.json').write_text(json.dumps(facts,indent=2)+'\n')
+  summary='''# Main project revision-10 build - PASS
+
+The ACTUAL main NOC_PQATTEST.xpr was synchronized twice (idempotent), rebuilt through write_bitstream,
+gated successfully and the full implemented design opened. Not merely a copy-project result.
+
+'''+json.dumps(facts,indent=2)+'''
+
+This main image's configuration payload matches both G4 builds and the qualified GUI copy exactly.
+Different whole-file hashes reflect timestamp headers; use this exact main SHA for the owner programming record.
+No new RTL/reference, clock, device, constraint or recipe changes. Main XPR stays uncommitted by policy.
+No programming was performed. HARDWARE_VALIDATED=NO, SOC_INTEGRATION_COMPLETE=NO, FORMAL_PROOF=NO.
+Remaining owner board validation, then freeze/tag/sign-off/site updates. Estimated whole-plan88%, not95%.
+'''
+  (ROOT/'reports/R10_MAIN_PROJECT_GATE_20261114.md').write_text(summary,encoding='utf-8')
+  update='## Latest: MAIN-project bitstream built and gated successfully\n\n'+f"Image: {bit}\nSHA256: {facts['sha256']}\n"+'All four physical builds match39962LUT/29187FF/WNS+0.182/WHS+0.007; main payload equals both releases and GUI copy.\nThe source-sync and main Generate Bitstream flow have now actually run. Do not rebuild again merely to program\nthis exact accepted image. Open the main project to view its implemented design/schematics. Board observations\nare the next required input; programming remains Kalash-only. Hardware/formal/SOC flags NO.\n\n--- earlier instructions and historical gates ---\n\n'
+  for rel in ['reports/R10_READY_FOR_OWNER_20261114.md','docs/handoff/REV10_QUOTA_HANDOFF_20261114.md']:
+   p=ROOT/rel;p.write_text(update+p.read_text(encoding='utf-8'),encoding='utf-8')
+  with (ROOT/'CLAUDE.md').open('a',encoding='utf-8') as f:f.write('\n## MAIN-project gate now PASS\nThe actual main project was updated and built, not just the copy. Read reports/R10_MAIN_PROJECT_GATE_20261114.md.\n'+f"Main bit SHA256 {facts['sha256']}.\n"+'Estimated88% whole plan: only owner board7% and final freeze/tag/report/site5% remain. No new build required.\nHardware/formal/SOC NO; no RC2 tag until owner evidence. Main .xpr stays uncommitted.\n')
+  (ROOT/'reports/NEXT_STEP.md').write_text('# Next: Kalash programs the accepted MAIN image and reports observations\n\nActual MAIN gate PASS. Read reports/R10_MAIN_PROJECT_GATE_20261114.md and R10_READY_FOR_OWNER_20261114.md.\nDo not start another build. Board record first, then RC2 freeze/tag/sign-off/site. Hardware/formal/SOC NO.\n')
+  note('## Actual MAIN gate PASS\n'+f"Main image {facts['sha256']}; payload identical to G4/copy. See R10_MAIN_PROJECT_GATE_20261114.md.\n"+'No more unattended builds needed; owner board record required. Full handoff updated.\n')
+  files=['CLAUDE.md','reports/NEXT_STEP.md','reports/R10_EXECUTION_CHECKPOINT_20261113.md','reports/R10_MAIN_PROJECT_GATE_20261114.md','reports/R10_READY_FOR_OWNER_20261114.md','docs/handoff/REV10_QUOTA_HANDOFF_20261114.md']+[str(p.relative_to(ROOT)) for p in ev.glob('*') if p.is_file()]
+  spec=TMP/'stage.nul';spec.write_bytes(b'\0'.join(p.replace('\\','/').encode() for p in files)+b'\0')
+  subprocess.run(['git','add','-f','--pathspec-from-file='+str(spec),'--pathspec-file-nul'],cwd=ROOT,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+  subprocess.run(['git','-c','user.name=Kalash Bheda','-c','user.email=kkalash.bheda@gmail.com','commit','-q','-m','MAIN project PASS: build revision-10 image and hand off exact hash for board validation'],cwd=ROOT,check=True)
+  status('READY_FOR_BOARD',**facts)
+except BaseException as e:
+ status('STOPPED_NEEDS_REVIEW',error=str(e));note('## Main build stopped; no unrun PASS\n'+str(e)+'\nInspect _r10main/status.json and logs.\n');raise

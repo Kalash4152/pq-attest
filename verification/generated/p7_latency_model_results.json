@@ -1,0 +1,593 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 Latency and Timeout Model Results",
+    "version": "2.0",
+    "date": "2026-11-06",
+    "author": "PQ-Attest Engineer 4",
+    "reviewer": "Kalash Bheda (Lane 1)",
+    "evidence_package": "E4_EVIDENCE_20261106",
+    "registered_runs": [
+      "dual_lane_10_20261029_140104_d9fb229d",
+      "dual_lane_10_20261105_145813_9ca6a347"
+    ]
+  },
+  "authoritative_inputs": {
+    "full_subsystem_attestation_rtt_none": {
+      "name": "Full Subsystem Attestation Round Trip, load=NONE",
+      "nominal_cycles": 1204,
+      "category": "MEASURED_REGISTERED",
+      "unit": "cycles",
+      "run_id": "dual_lane_10_20261029_140104_d9fb229d",
+      "job_name": "n2p7_rtt",
+      "source_document": "reports/I5_GATE_20261029.md (round-trip table, load NONE)",
+      "formula": null,
+      "notes": "Breakdown: start->CHALLENGE=208, CHALLENGE->RESPONSE=524, RESPONSE->GRANT=350, GRANT->delivered=122. This is the unloaded condition only; it is NOT the maximum observed across conditions. Re-run in I-9 as job i9r_n2p7_rtt (run dual_lane_10_20261105_145813_9ca6a347, PASS_FRESH per the I-9 gate); E4 quotes the numbers from the I-5 report table and did not independently extract the re-run output.",
+      "condition": "NONE (no tile-3 memory writes, no tile-5 raw-port flood)",
+      "samples": [
+        1204,
+        1204,
+        1204,
+        1204
+      ],
+      "statistic": "min = mean = max over 4 attestations"
+    },
+    "full_subsystem_attestation_rtt_loaded_max": {
+      "name": "Full Subsystem Attestation Round Trip, load=LOADED (maximum)",
+      "nominal_cycles": 1206,
+      "category": "MEASURED_REGISTERED",
+      "unit": "cycles",
+      "run_id": "dual_lane_10_20261029_140104_d9fb229d",
+      "job_name": "n2p7_rtt",
+      "source_document": "reports/I5_GATE_20261029.md (round-trip table, load LOADED)",
+      "formula": null,
+      "notes": "Selected as the model input because Step 12 computes the WORST legitimate CPU wait. Segment breakdown for LOADED rows: 208 / 524-525 / 350 / 123-124. Only two load conditions were measured; no other load is claimed.",
+      "condition": "LOADED (tile-3 memory writes, 271 commits, plus tile-5 raw-port flood, 1,889 quarantine forwards)",
+      "samples": [
+        1206,
+        1206,
+        1205,
+        1205
+      ],
+      "statistic": "min 1205, mean 1205.5, max 1206 over 4 attestations"
+    },
+    "contract_worst_attestation_estimate": {
+      "name": "Contract worst-case P7 attestation round trip (ESTIMATE)",
+      "nominal_cycles": 2700,
+      "category": "CONTRACT_ESTIMATE",
+      "unit": "cycles",
+      "run_id": null,
+      "job_name": null,
+      "source_document": "docs/decisions/M-F1-interface-freeze.md R7.6a 'Verifier timeout check'",
+      "formula": "KDF ~100 + CHALLENGE MAC <=269 + transport ~30 + endpoint ~600 + RESPONSE MAC <=792 + transport ~40 + RESPONSE verify <=792 + tag check ~100",
+      "notes": "Stated as 'about 2,700 cycles, ESTIMATE' in the signed contract. Not a measurement. Includes the Q-class bound (792) twice.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "c4_revoke_max": {
+      "name": "C4 Revocation Latency Maximum",
+      "nominal_cycles": 486,
+      "category": "MEASURED_REGISTERED",
+      "unit": "cycles",
+      "run_id": "dual_lane_10_20261105_145813_9ca6a347",
+      "job_name": "i9r_s3_p7_c4",
+      "source_document": "reports/S1_GATE_20261023.md / reports/I5_GATE_20261029.md",
+      "formula": null,
+      "notes": "Observed maximum across 17 testbench revocation scenarios (C4_REQ=486, C4_FILL=485, C4_WAIT=478).",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "c4_revoke_bound": {
+      "name": "C4 Revocation Upper Bound",
+      "nominal_cycles": 1500,
+      "category": "DERIVED_ANALYTICAL_BOUND",
+      "unit": "cycles",
+      "run_id": null,
+      "job_name": null,
+      "source_document": "docs/decisions/P7-INGRESS-REVOCATION-CONTRACT.md",
+      "formula": "Bound specified by contract covering transient revocation and FIFO drain",
+      "notes": "Contractual ceiling for revocation completion.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "arbiter_p_bound": {
+      "name": "Arbiter Engine P Bound (Tile 3)",
+      "nominal_cycles": 269,
+      "category": "DERIVED_ANALYTICAL_BOUND",
+      "unit": "cycles",
+      "run_id": null,
+      "job_name": null,
+      "source_document": "docs/decisions/D2-peer-slot-deadlock-freedom.md",
+      "formula": "wait_p <= 269 cycles at Tile 3",
+      "notes": "Signed upper bound on arbiter wait for class P (attestation traffic) at Tile 3.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "arbiter_q_bound": {
+      "name": "Arbiter Engine Q Bound (Tile 4)",
+      "nominal_cycles": 792,
+      "category": "DERIVED_ANALYTICAL_BOUND",
+      "unit": "cycles",
+      "run_id": null,
+      "job_name": null,
+      "source_document": "docs/decisions/D2-peer-slot-deadlock-freedom.md",
+      "formula": "wait_q <= 792 cycles at Tile 4",
+      "notes": "Signed upper bound on arbiter wait for class Q at Tile 4 verifier.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "arbiter_j_bound": {
+      "name": "Arbiter Engine Job Bound (J_MAX)",
+      "nominal_cycles": 128,
+      "category": "DERIVED_ANALYTICAL_BOUND",
+      "unit": "cycles",
+      "run_id": null,
+      "job_name": null,
+      "source_document": "docs/decisions/D2-peer-slot-deadlock-freedom.md",
+      "formula": "job <= 128 cycles",
+      "notes": "Signed maximum duration of a single engine cryptographic job.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "n_outstanding": {
+      "name": "Number of Outstanding NI Slots",
+      "nominal_cycles": 2,
+      "category": "MEASURED_REGISTERED",
+      "unit": "slots",
+      "run_id": "dual_lane_10_20261105_145813_9ca6a347",
+      "job_name": "i9r_hop_probes_p7",
+      "source_document": "rtl/dual_lane/NOC_PKG.sv",
+      "formula": null,
+      "notes": "CFG_N_OUTSTANDING verified in testbench; N_OUTSTANDING = 2.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "bridge_timeout": {
+      "name": "Proposed Bridge Timeout (D7)",
+      "nominal_cycles": 4096,
+      "category": "PROPOSED_RECOMMENDATION",
+      "unit": "cycles",
+      "run_id": null,
+      "job_name": null,
+      "source_document": "docs/decisions/M-F1-rev8-INTEGRATION-DRAFT.md (Row D7: '[PROPOSED, needs Kalash]')",
+      "formula": null,
+      "notes": "Recommendation pending Kalash approval. Not a measurement and not claimed as approved by Engineer 4. Kalash's E4_FINAL_INTAKE_20261106 states 'D7 stays 4,096'; the contract row still reads PROPOSED until the Step 12 model is accepted.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "verifier_timeout": {
+      "name": "Global Verifier Timeout",
+      "nominal_cycles": 100000,
+      "category": "CONFIGURATION_PARAMETER",
+      "unit": "cycles",
+      "run_id": null,
+      "job_name": null,
+      "source_document": "docs/decisions/M-F1-interface-freeze.md R7.6a (pq_rot_verifier.sv:4 TIMEOUT_CYCLES = 100000); M-F1 rev 8 Sec. 5",
+      "formula": null,
+      "notes": "RTL configuration constant counting the whole attestation from start. Not a measurement.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "ni_slot_timeout": {
+      "name": "Merged Build NI Slot Timeout",
+      "nominal_cycles": 8192,
+      "category": "REVIEWER_STATED_CONFIGURATION",
+      "unit": "cycles",
+      "run_id": null,
+      "job_name": null,
+      "source_document": "E4_FINAL_INTAKE_20261106.md row 'Step 12 latency model' and E4_FINAL_RESPONSE_20261106.md ('NI_SLOT_TIMEOUT 8,192 in the merged build', citing M-F1 rev 8)",
+      "formula": null,
+      "notes": "Stated by Kalash for the merged build. The rev-8 contract text only requires NI_SLOT_TIMEOUT > BRIDGE_TIMEOUT; the I-9 gate reports the RTL default NI_SLOT_TIMEOUT=0 (off) and that the enabled configuration has not been synthesized. No inspected RTL source in the evidence packages sets 8192. Not used by any behavioural scenario.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    },
+    "bench_ni_slot_timeout": {
+      "name": "Bench NI Slot Timeout (tb_i9_integ)",
+      "nominal_cycles": 600,
+      "category": "CONFIGURATION_PARAMETER",
+      "unit": "cycles",
+      "run_id": "dual_lane_10_20261106_163900_ff77f562",
+      "job_name": "i11_i9_integ",
+      "source_document": "tb_i9_integ.sv line 5 ('NI_SLOT_TIMEOUT = 600'); result.json / registry.json NI_SLOT_TIMEOUT=600; I9_GATE_20261105.md Sec. 2",
+      "formula": null,
+      "notes": "Bench parameter used by the registered I-9 integration bench and by all Step 12 / Step 13 behavioural scenarios.",
+      "condition": null,
+      "samples": null,
+      "statistic": null
+    }
+  },
+  "attestation_rtt_conditions": {
+    "NONE": {
+      "name": "Full Subsystem Attestation Round Trip, load=NONE",
+      "nominal_cycles": 1204,
+      "category": "MEASURED_REGISTERED",
+      "unit": "cycles",
+      "run_id": "dual_lane_10_20261029_140104_d9fb229d",
+      "job_name": "n2p7_rtt",
+      "source_document": "reports/I5_GATE_20261029.md (round-trip table, load NONE)",
+      "formula": null,
+      "notes": "Breakdown: start->CHALLENGE=208, CHALLENGE->RESPONSE=524, RESPONSE->GRANT=350, GRANT->delivered=122. This is the unloaded condition only; it is NOT the maximum observed across conditions. Re-run in I-9 as job i9r_n2p7_rtt (run dual_lane_10_20261105_145813_9ca6a347, PASS_FRESH per the I-9 gate); E4 quotes the numbers from the I-5 report table and did not independently extract the re-run output.",
+      "condition": "NONE (no tile-3 memory writes, no tile-5 raw-port flood)",
+      "samples": [
+        1204,
+        1204,
+        1204,
+        1204
+      ],
+      "statistic": "min = mean = max over 4 attestations"
+    },
+    "LOADED": {
+      "name": "Full Subsystem Attestation Round Trip, load=LOADED (maximum)",
+      "nominal_cycles": 1206,
+      "category": "MEASURED_REGISTERED",
+      "unit": "cycles",
+      "run_id": "dual_lane_10_20261029_140104_d9fb229d",
+      "job_name": "n2p7_rtt",
+      "source_document": "reports/I5_GATE_20261029.md (round-trip table, load LOADED)",
+      "formula": null,
+      "notes": "Selected as the model input because Step 12 computes the WORST legitimate CPU wait. Segment breakdown for LOADED rows: 208 / 524-525 / 350 / 123-124. Only two load conditions were measured; no other load is claimed.",
+      "condition": "LOADED (tile-3 memory writes, 271 commits, plus tile-5 raw-port flood, 1,889 quarantine forwards)",
+      "samples": [
+        1206,
+        1206,
+        1205,
+        1205
+      ],
+      "statistic": "min 1205, mean 1205.5, max 1206 over 4 attestations"
+    }
+  },
+  "timeout_registry": {
+    "bench_timeout_cycles": 600,
+    "merged_ni_slot_timeout_cycles": 8192,
+    "bridge_timeout_proposed_cycles": 4096,
+    "verifier_timeout_cycles": 100000,
+    "provenance": {
+      "bench_timeout_cycles": {
+        "classification": "CONFIGURATION_PARAMETER",
+        "source": "tb_i9_integ.sv line 5 ('NI_SLOT_TIMEOUT = 600'); result.json/registry.json NI_SLOT_TIMEOUT=600 in run dual_lane_10_20261106_163900_ff77f562; I9_GATE_20261105.md Sec. 2"
+      },
+      "merged_ni_slot_timeout_cycles": {
+        "classification": "REVIEWER_STATED_CONFIGURATION",
+        "source": "E4_FINAL_INTAKE_20261106.md and E4_FINAL_RESPONSE_20261106.md ('NI_SLOT_TIMEOUT 8,192 in the merged build', citing M-F1 rev 8). Not present in rev-8 contract text (only 'NI_SLOT_TIMEOUT > BRIDGE_TIMEOUT'); I-9 RTL default is 0 (off); enabled configuration not synthesized."
+      },
+      "bridge_timeout_proposed_cycles": {
+        "classification": "PROPOSED_RECOMMENDATION",
+        "source": "M-F1-rev8-INTEGRATION-DRAFT.md Row D7 ('[PROPOSED, needs Kalash]'). Pending Kalash approval."
+      },
+      "verifier_timeout_cycles": {
+        "classification": "CONFIGURATION_PARAMETER",
+        "source": "M-F1-interface-freeze.md R7.6a (pq_rot_verifier.sv:4 TIMEOUT_CYCLES = 100000)"
+      }
+    },
+    "usage": {
+      "bench_timeout_cycles": "All 9 Step 12 behavioural scenarios (timeout-dependent ones: 1-7) and all 14 Step 13 NI slot sequences",
+      "merged_ni_slot_timeout_cycles": "No behavioural scenario. Referenced only in the timeout hierarchy (merged NI timeout > proposed bridge timeout > worst legitimate wait)",
+      "bridge_timeout_proposed_cycles": "Margin evaluation against the worst legitimate CPU wait only",
+      "verifier_timeout_cycles": "Upper limit check: proposed bridge timeout must stay below it"
+    },
+    "hierarchy_checks": {
+      "merged_ni_slot_timeout_gt_bridge_timeout": true,
+      "bridge_timeout_lt_verifier_timeout": true,
+      "bench_timeout_ne_merged_timeout": true
+    }
+  },
+  "hop_probe_measurements": {
+    "1_hop_1_flit": 5,
+    "1_hop_3_flits": 7,
+    "1_hop_12_flits": 16,
+    "2_hops_1_flit": 7,
+    "2_hops_3_flits": 9,
+    "3_hops_1_flit": 9,
+    "3_hops_3_flits": 11
+  },
+  "worst_legitimate_cpu_wait": {
+    "composition_validation": {
+      "verdict": "SEQUENTIAL_NO_DOUBLE_COUNT",
+      "hold_interval_event_boundary": {
+        "begin": "attestation start (I-5 round-trip table column 'start')",
+        "end": "GRANT delivered at tile 3 (trusted completion; n2p7_rtt: GRANT HEAD into mesh -> delivered at tile 3)",
+        "model_input_cycles": 1206,
+        "model_input_condition": "LOADED maximum",
+        "none_condition_cycles": 1204,
+        "segments_none": {
+          "start_to_challenge": 208,
+          "challenge_to_response": 524,
+          "response_to_grant": 350,
+          "grant_to_delivered": 122
+        }
+      },
+      "service_path_event_boundary": {
+        "begin": "app_ready[3] rises and the CPU request is accepted by the NI (after endpoint releases the port)",
+        "end": "response delivered on app_rx[3]",
+        "cycles": 28
+      },
+      "justification": [
+        "M-F1 rev 8 Sec. 3 Rule 6: app_ready[3] = 0 while the endpoint owns the port; the CPU request cannot be accepted by the NI while app_ready[3] = 0.",
+        "M-F1 rev 8 Sec. 5 defines the worst legitimate wait as: port hold + NI store-and-forward + mesh round trip + front-end service (additive by contract).",
+        "The I-5 hold interval contains only attestation traffic (CHALLENGE/RESPONSE/GRANT); no CPU memory request NI/mesh/memory service lies inside it."
+      ],
+      "double_counted_components": [],
+      "unverified_assumptions": [
+        "The exact RTL cycle at which app_ready[3] rises is not a registered measurement; it is taken as the GRANT-delivered boundary. If it rises earlier the true wait is smaller (conservative).",
+        "The hold is assumed to begin no earlier than attestation start. A hold beginning earlier would add cycles not captured by the measurement.",
+        "The 3-cycle NI store-and-forward, 2-cycle front-end and 1-cycle egress allowances are ANALYTICAL_ASSUMPTION, not registered measurements.",
+        "Only the NONE and LOADED conditions were measured (4 attestations each). Heavier loads are not covered by measurement."
+      ],
+      "sensitivity": {
+        "service_path_inflated_3x_cycles": 84,
+        "margin_over_extreme_bound_with_3x_path": 1.468
+      }
+    },
+    "model_input_selection": {
+      "selected_input_key": "full_subsystem_attestation_rtt_loaded_max",
+      "selected_cycles": 1206,
+      "selected_condition": "LOADED maximum",
+      "reference_input_key": "full_subsystem_attestation_rtt_none",
+      "reference_cycles": 1204,
+      "reference_condition": "NONE",
+      "reason": "Step 12 computes the worst legitimate CPU wait for D7, so the largest registered measurement is used. 1,204 is the unloaded condition and is retained only as a labelled reference."
+    },
+    "arbiter_applicability": [
+      {
+        "bound": "J_MAX",
+        "cycles": 128,
+        "classification": "DERIVED_ANALYTICAL_BOUND",
+        "provenance": "M-F1 R7.6 (frozen), bench-checked by I-5 assertion A3 (every job <= J_MAX)",
+        "traversed_by_cpu_memory_request": false,
+        "applies_to": "Each L2 KMAC job inside the attestation hold",
+        "added_to_cpu_wait_total": false,
+        "rationale": "Per-job duration is already inside the measured 1,204/1,206-cycle hold and inside the P and Q bounds, which are conditional on J_MAX. Adding it separately would double count."
+      },
+      {
+        "bound": "P",
+        "cycles": 269,
+        "classification": "DERIVED_ANALYTICAL_BOUND",
+        "provenance": "M-F1 R7.6a (re-frozen 2026-10-20: P <= 269 for J_MAX=128, OVH<=4); exhaustive arbiter model",
+        "traversed_by_cpu_memory_request": false,
+        "applies_to": "RoT-class requesters r0 (tile-4 TX: CHALLENGE, GRANT, REVOKE) and r1 (tile-3 RX of the reserved peer slot)",
+        "added_to_cpu_wait_total": true,
+        "rationale": "Applied once, as a conservative single-wait increment on the attestation hold (scenario contention_wait_arbiter_p). It is not a complete worst-case hold: that is covered by the contract-estimate scenario."
+      },
+      {
+        "bound": "Q",
+        "cycles": 792,
+        "classification": "DERIVED_ANALYTICAL_BOUND",
+        "provenance": "M-F1 R7.6a (re-frozen: Q <= 792); starvation test checks Q <= 792",
+        "traversed_by_cpu_memory_request": false,
+        "applies_to": "Non-RoT requesters r2 (tile-3 TX: RESPONSE) and r3 (tile-4 RX: RESPONSE verify); both lie inside the attestation hold",
+        "added_to_cpu_wait_total": false,
+        "rationale": "Q affects how long the attestation hold can last under contention, not the CPU request itself. It is not added to the P scenario; it enters only through the contract-estimate scenario (RESPONSE MAC <= 792 and RESPONSE verify <= 792)."
+      },
+      {
+        "bound": "CPU memory request path",
+        "cycles": null,
+        "classification": "EVIDENCE_NOTE",
+        "provenance": "I5_GATE_20261029.md hop table ('7 (data plain in P7)' for VC0 MEM_WR_REQ) and L2 verdict row (CHALLENGE / RESPONSE / GRANT / REVOKE only)",
+        "traversed_by_cpu_memory_request": false,
+        "applies_to": "Tile 3 -> tile 2 data-plane MEM_RD/WR traffic",
+        "added_to_cpu_wait_total": false,
+        "rationale": "Data-plane packets are plain in P7 and do not use the shared L2 KMAC engine, so no P/Q/J arbitration is traversed by the request. Conclusion rests on the I-5 report and contract text, not on RTL inspection by Engineer 4."
+      },
+      {
+        "bound": "C4 REVOKE (measured 486 / contractual 1,500)",
+        "cycles": 486,
+        "classification": "MEASURED_REGISTERED (486) / DERIVED_ANALYTICAL_BOUND (1,500)",
+        "provenance": "i9r_s3_p7_c4; docs/decisions/P7-INGRESS-REVOCATION-CONTRACT.md",
+        "traversed_by_cpu_memory_request": false,
+        "applies_to": "Revocation transient stacked onto the wait",
+        "added_to_cpu_wait_total": true,
+        "rationale": "Stacked conservatively on top of the attestation hold. It is an upper-bound construction, not an observed combined event."
+      }
+    ],
+    "components": {
+      "attestation_port_hold": {
+        "cycles": 1206,
+        "condition": "LOADED maximum",
+        "classification": "MEASURED_REGISTERED",
+        "provenance": "I5_GATE_20261029.md round-trip table (run dual_lane_10_20261029_140104_d9fb229d, job n2p7_rtt); I-9 re-run job i9r_n2p7_rtt"
+      },
+      "attestation_port_hold_none_reference": {
+        "cycles": 1204,
+        "condition": "NONE",
+        "classification": "MEASURED_REGISTERED",
+        "provenance": "I5_GATE_20261029.md round-trip table (run dual_lane_10_20261029_140104_d9fb229d, job n2p7_rtt)"
+      },
+      "ni_store_forward_delay": {
+        "cycles": 3,
+        "classification": "ANALYTICAL_ASSUMPTION",
+        "provenance": "Engineer 4 allowance; no registered source"
+      },
+      "mesh_fwd_transport_3hops": {
+        "cycles": 11,
+        "classification": "MEASURED_REGISTERED",
+        "provenance": "i9r_hop_probes_p7 (hops=3, flits=3: 11 cycles)"
+      },
+      "frontend_service_bram_read": {
+        "cycles": 2,
+        "classification": "ANALYTICAL_ASSUMPTION",
+        "provenance": "Engineer 4 allowance: 1 cycle decode + 1 cycle BRAM read; no registered source"
+      },
+      "mesh_rev_transport_3hops": {
+        "cycles": 11,
+        "classification": "MEASURED_REGISTERED",
+        "provenance": "i9r_hop_probes_p7 (hops=3, flits=3: 11 cycles)"
+      },
+      "egress_delivery": {
+        "cycles": 1,
+        "classification": "ANALYTICAL_ASSUMPTION",
+        "provenance": "Engineer 4 allowance: app_rx handshake; no registered source"
+      },
+      "arbiter_p_bound": {
+        "cycles": 269,
+        "classification": "DERIVED_ANALYTICAL_BOUND",
+        "provenance": "M-F1 R7.6a frozen bound"
+      },
+      "c4_revoke_max": {
+        "cycles": 486,
+        "classification": "MEASURED_REGISTERED",
+        "provenance": "i9r_s3_p7_c4"
+      },
+      "c4_revoke_bound": {
+        "cycles": 1500,
+        "classification": "DERIVED_ANALYTICAL_BOUND",
+        "provenance": "P7-INGRESS-REVOCATION-CONTRACT.md"
+      },
+      "contract_worst_attestation_estimate": {
+        "cycles": 2700,
+        "classification": "CONTRACT_ESTIMATE",
+        "provenance": "M-F1 R7.6a 'about 2,700 cycles, ESTIMATE'"
+      }
+    },
+    "totals": {
+      "nominal_round_trip_transport": 28,
+      "nominal_legitimate_wait": 1234,
+      "nominal_legitimate_wait_basis": "LOADED-maximum hold (1,206) + 28-cycle service path",
+      "reference_none_condition_wait": 1232,
+      "reference_none_condition_wait_basis": "NONE hold (1,204) + 28-cycle service path; reference only",
+      "contention_wait_arbiter_p": 1503,
+      "contention_wait_c4_max": 1720,
+      "extreme_bound_c4": 2734,
+      "contract_estimate_wait": 2728,
+      "contract_estimate_wait_basis": "ESTIMATE 2,700 (contract R7.6a, includes Q bounds) + 28-cycle service path; not a measurement"
+    },
+    "timeout_evaluation": {
+      "proposed_bridge_timeout": 4096,
+      "registered_bridge_timeout": 4096,
+      "bridge_timeout_status": "PROPOSED_PENDING_KALASH_APPROVAL",
+      "approved_by_kalash": false,
+      "verifier_timeout": 100000,
+      "margin_over_nominal": 3.319,
+      "margin_over_reference_none": 3.325,
+      "margin_over_contention_p": 2.725,
+      "margin_over_c4_max": 2.381,
+      "margin_over_extreme_bound": 1.498,
+      "margin_over_contract_estimate": 1.501,
+      "ratio_below_verifier_timeout": 24.41,
+      "recommendation": "RETAIN_4096",
+      "justification": "A 4,096-cycle bridge timeout (PROPOSED, not approved) exceeds every modelled legitimate wait: 1234 nominal (loaded-max hold), 1503 with one P wait, 1720 with C4 max, 2728 at the contract ESTIMATE and 2734 at the stacked C4 bound. Margins: 2.38x over C4 max, 1.50x over the stacked bound, 1.50x over the contract estimate, and it stays 24.4x below VERIFIER_TIMEOUT. Pending Kalash approval per contract D7."
+    },
+    "timeout_registry": {
+      "bench_timeout_cycles": 600,
+      "merged_ni_slot_timeout_cycles": 8192,
+      "bridge_timeout_proposed_cycles": 4096,
+      "verifier_timeout_cycles": 100000,
+      "provenance": {
+        "bench_timeout_cycles": {
+          "classification": "CONFIGURATION_PARAMETER",
+          "source": "tb_i9_integ.sv line 5 ('NI_SLOT_TIMEOUT = 600'); result.json/registry.json NI_SLOT_TIMEOUT=600 in run dual_lane_10_20261106_163900_ff77f562; I9_GATE_20261105.md Sec. 2"
+        },
+        "merged_ni_slot_timeout_cycles": {
+          "classification": "REVIEWER_STATED_CONFIGURATION",
+          "source": "E4_FINAL_INTAKE_20261106.md and E4_FINAL_RESPONSE_20261106.md ('NI_SLOT_TIMEOUT 8,192 in the merged build', citing M-F1 rev 8). Not present in rev-8 contract text (only 'NI_SLOT_TIMEOUT > BRIDGE_TIMEOUT'); I-9 RTL default is 0 (off); enabled configuration not synthesized."
+        },
+        "bridge_timeout_proposed_cycles": {
+          "classification": "PROPOSED_RECOMMENDATION",
+          "source": "M-F1-rev8-INTEGRATION-DRAFT.md Row D7 ('[PROPOSED, needs Kalash]'). Pending Kalash approval."
+        },
+        "verifier_timeout_cycles": {
+          "classification": "CONFIGURATION_PARAMETER",
+          "source": "M-F1-interface-freeze.md R7.6a (pq_rot_verifier.sv:4 TIMEOUT_CYCLES = 100000)"
+        }
+      },
+      "usage": {
+        "bench_timeout_cycles": "All 9 Step 12 behavioural scenarios (timeout-dependent ones: 1-7) and all 14 Step 13 NI slot sequences",
+        "merged_ni_slot_timeout_cycles": "No behavioural scenario. Referenced only in the timeout hierarchy (merged NI timeout > proposed bridge timeout > worst legitimate wait)",
+        "bridge_timeout_proposed_cycles": "Margin evaluation against the worst legitimate CPU wait only",
+        "verifier_timeout_cycles": "Upper limit check: proposed bridge timeout must stay below it"
+      },
+      "hierarchy_checks": {
+        "merged_ni_slot_timeout_gt_bridge_timeout": true,
+        "bridge_timeout_lt_verifier_timeout": true,
+        "bench_timeout_ne_merged_timeout": true
+      }
+    }
+  },
+  "scenarios": {
+    "scenario_1_nominal_arrival": {
+      "status": "PASS",
+      "description": "Nominal response at cycle 118 (<600) completes cleanly.",
+      "timeout_kind": "BENCH",
+      "timeout_cycles_applied": 600
+    },
+    "scenario_2_boundary_arrival": {
+      "status": "PASS",
+      "description": "Response at cycle 599 immediately before 600-cycle threshold completes.",
+      "timeout_kind": "BENCH",
+      "timeout_cycles_applied": 600
+    },
+    "scenario_3_response_after_timeout": {
+      "status": "PASS",
+      "description": "Response at cycle 605 (>600) is safely dropped.",
+      "timeout_kind": "BENCH",
+      "timeout_cycles_applied": 600
+    },
+    "scenario_4_missing_response_release": {
+      "status": "PASS",
+      "description": "Missing response releases slot autonomously at cycle 600.",
+      "timeout_kind": "BENCH",
+      "timeout_cycles_applied": 600
+    },
+    "scenario_5_slot_reallocation": {
+      "status": "PASS",
+      "description": "Slot immediately reallocated after timeout release.",
+      "timeout_kind": "BENCH",
+      "timeout_cycles_applied": 600
+    },
+    "scenario_6_late_response_dropped": {
+      "status": "PASS",
+      "description": "Late response arriving into empty slot is dropped safely.",
+      "timeout_kind": "BENCH",
+      "timeout_cycles_applied": 600
+    },
+    "scenario_7_stale_response_mismatch": {
+      "status": "PASS",
+      "description": "Stale response for previous tag 0x70 dropped; active tag 0x71 untouched.",
+      "timeout_kind": "BENCH",
+      "timeout_cycles_applied": 600
+    },
+    "scenario_8_reset_cleanup": {
+      "status": "PASS",
+      "description": "Hardware reset immediately releases both occupied slots.",
+      "timeout_kind": "BENCH",
+      "timeout_cycles_applied": 600
+    },
+    "scenario_9_busy_retry_exhaustion": {
+      "status": "PASS",
+      "description": "BUSY retries permitted for 0..3 attempts; 4th fails closed.",
+      "records": [
+        {
+          "attempt": 0,
+          "verdict": "RETRY_PERMITTED"
+        },
+        {
+          "attempt": 1,
+          "verdict": "RETRY_PERMITTED"
+        },
+        {
+          "attempt": 2,
+          "verdict": "RETRY_PERMITTED"
+        },
+        {
+          "attempt": 3,
+          "verdict": "RETRY_PERMITTED"
+        },
+        {
+          "attempt": 4,
+          "verdict": "RETRY_EXHAUSTED",
+          "outcome": "FAIL_CLOSED_REVOKE_REASON_9"
+        }
+      ],
+      "timeout_kind": "NOT_APPLICABLE",
+      "timeout_cycles_applied": null
+    }
+  }
+}

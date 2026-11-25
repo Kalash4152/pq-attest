@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "saved_utc": "2026-10-08T13:24:35.196842+00:00",
+  "work_state": "STOPPED_AT_USER_REQUEST",
+  "git_head": "1e3141cda7bc7dccc28d6974016f7a418415e297",
+  "git_branch": "noc/credit-integration",
+  "git_status": " M NOC_PQATTEST.srcs/sim_1/new/ni_tb.sv\n M NOC_PQATTEST.srcs/sim_1/new/tb_noc_n81.sv\n M NOC_PQATTEST.srcs/sources_1/new/tb_noc_mesh.sv\n M NOC_PQATTEST.xpr\n D docs/HANDOFF_2026-09-26.md\n D docs/PQ_ATTEST_AI_HANDOFF_2026-10-01.md\n D docs/STATUS.md\n D docs/decisions/7c-flow-control.md\n D docs/decisions/M-F1-interface-freeze.md\n D docs/decisions/N-8.1-ni-endpoint-containment.md\n M scripts/n6_mutation.tcl\n M scripts/n81_xsim.tcl\n?? NOC_PQATTEST.srcs/sim_1/new/tb_noc_l2_auth.sv\n?? NOC_PQATTEST.srcs/sim_1/new/tb_noc_perf.sv\n?? NOC_PQATTEST.srcs/sim_1/new/tb_pq_full_chain.sv\n?? NOC_PQATTEST.srcs/sim_1/new/tb_stg_8_golden.sv\n?? NOC_PQATTEST.srcs/sources_1/new/pq_attest_protocol_pkg.sv\n?? NOC_PQATTEST.srcs/sources_1/new/pq_attest_request.sv\n?? NOC_PQATTEST.srcs/sources_1/new/pq_attest_response.sv\n?? NOC_PQATTEST.srcs/sources_1/new/tb_noc_mesh.sv.pre_d7_define\n?? NOC_PQATTEST.srcs/utils_1/\n?? PACKAGE_SHA256.csv\n?? \"PQ_Attest (2).zip\"\n?? \"PQ_Attest (3).zip\"\n?? PQ_Attest_WP0_2026-10-01_r2.zip\n?? Pq_Attest_final.zip\n?? README.md\n?? Run_M9_2.ps1\n?? WP0_package/\n?? WP0_r2/\n?? _recovery_backup/\n?? automation/\n?? baseline.json\n?? d7_regression.tcl\n?? docs/CODEX_INSTRUCTIONS_R3_REVIEW_2026-10-08.md\n?? docs/DUAL_LANE_CHECKPOINT_2026-10-08.md\n?? docs/PQ_NOC_RECONCILIATION_2026-10-08.md\n?? docs/decisions/DUAL_LANE_10_CONTRACT.md\n?? docs/decisions/N-10-attestation-enforcement.md\n?? docs/decisions/N-7.5-finite-liveness.md\n?? docs/decisions/N-8-performance-plan.md\n?? docs/decisions/N-9-l2-authentication.md\n?? docs/decisions/S8-1-attestation-field-map.md\n?? docs/decisions/S8-2-tile-attest-endpoint.md\n?? docs/decisions/dual_lane_config.json\n?? logs/wp0_baseline_20261001_154946_0386fe86/\n?? logs/wp0_baseline_20261001_155155_c41260f5/\n?? logs/wp0_baseline_20261001_155357_6ea044cc/\n?? logs/wp0_baseline_20261001_160413_9346f3dd/\n?? logs/wp0_baseline_20261001_192023_1c624970/\n?? logs/wp0_baseline_20261001_194107_3aabb9e6/\n?? logs/wp0_baseline_20261001_200156_382faaf2/\n?? logs/wp0_baseline_20261001_201035_97d69ce7/\n?? logs/wp0_baseline_20261002_000838_0b36ea04/\n?? logs/wp0_define_proof_20261001_143800/\n?? logs/wp0_n6_mutation_20261001_155153_36384_3fd16778/\n?? logs/wp0_n81_20261001_155356_36384_08c1dad7/\n?? logs/wp0_n81_20261001_160412_36384_77dbeab8/\n?? logs/wp0_n81_20261001_192022_36384_5f57e93d/\n?? logs/wp0_n81_20261001_194105_36384_449cb164/\n?? logs/wp0_n81_20261001_200154_37400_2cec12e1/\n?? logs/wp0_n81_20261001_201034_37400_62e7dcf8/\n?? logs/wp0_n81_20261002_000837_37400_2455a286/\n?? logs/wp0_sysdbg_1/\n?? logs/wp0_sysdbg_2/\n?? logs/wp0_triage_20261001_161210/\n?? logs/wp0_triage_20261001_161354/\n?? logs/wp0_triage_20261001_185318/\n?? logs/wp0_triage_20261001_185725/\n?? reports/dual_lane_10_20261008_144410_81040756/\n?? reports/dual_lane_10_20261008_144615_bf288411/\n?? reports/dual_lane_10_20261008_150300_5231be0b/\n?? reports/dual_lane_latest.json\n?? reports/n25_run3pe_2026-10-02/\n?? reports/n81_ni_ooc_2026-10-02/\n?? rtl/\n?? run_m9_2.py\n?? scripts.zip\n?? scripts/capture_baseline.ps1\n?? scripts/checkpoint_dual_lane.py\n?? scripts/d4_crypto_ooc.tcl\n?? scripts/d7_regression.tcl.pre_d7_define\n?? scripts/dual_lane.py\n?? scripts/dual_lane_common.tcl\n?? scripts/dual_lane_export.tcl\n?? scripts/dual_lane_jobs.json\n?? scripts/dual_lane_support.ps1\n?? scripts/dual_lane_verify.py\n?? scripts/full_chain_golden.py\n?? scripts/l2_golden.py\n?? scripts/perf_bench_body.sv.inc\n?? scripts/perf_report.py\n?? scripts/prepare_dual_lane.py\n?? scripts/prepare_perf_bench.py\n?? scripts/prepare_secure_variants.py\n?? scripts/run_dual_lane_10.tcl\n?? scripts/s8_golden.py\n?? scripts/test_dual_lane.py\n?? scripts/verify_wp0.ps1\n?? scripts/wp0_common.tcl\n?? scripts/wp0_n81_xsim_triage.ps1\n?? scripts/wp0_support.ps1\n?? selfcheck_m9_2.py\n?? sim/\n?? vectors/\n",
+  "scheduler_lock_present": false,
+  "checks": {
+    "automation": {
+      "exit_code": 0,
+      "log": "automation\\dual_lane_payload\\checkpoint_checks\\automation.log",
+      "sha256": "5d59c449f340aea8f109dcb0f5a248a2aaf1b5f8d41f14198acbc631bc9a9c9c"
+    },
+    "s8_oracle": {
+      "exit_code": 0,
+      "log": "automation\\dual_lane_payload\\checkpoint_checks\\s8_oracle.log",
+      "sha256": "9d53e587096371762d02dd01cd44d9bbe1b9c97f96e55e527952824223c8c522"
+    },
+    "chain_oracle": {
+      "exit_code": 0,
+      "log": "automation\\dual_lane_payload\\checkpoint_checks\\chain_oracle.log",
+      "sha256": "0281bc864aa8c1b8a9c4f5987d67a6bc108a64daa10496d76c8ed1a5518cd07b"
+    },
+    "l2_oracle": {
+      "exit_code": 0,
+      "log": "automation\\dual_lane_payload\\checkpoint_checks\\l2_oracle.log",
+      "sha256": "f2597c61177b54e8073debaba71c042777e04de2f443f11e93c8d23d9c4fac00"
+    },
+    "python_syntax": {
+      "state": "PASS",
+      "files": [
+        "checkpoint_dual_lane.py",
+        "dual_lane.py",
+        "dual_lane_verify.py",
+        "full_chain_golden.py",
+        "l2_golden.py",
+        "perf_report.py",
+        "prepare_dual_lane.py",
+        "prepare_perf_bench.py",
+        "prepare_secure_variants.py",
+        "s8_golden.py",
+        "test_dual_lane.py"
+      ]
+    },
+    "tcl_structure": {
+      "state": "PASS",
+      "files": [
+        "dual_lane_common.tcl",
+        "dual_lane_export.tcl",
+        "run_dual_lane_10.tcl",
+        "d4_crypto_ooc.tcl"
+      ],
+      "scope": "structure/bootstrap loading; no Vivado execution"
+    },
+    "payload_preflight": {
+      "state": "PASS",
+      "files": 46,
+      "already_installed": 46
+    },
+    "chain_artifact_integrity": {
+      "state": "PASS",
+      "scope": "saved artifact hashes; no rerun"
+    }
+  },
+  "intake_files": 105,
+  "intake_files_changed": {},
+  "update_manifest_sha256": "4d35578684dd8caaa2386535392ec8d4a463c532698ec154144aa94c7bf1552b",
+  "saved_files": {
+    "docs/decisions/DUAL_LANE_10_CONTRACT.md": "60d44d6d02e8c318292a99b780d039fe7fbfdac5c9868bc5e6accc7662294319",
+    "docs/decisions/dual_lane_config.json": "84d6aa304de4c29250fd33426a0dbee97c81ad0a818fa4e7bb8fe4e1e89e8af3",
+    "docs/decisions/N-10-attestation-enforcement.md": "096939c94ce49c24cc5e54edd87e29a968c80fc5f00c1211cff46be9daee2607",
+    "docs/decisions/N-7.5-finite-liveness.md": "f839dea83a266cc910df25cd2571b712adc348908a0eabe11fac7b32a041a95c",
+    "docs/decisions/N-8-performance-plan.md": "ad0ad6edce7bf23ed9d665c4c57a7b74408005cd32ca3554271c9a4ed5f96f84",
+    "docs/decisions/N-9-l2-authentication.md": "01cb8e482542976a83b5a08d6e2748ee18e251821a898c973c8e5575eb39270a",
+    "docs/decisions/S8-1-attestation-field-map.md": "c9856bed2d1c8fa464056c95fc4eb950fefa09d5ab8e1a7b2859415eb542b4c8",
+    "docs/decisions/S8-2-tile-attest-endpoint.md": "97963963afad1da43fd17e4f7a405c805876885382e3ddd608fb92f264b42374",
+    "docs/DUAL_LANE_CHECKPOINT_2026-10-08.md": "62a41e0707c3e484ee5eee87c59ead341e77a73e124f42f9a04d1d6b0eadf68b",
+    "NOC_PQATTEST.srcs/sim_1/new/tb_noc_l2_auth.sv": "b0f99f1b210462376addd25a809260f1f3d708e7d2967f90f6784b69cbdbcf45",
+    "NOC_PQATTEST.srcs/sim_1/new/tb_noc_perf.sv": "40092a76f1ffeaa3e1cea40d009da827c2292c288f8473e79bd9532c8897deb0",
+    "NOC_PQATTEST.srcs/sim_1/new/tb_pq_full_chain.sv": "0bbdef38bd5b1be94067588084dc7c42691fc3ec37cf1f29c1f7d04e56d9370e",
+    "NOC_PQATTEST.srcs/sim_1/new/tb_stg_8_golden.sv": "0ebfe4b7a6284b977993ba90b14b04c846b620f1b2c0b1a4b0d0c36d92a0f7ed",
+    "rtl/dual_lane/noc_attest_gate.sv": "ed149afeecfbc268eefb88e15a289cbe1211c8ef30683f7be656c7568b2d1af0",
+    "rtl/dual_lane/noc_fault_status.sv": "16591d516ccdf95d4691a41d53240faf29ec30a44fb2cfd57d739d8a5275f14f",
+    "rtl/dual_lane/noc_l2_auth.sv": "f56ac1f56eada1bdcf94a61f5f40aa994aef58eab5d10e12b98f7275d96a91e3",
+    "rtl/dual_lane/noc_network_interface.sv": "341c46d25525e6e5bc5c7eae557be0dacb4345361cf8466530c71a3f86fe1cbb",
+    "rtl/dual_lane/NOC_PKG.sv": "e428af103c9a0096f47f9ad97215a33b919dc9035c2a5e9d1255ff9fdd33a7be",
+    "rtl/dual_lane/pq_attest_endpoint.sv": "e89341648a0427b48730be742ccd5d13f6a6598b22e56c16ebb3d5befa9e7ca4",
+    "rtl/dual_lane/pq_noc_subsystem.sv": "f137fa33452f06f6577806ee71d5c40cec1e8dcfe30572cb217d9069cf56e025",
+    "rtl/dual_lane/pq_rot_verifier.sv": "2decf1c97e6059d810c98f42193bac7c279e480ebc6bd812fc5a07b081d6ecdf",
+    "rtl/dual_lane/variant_provenance.json": "eb351928735f2991587ea4ee1e7407bde19c9f4a0f95ccd7a2ca9786e6431e17",
+    "scripts/checkpoint_dual_lane.py": "08ecf5c894db0b42cdec10eee4b65e5a47b4eb69627293685bf023d23535f7ca",
+    "scripts/d4_crypto_ooc.tcl": "9dabc894c72768f5e28a96f77f44e773fc575820675d74a46e1d243eeb827470",
+    "scripts/dual_lane.py": "8479a81f622e86ffba535667900da803d513534971a2419064dd4957b3f83070",
+    "scripts/dual_lane_common.tcl": "6ec40937c86bf67d1bfb53ac1d1aae1f0e75cb1c7dbd66b4fe10185164706279",
+    "scripts/dual_lane_export.tcl": "51672893ff9eb5cd4650c363245d6f76750f49a6f326644073d8138061f3e3b5",
+    "scripts/dual_lane_jobs.json": "58b624dcd43d99d6588ed6469afa062a6bfd2a6f875c69b9783a38307557747a",
+    "scripts/dual_lane_support.ps1": "b65f7a0803221bc5005a0daa34974faff2d2158c468fd64ade61359e850b3427",
+    "scripts/dual_lane_verify.py": "6c6b785a7daf1ea19266127be45cef5e722f44500133b3dad3659c823b10faec",
+    "scripts/full_chain_golden.py": "8db2a96ff85d8efef7a5284a672707091a05106c0ac2b5872d00c0cce95efb69",
+    "scripts/l2_golden.py": "e93b903d4922d90929d1bd7a05191ab1ed94254d0018bd881e117e0244ace352",
+    "scripts/perf_bench_body.sv.inc": "83a6428355e2f79bf293b7d5e8fde3b3b034fabbde5855fde97695471fd0db73",
+    "scripts/perf_report.py": "d9232d09c214cc150180b26f177841c756d1b2f532eb3eb4e7ce47fe0b4ab516",
+    "scripts/prepare_dual_lane.py": "ff6a245aeac5bebdcfcc88c91c3c6f38c287b79f796293e15ceb33474a957a20",
+    "scripts/prepare_perf_bench.py": "cfca665f854107338ae7dac0d39535e5d1be1f6c3655d4e37c903c49ecb1fb1e",
+    "scripts/prepare_secure_variants.py": "f9ed6e312bb54ae82b5d8b62228539059b5a64852b55b07c05cb3309fbf8f8d1",
+    "scripts/run_dual_lane_10.tcl": "9a5d27d7cfeeb7fc0f04f238f41ff82a3dc1616887be8e68f6b0403914e0e332",
+    "scripts/s8_golden.py": "016f3f8eaa193dbc658edb2b0a7cfbe078ec1099cd7484570adb7f6d8db4a0c6",
+    "scripts/test_dual_lane.py": "affcc5bb600076a8039ed2fd506785ca578a725bba4d857d330d7edcc624b0ae",
+    "vectors/full_chain.json": "83795065ce9cf2885ccbec44d833ee6e22df652b8fe94f2e05522543245af15b",
+    "vectors/full_chain.svh": "2d203bab7a6fd17549b273fbaf59ed52d7d2bf1e4518a37ea19f9ce9a9311789",
+    "vectors/l2_golden.json": "0b406dafde2424ec35afc0428f1eebf8f62cfcfdcd5d7a0871aac0f11eb49ed3",
+    "vectors/l2_golden.svh": "b9a7e07b6233155a82da53cd36cecba9dba62a7ad359e375bd7d9370e809dd50",
+    "vectors/s8_golden.json": "7722a25dba07163ac0a6870d75744c99ac219311c949225ae7c49ed9851765b8",
+    "vectors/s8_golden.svh": "f5b08dabf8395ea16b53dd0d35a83d8f3db34bb603160bb6f26321d613c86785"
+  },
+  "latest_evidence": "reports\\dual_lane_10_20261008_150300_5231be0b",
+  "overall_status": "FAIL",
+  "package_states": {
+    "NOC-1": "FAIL",
+    "PQ-1": "NOT_RUN",
+    "NOC-2": "NOT_RUN",
+    "PQ-2": "NOT_RUN",
+    "PQ-3": "NOT_RUN",
+    "NOC-3": "NOT_RUN",
+    "NOC-4": "NOT_RUN",
+    "PQ-4": "NOT_RUN",
+    "PQ-5": "BLOCKED",
+    "NOC-5": "NOT_RUN"
+  },
+  "accepted_noc": 0,
+  "accepted_pq": 0,
+  "hardware_validated": false,
+  "future_plan": "docs/DUAL_LANE_CHECKPOINT_2026-10-08.md"
+}

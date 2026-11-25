@@ -1,0 +1,1 @@
+p7_soc: top pq_p7_soc_area_top  LUT 32118  FF 29168  WNS 0.184 ns  WHS 0.048 ns  bitstream C:/vivado_verilog_proj/NOC_PQATTEST/NOC_PQATTEST.runs_s4/p7_soc/pq_p7_soc_area_top.bit

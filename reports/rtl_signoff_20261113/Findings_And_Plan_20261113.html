@@ -1,0 +1,120 @@
+<html><head><meta charset="utf-8"><title>Findings, proposed changes and plan</title><style>
+body{font-family:Calibri,Arial,sans-serif;font-size:10.5pt;line-height:1.15}
+p{margin:0 0 6pt 0}.title{font-size:22pt;font-weight:bold;margin:0 0 6pt 0}
+h1{font-size:15pt;margin:14pt 0 6pt 0;color:#17365D}h2{font-size:12pt;margin:10pt 0 4pt 0}
+.box{font-weight:bold;border:1.5pt solid #17365D;padding:6pt;margin:8pt 0}
+.note{font-size:9.5pt;color:#444}
+table{border-collapse:collapse;width:100%;margin:0 0 8pt 0}
+th{background:#17365D;color:#fff;font-size:9.5pt;text-align:left;border:1px solid #D9D9D9;padding:3pt 4pt}
+td{font-size:9.5pt;border:1px solid #D9D9D9;padding:3pt 4pt;vertical-align:top}
+li{margin:0 0 4pt 0}@page{size:8.5in 11in;margin:0.6in 0.6in}
+</style></head><body>
+
+<p class="title">Findings, proposed changes and plan</p>
+<p>NoC + PQ-Attest + two RISC-V CPU tiles | Planning document, 13 November 2026 | Prepared for Kalash Bheda</p>
+<p class="box">This is a plan only. Nothing in it has been implemented. No RTL, firmware, constraint, vector or registry file has been changed since the audit. Every proposed change below waits for your decision.</p>
+<p>Basis: the RTL sign-off audit of 13 November (report RTL_Signoff_Report_20261113), five independent line-by-line reviews of the 70 active source files, fresh simulations on the current sources, and the 12 November build reports. Audit verdict: RTL conditionally closed.</p>
+
+<h1>1. Where the project stands</h1>
+<table>
+<tr><th width="30%">Item</th><th>State</th></tr>
+<tr><td>RTL for the approved scope</td><td>Complete. No mandatory RTL change found. Sources unchanged since tag rtl-rc1-20261112.</td></tr>
+<tr><td>Current build (12 Nov)</td><td>34,952 LUT (55 %), 25,328 FF, 20 block RAM; timing met at 50 MHz (setup slack +0.120 ns, hold slack +0.009 ns); 0 routing and design-rule errors.</td></tr>
+<tr><td>Fresh simulations (13 Nov)</td><td>Closure 14/14, in-flight 6/6, contention 8/8: all PASS on the current sources.</td></tr>
+<tr><td>Registered verification</td><td>615 jobs, including 231 fault-injection (mutant) jobs; increments I-13 to I-26 PASS.</td></tr>
+<tr><td>Board</td><td>The current image has not been run on the board. A 7 November image was reported as passing (not itemised).</td></tr>
+<tr><td>Formal proof, coverage measurement, ASIC work</td><td>Not done.</td></tr>
+<tr><td>Website</td><td>Built, 20 browser tests pass, published on the private link. Real-GPU check and usability trial open.</td></tr>
+</table>
+
+<h1>2. All findings</h1>
+<h2>2.1 Design and firmware findings</h2>
+<table>
+<tr><th width="6%">ID</th><th width="9%">Severity</th><th width="33%">Finding</th><th width="22%">Where</th><th width="30%">Effect today</th></tr>
+<tr><td>D-01</td><td>High (scope)</td><td>Only the first 64 bytes of tile 3's firmware are measured, and they hold just two jumps and padding. The program itself is not measured.</td><td>demo_fw_v2.S lines 3-6; window length 64</td><td>A changed program with the same first 64 bytes passes attestation. Recorded earlier as a known limitation.</td></tr>
+<tr><td>D-02</td><td>High (demo)</td><td>The firmware's two waits for a button run out and jump to FAIL.</td><td>demo_fw_v2.S lines 59-66, 83-90</td><td>The board shows a false FAIL after roughly 2.5 to 4.5 minutes without a button press (estimate).</td></tr>
+<tr><td>D-03</td><td>Medium (latent)</td><td>The network interface can free a request slot in the same cycle its late response arrives.</td><td>noc_network_interface_p7_i9.sv 765-770, 823-826</td><td>Needs a response exactly 16,384 cycles late; the measured worst case is 459 cycles. Not reachable today.</td></tr>
+<tr><td>D-04</td><td>Medium</td><td>A data packet sent to tile 4 during verification makes attestation fail.</td><td>pq_rot_verifier.sv 106-115</td><td>Denial of service only, and only through the untrusted port, which is tied off on the board.</td></tr>
+<tr><td>D-05</td><td>Medium</td><td>The memory front end ignores a request that arrives while it is busy.</td><td>pq_noc_subsystem_p7_i9.sv 313</td><td>Cannot happen in this build (one request at a time, one authorised tile).</td></tr>
+<tr><td>D-06</td><td>Medium (scope)</td><td>The processor may execute code from its writable data memory.</td><td>addr_decode.sv 231</td><td>The demo firmware does not do this; it weakens the "only measured code runs" argument.</td></tr>
+<tr><td>D-07</td><td>Low</td><td>A grant arriving in the same cycle as a failure leaves the tile authorised until the following revoke.</td><td>noc_attest_gate.sv 39, 47</td><td>Short, bounded window.</td></tr>
+<tr><td>D-08 to D-11</td><td>Low (latent)</td><td>Four corner cases in the hash and key blocks (full final block, oversize request, context length 15, a start lost in one state).</td><td>SHA3_PAD.sv 17; pq_measurement.sv; pq_kdf.sv; kmac_128_xp_a5.sv</td><td>All blocked by checks in the parent block. Matter only if the blocks are reused elsewhere.</td></tr>
+<tr><td>D-12</td><td>Low</td><td>A signal is used before it is declared.</td><td>SHA3_256_xp.sv 70</td><td>Vivado accepts it; an ASIC tool may reject it.</td></tr>
+<tr><td>D-13 to D-15</td><td>Low</td><td>Self-addressed packets, clear-versus-event ordering in two counters, small UART and error-code behaviours.</td><td>Various</td><td>Cosmetic or unreachable.</td></tr>
+</table>
+<h2>2.2 Verification findings</h2>
+<table>
+<tr><th width="6%">ID</th><th width="54%">Finding</th><th width="40%">Effect</th></tr>
+<tr><td>V-01</td><td>One closure check compares two testbench constants.</td><td>That check cannot fail because of the design.</td></tr>
+<tr><td>V-02</td><td>The injection helper in one bench does not confirm the forged packet was accepted.</td><td>A "nothing happened" check could pass for the wrong reason.</td></tr>
+<tr><td>V-03</td><td>Two benches print a fixed check count.</td><td>A skipped check would not show in the count.</td></tr>
+<tr><td>V-04</td><td>The 1,000-seed campaign exercises instruction fetches only.</td><td>Narrower than the name suggests.</td></tr>
+<tr><td>V-05</td><td>Some checks only confirm that something happened.</td><td>Weaker than exact expected values.</td></tr>
+<tr><td>V-06</td><td>Two fault-injection controls last ran on an older copy of the core (difference: comments and one start-up check).</td><td>The benches themselves pass fresh; the two controls were not re-run.</td></tr>
+<tr><td>V-07</td><td>No code coverage, no functional coverage on the final design, no formal proof.</td><td>Untested corners cannot be ruled out.</td></tr>
+<tr><td>V-08</td><td>Current image not run on the board.</td><td>Hardware validation open.</td></tr>
+</table>
+
+<h1>3. Every proposed change</h1>
+<p>None of these is implemented. "Decision" says what is needed from you.</p>
+<table>
+<tr><th width="5%">#</th><th width="21%">Change</th><th width="24%">Why</th><th width="20%">What it touches</th><th width="14%">Cost / risk</th><th width="16%">Decision</th></tr>
+<tr><td>C1</td><td><b>Measure the whole instruction memory</b> (revision 10 draft). Tile 3 hashes all 16,384 bytes and puts the digest in the existing 64-byte field.</td><td>Fixes D-01: the measurement then covers the program.</td><td>One new block in rtl/riscv, the CPU tile wrapper, firmware image padding, vector generator, board-top constants, benches. No protected file, no packet format.</td><td>Estimated +4,000 to +6,000 LUT; timing must be re-closed; full re-verification and rebuild.</td><td>Sign revision 10 (four points). You chose this direction on 13 Nov.</td></tr>
+<tr><td>C2</td><td><b>Firmware v3: button waits do not time out.</b></td><td>Fixes D-02: no false FAIL on the board.</td><td>Firmware only; new approved measurement.</td><td>Small. Best done together with C1, since the image changes either way.</td><td>Part of revision 10, point 3.</td></tr>
+<tr><td>C3</td><td>Fix the slot race in the network interface.</td><td>Removes latent defect D-03.</td><td>One condition in the NI variant (rtl/dual_lane), plus a new directed test.</td><td>Small code change; needs the NI regression re-run.</td><td>Optional. Recommended only if another revision is opened anyway; otherwise document.</td></tr>
+<tr><td>C4</td><td>Refuse instruction fetches from data memory.</td><td>Closes D-06.</td><td>Address decoder in rtl/riscv; one new test.</td><td>Small; changes processor behaviour for any firmware that runs code from RAM.</td><td>Your call. Recommended: yes, if C1 is done (it completes the "only measured code runs" claim).</td></tr>
+<tr><td>C5</td><td>Strengthen four weak checks (V-01, V-02, V-03, V-05).</td><td>Makes the test suite harder to pass by accident.</td><td>Benches only. Check counts would change, so each needs a registry update under the freeze-before-run rule.</td><td>Small per item.</td><td>Optional. Recommended with C1, when the benches are touched anyway.</td></tr>
+<tr><td>C6</td><td>Re-run the two fault-injection controls on the final core (V-06).</td><td>Brings every control up to the current sources.</td><td>No file change; two harness runs.</td><td>About an hour of simulation.</td><td>Recommended. No approval needed beyond go-ahead.</td></tr>
+<tr><td>C7</td><td>Fix the declaration order in SHA3_256_xp (D-12).</td><td>ASIC tools may reject it.</td><td>One line moved, in the ASIC copy or the variant file.</td><td>Trivial.</td><td>Do at ASIC start.</td></tr>
+<tr><td>C8</td><td>Periodic re-attestation timer in the board top.</td><td>Would match the original "continuous verification" wording.</td><td>Board top (not protected) plus contract note; lifecycle benches re-run.</td><td>Small logic; changes demo behaviour.</td><td>Optional. Not recommended now.</td></tr>
+<tr><td>C9</td><td>Drive the untrusted port from the board.</td><td>Would turn forged-packet rejection into board evidence.</td><td>Board top, constraints (new pins), contract revision.</td><td>Medium; exposes D-04, which would then need a destination rule.</td><td>Optional. Only if the paper needs a hardware attack demo.</td></tr>
+<tr><td>C10</td><td>Documentation corrections: stale comments, the exact scope wording in the paper and website.</td><td>Keeps claims matched to the hardware.</td><td>Comments and documents only.</td><td>None.</td><td>Recommended.</td></tr>
+</table>
+<p class="note">Not proposed for change, document only: D-04, D-05, D-07, D-08 to D-11, D-13 to D-15.</p>
+
+<h1>4. Items not built from the original proposal</h1>
+<table>
+<tr><th width="24%">Item</th><th width="38%">Why not built</th><th width="38%">Recommendation</th></tr>
+<tr><td>Second board and physical attacker link</td><td>The spoofed-tile case is exercised through an on-chip injection port in simulation; effort went to the two processor tiles.</td><td>Do not build two boards. If hardware attack evidence is needed, use C9.</td></tr>
+<tr><td>NTT, ML-KEM, ML-DSA (post-quantum signatures)</td><td>Scoped out on 6 November: the protocol uses symmetric KMAC128. A signature engine is a large separate block.</td><td>Future work. Keep the wording "symmetric, hash-based; signatures not implemented".</td></tr>
+<tr><td>Attestation of every tile</td><td>One attested and one refused tile demonstrate the mechanism; each extra attested tile costs about 13,000 LUT.</td><td>Do not build. State that the mechanism is per-tile.</td></tr>
+<tr><td>Continuous (timed) re-attestation</td><td>Revision 9 chose start by the root of trust or a button.</td><td>Optional (C8). Not needed for the paper.</td></tr>
+<tr><td>Formal proof, side-channel protection, random number generator</td><td>Out of scope by decision; no formal tool on this machine.</td><td>Limitations. Formal proof of two or three small properties is a good later addition if the college has the tool.</td></tr>
+</table>
+
+<h1>5. Measuring and testing plan (no design change needed)</h1>
+<table>
+<tr><th width="5%">#</th><th width="35%">Activity</th><th width="35%">Pass criterion</th><th width="25%">Who</th></tr>
+<tr><td>T1</td><td>Board run of the current image, itemised: heartbeat LED, LED 0, both UART texts, revoke, re-attest. Press revoke within 2 minutes (D-02).</td><td>Each observation recorded against the image hash.</td><td>Kalash (board)</td></tr>
+<tr><td>T2</td><td>Optional on the board: wait 5 minutes without pressing anything.</td><td>Confirms D-02 on hardware (false FAIL appears).</td><td>Kalash</td></tr>
+<tr><td>T3</td><td>Re-run the two fault-injection controls on the final core (C6).</td><td>Both faults detected.</td><td>Claude</td></tr>
+<tr><td>T4</td><td>Measure code coverage of the closure, in-flight and contention benches with XSim's coverage option.</td><td>A coverage number per module and a list of unexercised blocks. Measurement only; no target set yet.</td><td>Claude</td></tr>
+<tr><td>T5</td><td>Trial build of C1 in a scratch copy to measure real area and timing before committing to it.</td><td>Measured LUT under 47,550 and timing met; otherwise report and stop.</td><td>Claude, after revision 10 is signed</td></tr>
+<tr><td>T6</td><td>Website: open the link on a normal laptop browser, orbit the chip, click each tile, run the demo.</td><td>Renders, selects and animates correctly.</td><td>Kalash or teammate</td></tr>
+</table>
+
+<h1>6. Recommended order of work</h1>
+<table>
+<tr><th width="12%">Phase</th><th width="48%">Steps</th><th width="40%">Needs</th></tr>
+<tr><td>A. Now, no design change</td><td>T1 board run of the current image; T3 controls re-run; T4 coverage measurement; T6 website check; C10 documentation.</td><td>Your go-ahead for T3 and T4; you for T1 and T6.</td></tr>
+<tr><td>B. Decide</td><td>Sign or amend revision 10 (C1 + C2). Decide C4 (no execution from data memory) and C5 (stronger checks).</td><td>Your decisions.</td></tr>
+<tr><td>C. Implement revision 10</td><td>T5 trial build to measure cost; then the new block, firmware v3, vectors; increment I-27 with counts frozen first; full regression; release build and gate; new board run.</td><td>Signed revision 10.</td></tr>
+<tr><td>D. Freeze</td><td>Tag the RTL; update the sign-off report; record the board run.</td><td>Phase C PASS.</td></tr>
+<tr><td>E. ASIC preparation</td><td>Confirm tools, PDK and memory compiler with the college; ASIC top without the FPGA clock block; memories; firmware loading; C7; synthesis trial.</td><td>College access.</td></tr>
+<tr><td>F. Paper</td><td>Results tables from the frozen build; limitations section from section 4 and the "document only" findings.</td><td>Phases D and E results.</td></tr>
+</table>
+<p class="note">If you decide not to do revision 10 after all, phase C is skipped: the paper must then state that the measurement covers the boot vectors only, and D-02 is handled by firmware v3 alone or by the 2-minute board procedure.</p>
+
+<h1>7. Decisions needed from you</h1>
+<table>
+<tr><th width="5%">#</th><th width="55%">Decision</th><th width="40%">Recommendation</th></tr>
+<tr><td>1</td><td>Revision 10: approve the four points (field layout; tile 0 keeps the small reader; firmware timeout fix; estimated area with the stop rule).</td><td>Approve.</td></tr>
+<tr><td>2</td><td>C4: refuse execution from data memory?</td><td>Yes, together with revision 10.</td></tr>
+<tr><td>3</td><td>C3: fix the latent slot race now, or document it?</td><td>Fix it if revision 10 goes ahead; otherwise document.</td></tr>
+<tr><td>4</td><td>C5: strengthen the weak checks?</td><td>Yes, with revision 10.</td></tr>
+<tr><td>5</td><td>Go-ahead for T3 (controls re-run) and T4 (coverage measurement)? Neither changes any design file.</td><td>Yes.</td></tr>
+<tr><td>6</td><td>C8 and C9 (timer; untrusted port on the board)?</td><td>No, unless the paper needs them.</td></tr>
+<tr><td>7</td><td>Run the board test (T1) on the current image now, or wait for the revision 10 image?</td><td>Run it now: it validates the platform and costs little; repeat after revision 10.</td></tr>
+</table>
+<p>Status flags: HARDWARE_VALIDATED=NO for the current image, SOC_INTEGRATION_COMPLETE=NO, FORMAL_PROOF=NO.</p>
+</body></html>

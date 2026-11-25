@@ -1,0 +1,21 @@
+﻿18:52:16 GATE free=0.82GB pagefile=21018MB need free>=1GB pagefile>=8192MB
+18:57:18 GATE free=2.27GB pagefile=21018MB need free>=1GB pagefile>=8192MB
+18:57:20 STARTED select=b4e scheduler=24756 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261022_185719_2d11021a log=C:\Users\kalas\AppData\Local\Temp\i3_b4ez_20261022_185215.log
+18:57:21 free=2.18GB
+19:02:23 free=1.74GB
+19:03:08 DONE p7_ingress state=PASS_FRESH xsimkernel_peak=29908KB proc_peak[vivado=573MB xelab=305MB xsim=213MB xsimk=29MB xvlog=31MB] free=2.2GB
+19:07:26 free=2.39GB
+19:09:36 DONE p7_c4 state=PASS_FRESH xsimkernel_peak=29812KB proc_peak[vivado=565MB xelab=301MB xsim=213MB xsimk=29MB xvlog=5MB] free=2.92GB
+19:12:28 free=2.2GB
+19:12:33 DONE p7_ingress_c state=PASS_FRESH xsimkernel_peak=29948KB proc_peak[vivado=602MB xelab=284MB xsim=212MB xsimk=29MB] free=2.55GB
+19:14:11 DONE ig_mut_q_src_off state=PASS_FRESH xsimkernel_peak=30036KB proc_peak[vivado=567MB xelab=292MB xsim=241MB xsimk=29MB xvlog=54MB] free=1.54GB
+19:17:30 free=1.66GB
+19:19:08 DONE ig_mut_q_nested_off state=PASS_FRESH xsimkernel_peak=29880KB proc_peak[vivado=564MB xelab=301MB xsim=214MB xsimk=29MB xvlog=40MB] free=2.01GB
+19:22:34 free=1.81GB
+19:27:36 free=1.78GB
+19:28:23 DONE ig_mut_q_no_cap state=PASS_FRESH xsimkernel_peak=29976KB proc_peak[vivado=565MB xelab=301MB xsim=213MB xsimk=29MB] free=1.99GB
+19:32:38 free=1.72GB
+19:37:16 DONE ig_mut_q_partial state=PASS_FRESH xsimkernel_peak=30052KB proc_peak[vivado=581MB xelab=304MB xsim=257MB xsimk=29MB xvlog=31MB] free=1.96GB
+19:37:41 free=1.48GB
+19:40:14 DONE ig_mut_gap_any state=PASS_FRESH xsimkernel_peak=29944KB proc_peak[vivado=566MB xelab=301MB xsim=241MB xsimk=29MB] free=1.86GB
+19:42:17 scheduler exited stopped=False

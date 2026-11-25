@@ -1,0 +1,35 @@
+{
+  "head": "de2f2cc",
+  "date": "2026-10-25",
+  "registered_jobs_run": 0,
+  "production_rtl_changes": false,
+  "rows": [
+    {
+      "mode": "long",
+      "checks": 2,
+      "errors": 0,
+      "result": "PASS",
+      "process_exit_code": 0,
+      "registered": false,
+      "accepted_gate_evidence": false,
+      "attempts": 2,
+      "interpretation": "diagnostic PASS"
+    },
+    {
+      "mode": "long_n0",
+      "checks": 2,
+      "errors": 1,
+      "result": "FAIL",
+      "process_exit_code": 0,
+      "registered": false,
+      "accepted_gate_evidence": false,
+      "attempts": 2,
+      "interpretation": "targeted negative control effective"
+    }
+  ],
+  "prior_diagnostics": {
+    "default": "default/simulate.log; default/result.json",
+    "n0": "n0/simulate.log; console exit 0 observed on 2026-10-23"
+  },
+  "remaining": "Register/adjudicate the completed section 9 group; no I-5 PASS claimed"
+}

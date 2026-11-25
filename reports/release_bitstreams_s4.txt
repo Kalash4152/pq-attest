@@ -1,0 +1,3 @@
+p7_soc: top pq_p7_soc_area_top  LUT 32118  FF 29168  WNS 0.184 ns  WHS 0.048 ns  bitstream C:/vivado_verilog_proj/NOC_PQATTEST/NOC_PQATTEST.runs_s4/p7_soc/pq_p7_soc_area_top.bit
+p7_area: top pq_p7_area_top  LUT 32830  FF 30847  WNS 0.091 ns  WHS 0.021 ns  bitstream C:/vivado_verilog_proj/NOC_PQATTEST/NOC_PQATTEST.runs_s4/p7_area/pq_p7_area_top.bit
+p7_board: top pq_p7_board_top  LUT 29319  FF 20425  WNS 0.017 ns  WHS 0.012 ns  bitstream C:/vivado_verilog_proj/NOC_PQATTEST/NOC_PQATTEST.runs_s4/p7_board/pq_p7_board_top.bit

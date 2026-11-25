@@ -1,0 +1,22 @@
+{
+  "original_sha256": "9b46a4464ab628aea68cbc39c949c3a6f0a74126d1d6d1f399036dff03b7f101",
+  "versioned_sha256": "7ea6b71f67c709b236f13844bfb03ddb5bf8c4c55c1ac4e6214dec74ce60fef3",
+  "check_statements_identical": true,
+  "check_statements": [
+    "check(dut.c_meas_valid[0] && dut.c_meas[0]===REF_ATTACK.CLOSURE_IMEM,\"AT_MEASURE_CHANGED_IMAGE\");",
+    "check(dut.c_meas[0][255:0]!==REF_MAIN.CLOSURE_IMEM[255:0],\"AT_CODE_BEYOND_64_BYTES_CHANGES_DIGEST\");",
+    "check(endpoint_response===REF_ATTACK.CLOSURE_RESPONSE,\"AT_INDEPENDENT_RESPONSE\");",
+    "check(granted_seen && authorized[3] && !failed_seen,\"AT_CONTROL_GRANTED\");",
+    "check(memory_commits==1,\"AT_CONTROL_MEMORY_COMMIT\");",
+    "check(failed_seen && !authorized[3] && !granted_seen,\"AT_CHANGED_CODE_REJECTED\");",
+    "check(memory_commits==0,\"AT_NO_UNAPPROVED_COMMIT\");",
+    "check(unsafe_writes==0 && !authorized[0],\"AT_AUTHORIZATION_ENFORCED\");"
+  ],
+  "same_bound_values": [
+    "100000",
+    "25000",
+    "50000"
+  ],
+  "watchdog": "10 ms",
+  "expected_checks": 6
+}

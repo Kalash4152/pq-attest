@@ -1,0 +1,24 @@
+{
+  "review_date": "2026-11-08",
+  "head": "2eda1e2c22b030701c06ddd69607185050dca2cd",
+  "scope": "read-only engineering review; inventory and source hash comparison; no fresh simulator or build run",
+  "input_docx_sha256": "c490d3729bad53ca73091652e6b1d90f64cee22b59094b60e7d0040dd42f1ca4",
+  "folder_inventory_entries": 34856,
+  "active_sources": 70,
+  "I17_hash_matches": 70,
+  "duplicate_module_or_package_names": {},
+  "dependency_hashes": {
+    "scripts/merged_bitstream_sources.tcl": "9cf0b936ce48db3c0c11d8d9bd2773231f4f8aab966966940562431a3088ce4a",
+    "scripts/merged_project_update.tcl": "37dedfd74d4f139eee93b8c6a4c9eecdd739823e0c452e4d0a52c61940c2a8cd",
+    "scripts/merged_bitstream_flow.tcl": "2781dc23f91551e2d4ad6b11dc6894bfa521f1c76285f1ade5afe82ccdb76827",
+    "scripts/merged_board_gate.tcl": "f1f7b4a229bed2b391087bfc88337f6835c92b3856383363a66e8715f9af3d28",
+    "scripts/merged_impl.tcl": "72a5b8c7143ae9e2679cf2d489f4a7b8b76138928a544fd2cf98d8c56a732f2b",
+    "scripts/make_merged_sources.py": "7af53a7ced5c9447758f040b2ffd5b37eb3809aa9b162345d0ff8eb340ada622",
+    "scripts/s4_mesh_split.tcl": "33acdd344909ba049c0718e47ab3dc48e6bb33ed7078178fe897a6eb0f11065a",
+    "synth/merged/pq_merged_board_arty.xdc": "16b449f32744ba5047e2a13b1c95f43f76d95d127351c4bfaa7f6a7175587a90",
+    "sw/riscv/demo_fw.S": "8f9efb24c3e550cdfebcc1c49e8198f2997adf1de693ad1341bc497c32d419f5",
+    "sw/riscv/demo_fw.hex": "266bac12f24e36061854a135559759827a5e2284b7f8de1dce1846f3f1aec496",
+    "sim_riscv/include/demo_fw.svh": "44659d0e663c88b229a072b80f56d3b7edab8d04a8d920e3ca3625cc6e46efc6"
+  },
+  "latest_bitstream_sha256": "ae0d894677dae2b8814653d1595e7c7dd483f01800b2cad358dffe9226b112c2"
+}

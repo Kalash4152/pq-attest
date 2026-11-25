@@ -1,0 +1,7 @@
+V0 WNS=0.358 WHS=0.014 TNS=0 paths_lt_0.5ns=9 paths_lt_1.0ns=209 levels=21 data=19.607 net=15.710 LUT=37666 end=mesh/GEN_R[1].G_LINK_REG.qv_w_reg/D
+V1 WNS=0.247 WHS=-0.030 TNS=0 paths_lt_0.5ns=17 paths_lt_1.0ns=218 levels=20 data=19.614 net=15.780 LUT=37663 end=mesh/GEN_R[4].G_LINK_REG.q_n_reg[flit_data][19]/D
+V2 WNS=0.295 WHS=0.015 TNS=0 paths_lt_0.5ns=8 paths_lt_1.0ns=206 levels=20 data=19.631 net=15.237 LUT=37388 end=mesh/GEN_R[1].r/G_EJECT_REG.eject_flit_q_reg[flit_data][19]/D
+V3 WNS=0.358 WHS=0.014 TNS=0 paths_lt_0.5ns=9 paths_lt_1.0ns=209 levels=21 data=19.607 net=15.710 LUT=37666 end=mesh/GEN_R[1].G_LINK_REG.qv_w_reg/D
+V4 WNS=0.087 WHS=0.016 TNS=0 paths_lt_0.5ns=51 paths_lt_1.0ns=313 levels=21 data=19.800 net=15.707 LUT=37499 end=mesh/GEN_R[1].G_LINK_REG.qv_s_reg/D
+STRESS place=ExtraTimingOpt WNS=0.045 WHS=0.024 paths_lt_0.5ns=58 levels=20 LUT=39765 start=dut/mesh/GEN_R[4].r/u_datapath/east_vc1_fifo/rd_ptr_reg[0]/C end=dut/mesh/GEN_R[4].G_LINK_REG.q_w_reg[flit_data][4]/D
+STRESS place=ExtraTimingOpt WNS=0.128 WHS=0.023 paths_lt_0.5ns=14 levels=21 LUT=41012 start=dut/mesh/GEN_R[1].r/u_datapath/south_vc2_fifo/rd_ptr_reg[0]/C end=dut/mesh/GEN_R[1].G_LINK_REG.q_s_reg[flit_data][6]/D

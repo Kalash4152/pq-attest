@@ -1,0 +1,1 @@
+p7_area: top pq_p7_area_top  LUT 32830  FF 30847  WNS 0.091 ns  WHS 0.021 ns  bitstream C:/vivado_verilog_proj/NOC_PQATTEST/NOC_PQATTEST.runs_s4/p7_area/pq_p7_area_top.bit

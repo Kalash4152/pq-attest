@@ -1,0 +1,20 @@
+﻿23:10:47 GATE free=2.35GB pagefile=20480MB need free>=1GB pagefile>=8192MB
+23:10:48 STARTED select=b4c scheduler=37044 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261022_231047_f2434e17 log=C:\Users\kalas\AppData\Local\Temp\i3_b4cr_20261022_231046.log
+23:10:48 free=2.21GB
+23:11:08 DONE l2e_vectors_check state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[vivado=28MB] free=1.55GB
+23:11:51 DONE l2e_engine state=PASS_FRESH xsimkernel_peak=14368KB proc_peak[vivado=565MB xelab=102MB xsim=207MB xsimk=14MB] free=2.69GB
+23:12:34 DONE l2e_mut_a2_ovh state=PASS_FRESH xsimkernel_peak=14432KB proc_peak[vivado=565MB xelab=72MB xsim=209MB xsimk=14MB xvlog=31MB] free=2.55GB
+23:13:19 DONE l2e_mut_a3_long_job state=PASS_FRESH xsimkernel_peak=14448KB proc_peak[vivado=565MB xelab=31MB xsim=216MB xsimk=14MB xvlog=31MB] free=2.93GB
+23:14:39 DONE l2p7_equiv state=PASS_FRESH xsimkernel_peak=19236KB proc_peak[vivado=570MB xelab=261MB xsim=209MB xsimk=19MB] free=2.75GB
+23:15:49 free=2.16GB
+23:16:18 DONE l2p7_mut_a1 state=PASS_FRESH xsimkernel_peak=19212KB proc_peak[vivado=565MB xelab=261MB xsim=254MB xsimk=18MB] free=2.66GB
+23:17:05 DONE sf1_flood state=PASS_FRESH xsimkernel_peak=17736KB proc_peak[vivado=565MB xelab=190MB xsim=208MB xsimk=14MB] free=2.61GB
+23:17:52 DONE sf1_mut_peer_drop state=PASS_FRESH xsimkernel_peak=17872KB proc_peak[vivado=565MB xelab=192MB xsim=207MB xsimk=16MB] free=2.42GB
+23:18:37 DONE sf1_p1 state=PASS_FRESH xsimkernel_peak=15456KB proc_peak[vivado=572MB xelab=191MB xsim=207MB] free=2.66GB
+23:19:22 DONE sf1_mut_single_slot state=PASS_FRESH xsimkernel_peak=15896KB proc_peak[vivado=566MB xelab=181MB xsim=206MB xsimk=11MB xvlog=40MB] free=2.64GB
+23:20:10 DONE sf1_acct state=PASS_FRESH xsimkernel_peak=17728KB proc_peak[vivado=565MB xelab=193MB xsim=207MB xsimk=15MB] free=2.49GB
+23:20:50 free=2.4GB
+23:20:51 DONE l2e_mut_owner_select state=PASS_FRESH xsimkernel_peak=14364KB proc_peak[vivado=593MB xelab=92MB xsim=207MB xsimk=14MB] free=2.35GB
+23:21:34 DONE l2e_mut_done_route state=PASS_FRESH xsimkernel_peak=14420KB proc_peak[vivado=565MB xelab=91MB xsim=207MB xsimk=14MB xvlog=31MB] free=2.38GB
+23:22:15 DONE l2e_mut_word_off state=PASS_FRESH xsimkernel_peak=14428KB proc_peak[vivado=570MB xelab=102MB xsim=207MB xsimk=14MB] free=2.56GB
+23:22:56 scheduler exited stopped=False

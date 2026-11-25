@@ -1,0 +1,3 @@
+# Preserve manifest/intake bytes; payload descendants have their own rule.
+.gitattributes -text
+*.json -text

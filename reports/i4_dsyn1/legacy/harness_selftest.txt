@@ -1,0 +1,2 @@
+{"control_escaped": 1, "control_return_s": 5.7, "rc": "TIMEOUT", "seconds": 7.6, "leftovers": []}
+LEGACY_HARNESS_SELFTEST: PASS

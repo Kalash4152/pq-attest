@@ -1,0 +1,1 @@
+P7NI_VARIANT: PASS (noc_network_interface_p7.sv 80a59a7f9a5c, base 341c46d25525, 26 edits)

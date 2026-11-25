@@ -1,0 +1,47 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date         : Sat Nov  7 03:56:43 2026
+| Host         : LAPTOP-N9F2OTPF running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file C:/Users/kalas/AppData/Local/Temp/claude/9ea737159a6fbcdd/0a4a085c-458f-46d5-a827-2462954bbbaa/scratchpad/b7/out4/util_hier.rpt
+| Design       : cpu_tile_noc
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Synthesized
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++---------------------------------+--------------------+------------+------------+---------+------+------+--------+--------+------------+
+|             Instance            |       Module       | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++---------------------------------+--------------------+------------+------------+---------+------+------+--------+--------+------------+
+| cpu_tile_noc                    |              (top) |       2938 |       2842 |      96 |    0 | 2230 |      8 |      0 |          0 |
+|   (cpu_tile_noc)                |              (top) |          1 |          1 |       0 |    0 |   36 |      0 |      0 |          0 |
+|   u_bridge                      |    tmem_app_bridge |        115 |        115 |       0 |    0 |  135 |      0 |      0 |          0 |
+|   u_meas                        | meas_window_reader |         24 |         24 |       0 |    0 |  524 |      0 |      0 |          0 |
+|   u_mem                         |   tile_mem_wrapper |         18 |         18 |       0 |    0 |    2 |      8 |      0 |          0 |
+|     dmem_inst                   |           mem_bram |          1 |          1 |       0 |    0 |    1 |      4 |      0 |          0 |
+|     imem_inst                   |         mem_bram_0 |         17 |         17 |       0 |    0 |    1 |      4 |      0 |          0 |
+|   u_tile                        |           tile_top |       2780 |       2684 |      96 |    0 | 1533 |      0 |      0 |          0 |
+|     (u_tile)                    |           tile_top |         16 |         16 |       0 |    0 |    0 |      0 |      0 |          0 |
+|     adapter_inst                |   picorv32_adapter |        217 |        217 |       0 |    0 |  139 |      0 |      0 |          0 |
+|     addr_decode_inst            |        addr_decode |        465 |        465 |       0 |    0 |  103 |      0 |      0 |          0 |
+|     cpu                         |           picorv32 |       2028 |       1940 |      88 |    0 | 1163 |      0 |      0 |          0 |
+|       (cpu)                     |           picorv32 |       1332 |       1244 |      88 |    0 |  708 |      0 |      0 |          0 |
+|       pcpi_div                  |  picorv32_pcpi_div |        366 |        366 |       0 |    0 |  200 |      0 |      0 |          0 |
+|       pcpi_mul                  |  picorv32_pcpi_mul |        330 |        330 |       0 |    0 |  255 |      0 |      0 |          0 |
+|     gen_uart.uart_mmio_inst     |          uart_mmio |         48 |         40 |       8 |    0 |   47 |      0 |      0 |          0 |
+|       (gen_uart.uart_mmio_inst) |          uart_mmio |          4 |          4 |       0 |    0 |    4 |      0 |      0 |          0 |
+|       uart_tx_inst              |            uart_tx |         44 |         36 |       8 |    0 |   43 |      0 |      0 |          0 |
+|     gpio_inst                   |               gpio |          4 |          4 |       0 |    0 |   10 |      0 |      0 |          0 |
+|     tile_status_inst            |        tile_status |          2 |          2 |       0 |    0 |   71 |      0 |      0 |          0 |
++---------------------------------+--------------------+------------+------------+---------+------+------+--------+--------+------------+
+
+

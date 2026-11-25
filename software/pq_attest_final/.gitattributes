@@ -1,0 +1,3 @@
+# Preserve the ZIP's exact original source bytes, including CR/CRLF sequences.
+.gitattributes -text
+*.py -text

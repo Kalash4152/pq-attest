@@ -1,0 +1,420 @@
+PQ-ATTEST SoC
+Project Completion & Research Readiness Checklist
+Gate-by-gate execution plan from current FPGA prototype to a defensible research baseline
+Prepared 8 November 2026 | Working document — update only with reproducible evidence
+1. Purpose and definition of “100% complete”
+This document consolidates the remaining work required to close the current PQ-Attest SoC project, establish a reproducible experimental baseline, and only then begin a research-paper programme. It is an execution checklist, not a claim that the listed work has already been completed.
+“100% complete” means complete against a frozen project scope. It does not mean every optional feature (TRNG, asymmetric PQC, full-IMEM measurement, formal proof, side-channel resistance, fault-injection resistance, ASIC tapeout) has been implemented. Those are currently documented as out of scope or not established. They must either be added through an explicit scope change and verified, or remain explicit limitations.
+Completion layer
+Definition of done
+Current status from project records
+RTL / contract
+Hard-stop decisions resolved; interfaces and security semantics frozen.
+D1 CPU attestation request remains open; integration sign-off NO.
+Verification
+Required module, subsystem, SoC and adversarial checks pass on frozen RTL.
+I-13…I-17 reported PASS; I-18 remains outstanding; FORMAL_PROOF=NO.
+FPGA board
+Final bitstream hash linked to repeatable physical board observations.
+Hardware validation reported YES; itemized observations pending.
+Measurements
+Secure and insecure baselines measured identically; data traceable.
+Insecure baseline and final latency measurements remain open.
+Release documentation
+Contract, test matrix, limitations, reports, hashes and sign-off tag complete.
+Final contract sections and sign-off tag pending.
+ASIC readiness
+Tools, licenses, PDK, libraries, SRAM models and signoff flow confirmed.
+A0 discovery outstanding; no ASIC PPA/GDSII claim supported.
+Research readiness
+Focused question, threat model, baseline, experiments and measured results exist.
+Not ready until core closure and baseline measurements.
+
+2. Project baseline — facts to preserve
+Architecture: 3×2 mesh NoC with six logical tiles: CPU0, CPU1, MEMORY, CRYPTO, RoT and SPOOF; two PicoRV32 CPU tiles.
+Security path: SHA-3/KMAC/KDF-based symmetric attestation, measurement, RoT verifier, authenticated L2 link and memory authorization.
+Target board: Digilent Arty A7-100T, Xilinx Artix-7 xc7a100tcsg324-1, 50 MHz.
+Latest reported 7 Nov FPGA implementation: 34,987 LUT (55%), 25,276 FF, 20 BRAM36, 0 DSP; post-route WNS +0.237 ns and WHS +0.035 ns; zero errors/critical warnings in reported build.
+Reported board demo: Tile 3 attested/authorized, writes and reads 0xC0DE5A5A and reports T3 PASS; Tile 0 is refused; button 2 revokes Tile 3 and button 1 re-attests.
+Package status: HARDWARE_VALIDATED=YES based on owner-reported board demo, but itemized observations pending; SOC_INTEGRATION_COMPLETE=NO; FORMAL_PROOF=NO.
+KMAC is symmetric keyed authentication, not an asymmetric PQC signature. Scope any “post-quantum” statement to the selected symmetric primitive and its assumptions.
+Demo nonce and secrets are fixed; TRNG is not integrated. Do not claim genuine freshness or replay resistance for the fixed-nonce demo configuration.
+CPU `attest_req_o` is reported unconnected in `pq_soc_merged_core`; only RoT/button initiation is currently used.
+FPGA utilization/timing is not ASIC PPA. A successful bitstream build is not proof of board operation; board operation is not formal proof.
+3. Execution order — mandatory gates
+Gate
+Workstream
+Exit condition
+G0
+Freeze scope and owner decisions
+Decision sheet closed; exclusions explicit.
+G1
+RTL contract and integration closure
+Final contract/interface notes; frozen source manifest.
+G2
+I-18 merged verification
+Required tests pass; mutant controls executed; logs archived.
+G3
+Final FPGA build and board evidence
+Final I-17 build and board observations linked to exact bitstream hash.
+G4
+Security/performance measurements
+Insecure baseline and secure design measured under identical conditions.
+G5
+Documentation and release sign-off
+Reports, hashes, contract, limitations and release tag complete.
+G6
+ASIC A0 feasibility (conditional)
+Written tool/PDK/library/SRAM/signoff go/no-go.
+G7
+Research readiness review
+One focused question, threat model, baseline and experiment plan approved.
+
+Recommended order: G0 → G1 → G2 → G3 → G4 → G5 → G7. Run G6 in parallel after RTL decisions stabilize. Do not start an ASIC implementation merely because the FPGA project is built.
+4. G0 — Freeze project scope and owner decisions
+These are owner-level decisions. The RTL team must not guess or silently change the trust model.
+4.1 D1 — Can the CPU request attestation?
+Current state: CPU STATUS ATTEST_REQ raises `attest_req_o`, but the signal is not connected in the merged core. RoT/button initiates attestation.
+Option A: CPU may request; RoT decides. Busy requests are ignored/rate-limited by verifier busy state. Requires RTL and request/busy tests.
+Option B: RoT-only initiation. CPU cannot initiate its own attestation. Contract section 8 explicitly states this. This is the recommendation for the current release.
+Option C: CPU may request only for itself and only after revoke. Requires new RTL and checks.
+☐  Choose D1 explicitly. Recommended for this release: Option B, RoT-only. Record in M-F1 section 8.
+☐  If A or C is selected, update RTL, firmware, request/busy/error semantics and merged tests. Do not reuse B-only evidence.
+4.2 D2 — Define SoC completion
+☐  Adopt or revise proposed criteria: D1 closed; I-18 passes; final I-17 bitstream gate passes; itemized board observations recorded; `rtl-signoff-fpga-v1` tag pushed.
+☐  Keep `SOC_INTEGRATION_COMPLETE=NO` until every agreed criterion is met.
+4.3 D3 — Final demo firmware
+Recommended v2: bounded polling; PASS/FAIL-first output; explicit “REFUSED OK”; cycle counter; after revoke, Tile 3 retries and must be refused.
+☐  Approve v2 or explicitly retain v1. Preserve the 64-byte boot measurement stub and APPROVED_MEAS unless the measurement contract is intentionally changed.
+4.4 D4 — C firmware / GCC
+Current demo uses the in-repository RV32I assembler; GCC is not needed for the current demo.
+☐  Choose assembler-only for this release unless C workloads/benchmarks are required. If GCC is approved, record exact toolchain version and reproducible installation.
+4.5 Other scope decisions
+☐  Confirm Tile 0 remains intentionally unattested/refused for this release.
+☐  Decide whether optional bus-fault IRQ handling is needed; otherwise leave it out.
+☐  Do not add UART RX, extra CPU tile, full 16 KB IMEM measurement or feature creep unless a paper question requires it and the contract is revised.
+☐  Keep TRNG, asymmetric PQC, full-IMEM measurement, formal proof and side-channel/fault-injection resistance marked out of scope unless promoted through an explicit work package.
+☐  Do not treat a simple LFSR as a cryptographically secure nonce source. For real freshness, specify a vetted entropy/CSPRNG source or a correctly managed challenge/counter protocol with anti-rollback assumptions.
+5. G1 — RTL contract, interface and source freeze
+Use the testing plan's source inventory and merge/interface reconciliation phase. This document is not a fresh line-by-line RTL audit.
+☐  Confirm exact Git branch, commit, working-tree cleanliness and source list used by final merged build.
+☐  Inventory RTL, top modules, packages, parameters, interfaces, testbenches, scripts and generated artifacts. Identify stale/superseded files.
+☐  Reconcile top module names, port widths, clock/reset polarity, reset release, tile IDs, mesh coordinates, routing assumptions and endpoint mapping.
+☐  Confirm memory address window, protected ranges, authorization checks, BRAM read latency (documented as one cycle), and error/poison semantics.
+☐  Confirm attestation measurement input/length: current contract uses a 64-byte boot-stub measurement, not full 16 KB IMEM.
+☐  Confirm NI timeout/slot lifecycle, request/response matching, `app_rx` and other required interface exports.
+☐  Confirm RoT-only controls and ensure testbench-only fault-injection controls cannot become hardware controls.
+☐  Resolve error-read semantic conflict: poison `0xBADB_E00x` versus older statement that read errors return zero. Freeze exact poison/status values and CPU-visible behavior.
+☐  Finalize M-F1 notes: section 7 config_data words (TILE_ID/BUILD_ID), section 8 final start wiring after D1, section 9 BRAM read latency and memory window.
+☐  Confirm paper contribution/credit attribution across RISC-V tile base, A1 guard, fixes, bridge, reader, checker, firmware and merge.
+☐  Run compile and elaboration on exact merged source; preserve logs.
+☐  Create frozen source manifest and SHA-256 hashes for RTL, constraints, firmware, scripts and build artifacts.
+G1 exit criteria
+No unresolved interface mismatch remains for planned tests. Deliberate limitations are documented and excluded from claims requiring missing integration. Frozen commit, manifest, hashes, compile/elaboration logs and signed decision record exist.
+6. G2 — Verification closure
+The team package reports I-13 through I-17 as passing. Do not relabel old results or imply they were run on a different revision. The outstanding mandatory increment is I-18.
+6.1 Mandatory I-18 merged-level checks
+ID
+Stimulus
+Required result
+Evidence
+I18-1
+Force memory-tile error response.
+CPU A receives documented poison and STATUS code 3; no silent success.
+Bench, CHECK, log, trace/waveform, mutant control.
+I18-2
+Revoke while CPU A request is in flight.
+Request refused or times out; never commits after revoke.
+Bench, commit monitor, log, trace, mutant.
+I18-3
+Application port busy during attestation.
+CPU traffic waits correctly; no transaction lost, duplicated or corrupted.
+Bench, request/response accounting, log, mutant.
+I18-4
+CPU A retries protected access after revoke.
+Access refused; poison 0xBADBE002 where contract specifies.
+Bench/firmware v2, UART/board evidence, mutant.
+I18-5
+D1-specific request behavior, only if A/C selected.
+Initiation, busy handling and policy match selected contract.
+Option-specific tests.
+
+☐  Freeze test counts before first execution.
+☐  Run each required test against final merged RTL and exact source revision.
+☐  Execute an effective mutant for every required check and prove the test detects it. Proposed mutants do not count.
+☐  Preserve failed runs. Fix root cause, rerun the test and full regression; do not overwrite or relabel failures.
+☐  Register tests in the standard harness and archive machine-readable summary, logs and commands.
+6.2 Module-level regression audit
+☐  Crypto datapath: SHA3-256 and KMAC128 known-answer tests; pinned software reference comparison; padding/message-length boundaries; reset during idle/operation; back-to-back operations; valid/ready behavior.
+☐  Measurement/attestation: tile identity/configuration inputs; exact 64-byte measurement; measured-byte changes alter digest; bytes outside window excluded; valid/invalid responses; freshness/replay only to extent implemented; reset/interrupted transactions.
+☐  NoC/NI: all directed XY source/destination pairs and reverse paths; VC/FIFO behavior; backpressure/arbitration; malformed flits; slot allocation/release/timeout/reset cleanup; no leaked slot.
+☐  Memory/authorization: unattested access denied with no side effect; authorized access succeeds; identity spoofing denied; unauthorized address denied; error and poison semantics correct.
+☐  CPU/SoC: bridge behavior, status register semantics, exception/poison handling, firmware polling and bounded completion.
+6.3 Security/adversarial test matrix
+Threat
+Required outcome
+Scope note
+Unattested access
+Denied; no memory side effect.
+RTL SoC; board if observable.
+Spoofed identity
+Identity mismatch rejected.
+Record identity fields.
+Replay/stale challenge or packet
+Rejected only if freshness is genuinely implemented.
+Fixed nonce cannot substantiate replay protection.
+Invalid KMAC/tag
+Verification fails closed.
+Mutate tag/control fields.
+Unauthorized address
+Rejected; no side effect.
+Cover protected-window boundaries.
+Timeout/missing response
+Bounded handling and resource reclamation.
+Delay or suppress crypto/NI response.
+Reset during transaction
+Safe state; no stale authorization/commit.
+Reset at multiple protocol phases.
+Resource exhaustion/flood
+No unauthorized grant; bounded recovery.
+State attacker capability.
+Malformed packet
+Safe containment; unrelated traffic not corrupted.
+Respect actual HEAD/BODY/TAIL terminator semantics.
+Concurrent valid/malicious traffic
+Valid traffic correct; malicious traffic denied.
+Record fairness and DoS impact.
+
+☐  For every case record attacker capability, assumptions, exact sequence, expected property, observed outcome, execution layer (model/RTL/FPGA) and residual gap.
+☐  Keep Python-model, RTL-simulation and FPGA-board evidence separate.
+☐  Separate directed tests, constrained-random coverage, mutation evidence and formal proof. One does not substitute for another.
+6.4 Optional assurance — not current release sign-off unless promoted
+Formal proof is currently FORMAL_PROOF=NO. Optional bounded SymbiYosys-style proofs were proposed for the adapter A1 guard and bridge authorization gate. State tool, assumptions, proof depth and bounded vs inductive status.
+Constrained-random/UVM is not established by the current records. Add only if selected as a verification contribution.
+Physical fault injection and side-channel evaluation are out of scope/not established. RTL fault hooks or toggle estimates do not prove voltage/clock/EM glitch resistance or silicon leakage resistance.
+G2 exit criteria
+All mandatory tests for the selected contract pass on frozen RTL; mutant controls execute and are detected; no unexplained failure remains; logs and test counts are archived. Any omitted/blocked/N/A test must be labelled honestly.
+7. G3 — Final FPGA build and board validation
+7.1 Final FPGA image
+☐  Rebuild from frozen source manifest and final constraints using documented Vivado 2024.1 flow.
+☐  Confirm part and board revision: xc7a100tcsg324-1 / Arty A7-100T.
+☐  Review LUT, FF, BRAM, DSP and hierarchical utilization; explain deltas from 7 Nov report.
+☐  Review WNS, TNS, WHS, unconstrained paths, critical path startpoint/endpoint and path composition; confirm all clocks and I/O constrained.
+☐  Confirm no new DRC errors, critical warnings, unconstrained ports or missing I/O standards.
+☐  Archive bitstream, full SHA-256, implementation reports, timing/utilization reports, Tcl/scripts, constraints, tool version and source commit.
+7.2 Physical board record
+☐  Program exact final bitstream; record board revision, date, setup and bitstream SHA-256.
+☐  Record reset and clock behavior.
+☐  Record LED states before attestation, after Tile 3 grant, after Tile 0 refusal, after revoke and after re-attestation. Record actual observed map.
+☐  Capture exact UART text with `sw[0]=0` and `sw[0]=1`, including baud/configuration.
+☐  Exercise button 2 revoke and record Tile 3 authorization LED; exercise button 1 re-attest and record resulting state.
+☐  Demonstrate Tile 3 protected write/read of 0xC0DE5A5A; capture UART/LED output.
+☐  Demonstrate Tile 0 refusal and capture poison/status behavior if visible.
+☐  With firmware v2, demonstrate post-revoke Tile 3 retry is refused.
+☐  Repeat critical sequence at least three times or report actual repeat count; preserve failures.
+☐  Capture ILA/equivalent signals for attestation, authorization, protected request/commit and revoke where practical.
+G3 exit criteria
+Board record is tied to exact bitstream hash. A bitstream build alone is insufficient. Update HARDWARE_VALIDATED only according to evidence; do not set SOC_INTEGRATION_COMPLETE until D2 criteria pass.
+8. G4 — Measurements required before research selection
+The README lists insecure-baseline and final latency measurements as remaining work. This is a core research-readiness gap.
+8.1 Fair baseline construction
+☐  Define insecure baseline precisely: same CPU/NoC/memory configuration with security mechanism bypassed/removed in a controlled variant.
+☐  Build secure and insecure variants from controlled branches/commits. Keep clock, constraints, simulator settings, traffic, memory model and measurement boundaries identical.
+☐  Record tool version, seed/configuration, source commit, constraints, firmware image and workload for every run.
+☐  Do not compare Python model to RTL, pre-route to post-route, or different traffic conditions as equivalent.
+8.2 Required measurement set
+Metric
+Method
+Report
+Attestation latency
+Defined challenge/request start to verified grant/deny.
+Cycles and ns at 50 MHz; min/mean/max/distribution; split measurement, crypto, NoC, RoT decision.
+Revocation latency
+RoT revoke decision to guaranteed protected-commit denial.
+Cycles/ns; include outstanding requests and congestion.
+Normal memory overhead
+Same read/write patterns secure vs insecure.
+Latency distribution, throughput, protected/unprotected distinction.
+Area/resources
+Same FPGA flow for insecure, security subsystem and merged design.
+LUT/FF/BRAM/DSP; flat/hierarchical reports.
+Timing
+Same constraints and implementation settings.
+WNS/TNS/WHS, Fmax, critical path; pre/post-route distinction.
+NoC impact
+Controlled traffic and endpoint locations.
+Throughput, hop latency, p50/p95/p99, occupancy, fairness, starvation.
+Security outcomes
+Defined attack matrix.
+Pass/fail per threat, no-side-effect evidence, test layer.
+Power/energy
+Only with credible tool/activity assumptions.
+Power report or clearly labelled proxy; no silicon energy claim.
+
+☐  Add cycle counters/timestamps only after exact start/stop events are defined; ensure instrumentation does not distort behavior.
+☐  Repeat stochastic traffic runs sufficiently to report distributions and confidence intervals.
+☐  Create machine-readable CSV/JSON with one row per test/configuration and links to logs.
+G4 exit criteria
+Secure/insecure comparison is reproducible and apples-to-apples; latency/overhead boundaries are precise; raw logs/scripts are archived; every claim identifies model, RTL, FPGA or physical-design evidence.
+9. G5 — Documentation, reproducibility and release sign-off
+☐  Complete M-F1 sections 7, 8 and 9 and all open values.
+☐  Resolve/document final error-read poison semantics, exact poison values and STATUS codes.
+☐  Document D1 and firmware decisions, measurement window, BRAM latency, memory map, reset/timeout and revocation semantics.
+☐  Complete itemized board observation record and attach UART/LED/ILA evidence.
+☐  Update verification matrix with test IDs, expected/actual result, source revision, tool/version, command, log path, mutant status and limitations.
+☐  Archive failed-run history and explain resolved failures; never erase/relabel failures.
+☐  Generate source manifest and SHA-256 checksums for RTL, firmware, constraints, scripts, reports and bitstream.
+☐  Write release report listing implemented, simulated, board-observed, formally proven, proposed, blocked and out-of-scope features separately.
+☐  Push `rtl-signoff-fpga-v1` only after defined gates pass.
+☐  Update README status flags only when exit criteria pass; keep SOC_INTEGRATION_COMPLETE=NO until D2 criteria.
+G5 exit criteria
+A new team member can reproduce compile, simulation, build and measurement results from the frozen package without undocumented local state. Every headline claim has a traceable artifact.
+10. G6 — ASIC / RTL-to-GDSII readiness (conditional)
+Do not commit to Category A research until A0 is complete. The missing SRAM/compiler risk is real, but ASIC feasibility must be determined from the actual college flow rather than assumed.
+10.1 A0 — College/lab discovery questions
+☐  Which Cadence tools are licensed: Genus, Innovus, Tempus, Voltus, Conformal/LEC, Pegasus or other DRC/LVS? Record exact versions.
+☐  Which PDK/foundry node/process option is available, and is project use permitted? Record release/version/access restrictions.
+☐  Which standard-cell libraries/corners are available? Record timing/power models and voltage/temperature corners.
+☐  Is an SRAM compiler available? Which macros, depths, widths, ports, latency, aspect ratios and timing models?
+☐  Can all RTL arrays map to macros? If not, identify arrays that become standard-cell flops/register files and label the resulting proxy.
+☐  Are IO/pad libraries, ESD cells, filler/tap/endcap cells, antenna rules and power-grid collateral available?
+☐  Are extraction decks, RC corners, STA constraints and signoff DRC/LVS decks available?
+☐  Is compute/server capacity, license checkout, storage and reproducible run environment available?
+☐  Can the design legally/technically be taken to GDSII under academic licenses? Is tapeout in scope or only student implementation?
+10.2 A1–A7 after A0 go decision
+Stage
+Work
+Exit evidence
+A1 ASIC preparation
+ASIC wrappers; remove FPGA-only primitives; define clock/reset/IO and memory abstraction; keep FPGA branch separate.
+Reviewed ASIC source list, wrapper, constraints, equivalence plan.
+A2 synthesis
+Map with correct libraries/memory models; inspect inferred memories/latches.
+Genus reports, mapped netlist, area/timing/power estimates.
+A3 equivalence
+Compare mapped netlist to RTL/reference.
+Passing LEC or documented failure/waiver.
+A4 floorplan/power
+Core sizing, macro placement, IO planning, power grid.
+Floorplan, macro and power-grid reports.
+A5 placement
+Place cells; inspect congestion/fanout/timing.
+Placement/congestion reports and timing deltas.
+A6 CTS/routing
+Clock tree, route, extraction, hold repair.
+CTS, route, parasitic and post-route reports.
+A7 signoff
+STA, power, DRC/LVS and physical verification.
+Resolved violations and signoff reports; GDSII is not tapeout.
+
+Critical memory rule: Xilinx BRAM36 does not automatically map to an ASIC SRAM macro. Without a compiler/model, a standard-cell memory proxy may support a labelled experiment, but its area/power must not be presented as compiled-SRAM PPA. FPGA LUT/BRAM numbers are not ASIC results.
+G6 exit criteria
+Written A0 go/no-go exists. If valid PDK/library/memory/signoff resources are unavailable, mark Category A implementation BLOCKED and continue RTL-only research; do not claim GDSII.
+11. G7 — Research-paper readiness gate
+Start a paper-specific research programme only after G1–G5 are complete. G6 is required only if the research question claims ASIC physical implementation.
+☐  Choose one primary research question. Do not combine runtime attestation, QoS, side-channel leakage, formal verification and physical design into one unfocused paper.
+☐  Define attacker model: compromised tile capabilities, packet injection/observation, timing visibility, reset/replay capability and trusted RoT/key assumptions.
+☐  Define trust boundary and security property as precise temporal assertions or mathematical invariants.
+☐  Review nearest literature and establish a specific gap. Integration of PicoRV32 + SHA3/KMAC + XY mesh alone is not a novelty claim.
+☐  Build a baseline and at least one ablation; compare against a credible policy/architecture, not only a strawman.
+☐  Predefine experiment matrix: traffic, attacker/victim locations, packet lengths, load, repetitions, metrics and success criteria.
+☐  Collect raw data, logs, scripts, source hashes and plots. Separate RTL, formal, FPGA and ASIC evidence.
+☐  Report negative results and limitations. Do not claim universal Trojan detection, full CFI, side-channel/fault resistance or replay protection without direct evidence.
+☐  Prepare claim-to-evidence matrix: every abstract/contribution claim maps to a figure, table, proof or test artifact.
+☐  Select venue only after contribution and evidence strength are clear.
+12. Features not required for current release unless scope is expanded
+Feature
+Current status
+When it becomes necessary
+TRNG/fresh nonce
+Not integrated; fixed demo nonce.
+If claiming hardware-generated freshness/replay protection.
+Asymmetric PQC
+Not implemented; KMAC is symmetric.
+If claiming public-key PQC signatures/attestation.
+Full IMEM measurement
+Current contract uses 64-byte boot stub.
+If claiming full program-image measurement.
+Formal proof
+FORMAL_PROOF=NO.
+If claiming mathematically proven invariants.
+Side-channel evaluation
+Not established/out of scope.
+If claiming leakage or mitigation.
+Physical fault injection
+Not established/out of scope.
+If claiming voltage/clock/EM fault resistance.
+ASIC SRAM/GDSII
+A0 discovery outstanding.
+If claiming ASIC implementation.
+UVM/constrained random
+Not established in available records.
+If verification contribution needs broader coverage.
+
+13. Evidence discipline — mandatory for every task
+Label
+Meaning
+PLANNED
+Proposed, not implemented or run.
+IMPLEMENTED
+RTL/test/script exists; execution not implied.
+EXECUTED_PASS
+Run completed and passed; command, revision and log exist.
+EXECUTED_FAIL
+Run completed and failed; preserve failure/root cause.
+BLOCKED
+Dependency/environment prevents execution; state blocker and owner.
+NOT_APPLICABLE
+Explicitly outside frozen scope, with rationale.
+CONFIRM
+Evidence or interpretation needs owner review.
+
+Every result records source revision, tool/version, command, configuration, test ID, result, log path and limitations.
+A testbench existing is not proof it ran. Python output is not RTL evidence. Bitstream build is not board evidence. Board demo is not formal proof. FPGA PPA is not ASIC PPA.
+A proposed mutant is not an executed mutant. A large test count is not proof of complete coverage.
+Keep known failures and regression history. Never convert a failed run to PASS by deleting logs or changing labels.
+14. Final master checklist — definition of done
+☐  G0: D1–D4 and scope decisions recorded; current release exclusions explicit.
+☐  G1: M-F1 sections 7/8/9 and error semantics closed; interfaces reconciled; source manifest/hash frozen.
+☐  G2: I-18 required checks pass; regressions rerun on frozen RTL; mutant controls executed/detected; no unexplained failures.
+☐  G3: final I-17 FPGA build passes; reports archived; exact bitstream programmed; itemized board observations/repeats archived.
+☐  G4: insecure baseline and secure variant measured identically; attestation/revocation latency and memory overhead reported; attack matrix complete; raw data/scripts saved.
+☐  G5: sign-off report, README, verification matrix, limitations, hashes and `rtl-signoff-fpga-v1` tag complete; SOC_INTEGRATION_COMPLETE=YES only after D2.
+☐  G6: if Category A intended, A0 tool/PDK/library/SRAM/signoff discovery complete and go/no-go documented; A1–A7 only if prerequisites exist.
+☐  G7: one focused question selected; threat model, literature gap, baseline, ablations, experiment protocol and claim-to-evidence table approved.
+15. Recommended immediate work queue
+Order
+Action
+Dependency / reason
+1
+Return RTL finalization sheet with D1–D4 answers.
+Unblocks contract and firmware; prevents assumptions.
+2
+Approve v2 firmware and freeze poison/error semantics.
+Needed for explicit post-revoke board proof and I-18.
+3
+Register and execute I-18 with mutant controls.
+Main remaining merged verification gate.
+4
+Close M-F1 sections 7–9 and freeze source manifest.
+Makes tests and measurements unambiguous.
+5
+Rebuild final bitstream and perform itemized board record.
+Converts demo report into traceable board evidence.
+6
+Run insecure-vs-secure latency/area/overhead experiments.
+Required research baseline.
+7
+Complete A0 Cadence/PDK/SRAM discovery in parallel.
+Determines Category A viability; does not block RTL-only path.
+8
+Hold research-readiness review and select one topic.
+Prevents research on unstable/weakly measured baseline.
+
+Do not implement all proposed research-topic ideas now. Finish the release gates first. Preserve a frozen baseline branch; implement research extensions on separate branches so they do not contaminate project completion evidence.
+16. Source documents used
+TEAM_PACKAGE_README_20261107.md — architecture, reported FPGA build, board demo, status flags, remaining work and exclusions.
+RTL_FINALIZATION_DECISIONS_20261107.md — D1–D4, I-18, documentation closure, board record and ASIC hand-over questions.
+PQ_Attest_RTL_Testing_and_Evaluation_Plan.md — evidence classification, source inventory, merge/RTL freeze, module verification, adversarial tests, FPGA validation, measurement and conditional ASIC stages.
+Independent AI critique uploaded as Pasted text (20261107-203136) — treated as feedback, not ground truth; useful concerns incorporated and unsupported categorical conclusions qualified.
+Limitations: This document is based on project records available in this conversation. It is not a fresh source-code audit, simulator run, board test or ASIC toolchain inspection. The team must attach execution evidence as each item is closed.

@@ -1,0 +1,70 @@
+diff --git a/scripts/prepare_dual_lane.py b/scripts/prepare_dual_lane.py
+index 86214d3..eb3972d 100644
+--- a/scripts/prepare_dual_lane.py
++++ b/scripts/prepare_dual_lane.py
+@@ -74,7 +74,41 @@ def perf_matrix_points():
+     return pts
+ N2_CONTROLS=['perf_ctrl_corrupt','perf_ctrl_drop','perf_ctrl_stall']
+ N2_N75=['n75_sat_vc2_m0','n75_sat_vc2_m1','n75_reset_m0','n75_reset_m1','n75_second_challenge_m0','n75_second_challenge_m1']
+-N2_I3=['perf_m0','perf_m1']+N2_CONTROLS+N2_N75+['perf_matrix','perf_hop_probes']
++# NOC-2 isolated hop probes (I-3 / Track HP; N-8 "isolated hop probes are a separate subgate").
++# Counts and required lines frozen 2026-10-20 from TB source before any run:
++# reports/i3_hp/HP_COUNT_DERIVATION.md. Standalone bench, production transport (M-F1 rev 5), no L2.
++HOP_TB=T+'tb_noc_hop_probes.sv'
++HOP_ORACLE=['reports/i3_hp/HP_COUNT_DERIVATION.md','reports/i3_hp/check_hop_bench_static.py']
++HOP_BASIS='derived from TB source before first run (reports/i3_hp/HP_COUNT_DERIVATION.md)'
++# (vc, msg_type code, payload flits) from NOC_PKG: MEM_WR_REQ, MEM_WR_RESP (answers the VC0 probe), ATTEST_CHALLENGE.
++HOP_VCS=[(0,2,2),(1,3,0),(2,4,5)]
++# Ordered pairs without local loopback: noc_router a_no_loopback_local_sync makes LOCAL->LOCAL an error.
++HOP_PAIRS=[(a,b) for a in range(6) for b in range(6) if a!=b]
++def hop_count(s,d): return abs(s%3-d%3)+abs(s//3-d//3)   # tile index = y*3+x
++HOP_PROBES=len(HOP_PAIRS)*len(HOP_VCS)                    # 90
++HOP_HOPS=sorted({hop_count(a,b) for a,b in HOP_PAIRS})    # [1,2,3]
++HOP_CLASSES=len(HOP_VCS)*len(HOP_HOPS)                    # 9
++HOP_CHECKS=2+6*HOP_PROBES+HOP_CLASSES+2*len(HOP_VCS)      # 2 global + 6/probe + 1/class + 2/VC = 557
++def hop_cfg(mac):
++    return dict(TOP='tb_noc_hop_probes',CASE='hop_probes',transport='MF1-rev5',l2='none',w=64,wde=1,n_out=2,tool='xsim-2024.1',
++                MAC_FLITS=4*mac,CLOCK_NS=20,PAIRS=len(HOP_PAIRS),PROBES=HOP_PROBES,CLASSES=HOP_CLASSES,LOOPBACK=0)
++def hop_required_lines(mac):
++    lines=[]
++    for a,b in HOP_PAIRS:
++        for vc,msg,pay in HOP_VCS:
++            s,d=(b,a) if vc==1 else (a,b)   # the VC1 probe answers the a->b request: b->a
++            lines.append([rf'^HOP_PROBE id=\d+ src={s} dst={d} vc={vc} msg={msg} hops={hop_count(s,d)} flits={1+pay+4*mac} t_inj=\d+ t_del=\d+ latency=[1-9]\d* mac={mac} ok=1$',1])
++    lines.append([r'^HOP_PROBE ',HOP_PROBES])
++    for vc,_,_ in HOP_VCS:
++        for h in HOP_HOPS:
++            n=sum(1 for a,b in HOP_PAIRS if hop_count(a,b)==h)   # 14 / 12 / 4
++            lines.append([rf'^HOP_CLASS vc={vc} mac={mac} hops={h} probes={n} latency=[1-9]\d* min=[1-9]\d* max=[1-9]\d* deterministic=1$',1])
++    lines.append([r'^HOP_CLASS ',HOP_CLASSES])
++    lines.append([rf'^HOP_SUMMARY mac={mac} loopback=0'+''.join(rf' vc{vc}_per_hop=[1-9]\d* vc{vc}_hop1=[1-9]\d* vc{vc}_zero_hop=NA' for vc,_,_ in HOP_VCS)+r' monotonic=1 const_increment=1$',1])
++    lines.append([r'^HOP_CONTENTION ',0])
++    return lines
++HOP_JOBS=['hop_probes_m0','hop_probes_m1']
++N2_I3=['perf_m0','perf_m1']+N2_CONTROLS+N2_N75+['perf_matrix']+HOP_JOBS
+ 
+ def noc2_jobs():
+     """Control and N-7.5 jobs (added after the pfc block, so they get no post_format_compat variants)."""
+@@ -126,7 +160,11 @@ def noc2_jobs():
+         sources=['scripts/perf_report.py',PERF_TB]+NOC,dependencies=deps,independent=False,selection='I-3',sim_timeout=600,
+         perf_inputs=dict(points=['perf_m0','perf_m1'],controls=N2_CONTROLS,n75=N2_N75),
+         scope='56-point matrix + effective controls + N-7.5 cases; Verilator cross-check BLOCKED (not installed)'))
+-    jobs.append(dict(id='perf_hop_probes',kind='gate',sources=[],dependencies=[],unimplemented='N-8 isolated hop probes: separate subgate, not prepared'))
++    # N-8 isolated hop probes: one packet per probe in an idle mesh, every ordered non-loopback pair x 3 VCs, both MAC framings.
++    for mac in (0,1):
++        j=job(f'hop_probes_m{mac}','tb_noc_hop_probes',NOC+[HOP_TB],HOP_CHECKS,selection='I-3',config=hop_cfg(mac),tb_time_limit='10ms',oracle_files=HOP_ORACLE)
++        j.update(defines=['PQ_MAC_ON'] if mac else [],sim_timeout=900,required_lines=hop_required_lines(mac),checks_basis=HOP_BASIS)
++        jobs.append(j)
+     return jobs
+ 
+ def variant_pkg_job(j):
+@@ -251,7 +289,8 @@ def build_registry(check_files=True):
+     ids=[j['id'] for j in jobs]
+     if len(ids)!=len(set(ids)) or len(i2)!=len(set(i2)) or any(i not in ids for i in i2):raise ValueError('I-2 job list inconsistent')
+     # I-3 = NOC-2 (N2_I3) || PQ-2 (ep_jobs). active_increment is switched together with dual_lane_config.json.
+-    if len(set(N2_I3))!=13 or any(i not in ids for i in N2_I3):raise ValueError('I-3 NOC-2 job list inconsistent')
++    if len(set(N2_I3))!=14 or any(i not in ids for i in N2_I3):raise ValueError('I-3 NOC-2 job list inconsistent')
++    if HOP_CHECKS!=557 or HOP_PROBES!=90 or HOP_CLASSES!=9:raise ValueError('hop-probe frozen counts drifted from HP_COUNT_DERIVATION.md')
+     i3=list(N2_I3)+list(ep_jobs)
+     if len(i3)!=len(set(i3)) or any(i not in ids for i in i3):raise ValueError('I-3 job list inconsistent')
+     for j in jobs:

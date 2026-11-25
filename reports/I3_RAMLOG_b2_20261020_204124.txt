@@ -1,0 +1,8 @@
+﻿20:41:25 GATE free=3.03GB pagefile=19456MB need free>=1GB pagefile>=8192MB
+20:41:26 STARTED select=b2 scheduler=26184 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261020_204125_e8bed18c log=C:\Users\kalas\AppData\Local\Temp\i3_b2_20261020_204124.log
+20:41:27 free=2.96GB
+20:41:27 DONE l2trim_variant state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[xsimk=11MB] free=2.94GB
+20:42:12 DONE b2_endpoint_python state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[vivado=578MB xelab=183MB xsim=208MB xsimk=11MB] free=3.32GB
+20:42:13 DONE l2trim_equiv state=INVALID xsimkernel_peak=16108KB proc_peak[] free=3.3GB
+20:43:20 DONE b2_pq_endpoint_sys state=PASS_FRESH xsimkernel_peak=30428KB proc_peak[vivado=565MB xelab=298MB xsim=214MB xsimk=30MB xvlog=31MB] free=3.61GB
+20:43:22 scheduler exited stopped=False

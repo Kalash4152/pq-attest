@@ -1,0 +1,4 @@
+VOID 2026-10-20: legacy KAT harness round 1. Two harness instances (PIDs 31684 and 19992) ran concurrently in the same work and
+output directories after the first was wrongly believed dead, so two XSim jobs overlapped and logs may be overwritten.
+None of these results counts. Clean single-instance rerun: reports/i4_dsyn1/legacy/ (round 2).
+Observed before voiding (not counted): tb_sha3_256 PASS; tb_keccak_f1600 stalled twice; KMAC_TB MATCH_HISTORY after one stall.

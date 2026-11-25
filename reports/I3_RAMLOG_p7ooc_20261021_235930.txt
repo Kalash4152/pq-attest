@@ -1,0 +1,4 @@
+﻿23:59:31 GATE free=2.84GB pagefile=20480MB need free>=2GB pagefile>=8192MB
+23:59:32 STARTED select=b4d_ooc scheduler=37440 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261021_235931_dfe71dba log=C:\Users\kalas\AppData\Local\Temp\i3_p7ooc_20261021_235930.log
+23:59:32 free=2.72GB
+23:59:34 scheduler exited stopped=False

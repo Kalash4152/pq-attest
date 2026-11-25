@@ -1,0 +1,729 @@
+{
+  "schema_version": "1.0.0",
+  "generator": "verification.p7_pair_matrix",
+  "timestamp": "2026-11-06T14:48:57.258454+00:00",
+  "source_revision": "00d58c1417fe8c049d78ba63038abfd24ee69811",
+  "source_files": {
+    "noc_pkg": {
+      "path": "rtl/dual_lane/NOC_PKG.sv",
+      "sha256": "e428af103c9a0096f47f9ad97215a33b919dc9035c2a5e9d1255ff9fdd33a7be"
+    },
+    "noc_xy_routing": {
+      "path": "NOC_PQATTEST.srcs/sources_1/new/NOC_XY_ROUTING.sv",
+      "sha256": "6b92bf51f142279a37272372bbdda75b1412ac930772dd17ded3d41c454d7416"
+    },
+    "noc_p7_pkg": {
+      "path": "rtl/dual_lane/noc_p7_pkg.sv",
+      "sha256": "8a10decc6d39c5b1dcb097f2aa638e8fb348e88d7a2fb85a696083d3a5ffe4f0"
+    }
+  },
+  "tile_topology": {
+    "mesh_x": 3,
+    "mesh_y": 2,
+    "num_tiles": 6,
+    "num_ports": 5,
+    "tile_mapping": {
+      "0": {
+        "tile_id": 0,
+        "name": "TILE_CPU0",
+        "role": "CPU0",
+        "coordinates": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      "1": {
+        "tile_id": 1,
+        "name": "TILE_CPU1",
+        "role": "CPU1",
+        "coordinates": {
+          "x": 1,
+          "y": 0
+        }
+      },
+      "2": {
+        "tile_id": 2,
+        "name": "TILE_MEMORY",
+        "role": "MEMORY",
+        "coordinates": {
+          "x": 2,
+          "y": 0
+        }
+      },
+      "3": {
+        "tile_id": 3,
+        "name": "TILE_CRYPTO",
+        "role": "CRYPTO",
+        "coordinates": {
+          "x": 0,
+          "y": 1
+        }
+      },
+      "4": {
+        "tile_id": 4,
+        "name": "TILE_ROT",
+        "role": "RoT",
+        "coordinates": {
+          "x": 1,
+          "y": 1
+        }
+      },
+      "5": {
+        "tile_id": 5,
+        "name": "TILE_SPOOF",
+        "role": "SPOOF",
+        "coordinates": {
+          "x": 2,
+          "y": 1
+        }
+      }
+    }
+  },
+  "metrics": {
+    "expected_pair_count": 30,
+    "generated_pair_count": 30,
+    "unique_pair_count": 30,
+    "missing_pair_count": 0,
+    "duplicate_pair_count": 0,
+    "self_pair_rejection_count": 6,
+    "coverage_percentage": 100.0
+  },
+  "route_metadata": {
+    "available": true,
+    "routing_convention": "Dimension-order XY routing (X-first, then Y, then LOCAL)",
+    "provenance": {
+      "rtl_oracle": "NOC_PQATTEST.srcs/sources_1/new/NOC_XY_ROUTING.sv",
+      "python_oracle": "verification/xy_route_oracle.py",
+      "package_declarations": "rtl/dual_lane/NOC_PKG.sv"
+    }
+  },
+  "validation_summary": {
+    "status": "PASS",
+    "rejection_of_all_self_pairs": true,
+    "no_duplicate_pairs": true,
+    "no_missing_pairs": true,
+    "reverse_directions_distinct": true
+  },
+  "pairs": [
+    {
+      "pair_id": "T0_TO_T1",
+      "source_tile": 0,
+      "destination_tile": 1,
+      "source_role": "CPU0",
+      "destination_role": "CPU1",
+      "source_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "direction": "EAST",
+      "expected_route": [
+        "EAST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T0_TO_T2",
+      "source_tile": 0,
+      "destination_tile": 2,
+      "source_role": "CPU0",
+      "destination_role": "MEMORY",
+      "source_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "direction": "EAST",
+      "expected_route": [
+        "EAST",
+        "EAST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T0_TO_T3",
+      "source_tile": 0,
+      "destination_tile": 3,
+      "source_role": "CPU0",
+      "destination_role": "CRYPTO",
+      "source_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "direction": "SOUTH",
+      "expected_route": [
+        "SOUTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T0_TO_T4",
+      "source_tile": 0,
+      "destination_tile": 4,
+      "source_role": "CPU0",
+      "destination_role": "RoT",
+      "source_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "direction": "SOUTH_EAST",
+      "expected_route": [
+        "EAST",
+        "SOUTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T0_TO_T5",
+      "source_tile": 0,
+      "destination_tile": 5,
+      "source_role": "CPU0",
+      "destination_role": "SPOOF",
+      "source_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "direction": "SOUTH_EAST",
+      "expected_route": [
+        "EAST",
+        "EAST",
+        "SOUTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T1_TO_T0",
+      "source_tile": 1,
+      "destination_tile": 0,
+      "source_role": "CPU1",
+      "destination_role": "CPU0",
+      "source_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "direction": "WEST",
+      "expected_route": [
+        "WEST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T1_TO_T2",
+      "source_tile": 1,
+      "destination_tile": 2,
+      "source_role": "CPU1",
+      "destination_role": "MEMORY",
+      "source_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "direction": "EAST",
+      "expected_route": [
+        "EAST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T1_TO_T3",
+      "source_tile": 1,
+      "destination_tile": 3,
+      "source_role": "CPU1",
+      "destination_role": "CRYPTO",
+      "source_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "direction": "SOUTH_WEST",
+      "expected_route": [
+        "WEST",
+        "SOUTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T1_TO_T4",
+      "source_tile": 1,
+      "destination_tile": 4,
+      "source_role": "CPU1",
+      "destination_role": "RoT",
+      "source_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "direction": "SOUTH",
+      "expected_route": [
+        "SOUTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T1_TO_T5",
+      "source_tile": 1,
+      "destination_tile": 5,
+      "source_role": "CPU1",
+      "destination_role": "SPOOF",
+      "source_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "direction": "SOUTH_EAST",
+      "expected_route": [
+        "EAST",
+        "SOUTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T2_TO_T0",
+      "source_tile": 2,
+      "destination_tile": 0,
+      "source_role": "MEMORY",
+      "destination_role": "CPU0",
+      "source_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "direction": "WEST",
+      "expected_route": [
+        "WEST",
+        "WEST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T2_TO_T1",
+      "source_tile": 2,
+      "destination_tile": 1,
+      "source_role": "MEMORY",
+      "destination_role": "CPU1",
+      "source_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "direction": "WEST",
+      "expected_route": [
+        "WEST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T2_TO_T3",
+      "source_tile": 2,
+      "destination_tile": 3,
+      "source_role": "MEMORY",
+      "destination_role": "CRYPTO",
+      "source_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "direction": "SOUTH_WEST",
+      "expected_route": [
+        "WEST",
+        "WEST",
+        "SOUTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T2_TO_T4",
+      "source_tile": 2,
+      "destination_tile": 4,
+      "source_role": "MEMORY",
+      "destination_role": "RoT",
+      "source_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "direction": "SOUTH_WEST",
+      "expected_route": [
+        "WEST",
+        "SOUTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T2_TO_T5",
+      "source_tile": 2,
+      "destination_tile": 5,
+      "source_role": "MEMORY",
+      "destination_role": "SPOOF",
+      "source_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "direction": "SOUTH",
+      "expected_route": [
+        "SOUTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T3_TO_T0",
+      "source_tile": 3,
+      "destination_tile": 0,
+      "source_role": "CRYPTO",
+      "destination_role": "CPU0",
+      "source_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "direction": "NORTH",
+      "expected_route": [
+        "NORTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T3_TO_T1",
+      "source_tile": 3,
+      "destination_tile": 1,
+      "source_role": "CRYPTO",
+      "destination_role": "CPU1",
+      "source_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "direction": "NORTH_EAST",
+      "expected_route": [
+        "EAST",
+        "NORTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T3_TO_T2",
+      "source_tile": 3,
+      "destination_tile": 2,
+      "source_role": "CRYPTO",
+      "destination_role": "MEMORY",
+      "source_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "direction": "NORTH_EAST",
+      "expected_route": [
+        "EAST",
+        "EAST",
+        "NORTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T3_TO_T4",
+      "source_tile": 3,
+      "destination_tile": 4,
+      "source_role": "CRYPTO",
+      "destination_role": "RoT",
+      "source_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "direction": "EAST",
+      "expected_route": [
+        "EAST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T3_TO_T5",
+      "source_tile": 3,
+      "destination_tile": 5,
+      "source_role": "CRYPTO",
+      "destination_role": "SPOOF",
+      "source_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "direction": "EAST",
+      "expected_route": [
+        "EAST",
+        "EAST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T4_TO_T0",
+      "source_tile": 4,
+      "destination_tile": 0,
+      "source_role": "RoT",
+      "destination_role": "CPU0",
+      "source_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "direction": "NORTH_WEST",
+      "expected_route": [
+        "WEST",
+        "NORTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T4_TO_T1",
+      "source_tile": 4,
+      "destination_tile": 1,
+      "source_role": "RoT",
+      "destination_role": "CPU1",
+      "source_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "direction": "NORTH",
+      "expected_route": [
+        "NORTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T4_TO_T2",
+      "source_tile": 4,
+      "destination_tile": 2,
+      "source_role": "RoT",
+      "destination_role": "MEMORY",
+      "source_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "direction": "NORTH_EAST",
+      "expected_route": [
+        "EAST",
+        "NORTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T4_TO_T3",
+      "source_tile": 4,
+      "destination_tile": 3,
+      "source_role": "RoT",
+      "destination_role": "CRYPTO",
+      "source_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "direction": "WEST",
+      "expected_route": [
+        "WEST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T4_TO_T5",
+      "source_tile": 4,
+      "destination_tile": 5,
+      "source_role": "RoT",
+      "destination_role": "SPOOF",
+      "source_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "direction": "EAST",
+      "expected_route": [
+        "EAST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T5_TO_T0",
+      "source_tile": 5,
+      "destination_tile": 0,
+      "source_role": "SPOOF",
+      "destination_role": "CPU0",
+      "source_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 0
+      },
+      "direction": "NORTH_WEST",
+      "expected_route": [
+        "WEST",
+        "WEST",
+        "NORTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T5_TO_T1",
+      "source_tile": 5,
+      "destination_tile": 1,
+      "source_role": "SPOOF",
+      "destination_role": "CPU1",
+      "source_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 0
+      },
+      "direction": "NORTH_WEST",
+      "expected_route": [
+        "WEST",
+        "NORTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T5_TO_T2",
+      "source_tile": 5,
+      "destination_tile": 2,
+      "source_role": "SPOOF",
+      "destination_role": "MEMORY",
+      "source_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 2,
+        "y": 0
+      },
+      "direction": "NORTH",
+      "expected_route": [
+        "NORTH"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T5_TO_T3",
+      "source_tile": 5,
+      "destination_tile": 3,
+      "source_role": "SPOOF",
+      "destination_role": "CRYPTO",
+      "source_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 0,
+        "y": 1
+      },
+      "direction": "WEST",
+      "expected_route": [
+        "WEST",
+        "WEST"
+      ],
+      "validation_status": "VALID"
+    },
+    {
+      "pair_id": "T5_TO_T4",
+      "source_tile": 5,
+      "destination_tile": 4,
+      "source_role": "SPOOF",
+      "destination_role": "RoT",
+      "source_coordinates": {
+        "x": 2,
+        "y": 1
+      },
+      "destination_coordinates": {
+        "x": 1,
+        "y": 1
+      },
+      "direction": "WEST",
+      "expected_route": [
+        "WEST"
+      ],
+      "validation_status": "VALID"
+    }
+  ]
+}

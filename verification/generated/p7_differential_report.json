@@ -1,0 +1,332 @@
+{
+  "summary": {
+    "total_evaluations": 15,
+    "pass_count": 1,
+    "fail_count": 0,
+    "not_observed_count": 14,
+    "mac_cryptographic_equivalence": "PASS"
+  },
+  "crypto_equivalence": {
+    "status": "PASS",
+    "kat_results": [
+      {
+        "kat_id": "TB_TEST_1",
+        "name": "KMAC128 / empty message / empty custom",
+        "python_output_le": "0x973ad9b322481f9e33d9b846afdf832e22857038c98773a9aec45b25a004a502",
+        "expected_rtl_le": "0x973ad9b322481f9e33d9b846afdf832e22857038c98773a9aec45b25a004a502",
+        "matched": true
+      },
+      {
+        "kat_id": "TB_TEST_2",
+        "name": "KMAC128 / 16-byte message / empty custom",
+        "python_output_le": "0x350e8bd95e6df79c65878fd953f0369745115da9cb1c7bdce21b4384a56cd119",
+        "expected_rtl_le": "0x350e8bd95e6df79c65878fd953f0369745115da9cb1c7bdce21b4384a56cd119",
+        "matched": true
+      },
+      {
+        "kat_id": "TB_TEST_3",
+        "name": "KMAC128 / 16-byte message / Custom",
+        "python_output_le": "0x29b7bd43a1df5e4ffbacb9d3134aa837dc3ee504a563858ca2327fe0fef702db",
+        "expected_rtl_le": "0x29b7bd43a1df5e4ffbacb9d3134aa837dc3ee504a563858ca2327fe0fef702db",
+        "matched": true
+      },
+      {
+        "kat_id": "TB_TEST_4",
+        "name": "KMAC128 / maximum v1 lengths",
+        "python_output_le": "0x556c806a871cc489e51b2f3085ac01ac55065b94f2b0e43af340c14faa83e13e",
+        "expected_rtl_le": "0x556c806a871cc489e51b2f3085ac01ac55065b94f2b0e43af340c14faa83e13e",
+        "matched": true
+      },
+      {
+        "kat_id": "TB_TEST_5",
+        "name": "KMAC128 / 16-byte key boundary",
+        "python_output_le": "0xf1501b0abeb872265fc62c77e9a37c59ba8038288bad24b4b6861fc410c659a4",
+        "expected_rtl_le": "0xf1501b0abeb872265fc62c77e9a37c59ba8038288bad24b4b6861fc410c659a4",
+        "matched": true
+      },
+      {
+        "kat_id": "TB_TEST_6_L128",
+        "name": "KMAC128 / L=128 KAT (out_len_sel low)",
+        "python_output_le": "0x1f2915cfef11bdfabebf8e536b71fa30",
+        "expected_rtl_le": "0x1f2915cfef11bdfabebf8e536b71fa30",
+        "matched": true
+      }
+    ],
+    "sim_log_verified": true,
+    "sim_log_path": "C:\\Users\\Arnav Bhandari\\PQ_Attest\\logs\\s3_kmac_2026-09-23.log",
+    "total_kats": 6,
+    "matched_kats": 6,
+    "l128_absorbed_status": "VERIFIED_EQUIVALENT",
+    "p7_transcript_framing": {
+      "key_width_bits": 256,
+      "domain_string": "NOC-L2-AUTH-v1",
+      "domain_len_bytes": 14,
+      "output_tag_bits": 128,
+      "output_flits": 4,
+      "byte_packing": "little_endian_32bit_words"
+    }
+  },
+  "observations": [
+    {
+      "scenario_id": "SCEN_01_VALID_CONTROL_PACKET",
+      "scenario_name": "Valid control packet (RoT -> Tile 3 CHALLENGE)",
+      "target_component": "noc_l2_p7_pair",
+      "target_tb": "tb_l2p7_equiv",
+      "signal_name": "pacc / prh",
+      "expected_value": {
+        "accepted": 1,
+        "delivered_head": 1
+      },
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "tb_l2p7_equiv defines L2P7_TX_WIRE / L2P7_RX_DELIVERY, but local XSim simulator is not installed on this host."
+    },
+    {
+      "scenario_id": "SCEN_02_INVALID_MAC",
+      "scenario_name": "Control packet with corrupted MAC",
+      "target_component": "noc_l2_auth_p7",
+      "target_tb": "tb_l2p7_equiv",
+      "signal_name": "pwhy",
+      "expected_value": 2,
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "tb_l2p7_equiv asserts rejection reason 2, but local XSim simulation run is unavailable."
+    },
+    {
+      "scenario_id": "SCEN_03_INCORRECT_EPOCH",
+      "scenario_name": "Control packet under mismatched boot epoch",
+      "target_component": "noc_l2_auth_p7",
+      "target_tb": "tb_l2p7_equiv",
+      "signal_name": "pwhy",
+      "expected_value": 3,
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "tb_l2p7_equiv asserts rejection reason 3, but local XSim simulation run is unavailable."
+    },
+    {
+      "scenario_id": "SCEN_04_SEQUENCE_ZERO",
+      "scenario_name": "Control packet with sequence number zero",
+      "target_component": "noc_l2_auth_p7",
+      "target_tb": "tb_l2p7_equiv",
+      "signal_name": "pwhy",
+      "expected_value": 4,
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "tb_l2p7_equiv asserts rejection reason 4, but local XSim simulation run is unavailable."
+    },
+    {
+      "scenario_id": "SCEN_05_REPLAYED_SEQUENCE",
+      "scenario_name": "Control packet with replayed sequence number",
+      "target_component": "noc_l2_auth_p7",
+      "target_tb": "tb_l2p7_equiv",
+      "signal_name": "pwhy",
+      "expected_value": 4,
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "tb_l2p7_equiv asserts rejection reason 4, but local XSim simulation run is unavailable."
+    },
+    {
+      "scenario_id": "SCEN_06_VALID_GRANT",
+      "scenario_name": "Valid GRANT authorizing Tile 3",
+      "target_component": "noc_attest_gate",
+      "target_tb": "tb_p7_c4 / tb_p7_gate_data",
+      "signal_name": "authorized[3]",
+      "expected_value": 1,
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "State transition verified in reference model; hardware observation requires XSim execution."
+    },
+    {
+      "scenario_id": "SCEN_07_INVALID_GRANT",
+      "scenario_name": "GRANT with status != 1 rejected by Gate",
+      "target_component": "noc_attest_gate",
+      "target_tb": "tb_p7_c4 / tb_p7_gate_data",
+      "signal_name": "authorized[3]",
+      "expected_value": 0,
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "State transition verified in reference model; hardware observation requires XSim execution."
+    },
+    {
+      "scenario_id": "SCEN_08_REVOKE",
+      "scenario_name": "REVOKE de-authorizes Tile 3",
+      "target_component": "noc_attest_gate",
+      "target_tb": "tb_p7_c4 / tb_p7_gate_data",
+      "signal_name": "authorized[3]",
+      "expected_value": 0,
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "State transition verified in reference model; hardware observation requires XSim execution."
+    },
+    {
+      "scenario_id": "SCEN_09_UNAUTHORIZED_MEM_READ",
+      "scenario_name": "Unauthorized memory read dropped at HEAD",
+      "target_component": "pq_noc_subsystem_p7",
+      "target_tb": "tb_p7_gate_data",
+      "signal_name": "memory_commits / app_ready",
+      "expected_value": {
+        "app_ready[0]": 0,
+        "mem_faults": 1,
+        "rd_resp": 0
+      },
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "tb_p7_gate_data checks GATE_DATA_REFUSED_<g> with 0 commits; live simulation unexecuted."
+    },
+    {
+      "scenario_id": "SCEN_10_UNAUTHORIZED_MEM_WRITE",
+      "scenario_name": "Unauthorized memory write rejected before commit",
+      "target_component": "pq_noc_subsystem_p7",
+      "target_tb": "tb_p7_gate_data",
+      "signal_name": "memory_commits / app_ready",
+      "expected_value": {
+        "memory_commits": 0,
+        "app_ready[0]": 0
+      },
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "tb_p7_gate_data checks GATE_DATA_REFUSED_<g> with 0 commits; live simulation unexecuted."
+    },
+    {
+      "scenario_id": "SCEN_11_REVOCATION_DURING_READ",
+      "scenario_name": "Revocation during read transaction suppresses response",
+      "target_component": "pq_noc_subsystem_p7 (Tile 2 memory endpoint)",
+      "target_tb": "pq_noc_subsystem_p7.sv:263-291",
+      "signal_name": "rd_resp_suppression / memory_commits",
+      "expected_value": {
+        "rd_resp_suppressed": 1,
+        "mem_faults": 1
+      },
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "Two-phase read response suppression and write abort verified in Python; RTL logs require batch XSim."
+    },
+    {
+      "scenario_id": "SCEN_12_REVOCATION_DURING_WRITE",
+      "scenario_name": "Revocation before final write word blocks commit",
+      "target_component": "pq_noc_subsystem_p7 (Tile 2 memory endpoint)",
+      "target_tb": "pq_noc_subsystem_p7.sv:263-291",
+      "signal_name": "rd_resp_suppression / memory_commits",
+      "expected_value": {
+        "memory_commits": 0,
+        "wr_resp_suppressed": 1
+      },
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "Two-phase read response suppression and write abort verified in Python; RTL logs require batch XSim."
+    },
+    {
+      "scenario_id": "SCEN_13_TAG_MISMATCH",
+      "scenario_name": "Mismatched response tag leaves transaction pending",
+      "target_component": "noc_network_interface_p7",
+      "target_tb": "tb_ni_n81_p7",
+      "signal_name": "txn_valid_q / app_ready",
+      "expected_value": {
+        "txn_valid_q": 1,
+        "rx_match": 0
+      },
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "tb_ni_n81_p7 tests 2-slot tag tracking and release in T14/T15; simulation executable absent."
+    },
+    {
+      "scenario_id": "SCEN_14_SLOT_EXHAUSTION",
+      "scenario_name": "3rd transaction blocked when 2 slots are occupied",
+      "target_component": "noc_network_interface_p7",
+      "target_tb": "tb_ni_n81_p7",
+      "signal_name": "txn_valid_q / app_ready",
+      "expected_value": {
+        "app_ready": 0,
+        "txn_valid_q": 3
+      },
+      "observed_value": "UNAVAILABLE_SIM_RUN",
+      "status": "NOT OBSERVED",
+      "details": "tb_ni_n81_p7 tests 2-slot tag tracking and release in T14/T15; simulation executable absent."
+    },
+    {
+      "scenario_id": "SCEN_CRYPTO_KMAC128_EQUIV",
+      "scenario_name": "KMAC128 cryptographic engine bit-exact equivalence (NIST & RTL KATs)",
+      "target_component": "kmac_128 / kmac_encode",
+      "target_tb": "kmac_tb",
+      "signal_name": "tag_out[127:0] / done",
+      "expected_value": "0x1f2915cfef11bdfabebf8e536b71fa30",
+      "observed_value": "0x1f2915cfef11bdfabebf8e536b71fa30",
+      "status": "PASS",
+      "details": "All 6 KATs matched bit-for-bit (incl. L=128 KAT). Provenance confirmed against logs/s3_kmac_2026-09-23.log."
+    }
+  ],
+  "exported_vectors": {
+    "json": "C:\\Users\\Arnav Bhandari\\PQ_Attest\\verification\\generated\\p7_differential_vectors.json",
+    "sv": "C:\\Users\\Arnav Bhandari\\PQ_Attest\\verification\\generated\\p7_differential_vectors.sv",
+    "count": 14
+  },
+  "testbench_catalog": {
+    "tb_l2p7_equiv": [
+      "pnf",
+      "pnv",
+      "pntr",
+      "prf",
+      "prv",
+      "prr",
+      "pwhy",
+      "prej",
+      "pacc",
+      "pdrop",
+      "prh",
+      "prm",
+      "tag_q",
+      "rfresh"
+    ],
+    "tb_ni_n81_p7": [
+      "noc_tx_flit",
+      "noc_tx_valid",
+      "noc_rx_flit",
+      "txn_valid_q",
+      "txn_tag_q",
+      "app_tag",
+      "app_ready",
+      "app_tx_error"
+    ],
+    "tb_p7_gate_data": [
+      "authorized",
+      "app_ready",
+      "tile_ov",
+      "memory_commits",
+      "memory_last_data",
+      "gate_faults"
+    ],
+    "tb_p7_refuse_grant": [
+      "l2_rejected",
+      "l2_reason",
+      "authorized",
+      "gate_faults",
+      "app_tx_error"
+    ],
+    "tb_p7_ingress": [
+      "q_rejected",
+      "q_forwarded",
+      "q_discarded",
+      "q_reason",
+      "ingress_rejected",
+      "ingress_reason"
+    ],
+    "tb_p7_c4": [
+      "revoke",
+      "authorized[3]",
+      "grant_done",
+      "attestation_failed"
+    ],
+    "kmac_tb": [
+      "key_in",
+      "key_len",
+      "custom_in",
+      "custom_len",
+      "msg_in",
+      "msg_len",
+      "out_len_sel",
+      "tag_out",
+      "done",
+      "busy"
+    ]
+  }
+}

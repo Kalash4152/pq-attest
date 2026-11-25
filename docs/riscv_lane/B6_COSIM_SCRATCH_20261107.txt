@@ -1,0 +1,18 @@
+B6 co-simulation, scratch (XSim 2024.1, --relax, -d PQ_MAC_ON -d CPU_TILE_MODULE=cpu_tile_noc), 2026-11-07. NOT harness evidence.
+Source list = scripts/merged_bitstream_sources.tcl merged_board (70 files, preflight PASS) minus the board top (MMCM primitive) + rtl/dual_lane/merged/tb_merged_real.sv
+Firmware: sw/riscv/demo_fw.hex preloaded into both tiles; provisioning = d2_k3_64 row 0 + merged_provision.py --words demo_fw.hex
+Attempt 1: XSim start stall (no CONFIG in 180 s), killed own PID; attempt 2 ran:
+CONFIG: TOP=tb_merged_real CHECKS=10 FW=demo_fw CPU_TILE=cpu_tile_noc
+[PASS] MR_MEAS_IMAGE valid=1 w0=0400006f
+[PASS] MR_RESPONSE match=1
+[PASS] MR_GRANT cycles=1252
+[PASS] MR_T3_UART n=8 hex=543320504153530a
+[PASS] MR_T3_LED 0001
+[PASS] MR_BRAM word=c0de5a5a
+[PASS] MR_COMMITS commits=1
+[PASS] MR_T0_UART n=11 hex=543020524546555345440a
+[PASS] MR_T0_ISOLATED authorized0=0 gate_faults0=0 led=0010
+[PASS] MR_REVOKE authorized3=0 commits_after=+0
+CHECKS : 10
+ERRORS : 0
+RESULT : PASS

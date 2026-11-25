@@ -1,0 +1,23 @@
+﻿{
+    "head":  "8fe96984",
+    "sims":  {
+                 "tb_merged_closure (14 checks)":  {
+                                                       "cmd":  "xvlog --relax / xelab --standalone / axsim, 70 sources + bench, defines as the build",
+                                                       "result":  "PASS",
+                                                       "note":  "Real CPUs, firmware v2: measured boot, grant, CPU A success, CPU B refused, revoke, re-attest, both UARTs",
+                                                       "checks":  "14/14"
+                                                   },
+                 "tb_merged_inflight (6 checks)":  {
+                                                       "cmd":  "same",
+                                                       "result":  "PASS",
+                                                       "note":  "Revoke while a request is in flight; no commit after the boundary",
+                                                       "checks":  "6/6"
+                                                   },
+                 "tb_merged_contention (8 checks)":  {
+                                                         "cmd":  "same",
+                                                         "result":  "PASS",
+                                                         "note":  "CPU traffic overlapping a second attestation; exact accounting",
+                                                         "checks":  "8/8"
+                                                     }
+             }
+}

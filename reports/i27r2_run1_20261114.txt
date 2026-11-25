@@ -1,0 +1,75 @@
+RUN i27r2_attack_approve_changed
+i27r2_attack_approve_changed: PASS_FRESH 
+RUN i27r2_attack_control_drop_grant
+i27r2_attack_control_drop_grant: PASS_FRESH 
+RUN i27r2_profile
+i27r2_profile: PASS_FRESH 
+RUN i27r2_board_profile
+i27r2_board_profile: PASS_FRESH 
+RUN i27r2_release_controls
+i27r2_release_controls: PASS_FRESH 
+RUN i27r2_mutation_controls
+i27r2_mutation_controls: PASS_FRESH 
+RUN i27r2_hasher
+i27r2_hasher: PASS_FRESH 
+RUN i27r2_decoder
+i27r2_decoder: PASS_FRESH 
+RUN i27r2_mmio_guard
+i27r2_mmio_guard: PASS_FRESH 
+RUN i27r2_hasher_control
+i27r2_hasher_control: PASS_FRESH 
+RUN i27r2_decoder_control
+i27r2_decoder_control: PASS_FRESH 
+RUN i27r2_mmio_control
+i27r2_mmio_control: PASS_FRESH 
+RUN i27r2_closure
+i27r2_closure: PASS_FRESH 
+RUN i27r2_lifecycle
+i27r2_lifecycle: PASS_FRESH 
+RUN i27r2_error
+i27r2_error: PASS_FRESH 
+RUN i27r2_inflight
+i27r2_inflight: PASS_FRESH 
+RUN i27r2_contention
+i27r2_contention: PASS_FRESH 
+RUN i27r2_phase_sweep
+i27r2_phase_sweep: PASS_FRESH 
+RUN i27r2_inflight_control
+i27r2_inflight_control: PASS_FRESH 
+RUN i27r2_contention_control
+i27r2_contention_control: PASS_FRESH 
+RUN i27r2_phase_control
+i27r2_phase_control: PASS_FRESH 
+RUN i27r2_attack_reject_changed
+i27r2_attack_reject_changed: PASS_FRESH 
+RUN i27r2_i9_integ
+i27r2_i9_integ: PASS_FRESH 
+RUN i27r2_project_controls
+i27r2_project_controls: PASS_FRESH 
+RUN i27r2_matched_secure
+i27r2_matched_secure: PASS_FRESH 
+RUN i27r2_matched_fixed
+i27r2_matched_fixed: PASS_FRESH 
+RUN i27r2_matched_secure_contended
+i27r2_matched_secure_contended: PASS_FRESH 
+RUN i27r2_matched_fixed_contended
+i27r2_matched_fixed_contended: PASS_FRESH 
+RUN i27r2_matched_data
+i27r2_matched_data: PASS_FRESH 
+RUN i27r2_board_secure
+i27r2_board_secure: PASS_FRESH 
+RUN i27r2_gate_negative
+i27r2_gate_negative: PASS_FRESH 
+NOC_PACKAGES_ACCEPTED=0/5
+PQ_PACKAGES_ACCEPTED=0/5
+DUAL_LANE_STATUS=BLOCKED
+SOURCE_IDENTITY=dee22ceec8dc09e421f6a43e93890ffb21a391cb244022a314d179742a9d25c8
+PYTHON_REFERENCE_ZIP=Pq_Attest_final.zip
+PYTHON_REFERENCE_SHA256=047bb5a981050f11a572a60e850f7c7511ff5d636f7903c6a8d239891003c6a0
+TILE_KEY_BYTES=32
+PYTHON_RTL_COMPATIBILITY=NOT_RUN
+EVIDENCE_DIR=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261114_114143_ce2c2eba
+HARDWARE_VALIDATED=NO
+SOC_INTEGRATION_COMPLETE=NO
+ACTIVE_INCREMENT=I-27-R2
+INCREMENT_STATUS=PASS

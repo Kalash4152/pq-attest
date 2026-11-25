@@ -1,0 +1,31 @@
+﻿11:01:48 GATE free=1.87GB pagefile=19456MB need free>=1.0GB pagefile>=8192MB
+11:01:49 STARTED select=I-3 scheduler=31496 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261020_110148_0bbc7041 log=C:\Users\kalas\AppData\Local\Temp\i3_main_20261020_110147.log
+11:01:49 free=1.79GB
+11:01:49 DONE endpoint_python state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[] free=1.78GB
+11:02:30 DONE pq_endpoint_unit state=PASS_FRESH xsimkernel_peak=13924KB proc_peak[vivado=556MB xelab=148MB xsim=207MB] free=1.47GB
+11:03:19 DONE pq_endpoint_sys state=PASS_FRESH xsimkernel_peak=30336KB proc_peak[vivado=564MB xelab=299MB xsim=213MB xsimk=30MB xvlog=31MB] free=1.54GB
+11:03:54 DONE pq_endpoint_mut_tag_swap state=PASS_FRESH xsimkernel_peak=13892KB proc_peak[vivado=564MB xelab=55MB xsim=206MB xsimk=11MB xvlog=31MB] free=1.82GB
+11:04:31 DONE pq_endpoint_mut_nonce_offset state=PASS_FRESH xsimkernel_peak=13880KB proc_peak[vivado=569MB xelab=40MB xsim=207MB xsimk=11MB] free=1.86GB
+11:05:13 DONE pq_endpoint_mut_wrong_reply state=PASS_FRESH xsimkernel_peak=13952KB proc_peak[vivado=593MB xelab=53MB xsim=210MB xsimk=3MB xvlog=40MB] free=1.24GB
+11:05:48 DONE pq_endpoint_mut_rx_stall state=PASS_FRESH xsimkernel_peak=13956KB proc_peak[vivado=565MB xelab=148MB xsim=208MB xsimk=13MB] free=2.21GB
+11:06:11 DONE pq_endpoint_control_after state=PASS_FRESH xsimkernel_peak=13920KB proc_peak[vivado=554MB xelab=149MB xsim=207MB] free=2.09GB
+11:06:50 free=2.05GB
+11:11:51 free=2.23GB
+11:15:41 DONE perf_m0 state=PASS_FRESH xsimkernel_peak=30504KB proc_peak[vivado=564MB xelab=273MB xsim=229MB xsimk=30MB] free=2.37GB
+11:16:53 free=2.12GB
+11:21:54 free=2.57GB
+11:26:55 free=2.73GB
+11:31:27 DONE perf_m1 state=PASS_FRESH xsimkernel_peak=29972KB proc_peak[vivado=564MB xelab=270MB xsim=213MB xsimk=29MB xvlog=27MB] free=2.29GB
+11:31:56 free=1.58GB
+11:32:27 DONE perf_ctrl_corrupt state=PASS_FRESH xsimkernel_peak=29688KB proc_peak[vivado=565MB xelab=245MB xsim=212MB xsimk=29MB xvlog=31MB] free=2.07GB
+11:33:26 DONE perf_ctrl_drop state=PASS_FRESH xsimkernel_peak=29696KB proc_peak[vivado=566MB xelab=269MB xsim=212MB xsimk=29MB] free=2.31GB
+11:34:26 DONE perf_ctrl_stall state=PASS_FRESH xsimkernel_peak=29444KB proc_peak[vivado=565MB xelab=267MB xsim=211MB xsimk=29MB] free=2.5GB
+11:36:12 DONE n75_sat_vc2_m0 state=PASS_FRESH xsimkernel_peak=29356KB proc_peak[vivado=565MB xelab=276MB xsim=212MB xsimk=29MB] free=2.65GB
+11:36:56 free=2.33GB
+11:37:44 DONE n75_reset_m0 state=PASS_FRESH xsimkernel_peak=29472KB proc_peak[vivado=565MB xelab=271MB xsim=212MB xsimk=29MB xvlog=33MB] free=2.26GB
+11:38:31 DONE n75_second_challenge_m0 state=PASS_FRESH xsimkernel_peak=29708KB proc_peak[vivado=554MB xelab=264MB xsim=211MB xsimk=29MB] free=2.84GB
+11:39:46 DONE n75_sat_vc2_m1 state=PASS_FRESH xsimkernel_peak=29460KB proc_peak[vivado=565MB xelab=270MB xsim=213MB xsimk=29MB] free=2.29GB
+11:41:16 DONE n75_reset_m1 state=PASS_FRESH xsimkernel_peak=30320KB proc_peak[vivado=564MB xelab=272MB xsim=213MB xsimk=30MB] free=2.75GB
+11:41:57 free=2.45GB
+11:42:20 DONE n75_second_challenge_m1 state=PASS_FRESH xsimkernel_peak=29660KB proc_peak[vivado=565MB xelab=269MB xsim=211MB xsimk=29MB] free=2.62GB
+11:42:22 scheduler exited stopped=False

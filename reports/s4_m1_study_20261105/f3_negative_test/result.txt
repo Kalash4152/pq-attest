@@ -1,0 +1,5 @@
+CLOCK clk sources=dut/mesh/clk
+#   puts [expr {[string match "*sourced inside the mesh*" $e] ? "TEST_S4F3_CLOCK_CHECK: PASS" : "TEST_S4F3_CLOCK_CHECK: FAIL (wrong reason)"}]
+# } else { puts "TEST_S4F3_CLOCK_CHECK: FAIL (accepted a mesh-sourced clock)" }
+REFUSED: S4-F3: clock clk is sourced inside the mesh (dut/mesh/clk)
+TEST_S4F3_CLOCK_CHECK: PASS

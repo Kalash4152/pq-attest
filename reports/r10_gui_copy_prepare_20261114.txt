@@ -1,0 +1,1 @@
+Prepared isolated project copy: C:\vivado_verilog_proj\_r10g2\NOC_PQATTEST.xpr

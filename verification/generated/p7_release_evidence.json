@@ -1,0 +1,479 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 Step 4B: Release RTL Evidence Reconciliation",
+    "evidence_package": "E4_P7_XSIM_20261103",
+    "run_identity": "reports/dual_lane_10_20261103_140235_46039411",
+    "commit": "19f06a0",
+    "release": "f99e0d5",
+    "status_claims": {
+      "HARDWARE_VALIDATED": false,
+      "FORMAL_PROOF": false,
+      "SOC_INTEGRATION_COMPLETE": false
+    }
+  },
+  "summary": {
+    "total_core_scenarios": 15,
+    "rtl_pass": 15,
+    "rtl_fail": 0,
+    "not_observed": 0,
+    "new_suites_count": 7,
+    "kmac_tiers_count": 3,
+    "project_sims_verified": 35
+  },
+  "reconciled_differential_scenarios": [
+    {
+      "scenario_id": "SCEN_01",
+      "scenario_name": "VALID_CONTROL_PACKET",
+      "testbench": "tb_l2p7_equiv",
+      "job_id": "rel_s3_l2p7_equiv",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_l2p7_equiv/simulate.log",
+      "checks": 2425,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Fully validated in rel_s3_l2p7_equiv (accepted=500 genuine packets) and tb_pq_full_chain_p7.",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_02",
+      "scenario_name": "INVALID_MAC",
+      "testbench": "tb_l2p7_equiv",
+      "job_id": "rel_s3_l2p7_equiv",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_l2p7_equiv/simulate.log",
+      "checks": 2425,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Rejection code r2=20 in rel_s3_l2p7_equiv; SEC_WRONG_TAG_VERDICT (reason 12) in tb_i7_sec.",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_03",
+      "scenario_name": "INCORRECT_EPOCH",
+      "testbench": "tb_l2p7_equiv",
+      "job_id": "rel_s3_l2p7_equiv",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_l2p7_equiv/simulate.log",
+      "checks": 2425,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Rejection code r3=70 in rel_s3_l2p7_equiv; SEC_STALE_EPOCH_VERDICT & SEC3_RESET_REPLAY in tb_i7_sec.",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_04",
+      "scenario_name": "SEQUENCE_ZERO",
+      "testbench": "tb_l2p7_equiv",
+      "job_id": "rel_s3_l2p7_equiv",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_l2p7_equiv/simulate.log",
+      "checks": 2425,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Rejection code r4=66 (sequence violation) in rel_s3_l2p7_equiv; verified non-zero sequence required.",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_05",
+      "scenario_name": "REPLAYED_SEQUENCE",
+      "testbench": "tb_l2p7_equiv",
+      "job_id": "rel_s3_l2p7_equiv",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_l2p7_equiv/simulate.log",
+      "checks": 2425,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Rejection code r4 in rel_s3_l2p7_equiv; SEC3_L2_REPLAY (flits=10, reason=4) in tb_i7_sec.",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_06",
+      "scenario_name": "VALID_GRANT",
+      "testbench": "tb_p7_c4",
+      "job_id": "rel_s3_p7_c4",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_p7_c4/simulate.log",
+      "checks": 18,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Valid grant handshake observed in rel_s3_p7_c4, tb_pq_full_chain_p7 (FC_TXN0_GRANT), and tb_i7_sec (SEC1_GENUINE_GRANT).",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_07",
+      "scenario_name": "INVALID_GRANT",
+      "testbench": "tb_p7_refuse_grant",
+      "job_id": "rel_i6_p7_refuse_grant",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_i6_p7_refuse_grant/simulate.log",
+      "checks": 12,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Refusal of grants to non-attestable tiles (0, 1, 2, 5) verified in rel_i6_p7_refuse_grant (reason 8).",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_08",
+      "scenario_name": "REVOKE",
+      "testbench": "tb_p7_c4",
+      "job_id": "rel_s3_p7_c4",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_p7_c4/simulate.log",
+      "checks": 18,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Revocation latency (max 486 cycles <= 1500 bound) verified in rel_s3_p7_c4; verifier revocation verified in dl_rel_s3_verifier_revoke.",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_09",
+      "scenario_name": "UNAUTHORIZED_MEM_READ",
+      "testbench": "tb_p7_gate_data",
+      "job_id": "rel_p7_gate_data",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_p7_gate_data/simulate.log",
+      "checks": 4,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Memory read/write refused when unauthorized at gate; verified in rel_p7_gate_data and project_run dl_rel_i6_gate.",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_10",
+      "scenario_name": "UNAUTHORIZED_MEM_WRITE",
+      "testbench": "tb_p7_gate_data",
+      "job_id": "rel_p7_gate_data",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_p7_gate_data/simulate.log",
+      "checks": 4,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Memory commits remain 0 when unauthorized; confirmed across rel_p7_gate_data and tb_i7_sec (SEC_NO_UNAUTH_COMMIT).",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_11",
+      "scenario_name": "REVOCATION_DURING_READ",
+      "testbench": "tb_pq_full_chain_p7",
+      "job_id": "rel_i7_full_chain",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_full_chain/simulate.log",
+      "checks": 21,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Dynamic revocation during read response verified in tb_pq_full_chain_p7 (FC_TXN*_REVOKE_BLOCKS) and dl_rel_i6_gate.",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_12",
+      "scenario_name": "REVOCATION_DURING_WRITE",
+      "testbench": "tb_pq_full_chain_p7",
+      "job_id": "rel_i7_full_chain",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_full_chain/simulate.log",
+      "checks": 21,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Revocation during active write prevents commit; verified in tb_pq_full_chain_p7 and rel_p7_gate_data.",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_13",
+      "scenario_name": "TAG_MISMATCH",
+      "testbench": "tb_ni_n81_p7",
+      "job_id": "rel_n81p7_ni_t0w16",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_n81p7_ni_t0w16/simulate.log",
+      "checks": 126,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Transaction tag routing and matching verified in NI testbenches (rel_n81p7_ni_t0w16 / t3w16).",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_14",
+      "scenario_name": "SLOT_EXHAUSTION",
+      "testbench": "tb_ni_n81_p7",
+      "job_id": "rel_n81p7_ni_t0w16",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_n81p7_ni_t0w16/simulate.log",
+      "checks": 126,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "2-slot exhaustion and backpressure verified in rel_n81p7_ni_t0w16 / t3w16 (T13/T14).",
+      "is_control_mutant": false
+    },
+    {
+      "scenario_id": "SCEN_CRYPTO",
+      "scenario_name": "KMAC128_EQUIVALENCE",
+      "testbench": "tb_l2_kmac_engine",
+      "job_id": "rel_s3_l2e_engine",
+      "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_l2e_engine/simulate.log",
+      "checks": 8020,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "evidence_notes": "Cryptographic equivalence confirmed across 3 tiers: Standalone KAT (SCRATCH_kmac_tb), Registered Engine (8020 checks), and Full Pair Equivalence (2425 checks).",
+      "is_control_mutant": false
+    }
+  ],
+  "new_release_test_suites": [
+    {
+      "testbench": "tb_i7_sec",
+      "job_id": "rel_i7_sec",
+      "checks": 30,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "description": "PQ-4 SEC-1..4 attack matrix: wrong tag, measurement, stale epoch, nonce replay, status clear misuse, zero unauth commits.",
+      "evidence_path": "E4_P7_XSIM_20261103/logs/rel_i7_sec/simulate.log"
+    },
+    {
+      "testbench": "tb_pq_full_chain_p7",
+      "job_id": "rel_i7_full_chain",
+      "checks": 21,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "description": "PQ-5 full offline attestation chain: 3 distinct transactions, memory access in 0x2 window, clean resets, retry after timeout.",
+      "evidence_path": "E4_P7_XSIM_20261103/logs/rel_i7_full_chain/simulate.log"
+    },
+    {
+      "testbench": "tb_p7_ingress_i6",
+      "job_id": "rel_i6_p7_ingress",
+      "checks": 39,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "description": "Ingress quarantine and framing checks: spoof rejection (reason 9), framing errors (reason 11), quarantine gaps, legal pass-through.",
+      "evidence_path": "E4_P7_XSIM_20261103/logs/rel_i6_p7_ingress/simulate.log"
+    },
+    {
+      "testbench": "tb_p7_refuse_grant_i6",
+      "job_id": "rel_i6_p7_refuse_grant",
+      "checks": 12,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "description": "Refusal of control messages (GRANT/REVOKE) at non-attestable endpoints (Tiles 0, 1, 2, 5; reason 8) and app_tx_error assertion.",
+      "evidence_path": "E4_P7_XSIM_20261103/logs/rel_i6_p7_refuse_grant/simulate.log"
+    },
+    {
+      "testbench": "tb_n2p7_rtt",
+      "job_id": "dl_rel_n2p7_rtt",
+      "checks": 11,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "description": "Round-trip timing characterization under unloaded and loaded network conditions.",
+      "evidence_path": "E4_P7_XSIM_20261103/project_run/release_project_sims.txt"
+    },
+    {
+      "testbench": "tb_i6_retry",
+      "job_id": "dl_rel_i6_retry",
+      "checks": 24,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "description": "Verifier BUSY retry state machine: 1..3 retries with same challenge, 4th BUSY fails closed (reason 9), immediate fail on non-1/non-3 status.",
+      "evidence_path": "E4_P7_XSIM_20261103/project_run/release_project_sims.txt"
+    },
+    {
+      "testbench": "tb_verifier_revoke",
+      "job_id": "dl_rel_s3_verifier_revoke",
+      "checks": 48,
+      "errors": 0,
+      "result": "PASS",
+      "classification": "RTL PASS",
+      "description": "RoT verifier revocation handshakes, timeout containment, and gate revoking transitions.",
+      "evidence_path": "E4_P7_XSIM_20261103/project_run/release_project_sims.txt"
+    }
+  ],
+  "kmac_cryptographic_equivalence_tiers": [
+    {
+      "tier": "Tier 1: Standalone KMAC KAT (Scratch)",
+      "job_id": "SCRATCH_kmac_tb",
+      "testbench": "kmac_tb (KMAC_TB)",
+      "scope": "Scratch standalone unit testbench",
+      "checks": 11,
+      "errors": 0,
+      "result": "PASS",
+      "evidence_status": "PASS (Scratch reference check, not formal registered harness job)",
+      "description": "Verifies KMAC128 NIST SP 800-185 KATs: empty message, 16-byte message, custom string, L=128 KAT, 3 Keccak permutations."
+    },
+    {
+      "tier": "Tier 2: Registered L2 KMAC Engine (Harness)",
+      "job_id": "rel_s3_l2e_engine",
+      "testbench": "tb_l2_kmac_engine",
+      "scope": "Subsystem registered L2 KMAC hardware engine",
+      "checks": 8020,
+      "errors": 0,
+      "result": "PASS",
+      "evidence_status": "PASS_FRESH (Authoritative registered harness)",
+      "description": "2,000 KMAC jobs scheduled and authenticated through the hardware arbiter and engine; zero errors across 8,020 checks."
+    },
+    {
+      "tier": "Tier 3: Full L2 Pair Wire Equivalence (Harness)",
+      "job_id": "rel_s3_l2p7_equiv",
+      "testbench": "tb_l2p7_equiv",
+      "scope": "End-to-end L2 packet framing and wire pair authentication",
+      "checks": 2425,
+      "errors": 0,
+      "result": "PASS",
+      "evidence_status": "PASS_FRESH (Authoritative registered harness)",
+      "description": "500 genuine packets authenticated across mesh wires, full rejection code coverage (reasons 1..5), zero errors across 2,425 checks."
+    }
+  ],
+  "parsed_log_records": {
+    "rel_s3_l2p7_equiv": {
+      "job_id": "rel_s3_l2p7_equiv",
+      "bench_name": "tb_l2p7_equiv",
+      "checks": 2425,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_p7_gate_data": {
+      "job_id": "rel_p7_gate_data",
+      "bench_name": "tb_p7_gate_data",
+      "checks": 4,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_p7_gate_mut_control_allowed": {
+      "job_id": "rel_p7_gate_mut_control_allowed",
+      "bench_name": "tb_p7_gate_data",
+      "checks": 4,
+      "errors": 4,
+      "result": "FAIL",
+      "kind": "control_mutant",
+      "is_control_mutant": true,
+      "mutant_killed": true
+    },
+    "rel_p7_gate_mut_bypass": {
+      "job_id": "rel_p7_gate_mut_bypass",
+      "bench_name": "tb_p7_gate_data",
+      "checks": 4,
+      "errors": 4,
+      "result": "FAIL",
+      "kind": "control_mutant",
+      "is_control_mutant": true,
+      "mutant_killed": true
+    },
+    "rel_i6_p7_refuse_grant": {
+      "job_id": "rel_i6_p7_refuse_grant",
+      "bench_name": "tb_p7_refuse_grant",
+      "checks": 12,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_s3_p7_c4": {
+      "job_id": "rel_s3_p7_c4",
+      "bench_name": "tb_p7_c4",
+      "checks": 18,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_n81p7_ni_t0w16": {
+      "job_id": "rel_n81p7_ni_t0w16",
+      "bench_name": "tb_ni_n81_p7",
+      "checks": 126,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_n81p7_ni_t0w1": {
+      "job_id": "rel_n81p7_ni_t0w1",
+      "bench_name": "tb_ni_n81_p7",
+      "checks": 126,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_n81p7_ni_t3w16": {
+      "job_id": "rel_n81p7_ni_t3w16",
+      "bench_name": "tb_ni_n81_p7",
+      "checks": 123,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_n81p7_ni_t3w1": {
+      "job_id": "rel_n81p7_ni_t3w1",
+      "bench_name": "tb_ni_n81_p7",
+      "checks": 122,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_i6_p7_ingress": {
+      "job_id": "rel_i6_p7_ingress",
+      "bench_name": "tb_p7_ingress",
+      "checks": 39,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_s3_l2e_engine": {
+      "job_id": "rel_s3_l2e_engine",
+      "bench_name": "tb_l2_kmac_engine (registered KMAC evidence)",
+      "checks": 8020,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "SCRATCH_kmac_tb": {
+      "job_id": "SCRATCH_kmac_tb",
+      "bench_name": "kmac_tb (KMAC_TB)",
+      "checks": 11,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "scratch",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_i7_sec": {
+      "job_id": "rel_i7_sec",
+      "bench_name": "tb_i7_sec",
+      "checks": 30,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    },
+    "rel_i7_full_chain": {
+      "job_id": "rel_i7_full_chain",
+      "bench_name": "tb_pq_full_chain_p7",
+      "checks": 21,
+      "errors": 0,
+      "result": "PASS",
+      "kind": "positive",
+      "is_control_mutant": false,
+      "mutant_killed": false
+    }
+  }
+}

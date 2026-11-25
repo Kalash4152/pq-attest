@@ -1,0 +1,10 @@
+﻿00:32:15 GATE free=5.71GB pagefile=20480MB need free>=1GB pagefile>=8192MB
+00:32:16 STARTED select=b4c scheduler=38596 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261022_003215_7f8b4b62 log=C:\Users\kalas\AppData\Local\Temp\i3_b4c2_20261022_003214.log
+00:32:16 free=5.59GB
+00:32:16 DONE l2e_vectors_check state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=5.59GB
+00:32:55 DONE l2e_engine state=PASS_FRESH xsimkernel_peak=14408KB proc_peak[vivado=564MB xelab=92MB xsim=207MB xsimk=14MB xvlog=52MB] free=5.58GB
+00:33:32 DONE l2e_mut_a2_ovh state=PASS_FRESH xsimkernel_peak=14460KB proc_peak[vivado=564MB xelab=92MB xsim=209MB xsimk=14MB xvlog=31MB] free=5.61GB
+00:34:08 DONE l2e_mut_a3_long_job state=PASS_FRESH xsimkernel_peak=14424KB proc_peak[vivado=564MB xelab=94MB xsim=209MB xsimk=14MB xvlog=31MB] free=5.66GB
+00:35:03 DONE l2p7_equiv state=PASS_FRESH xsimkernel_peak=19284KB proc_peak[vivado=565MB xelab=251MB xsim=208MB xsimk=18MB xvlog=51MB] free=5.65GB
+00:36:06 DONE l2p7_mut_a1 state=PASS_FRESH xsimkernel_peak=19300KB proc_peak[vivado=565MB xelab=257MB xsim=254MB xsimk=18MB xvlog=57MB] free=5.6GB
+00:36:45 scheduler exited stopped=False

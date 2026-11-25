@@ -1,0 +1,16 @@
+bench	job	kind	frozen_checks	CHECKS	ERRORS	RESULT	[PASS]_lines	[FAIL]_lines	harness_state
+tb_l2p7_equiv	rel_s3_l2p7_equiv	positive	2425	2425	0	PASS	0	0	PASS_FRESH
+tb_p7_gate_data	rel_p7_gate_data	positive	4	4	0	PASS	4	0	PASS_FRESH
+tb_p7_gate_data	rel_p7_gate_mut_control_allowed	control (mutant p7s_control_allowed)	4	4	4	FAIL	0	4	PASS_FRESH (KILLED)
+tb_p7_gate_data	rel_p7_gate_mut_bypass	control (mutant p7s_gate_bypass)	4	4	4	FAIL	0	4	PASS_FRESH (KILLED)
+tb_p7_refuse_grant	rel_i6_p7_refuse_grant	positive	12	12	0	PASS	12	0	PASS_FRESH
+tb_p7_c4	rel_s3_p7_c4	positive	18	18	0	PASS	18	0	PASS_FRESH
+tb_ni_n81_p7	rel_n81p7_ni_t0w16	positive	126	126	0	PASS	126	0	PASS_FRESH
+tb_ni_n81_p7	rel_n81p7_ni_t0w1	positive	126	126	0	PASS	126	0	PASS_FRESH
+tb_ni_n81_p7	rel_n81p7_ni_t3w16	positive	123	123	0	PASS	123	0	PASS_FRESH
+tb_ni_n81_p7	rel_n81p7_ni_t3w1	positive	122	122	0	PASS	122	0	PASS_FRESH
+tb_p7_ingress	rel_i6_p7_ingress	positive	39	39	0	PASS	39	0	PASS_FRESH
+tb_l2_kmac_engine (registered KMAC evidence)	rel_s3_l2e_engine	positive	8020	8020	0	PASS	0	0	PASS_FRESH
+kmac_tb (KMAC_TB)	SCRATCH_kmac_tb	positive, NOT registered (scratch)	-	-	-	STAGE 3 PASS	11 tests	0	scratch PASS (not evidence)
+tb_i7_sec	rel_i7_sec	positive	30	30	0	PASS	30	0	PASS_FRESH
+tb_pq_full_chain_p7	rel_i7_full_chain	positive	21	21	0	PASS	21	0	PASS_FRESH

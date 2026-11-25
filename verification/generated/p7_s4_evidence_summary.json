@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 S4 Release Evidence Summary",
+    "evidence_package": "PQ_Attest_S4_Evidence_20261105",
+    "timestamp": "2026-11-05T23:54:44",
+    "active_increment": "S4",
+    "registered_xsim_run_id": "dual_lane_10_20261105_023806_ae7d5152",
+    "registered_run_overall_status": "BLOCKED",
+    "increment_status": "NOT_RUN",
+    "package_acceptance": "PENDING",
+    "python_rtl_compatibility": "PENDING",
+    "status_claims": {
+      "HARDWARE_VALIDATED": false,
+      "FORMAL_PROOF": false,
+      "SOC_INTEGRATION_COMPLETE": false
+    }
+  },
+  "source_validation": {
+    "total_unique_sources": 111,
+    "verified_count": 111,
+    "all_sources_verified": true,
+    "type_distribution": {
+      "SystemVerilog Testbench": 21,
+      "SystemVerilog RTL": 62,
+      "JSON Metadata/Provenance": 5,
+      "Python Software/Script": 18,
+      "Vector/Memory Data": 2,
+      "SystemVerilog Header": 3
+    }
+  },
+  "a5_kmac_provenance": {
+    "schema": 1,
+    "contract": "docs/decisions/S4_AREA_CONTRACT.md",
+    "variants": {
+      "rtl/dual_lane/kmac_128_a5.sv": {
+        "source": "NOC_PQATTEST.srcs/sources_1/new/kmac_128.sv",
+        "expected_src_sha256": "796164790af7073a6260b561e9ac943a3291cfa278e5d3d6a8709fd2dafe0a72",
+        "actual_src_sha256": "796164790af7073a6260b561e9ac943a3291cfa278e5d3d6a8709fd2dafe0a72",
+        "source_matches": true,
+        "expected_out_sha256": "4b5c867d5cffc5ca2811ef785b0bb381f5b5a1be401ae3d85c1fc3f6671685bb",
+        "actual_out_sha256": "4b5c867d5cffc5ca2811ef785b0bb381f5b5a1be401ae3d85c1fc3f6671685bb",
+        "output_matches": true,
+        "valid": true
+      },
+      "rtl/dual_lane/kmac_128_xp_a5.sv": {
+        "source": "NOC_PQATTEST.srcs/sources_1/new/kmac_128.sv",
+        "expected_src_sha256": "796164790af7073a6260b561e9ac943a3291cfa278e5d3d6a8709fd2dafe0a72",
+        "actual_src_sha256": "796164790af7073a6260b561e9ac943a3291cfa278e5d3d6a8709fd2dafe0a72",
+        "source_matches": true,
+        "expected_out_sha256": "e0302fd5503dc5ddd322432731016e8a7d3d335d9f829bfbf51ab34461017b04",
+        "actual_out_sha256": "e0302fd5503dc5ddd322432731016e8a7d3d335d9f829bfbf51ab34461017b04",
+        "output_matches": true,
+        "valid": true
+      }
+    },
+    "all_verified": true
+  },
+  "job_accounting": {
+    "total_registry_jobs": 434,
+    "s4_active_jobs_total": 66,
+    "s4_pass_fresh_count": 62,
+    "s4_not_run_count": 4,
+    "s4_not_run_jobs": [
+      "s4r_p7_pnr",
+      "s4r_soc_pnr",
+      "s4r_n13_secure",
+      "s4r_n13_insecure"
+    ],
+    "out_of_scope_blocked_count": 368
+  },
+  "registered_implementation_runs": {
+    "run_033916_71a1eedc": {
+      "run_id": "dual_lane_10_20261105_033916_71a1eedc",
+      "pass_fresh_jobs": [
+        "s4r_p7_pnr"
+      ],
+      "status": "BLOCKED",
+      "active_increment": "S4"
+    },
+    "run_035324_bf4d9cea": {
+      "run_id": "dual_lane_10_20261105_035324_bf4d9cea",
+      "pass_fresh_jobs": [
+        "s4r_soc_pnr"
+      ],
+      "status": "BLOCKED",
+      "active_increment": "S4"
+    },
+    "run_040617_08dd583e": {
+      "run_id": "dual_lane_10_20261105_040617_08dd583e",
+      "pass_fresh_jobs": [
+        "s4r_n13_secure"
+      ],
+      "status": "BLOCKED",
+      "active_increment": "S4"
+    },
+    "run_042159_0fe3d737": {
+      "run_id": "dual_lane_10_20261105_042159_0fe3d737",
+      "pass_fresh_jobs": [
+        "s4r_n13_insecure"
+      ],
+      "status": "BLOCKED",
+      "active_increment": "S4"
+    }
+  },
+  "boundary_disclosures": {
+    "HARDWARE_VALIDATED": false,
+    "FORMAL_PROOF": false,
+    "SOC_INTEGRATION_COMPLETE": false,
+    "disclaimer": "Registered S4 run overall status is BLOCKED. Active S4 jobs exhibit 62 PASS_FRESH and 4 NOT_RUN. Python reference-model agreement with registered XSim results is confirmed without claiming hardware validation."
+  }
+}

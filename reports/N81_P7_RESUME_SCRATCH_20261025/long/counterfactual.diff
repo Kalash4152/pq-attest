@@ -1,0 +1,20 @@
+--- production/rtl/dual_lane/NOC_PKG.sv
++++ COUNTERFACTUAL/rtl/dual_lane/NOC_PKG.sv
+@@ -609,7 +609,7 @@
+ 
+             MSG_MEM_RD_REQ:       return 5'd1;
+             MSG_MEM_RD_RESP:      return 5'd1;
+-            MSG_MEM_WR_REQ:       return 5'd2;
++            MSG_MEM_WR_REQ:       return 5'd16; // COUNTERFACTUAL ONLY
+             MSG_MEM_WR_RESP:      return 5'd0;
+ 
+             MSG_ATTEST_CHALLENGE: return 5'd7;
+--- production/rtl/dual_lane/noc_p7_pkg.sv
++++ COUNTERFACTUAL/rtl/dual_lane/noc_p7_pkg.sv
+@@ -25,6 +25,4 @@
+     return 1'b1;
+   endfunction
+   localparam bit P7_PACKET_BOUND_OK = p7_packet_bound_ok();
+-  typedef logic p7_packet_bound_check_t [P7_PACKET_BOUND_OK ? 1 : 0];
+-  p7_packet_bound_check_t p7_packet_bound_check;   // forces elaboration of the check
+ endpackage

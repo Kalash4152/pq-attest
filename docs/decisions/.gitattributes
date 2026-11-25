@@ -1,0 +1,3 @@
+# Preserve raw JSON bytes used in guarded-install and run identities.
+.gitattributes -text
+dual_lane_config.json -text

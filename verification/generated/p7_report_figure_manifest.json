@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 Step 17: Report Figure Manifest",
+    "version": "1.0",
+    "timestamp": "2026-11-06",
+    "output_directory": "C:\\Users\\Arnav Bhandari\\PQ_Attest\\reports\\figures",
+    "total_figures": 10
+  },
+  "figures": [
+    {
+      "figure_id": "FIG_01",
+      "filename": "fig01_pair_matrix.svg",
+      "title": "Six-Tile Directed Communication Pair Matrix",
+      "provenance": "SPECIFIED_VALUES",
+      "source_files": [
+        "verification/p7_pair_matrix.py"
+      ],
+      "source_hashes": {
+        "p7_pair_matrix.py": "c8c88fcb48bbc8644c24297a3bb051316a9542c6b517e2fb75e4ca9667d20f0b"
+      },
+      "units": "Tiles & Ordered Directed Pairs",
+      "parameters": {
+        "tiles": 6,
+        "legal_pairs": 30,
+        "diagonal_self_pairs": 6
+      }
+    },
+    {
+      "figure_id": "FIG_02",
+      "filename": "fig02_requirement_coverage.svg",
+      "title": "Requirement Traceability Matrix Coverage",
+      "provenance": "PYTHON_MODEL_OUTPUT",
+      "source_files": [
+        "verification/p7_coverage_audit.py"
+      ],
+      "source_hashes": {
+        "p7_coverage_audit.py": "583bf0d3e9da7c3d43a4701cb8779e0fc8fe0863a4aa544187d6110e06ce2b36"
+      },
+      "units": "Architectural Requirements",
+      "parameters": {
+        "total_requirements": 58,
+        "covered": 58,
+        "coverage_pct": 100.0
+      }
+    },
+    {
+      "figure_id": "FIG_03",
+      "filename": "fig03_mutation_results.svg",
+      "title": "Python Mutation Sensitivity Analysis",
+      "provenance": "PYTHON_MODEL_OUTPUT",
+      "source_files": [
+        "verification/p7_mutation_analysis.py",
+        "verification/p7_i9_model.py"
+      ],
+      "source_hashes": {
+        "p7_mutation_analysis.py": "44d4e46e24e553c03b1a649cb6c8a0a67e8d99964bfff4e57cdd2abf6e9d0fd1",
+        "p7_i9_model.py": "2ca9b6b20742f66e7d2f49086c022ae4bdcf6e47d64559582c8813597deb5d47"
+      },
+      "units": "Mutants Killed",
+      "parameters": {
+        "core_mutants": 16,
+        "i9_mutants": 8,
+        "total_killed": 24,
+        "kill_rate_pct": 100.0
+      }
+    },
+    {
+      "figure_id": "FIG_04",
+      "filename": "fig04_ni_slot_occupancy.svg",
+      "title": "NI Slot Occupancy Lifecycle",
+      "provenance": "PYTHON_MODEL_OUTPUT",
+      "source_files": [
+        "verification/p7_ni_slot_analysis.py"
+      ],
+      "source_hashes": {
+        "p7_ni_slot_analysis.py": "b3300d4d1109bbe274e0dfaf99878c021b4e256bdc901462191996861de22219"
+      },
+      "units": "Occupancy Slots & Clock Cycles",
+      "parameters": {
+        "capacity": 2,
+        "timeout": 600
+      }
+    },
+    {
+      "figure_id": "FIG_05",
+      "filename": "fig05_timeout_behavior.svg",
+      "title": "NI Slot Timeout & Late Response Discard",
+      "provenance": "SPECIFIED_VALUES",
+      "source_files": [
+        "verification/p7_latency_model.py"
+      ],
+      "source_hashes": {
+        "p7_latency_model.py": "4b18e85426d09309af94adbcd9d97b62a155e29f4f97163166fbb18e0ea9012a"
+      },
+      "units": "Clock Cycles",
+      "parameters": {
+        "timeout_cycles": 600,
+        "late_response_handling": "SAFE_DROP"
+      }
+    },
+    {
+      "figure_id": "FIG_06",
+      "filename": "fig06_latency_breakdown.svg",
+      "title": "Attestation Latency Component Breakdown",
+      "provenance": "DERIVED",
+      "source_files": [
+        "verification/p7_latency_model.py"
+      ],
+      "source_hashes": {
+        "p7_latency_model.py": "4b18e85426d09309af94adbcd9d97b62a155e29f4f97163166fbb18e0ea9012a"
+      },
+      "units": "Clock Cycles",
+      "parameters": {
+        "nominal_rtt": 118,
+        "timeout_limit": 600,
+        "headroom": 482
+      }
+    },
+    {
+      "figure_id": "FIG_07",
+      "filename": "fig07_link_monitor.svg",
+      "title": "NoC Link Monitor Rule Verifications",
+      "provenance": "SYNTHETIC_TEST_INPUT",
+      "source_files": [
+        "verification/p7_link_monitor.py"
+      ],
+      "source_hashes": {
+        "p7_link_monitor.py": "8192118af6b5e237291c6f69005bf7fd65d6e5052c61f6964bb681881efc75d3"
+      },
+      "units": "Rule Verifications",
+      "parameters": {
+        "rules_verified": 6,
+        "violations_detected": "PASS"
+      }
+    },
+    {
+      "figure_id": "FIG_08",
+      "filename": "fig08_d2_sensitivity.svg",
+      "title": "D2 48-Byte IMEM Sensitivity Verification",
+      "provenance": "PYTHON_MODEL_OUTPUT",
+      "source_files": [
+        "verification/p7_d2_measurement.py"
+      ],
+      "source_hashes": {
+        "p7_d2_measurement.py": "93b4d42ad5a445e5fd2b5cdcccf4d7c15806fa489051038c6d5593632c8a2984"
+      },
+      "units": "Bytes (Indices 16..63)",
+      "parameters": {
+        "expansion_bytes": 48,
+        "divergence_rate_pct": 100.0
+      }
+    },
+    {
+      "figure_id": "FIG_09",
+      "filename": "fig09_regression_status.svg",
+      "title": "PQ-Attest Regression Suite Execution Status",
+      "provenance": "PYTHON_MODEL_OUTPUT",
+      "source_files": [
+        "verification/p7_regression.py"
+      ],
+      "source_hashes": {
+        "p7_regression.py": "5d04def0923c0061d030572b80404805fe38a89c476e10844f19ef44e61d29a6"
+      },
+      "units": "Regression Stages",
+      "parameters": {
+        "total_stages": 15,
+        "stages_passed": 15
+      }
+    },
+    {
+      "figure_id": "FIG_10",
+      "filename": "fig10_performance_curves.svg",
+      "title": "Measured Timing Slack Distribution",
+      "provenance": "MEASURED_RTL_DATA",
+      "source_files": [
+        "reports/n25_2026-09-23/paths_lt3ns.csv"
+      ],
+      "source_hashes": {
+        "paths_lt3ns.csv": "fffbcf5f5877eac7a36b37f25dbd847d04a7b2682e59d64145cee0793d0945a1"
+      },
+      "units": "Nanoseconds (ns)",
+      "parameters": {
+        "source_file": "paths_lt3ns.csv",
+        "metric": "slack_ns"
+      }
+    }
+  ]
+}

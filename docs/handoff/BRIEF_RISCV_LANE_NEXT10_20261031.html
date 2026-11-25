@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>RISC-V Lane Work Brief</title>
+<style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.2pt; line-height: 1.42; color: #1a1a1a; }
+h1 { font-size: 19pt; margin: 0 0 4px 0; color: #0b3d63; }
+h2 { font-size: 13.5pt; color: #0b3d63; border-bottom: 2px solid #0b3d63; padding-bottom: 2px; margin-top: 22px; page-break-after: avoid; }
+h3 { font-size: 11.2pt; color: #12507f; margin: 14px 0 4px 0; page-break-after: avoid; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px 0; page-break-inside: auto; }
+tr { page-break-inside: avoid; }
+th, td { border: 1px solid #9fb3c8; padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: #e3edf6; }
+code, pre { font-family: Consolas, "Courier New", monospace; font-size: 9.2pt; }
+pre { background: #f3f6f9; border: 1px solid #c9d6e2; padding: 6px 8px; white-space: pre-wrap; page-break-inside: avoid; }
+.meta { color: #444; font-size: 9.5pt; }
+.box { border: 1px solid #c98a00; background: #fff7e0; padding: 6px 10px; margin: 8px 0; page-break-inside: avoid; }
+.ok { border: 1px solid #2e7d32; background: #eef7ee; padding: 6px 10px; margin: 8px 0; page-break-inside: avoid; }
+.step { border: 1px solid #9fb3c8; border-left: 5px solid #0b3d63; padding: 6px 10px; margin: 10px 0; page-break-inside: avoid; }
+.step h3 { margin-top: 2px; }
+.lbl { font-weight: 600; color: #0b3d63; }
+.wait { color: #a15c00; font-weight: 600; }
+</style></head><body>
+
+<h1>RISC-V Lane: Work Brief and Next 10 Steps</h1>
+<div class="meta">
+  <b>Project:</b> PQ-Attest (post-quantum attestation on a network-on-chip, Artix-7 FPGA).<br>
+  <b>Issued by:</b> Kalash Bheda, Lane 1 owner (NoC + PQ attestation).<br>
+  <b>Date:</b> 31 Oct 2026.<br>
+  <b>Applies to:</b> the RISC-V tile lane, after the handoff check of 29 Oct 2026.
+</div>
+
+<div class="box">
+  <b>How to use this document.</b> It is written so that it can be pasted or uploaded, unchanged, to the AI assistant that
+  helps you. It is self-contained: it explains the system you plug into and the defects found in your last package. For
+  every next step it gives the exact work, how to verify it, and what "done" means. Work through the steps in order.
+  Steps 1-6 can start today; steps 7 and 8 have parts that wait for a Lane 1 decision, marked <span class="wait">WAIT</span>.
+</div>
+
+<h2>1. The system you are building for</h2>
+
+<p><b>The system.</b> PQ-Attest is a 3 x 2 mesh network-on-chip with six tiles, implemented on the xc7a100tcsg324-1
+(Arty A7-100T board). It runs at 50 MHz (20 ns), from one clock domain. A tile may use the shared memory only after it has
+passed a post-quantum attestation exchange with the Root of Trust (RoT). Lane 1 (Kalash) owns:</p>
+<ul>
+  <li>the network: routers, network interfaces, credit flow control;</li>
+  <li>the attestation hardware: endpoint, verifier, link authentication, gates.</li>
+</ul>
+<p><b>Your lane.</b> You own the RISC-V CPU tile:</p>
+<ul>
+  <li>PicoRV32 (RV32IMC), with an adapter to the TMEM bus, local memories and peripherals;</li>
+  <li>the software that runs on it.</li>
+</ul>
+<p>Your tile ends at the ten TMEM signals. Lane 1 builds the bridge from TMEM into the network.</p>
+
+<h3>1.1 Tile map (fixed, from noc_pkg)</h3>
+<table>
+<tr><th>Tile</th><th>Name in noc_pkg</th><th>Coordinate (x, y)</th><th>Role in the current design (P7 profile)</th></tr>
+<tr><td>0</td><td>TILE_CPU0</td><td>(0, 0)</td><td>Plain tile: <b>not attestable</b>. Its gate refuses all data it sends.</td></tr>
+<tr><td>1</td><td>TILE_CPU1</td><td>(1, 0)</td><td>Plain tile: not attestable.</td></tr>
+<tr><td>2</td><td>TILE_MEMORY</td><td>(2, 0)</td><td>Shared memory. Its front end checks, at the moment of the write or read, that the requester is authorized.</td></tr>
+<tr><td>3</td><td>TILE_CRYPTO</td><td>(0, 1)</td><td><b>The attested tile.</b> It is attested by the RoT; after a GRANT its data reaches memory; after a REVOKE it is blocked.</td></tr>
+<tr><td>4</td><td>TILE_ROT</td><td>(1, 1)</td><td>Root of Trust (the verifier). It issues CHALLENGE, GRANT and REVOKE.</td></tr>
+<tr><td>5</td><td>TILE_SPOOF</td><td>(2, 1)</td><td>Untrusted injection port, used for attack tests.</td></tr>
+</table>
+<p>Tile number = y x 3 + x. Only tiles 3 and 4 carry attestation hardware. Each extra attestable tile would cost about
+17.7k LUTs, which the device does not have, so this is fixed.</p>
+
+<h3>1.2 Proposed demo placement (pending Kalash's decision D1)</h3>
+<p><b>Proposed placement:</b></p>
+<ul>
+  <li><b>CPU A at tile 3</b>: attests, gains memory access, and is later revoked;</li>
+  <li><b>CPU B at tile 0</b>: never attested; every remote access it makes must come back as a bus error.</li>
+</ul>
+<p>This still meets your brief's "two instances with different IDs and programs". Build your tile so that its tile ID is a
+parameter or port: the same RTL must work at tile 0 and at tile 3.</p>
+
+<h3>1.3 Address map (fixed; from noc_pkg, matches your MEMORY_MAP.h)</h3>
+<table>
+<tr><th>Range</th><th>Target</th><th>Notes</th></tr>
+<tr><td>0x0000_0000 + 16 KB</td><td>IMEM (local)</td><td>Instruction memory, 16 KB. Your MEMORY_MAP.h and link.ld still say 8 KB; fix them.</td></tr>
+<tr><td>0x0000_4000 + 16 KB</td><td>DMEM (local)</td><td>16 KB.</td></tr>
+<tr><td>0x1000_0000 + 4 KB</td><td>UART</td><td>115200 baud from 50 MHz (your benches pass).</td></tr>
+<tr><td>0x1000_1000 + 4 KB</td><td>GPIO</td><td></td></tr>
+<tr><td>0x1000_2000 + 4 KB</td><td>STATUS</td><td>Tile status registers, including the one-cycle attest-request pulse.</td></tr>
+<tr><td>0x1000_3000 + 4 KB</td><td>NI window</td><td><b>Unmapped in your decoder today</b>; map it.</td></tr>
+<tr><td>0x2T00_0000</td><td>Remote tile T</td><td>T = address[27:24], legal T = 0..5. Self-addressed remote access is an error. Shared memory is <code>0x2200_0000</code> + offset.</td></tr>
+<tr><td>anything else</td><td>bus error</td><td>Must reach the core as an error, never as read data 0.</td></tr>
+</table>
+
+<h3>1.4 What the network does with your requests (so your error handling is right)</h3>
+<ul>
+  <li><b>Request types:</b>
+    <ul>
+      <li>a remote write becomes a network <code>MEM_WR_REQ</code> (address + data, byte enables in the header);</li>
+      <li>a remote read becomes a <code>MEM_RD_REQ</code>;</li>
+      <li>the memory answers with <code>MEM_WR_RESP</code> / <code>MEM_RD_RESP</code>.</li>
+    </ul>
+  </li>
+  <li><b>Refused tile:</b> a request from a tile that is not authorized is refused. The Lane 1 bridge returns
+    <code>tmem_err</code> for it.</li>
+  <li><b>Errors in general:</b> an illegal address, a timeout, and a revocation in flight also return
+    <code>tmem_err</code>. Your tile must turn <code>tmem_err</code> into a <b>bus error (trap) to the core</b>.</li>
+  <li><b>Tile 3 port sharing:</b> at tile 3 the network port is shared with the attestation endpoint. A remote request can
+    wait about 1,200 cycles while an attestation is in flight. Do not time out remote requests shorter than about 4,000
+    cycles (exact value comes in the Lane 1 contract).</li>
+  <li><b>Response backpressure:</b> TMEM has none. Your tile must accept <code>tmem_rvalid</code> in any cycle it is
+    raised.</li>
+</ul>
+
+<h2>2. Result of your last handoff (PQ_ATTEST.zip, checked 29 Oct 2026)</h2>
+<p><b>Package:</b> PQ_ATTEST.zip, 12,634,534 bytes, SHA-256 <code>273e3057196026331c3da0c4f6abebffda2b4618d809648cd1ec29a5653a2cd7</code>.
+<b>Verdict: NOT ACCEPTED.</b> Your own testbenches were run in Vivado XSim 2024.1, with the hard-coded
+<code>C:/Users/HP/...</code> paths rewritten.</p>
+<table>
+<tr><th>#</th><th>Finding</th><th>Severity</th></tr>
+<tr><td>B1</td><td>Adapter captures every request twice, including writes: 24 core transfers produced 31 adapter requests (3 writes became 5). The CPU stops at PC 0x12C in <code>tb_tile_top</code> and <code>tb_two_tiles</code>.</td><td>Blocking</td></tr>
+<tr><td>B2</td><td><code>tb_conformance</code> FAILS: stability errors 3,996, fetch-flag errors 999, protocol errors 1,999 over 1,000 transactions. These counts match B1.</td><td>Blocking</td></tr>
+<tr><td>B3</td><td><code>tb_random_latency</code> never finishes (no output in 900 s, no internal timeout). It covers 20 transactions on one seed; the brief requires 1,000 seeds.</td><td>Blocking</td></tr>
+<tr><td>B4</td><td>Bus errors complete silently: on <code>tmem_err</code> the adapter returns read data 0 with a normal ready. <code>dbg_trap_o</code> is tied to 0.</td><td>Blocking</td></tr>
+<tr><td>O1</td><td><code>tb_tile_status</code> and <code>tb_gpio</code> run forever (no <code>$finish</code>) and contain no checks.</td><td>Major</td></tr>
+<tr><td>O2</td><td><code>tb/tb_addr_decode.sv</code> no longer elaborates: it connects <code>local_req_i</code>, which <code>addr_decode.sv</code> does not have.</td><td>Major</td></tr>
+<tr><td>O3</td><td><code>tb_two_tiles</code> loads the same program into both tiles, and its pass rule is only "PC != 0".</td><td>Major</td></tr>
+<tr><td>O4</td><td>Missing items:
+  <ul>
+    <li><code>memory_tile.sv</code>, the second read port of <code>mem_bram</code>;</li>
+    <li><code>memtest.c</code>, cycle-counter code, the traffic generator;</li>
+    <li>the 7.3 assertions;</li>
+    <li>a <code>tile_top</code> implementation and timing report.</li>
+  </ul></td><td>Major</td></tr>
+<tr><td>O5</td><td>The <code>tile_top</code> synthesis report shows 4 BRAM inside the tile (the brief says 0). <code>reset_sync.sv</code> is not instantiated. <code>tile_status</code> uses an asynchronous reset while the other blocks use synchronous ones.</td><td>Medium</td></tr>
+<tr><td>O6</td><td><code>dbg_pc_o</code> is the memory address, not the retiring PC; <code>dbg_inst_o</code> is the memory read data.</td><td>Medium</td></tr>
+<tr><td>O7</td><td>Only 4 files are tracked in git; all RTL, software and testbenches are untracked. README.md and DESIGN_LOG.md are empty. Build products (a.out, xsimk.exe, .wdb, .dcp) are in the tree.</td><td>Medium</td></tr>
+</table>
+<div class="ok"><b>What already works:</b>
+  <ul>
+    <li><code>tb_uart_tx</code> and <code>tb_uart_mmio</code> pass;</li>
+    <li><code>tile_top</code> synthesizes to 1,674 LUT, 1,102 FF and 0 DSP;</li>
+    <li>the local address map matches noc_pkg;</li>
+    <li>there is no combinational path from grant to request.</li>
+  </ul>
+</div>
+
+<h2>3. Ground rules</h2>
+<ol>
+  <li><b>Do not modify PicoRV32.</b> Record the upstream tag you used and the SHA-256 of <code>picorv32.v</code>.</li>
+  <li><b>Do not change the ten TMEM signals</b> or their meaning without written agreement from Lane 1. Lane 1's bridge is
+    built against them.</li>
+  <li><b>Every testbench must check results and end by itself:</b>
+    <ul>
+      <li>it prints <code>PASS</code> or <code>FAIL</code> with counts and calls <code>$finish</code>;</li>
+      <li>it has an internal timeout that prints <code>FAIL: timeout</code>.</li>
+    </ul>
+    A timeout is never a pass.</li>
+  <li><b>Never weaken a check</b> or lower an expected count to make a test pass. Fix the design instead.</li>
+  <li><b>No hard-coded absolute paths</b> (<code>C:/Users/HP/...</code>). Use paths relative to the repository root, or a
+    plusarg.</li>
+  <li><b>Claim only what you ran.</b> Every PASS in your report must have a log file in the package. Keep these separate:
+    simulated, synthesized, implemented, and measured on the board.</li>
+  <li><b>One clock, 20 ns.</b> No clock-domain crossings inside the tile; synchronous reset, through <code>reset_sync</code>.</li>
+</ol>
+
+<h2>4. The next 10 steps</h2>
+
+<div class="step"><h3>Step 1: Fix the adapter double capture (blocking)</h3>
+<p><span class="lbl">Root cause (confirmed in your source and with a probe):</span></p>
+<ol>
+  <li>In the RESPONSE state, <code>picorv32_adapter.sv</code> sets <code>mem_ready_q</code> and returns to IDLE on the
+    <i>same</i> clock edge.</li>
+  <li>PicoRV32 lowers <code>mem_valid</code> only on the <i>next</i> edge, after it has sampled <code>mem_ready</code>
+    (<code>mem_xfer</code>, picorv32.v line 373).</li>
+  <li>In that cycle IDLE still sees <code>mem_valid = 1</code> and captures the same request a second time.</li>
+</ol>
+<p>Every request is issued twice, so every remote write reaches memory twice.</p>
+<p><span class="lbl">Fix (either form):</span></p>
+<pre>// (a) never accept a new request in the cycle the response is presented
+if (state == IDLE &amp;&amp; mem_valid &amp;&amp; !mem_ready_q) begin  /* capture */ end
+
+// (b) pending flag: set on capture, clear on the edge where mem_ready_q is 1
+always_ff @(posedge clk)
+  if (rst)                       pending &lt;= 1'b0;
+  else if (mem_ready_q)          pending &lt;= 1'b0;
+  else if (mem_valid &amp;&amp; !pending) pending &lt;= 1'b1;   // capture here only</pre>
+<p><span class="lbl">Add an assertion:</span> exactly one adapter request per core transfer.</p>
+<pre>// 'capture' = the adapter's internal "accept a new core request" signal
+a_no_capture_during_ready: assert property (@(posedge clk) disable iff (rst) mem_ready_q |-&gt; !capture);
+// plus, in the testbench: count core transfers (mem_valid &amp;&amp; mem_ready) and adapter requests; at $finish they must be equal</pre>
+<p><span class="lbl">Verify:</span> in <code>tb_tile_top</code>, count core transfers (<code>mem_valid &amp;&amp; mem_ready</code>)
+and adapter requests separately; print both counts and compare them.</p>
+<p><span class="lbl">Done when:</span></p>
+<ul>
+  <li>core transfers = adapter requests (24 = 24 on the current program; writes 3 = 3);</li>
+  <li>the CPU runs past PC 0x12C in <code>tb_tile_top</code> and <code>tb_two_tiles</code>.</li>
+</ul>
+</div>
+
+<div class="step"><h3>Step 2: Re-run the TMEM conformance test</h3>
+<p><span class="lbl">Do:</span> rerun <code>tb_conformance</code> (1,000 transactions) without changing any of its checks.</p>
+<p><span class="lbl">Done when:</span> stability, fetch-flag, protocol and response errors are all 0; the result is PASS; the
+log is in the package.</p>
+</div>
+
+<div class="step"><h3>Step 3: Real bus errors and correct debug taps</h3>
+<p><span class="lbl">Do:</span></p>
+<ul>
+  <li>On <code>tmem_err</code>, or a local access to an unmapped address, raise a <b>bus error to the core</b>. PicoRV32
+    with <code>CATCH_MISALIGN</code>/<code>CATCH_ILLINSN</code> traps; use its error/trap mechanism, or an IRQ, as your
+    brief section 4.2-4.3 describes.</li>
+  <li>Drive <code>dbg_trap_o</code>.</li>
+  <li>Make <code>dbg_pc_o</code> the PC of the retiring instruction, and <code>dbg_inst_o</code> the retiring instruction.</li>
+</ul>
+<p><span class="lbl">Tests (one each):</span></p>
+<ul>
+  <li>a remote read that gets <code>tmem_err</code> traps, and the read value is not used;</li>
+  <li>a remote write that gets <code>tmem_err</code> traps;</li>
+  <li>an unmapped local address traps;</li>
+  <li><code>dbg_pc_o</code> matches the expected PC sequence of a short program.</li>
+</ul>
+<p><span class="lbl">Done when:</span> all four tests PASS, and no path returns silent zero data.</p>
+</div>
+
+<div class="step"><h3>Step 4: Random-latency stress test that terminates</h3>
+<p><span class="lbl">Do:</span></p>
+<ul>
+  <li>Give <code>tb_random_latency</code> an internal cycle limit (print <code>FAIL: timeout</code>, then
+    <code>$finish</code>), a seed plusarg, and the full memory test (all sizes and alignments).</li>
+  <li>Run it for 1,000 seeds with a small script that records the seed and result per run.</li>
+</ul>
+<p><span class="lbl">Done when:</span> 1,000 / 1,000 seeds PASS, no run hangs, and the per-seed result list is in the
+package.</p>
+</div>
+
+<div class="step"><h3>Step 5: Bench and assertion hygiene</h3>
+<p><span class="lbl">Do:</span></p>
+<ul>
+  <li>Add the brief 7.3 assertions: request address and data stable while a request is pending; exactly one response per
+    request.</li>
+  <li>Fix <code>tb_addr_decode</code> so it elaborates against the shipped <code>addr_decode.sv</code>.</li>
+  <li>Give <code>tb_two_tiles</code> two different programs, with a pass rule that checks the values each program
+    writes.</li>
+  <li>Give <code>tb_tile_status</code> and <code>tb_gpio</code> real checks and <code>$finish</code>. The attest-request
+    pulse must be exactly one cycle wide.</li>
+</ul>
+<p><span class="lbl">Done when:</span> every testbench in the package self-checks, prints PASS/FAIL, and terminates.</p>
+</div>
+
+<div class="step"><h3>Step 6: Reset, tile identity and address decode</h3>
+<p><span class="lbl">Do:</span></p>
+<ul>
+  <li>Instantiate <code>reset_sync</code> in <code>tile_top</code> (asynchronous assert, synchronous deassert, gated on
+    <code>locked_i</code>), and use synchronous reset everywhere, including <code>tile_status</code>.</li>
+  <li>Make TILE_ID / BUILD_ID either the ports <code>tile_id_i</code> / <code>build_id_i</code> of brief 5.5, or
+    parameters; state which in DESIGN_LOG.md. <code>last_fault_timeout_i</code> may stay; document it.</li>
+  <li>Map the NI window <code>0x1000_3000</code>.</li>
+  <li>Make self-addressed remote accesses a bus error.</li>
+</ul>
+<p><span class="lbl">Done when:</span> <code>tb_addr_decode</code> PASSes and covers every row of the table in section 1.3,
+including T = 6..15 and the self address, which must give an error.</p>
+</div>
+
+<div class="step"><h3>Step 7: Memories</h3>
+<p><span class="lbl">Start now:</span></p>
+<ul>
+  <li>Set IMEM and DMEM to 16 KB in <code>MEMORY_MAP.h</code> and <code>link.ld</code>.</li>
+  <li>Write <code>memtest.c</code> (bytes, halfwords and words at every alignment, local and remote).</li>
+  <li>Add the <code>mem_bram</code> second read port (brief 4.7). It becomes the path through which the attestation
+    endpoint reads the program memory of tile 3 for measurement.</li>
+</ul>
+<p><span class="wait">WAIT (Lane 1 decision D3):</span> Lane 1 proposes to keep the network-facing front end of tile 2
+(memory), because it enforces the authorization checks. In that case you deliver a <b>plain BRAM memory block</b>, not a
+network-facing <code>memory_tile.sv</code>. Its interface: byte write enables, 1-cycle read, and a size Lane 1 will fix.
+Do not build the network-facing memory tile until Lane 1 confirms.</p>
+<p><span class="wait">WAIT (Lane 1 decision D2):</span> how many bytes of IMEM the attestation measures. Today it measures
+at most 64 bytes, through a 512-bit input. Keep the second read port generic: a word address in, a word out, one-cycle
+latency.</p>
+<p><span class="lbl">Done when:</span> memtest PASSes for every size and alignment; the second read port has its own test.</p>
+</div>
+
+<div class="step"><h3>Step 8: Software for the demo</h3>
+<p><span class="lbl">Do:</span></p>
+<ul>
+  <li><b>Hex build:</b> one command builds each program to a hex file (the existing <code>convert_hex.py</code> flow).</li>
+  <li><b>Program A (runs at tile 3, the attested tile):</b>
+    <ul>
+      <li>requests attestation through STATUS;</li>
+      <li>waits for "authorized";</li>
+      <li>writes a pattern to <code>0x2200_0100</code> and reads it back;</li>
+      <li>prints the result on the UART;</li>
+      <li>after a REVOKE, shows that the next remote access traps.</li>
+    </ul>
+  </li>
+  <li><b>Program B (runs at tile 0, not attested):</b> attempts the same remote write, expects a bus error, and prints
+    <code>REFUSED OK</code>.</li>
+  <li><b>Support code:</b> cycle-counter access (<code>rdcycle</code>), and a traffic generator (configurable rate, read
+    and write mix, remote target).</li>
+  <li><b>UART output:</b> every result line starts with <code>PASS</code> or <code>FAIL</code>.</li>
+</ul>
+<p><span class="wait">WAIT:</span> the STATUS register bits for "attestation requested" and "authorized" are defined in
+the Lane 1 integration contract (expected 2-8 Nov). Until then, keep them behind named constants in one header file.</p>
+<p><span class="lbl">Done when:</span> both programs run in <code>tb_two_tiles</code>, with a testbench model of the
+network that returns success to tile 3 and <code>tmem_err</code> to tile 0. The UART lines are checked by the
+testbench.</p>
+</div>
+
+<div class="step"><h3>Step 9: Synthesis and implementation of tile_top at 20 ns</h3>
+<p><span class="lbl">Do:</span> synthesize and implement <code>tile_top</code> out of context in Vivado 2024.1 for
+xc7a100tcsg324-1 with a 20 ns clock constraint.</p>
+<p><span class="lbl">Report:</span></p>
+<ul>
+  <li>LUT, FF, LUTRAM, BRAM and DSP;</li>
+  <li>WNS, WHS and TNS;</li>
+  <li>latches, combinational loops, multi-driven nets (brief criteria 16-18);</li>
+  <li>critical warnings.</li>
+</ul>
+<p>BRAM inside <code>tile_top</code>: 0 if the memories live outside (brief criterion 22). If you keep IMEM inside, say so
+explicitly; Lane 1 needs the number for its area budget.</p>
+<p><span class="lbl">Done when:</span> WNS &ge; 0 and WHS &ge; 0; 0 latches, 0 loops, 0 multi-driven nets; RESOURCES.md
+updated with the measured numbers and the report files included.</p>
+</div>
+
+<div class="step"><h3>Step 10: Re-submission package</h3>
+<p><span class="lbl">Do:</span></p>
+<ul>
+  <li><b>Git:</b> commit every source, testbench, script and program in git, so that nothing needed is untracked.</li>
+  <li><b>Clean tree:</b> remove build products (<code>a.out</code>, <code>xsim.dir</code>, <code>*.wdb</code>,
+    <code>*.dcp</code>, <code>*.exe</code>).</li>
+  <li><b>Docs:</b> fill in README.md (how to build and run every bench) and DESIGN_LOG.md (decisions, including the step 1
+    fix).</li>
+  <li><b>Package:</b> zip the repository and report its SHA-256 and the git commit ID.</li>
+</ul>
+<p><span class="lbl">Done when:</span> the package contains everything in section 5, and Lane 1's re-check reproduces your
+results.</p>
+</div>
+
+<h2>5. Handoff package checklist</h2>
+<table>
+<tr><th>Item</th><th>Required content</th></tr>
+<tr><td>Sources</td><td>All RTL, testbenches, scripts and software, committed in git; <code>picorv32.v</code> upstream tag + SHA-256</td></tr>
+<tr><td>Logs</td><td>One log per testbench run (conformance, random-latency per-seed list, tile_top, two_tiles, addr_decode, tile_status, gpio, uart, memtest, bus-error tests)</td></tr>
+<tr><td>Reports</td><td>tile_top synthesis and implementation: utilization, timing summary, DRC / methodology summary</td></tr>
+<tr><td>Docs</td><td>README.md (exact commands), DESIGN_LOG.md, RESOURCES.md, MEMORY_MAP.h + link.ld at 16 KB</td></tr>
+<tr><td>Results table</td><td>For each brief criterion 1-28: PASS / FAIL / NOT DONE, with the log file that shows it</td></tr>
+<tr><td>Identity</td><td>Zip SHA-256 and git commit ID in the message that sends the package</td></tr>
+</table>
+
+<h2>6. How Lane 1 will re-check your package</h2>
+<ol>
+  <li>Extract into an empty folder, and hash the zip.</li>
+  <li>Run every testbench in Vivado XSim 2024.1, each with a 900 s outer limit. A hang counts as FAIL.</li>
+  <li>Count core transfers against adapter requests with a probe on <code>tb_tile_top</code>.</li>
+  <li>Compare your RESOURCES.md numbers against your reports.</li>
+  <li>Mark each brief criterion accepted or not, in a written report you will receive.</li>
+</ol>
+
+<h2>7. Prompt you can give your AI assistant</h2>
+<pre>You are helping the RISC-V tile lane of the PQ-Attest project. Read the attached brief completely.
+Work through section 4, steps 1 to 10, in order. Do not modify picorv32.v, the ten TMEM signals,
+or any expected count or check in an existing testbench. For each step: explain the change,
+show the code, add or update a self-checking testbench that prints PASS/FAIL with counts and
+calls $finish with an internal timeout, and state the exact "done when" condition you met with
+the log line that proves it. Stop and ask before anything marked WAIT. Never report a result
+that was not produced by an actual simulation or synthesis run.</pre>
+
+<p class="meta">Source of findings: Lane 1 handoff check report <code>RISCV_HANDOFF_CHECK_20261029.md</code>; plan:
+<code>PLAN_NEXT10_ALL_LANES_20261030.md</code> (proposal). Hardware validation: none yet.</p>
+</body></html>

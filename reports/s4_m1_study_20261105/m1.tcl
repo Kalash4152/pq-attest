@@ -1,0 +1,32 @@
+# M1 (measurement only): protected mesh synthesized out of context with the RELEASE settings (-flatten_hierarchy none, no
+# directive), the rest of the S4 design with rebuilt + AreaOptimized_high and the mesh as a black box; mesh netlist linked in.
+set out [file normalize [file dirname [info script]]]
+source [file join $out srcs.tcl]
+create_project -in_memory -part xc7a100tcsg324-1
+read_verilog -sv $mesh_srcs
+read_xdc [file join $out mesh_ooc.xdc]
+synth_design -top noc_mesh_3x2 -part xc7a100tcsg324-1 -mode out_of_context -flatten_hierarchy none -generic LINK_PIPE=1
+write_checkpoint -force [file join $out mesh.dcp]
+write_verilog -force -mode synth_stub [file join $out mesh_stub.v]
+close_project
+create_project -in_memory -part xc7a100tcsg324-1
+read_verilog -sv $top_srcs
+read_verilog [file join $out mesh_stub.v]
+read_xdc C:/vivado_verilog_proj/NOC_PQATTEST/scripts/d4_crypto_ooc.xdc
+synth_design -top pq_noc_subsystem_p7 -part xc7a100tcsg324-1 -mode out_of_context -flatten_hierarchy rebuilt -directive AreaOptimized_high -verilog_define PQ_MAC_ON
+read_checkpoint -cell [get_cells mesh] [file join $out mesh.dcp]
+puts "M1 black boxes left: [llength [get_cells -hier -filter {IS_BLACKBOX == 1}]]"
+set_property HD.CLK_SRC BUFGCTRL_X0Y0 [get_ports clk]
+opt_design -directive Explore
+place_design -directive ExtraTimingOpt
+phys_opt_design -directive AggressiveExplore
+route_design -directive AggressiveExplore
+phys_opt_design -directive AggressiveExplore
+report_timing_summary -max_paths 10 -file [file join $out M1_timing.rpt]
+report_utilization -hierarchical -hierarchical_depth 4 -file [file join $out M1_util_hier.rpt]
+set us [report_utilization -return_string]
+set l NA; set f NA; regexp {\|\s*Slice LUTs\*?\s*\|\s*([0-9]+)} $us -> l; regexp {\|\s*Slice Registers\s*\|\s*([0-9]+)} $us -> f
+set p [lindex [get_timing_paths -setup -max_paths 1] 0]; set h [lindex [get_timing_paths -hold -max_paths 1] 0]
+set line "M1 routed LUT=$l FF=$f WNS=[get_property SLACK $p] WHS=[get_property SLACK $h] levels=[get_property LOGIC_LEVELS $p] end=[get_property NAME [get_property ENDPOINT_PIN $p]]"
+set fh [open [file join $out m1_results.txt] w]; puts $fh $line; close $fh
+puts "RESULT $line"

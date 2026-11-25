@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "title": "I-9 Differential and Integration Reference Vectors",
+    "generator": "verification.p7_i9_model",
+    "contract": "M-F1 revision 8",
+    "total_vectors": 9,
+    "passed_vectors": 9,
+    "status": "PASS"
+  },
+  "vectors": [
+    {
+      "vector_id": "VEC-I9-01-ALLOC-FULL",
+      "description": "Two transaction slots allocated; third allocation blocked",
+      "provenance": "contract-derived (M-F1 rev 8 \u00a711)",
+      "inputs": {
+        "alloc_0": "MEM_RD_REQ",
+        "alloc_1": "MEM_WR_REQ",
+        "alloc_2": "MEM_RD_REQ"
+      },
+      "expected": {
+        "slot_0_tag": 0,
+        "slot_1_tag": 1,
+        "alloc_2_result": null
+      },
+      "python_result": {
+        "slot_0_tag": 0,
+        "slot_1_tag": 1,
+        "alloc_2_result": null
+      },
+      "status": "PASS"
+    },
+    {
+      "vector_id": "VEC-I9-02-TIMEOUT-RELEASE",
+      "description": "Slot 0 expires at 600 cycles and is freed while slot 1 remains pending",
+      "provenance": "contract-derived (M-F1 rev 8 \u00a711 / dual_lane_jobs.json: i9_integ)",
+      "inputs": {
+        "elapsed_cycles": 585,
+        "current_cycle": 605,
+        "slot_0_timeout": 600,
+        "slot_1_timeout": 610
+      },
+      "expected": {
+        "timed_out_count": 1,
+        "timed_out_slot": 0,
+        "slots_occupied": 1
+      },
+      "python_result": {
+        "timed_out_count": 1,
+        "timed_out_slot": 0,
+        "slots_occupied": 1
+      },
+      "status": "PASS"
+    },
+    {
+      "vector_id": "VEC-I9-03-LATE-DROP",
+      "description": "Late response for timed-out slot 0 dropped and not delivered",
+      "provenance": "contract-derived (M-F1 rev 8 \u00a711 / dual_lane_jobs.json: i9_integ)",
+      "inputs": {
+        "tag": 0,
+        "msg_type": "MEM_RD_RESP",
+        "dest_tile": 0
+      },
+      "expected": {
+        "delivery": "DROP",
+        "classification": "LATE_TIMED_OUT",
+        "exported_to_app_rx": false
+      },
+      "python_result": {
+        "delivery": "DROP",
+        "classification": "LATE_TIMED_OUT",
+        "exported_to_app_rx": false
+      },
+      "status": "PASS"
+    },
+    {
+      "vector_id": "VEC-I9-04-APP-RX-CPU0",
+      "description": "Memory response exported to CPU tile 0",
+      "provenance": "contract-derived (M-F1 rev 8 \u00a711)",
+      "inputs": {
+        "dest_tile": 0,
+        "msg_type": "MEM_RD_RESP"
+      },
+      "expected": {
+        "delivery": "DELIVER",
+        "exported_to_app_rx": true
+      },
+      "python_result": {
+        "delivery": "DELIVER",
+        "exported_to_app_rx": true
+      },
+      "status": "PASS"
+    },
+    {
+      "vector_id": "VEC-I9-05-APP-RX-CPU3",
+      "description": "Memory response exported to CPU tile 3",
+      "provenance": "contract-derived (M-F1 rev 8 \u00a711)",
+      "inputs": {
+        "dest_tile": 3,
+        "msg_type": "MEM_RD_RESP"
+      },
+      "expected": {
+        "delivery": "DELIVER",
+        "exported_to_app_rx": true
+      },
+      "python_result": {
+        "delivery": "DELIVER",
+        "exported_to_app_rx": true
+      },
+      "status": "PASS"
+    },
+    {
+      "vector_id": "VEC-I9-06-APP-RX-TILE1-DROP",
+      "description": "Memory response to non-CPU tile 1 rejected from app_rx",
+      "provenance": "contract-derived (M-F1 rev 8 \u00a711)",
+      "inputs": {
+        "dest_tile": 1,
+        "msg_type": "MEM_RD_RESP"
+      },
+      "expected": {
+        "delivery": "DROP",
+        "drop_reason": "UNAUTHORIZED_APP_RX_DESTINATION",
+        "exported_to_app_rx": false
+      },
+      "python_result": {
+        "delivery": "DROP",
+        "drop_reason": "UNAUTHORIZED_APP_RX_DESTINATION",
+        "exported_to_app_rx": false
+      },
+      "status": "PASS"
+    },
+    {
+      "vector_id": "VEC-I9-07-BRAM-BOUNDARY-3FFC",
+      "description": "Tile-2 BRAM word read at 0x2200_3FFC accepted",
+      "provenance": "contract-derived (M-F1 rev 8 \u00a711 / E4_RESPONSE_20261106 \u00a75)",
+      "inputs": {
+        "addr": "0x22003FFC",
+        "access_type": "READ"
+      },
+      "expected": {
+        "accepted": true,
+        "drop_reason": "NONE"
+      },
+      "python_result": {
+        "accepted": true,
+        "drop_reason": "NONE"
+      },
+      "status": "PASS"
+    },
+    {
+      "vector_id": "VEC-I9-08-BRAM-BOUNDARY-4000",
+      "description": "Tile-2 BRAM word read at 0x2200_4000 rejected",
+      "provenance": "contract-derived (M-F1 rev 8 \u00a711 / E4_RESPONSE_20261106 \u00a75)",
+      "inputs": {
+        "addr": "0x22004000",
+        "access_type": "READ"
+      },
+      "expected": {
+        "accepted": false,
+        "drop_reason": "BRAM_OUT_OF_BOUNDS"
+      },
+      "python_result": {
+        "accepted": false,
+        "drop_reason": "BRAM_OUT_OF_BOUNDS"
+      },
+      "status": "PASS"
+    },
+    {
+      "vector_id": "VEC-I9-09-BRAM-BYTE-LANES-PARTIAL",
+      "description": "Partial write with wstrb=0x5 updates lanes 0 and 2; preserves 1 and 3",
+      "provenance": "contract-derived (mem_bram.sv / M-F1 rev 8 \u00a711)",
+      "inputs": {
+        "addr": "0x22000100",
+        "wdata": "0xAA00BB00",
+        "wstrb": "0x5",
+        "initial_val": "0x11223344"
+      },
+      "expected": {
+        "accepted": true,
+        "rdata_after": "0x11003300",
+        "modified_bytes": [
+          0,
+          2
+        ]
+      },
+      "python_result": {
+        "accepted": true,
+        "rdata_after": "0x11003300",
+        "modified_bytes": [
+          0,
+          2
+        ]
+      },
+      "status": "PASS"
+    }
+  ]
+}

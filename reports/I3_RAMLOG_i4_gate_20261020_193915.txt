@@ -1,0 +1,35 @@
+﻿19:39:15 GATE free=3.88GB pagefile=19456MB need free>=2GB pagefile>=8192MB
+19:39:17 STARTED select=all scheduler=10136 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261020_193916_69a2a2cb log=C:\Users\kalas\AppData\Local\Temp\i3_i4_gate_20261020_193915.log
+19:39:17 free=3.83GB
+19:39:17 DONE endpoint_ooc state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[xsimk=16MB] free=3.81GB
+19:39:17 DONE ooc_pq_attestation_controller state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.84GB
+19:39:18 DONE ooc_pq_attestation_tag state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.82GB
+19:39:18 DONE ooc_pq_kdf state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.82GB
+19:39:19 DONE ooc_pq_measurement state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.81GB
+19:39:21 DONE dsyn1_variants state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[vivado=283MB xsimk=16MB] free=3.47GB
+19:39:48 DONE dsyn1_sha3_pad_equiv state=PASS_FRESH xsimkernel_peak=11620KB proc_peak[vivado=554MB xsim=207MB xsimk=16MB xvlog=31MB] free=3.8GB
+19:40:14 DONE dsyn1_iota_equiv state=PASS_FRESH xsimkernel_peak=11612KB proc_peak[vivado=554MB xelab=31MB xsim=202MB xsimk=16MB xvlog=40MB] free=3.72GB
+19:40:47 DONE dsyn1_s8_golden state=PASS_FRESH xsimkernel_peak=13312KB proc_peak[vivado=569MB xelab=115MB xsim=207MB xsimk=16MB] free=3.74GB
+19:41:17 DONE dsyn1_s8_mut_lost_measurement state=PASS_FRESH xsimkernel_peak=13312KB proc_peak[vivado=554MB xelab=108MB xsim=207MB xsimk=16MB xvlog=53MB] free=3.72GB
+19:41:48 DONE dsyn1_s8_mut_lost_tag state=PASS_FRESH xsimkernel_peak=13284KB proc_peak[vivado=563MB xelab=116MB xsim=207MB xsimk=16MB] free=3.76GB
+19:42:18 DONE dsyn1_s8_mut_key_length state=PASS_FRESH xsimkernel_peak=13296KB proc_peak[vivado=556MB xelab=113MB xsim=208MB xsimk=16MB] free=3.84GB
+19:42:49 DONE dsyn1_s8_mut_wrong_transcript state=PASS_FRESH xsimkernel_peak=13300KB proc_peak[vivado=554MB xelab=109MB xsim=207MB xsimk=16MB] free=3.9GB
+19:43:19 DONE dsyn1_s8_mut_field_order state=PASS_FRESH xsimkernel_peak=13284KB proc_peak[vivado=556MB xelab=109MB xsim=207MB xsimk=16MB] free=3.88GB
+19:43:50 DONE dsyn1_s8_mut_stale_nonce state=PASS_FRESH xsimkernel_peak=13344KB proc_peak[vivado=568MB xelab=116MB xsim=207MB xsimk=16MB] free=3.85GB
+19:44:18 free=3.78GB
+19:44:21 DONE dsyn1_s8_mut_wrong_key state=PASS_FRESH xsimkernel_peak=13336KB proc_peak[vivado=555MB xelab=122MB xsim=206MB xsimk=16MB xvlog=43MB] free=3.98GB
+19:44:52 DONE dsyn1_s8_control_after state=PASS_FRESH xsimkernel_peak=13304KB proc_peak[vivado=554MB xelab=122MB xsim=206MB xsimk=16MB xvlog=40MB] free=4.01GB
+19:45:22 DONE dsyn1_pq_endpoint_unit state=PASS_FRESH xsimkernel_peak=13952KB proc_peak[vivado=566MB xelab=138MB xsim=207MB xsimk=16MB xvlog=31MB] free=3.96GB
+19:46:11 DONE dsyn1_pq_endpoint_sys state=PASS_FRESH xsimkernel_peak=30416KB proc_peak[vivado=564MB xelab=296MB xsim=213MB xsimk=30MB xvlog=46MB] free=3.97GB
+19:46:12 DONE dsyn2_measurement_equiv state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.98GB
+19:46:12 DONE dsyn2_mut_imem_off_by_one state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.98GB
+19:46:13 DONE dsyn2_s8_golden state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.98GB
+19:46:13 DONE dsyn2_s8_mut_field_order state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.98GB
+19:46:14 DONE dsyn2_s8_mut_key_length state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.98GB
+19:46:14 DONE dsyn2_s8_mut_lost_measurement state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.98GB
+19:46:15 DONE dsyn2_s8_mut_lost_tag state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.97GB
+19:46:15 DONE dsyn2_s8_mut_stale_nonce state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.97GB
+19:46:16 DONE dsyn2_s8_mut_wrong_key state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.97GB
+19:46:16 DONE dsyn2_s8_mut_wrong_transcript state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.96GB
+19:46:17 DONE dsyn2_variant state=PASS_REUSED xsimkernel_peak=NAKB proc_peak[] free=3.97GB
+19:46:19 scheduler exited stopped=False

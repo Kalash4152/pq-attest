@@ -1,0 +1,7 @@
+{
+  "state": "FAIL",
+  "source": "observed test execution before atomic rename fix",
+  "test": "InstallationTests.test_path_with_spaces_and_atomic_install",
+  "error": "PermissionError [WinError 5] Access denied replacing install_journal.json",
+  "resolution": "bounded retry of the same Windows atomic rename; no simulation/build retry"
+}

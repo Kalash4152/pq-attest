@@ -1,0 +1,117 @@
+"""Finish authorized G4/G5 after the existing release driver; never programs hardware."""
+import sys,os,json,time,hashlib,subprocess,datetime,re,shutil
+from pathlib import Path
+ROOT=Path('C:/vivado_verilog_proj/NOC_PQATTEST');TMP=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT/'scripts'))
+from seed_campaign import system_awake,run
+from merged_release import validate,alive,expected_source_paths
+STATE=TMP/'finalize_status.json';LOCK=TMP/'finalize.lock'
+with LOCK.open('x') as f:json.dump({'pid':os.getpid()},f)
+def state(stage,**extra):
+    STATE.write_text(json.dumps(dict(pid=os.getpid(),stage=stage,time=datetime.datetime.now().astimezone().isoformat(),**extra),indent=2)+'\n')
+def note(text):
+    with (ROOT/'reports/R10_EXECUTION_CHECKPOINT_20261113.md').open('a',encoding='utf-8') as f:f.write('\n'+text+'\n')
+def cmd(args,log=None):
+    p=subprocess.run(args,cwd=ROOT,capture_output=True,text=True,encoding='utf-8',errors='replace')
+    if log:(ROOT/log).write_text(p.stdout+p.stderr,encoding='utf-8')
+    if p.returncode:raise RuntimeError('command failed: '+str(args)+'\n'+p.stderr[-1500:])
+    return p.stdout
+PY=sys.executable
+def commit(files,message):
+    spec=TMP/'finalize_stage.nul';spec.write_bytes(b'\0'.join(str(p).replace('\\','/').encode() for p in sorted(set(files)))+b'\0')
+    cmd(['git','add','-f','--pathspec-from-file='+str(spec),'--pathspec-file-nul'])
+    cmd(['git','-c','user.name=Kalash Bheda','-c','user.email=kkalash.bheda@gmail.com','commit','-q','-m',message])
+def metrics(text):
+    if not re.search(r'^VERDICT PASS(?: |$)',text,re.M):raise RuntimeError('physical gate not PASS')
+    d={k:float(re.search(r'^MG_'+k+r'=(\S+)',text,re.M).group(1)) for k in ['LUT','FF','BRAM','WNS','WHS']}
+    if d['LUT']>47550 or min(d['WNS'],d['WHS'])<0:raise RuntimeError('physical hard stop')
+    return d
+try:
+ with system_awake():
+    records=json.loads((ROOT/'reports/R10_RELEASE_REPRODUCTION_20261114.json').read_text())['runs']
+    out=ROOT/'NOC_PQATTEST.runs_merged/merged_board'
+    validate(records[1],out)
+    state('RECOVERING_GUI_AFTER_STANDBY')
+    state('PREPARING_GUI_COPY')
+    # Wait for other EDA activity rather than killing or competing with it.
+    began=time.monotonic()
+    while True:
+        names=cmd(['powershell.exe','-NoProfile','-Command',"Get-Process vivado,xsim,xsimk,xelab -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Id; exit 0"]).strip()
+        if not names:break
+        state('WAITING_OTHER_EDA',pids=names)
+        if time.monotonic()-began>10800:raise RuntimeError('other EDA activity blocks isolated GUI test')
+        time.sleep(10)
+    cmd([PY,'-E',str(TMP/'prepare_gui_copy.py')],'reports/r10_gui_copy_prepare_20261114.txt')
+    t=TMP/'test.tcl';text=t.read_text();assert 'gui_merged_build' in text
+    marker='gui_merged_build\n'
+    text=text.replace(marker,'if {[dict get $b mem_init] ne {sw/riscv/demo_fw_v3.hex}} { error "wrong GUI firmware" }\n'+marker)
+    t.write_text(text)
+    state('GUI_COPY_BUILD_RUNNING');note('## G5 GUI copy running\nC:/vivado_verilog_proj/_r10g/test.tcl; main XPR untouched. Read finalize_status.json before any restart.')
+    run(['C:/xilinx_vivado/Vivado/2024.1/bin/vivado.bat','-mode','batch','-nojournal','-log',str(TMP/'gui_vivado.log'),'-source',str(t)],TMP,TMP/'gui_stdout.txt',10800)
+    stdout=(TMP/'gui_stdout.txt').read_text(errors='replace')
+    if not re.search(r'^R10_GUI_COPY: PASS idempotent=YES sources=73 whole_design_opened=YES$',stdout,re.M):raise RuntimeError('GUI validation marker missing')
+    impl=TMP/'NOC_PQATTEST.runs/impl_merged';gate=(impl/'gate/gate_summary.txt').read_text();m=metrics(gate)
+    bit=impl/'pq_merged_board_top.bit';assert bit.is_file() and bit.stat().st_size>0
+    mesh=ROOT/'NOC_PQATTEST.gui_merged/noc_mesh_3x2.dcp';release_mesh=out/'s4f3_mesh.dcp'
+    assert hashlib.sha256(mesh.read_bytes()).digest()==hashlib.sha256(release_mesh.read_bytes()).digest()
+    # Ensure no build input drift occurred while the GUI ran.
+    validate(records[1],out)
+    ev=ROOT/'reports/r10_gui_copy_20261114';ev.mkdir(exist_ok=True)
+    for source in [TMP/'gui_stdout.txt',TMP/'gui_vivado.log',impl/'gate/gate_summary.txt',TMP/'test.tcl',TMP/'prepare_gui_copy.py']:
+        shutil.copyfile(source,ev/source.name)
+    facts=dict(metrics=m,bitstream=str(bit),sha256=hashlib.sha256(bit.read_bytes()).hexdigest(),source_manifest=records[1]['source_manifest'],hardware_validated=False,formal_proof=False)
+    (ev/'result.json').write_text(json.dumps(facts,indent=2)+'\n')
+    # Documentation-only GUI header refresh after successful execution; Tcl commands stay byte-identical.
+    script=ROOT/'scripts/merged_gui_runs.tcl';before=script.read_text(encoding='utf-8')
+    after=before.replace('firmware v2)','firmware v3 / profile 10)')
+    logic=lambda s:'\n'.join(l for l in s.splitlines() if not l.lstrip().startswith('#'))
+    assert logic(before)==logic(after);script.write_text(after,encoding='utf-8')
+    handoff=ROOT/'reports/R10_READY_FOR_OWNER_20261114.md'
+    handoff.write_text('''# Revision 10 - automated build qualification complete
+
+G3: 31/31 PASS_FRESH. G4: two fresh accepted release builds. G5: isolated GUI flow passed twice-source
+idempotence, 73 sources, full synthesis/implementation/bitstream gate, implemented top opened successfully.
+
+Open NOC_PQATTEST.xpr, then in Vivado Tcl Console:
+
+    source C:/vivado_verilog_proj/NOC_PQATTEST/scripts/merged_gui_runs.tcl
+
+Press Generate Bitstream. Wait for GUI_GATE PASS and write_bitstream Complete. Record the hash:
+
+    Get-FileHash C:/vivado_verilog_proj/NOC_PQATTEST/NOC_PQATTEST.runs/impl_merged/pq_merged_board_top.bit -Algorithm SHA256
+
+Only then program that exact image. Main project GUI generation and programming are Kalash's remaining steps.
+USB UART: 115200 baud, 8 data bits, no parity, one stop. sw[0]=0 selects CPU A/tile3; sw[0]=1 selects CPU B/tile0.
+Reset with btn[0] after selecting each UART source to capture its boot text. A: PASS T3 cycles=...; B: PASS T0 REFUSED OK.
+Return sw[0]=0, reset, then btn[2] revoke: PASS T3 REVOKED and authorization LED0 off. btn[1] re-attests:
+PASS T3 RECOVERED, authorization LED0 on. Firmware v3 button waits do not time out.
+Board LEDs: led[0] authorization, led[1] sticky attestation failure, led[2] CPU A GPIO bit0, led[3] heartbeat;
+led0_r indicates CPU B refused, led0_g indicates either CPU FAIL bit. Do not read tile GPIO patterns as the external LED bus.
+
+Record image SHA256, both UART texts, LEDs before/after revoke/re-attest and any failure. No hardware PASS is assumed.
+The old board checklist and old source-header comments about first64 bytes/v2 are historical; active qualified code
+uses WHOLE_IMEM_MEASUREMENT=1, demo_fw_v3.hex and profile10. Current measurement covers 16384 bytes.
+
+HARDWARE_VALIDATED=NO, SOC_INTEGRATION_COMPLETE=NO, FORMAL_PROOF=NO. No rtl-rc2 tag yet.
+Remaining: owner's main GUI build and board record, then final freeze/tag/report and website data update.
+''',encoding='utf-8')
+    (ROOT/'reports/R10_G5_GUI_GATE_20261114.md').write_text('# G5 isolated GUI-copy qualification - PASS\n\n'+json.dumps(facts['metrics'],indent=2)+'\n\nImage SHA256: '+facts['sha256']+'\nFull design opened; no owner XPR modification. Owner main-project build and hardware validation remain.\nHARDWARE_VALIDATED=NO, SOC_INTEGRATION_COMPLETE=NO, FORMAL_PROOF=NO.\n',encoding='utf-8')
+    p=ROOT/'docs/STATUS.md';history=p.read_text(encoding='utf-8');p.write_text('# Current revision-10 handoff: G3/G4/isolated-G5 PASS\n\nAutomated build qualification complete; owner main GUI build, board validation and RC2 freeze remain.\nSee reports/R10_READY_FOR_OWNER_20261114.md for exact command and acceptance checks.\nLatest GUI-copy metrics: '+json.dumps(m)+'\nHARDWARE_VALIDATED=NO, SOC_INTEGRATION_COMPLETE=NO, FORMAL_PROOF=NO.\n\n--- prior status record ---\n\n'+history,encoding='utf-8')
+    p=ROOT/'reports/NEXT_STEP.md';p.write_text('# Next: owner main GUI build and hardware observations\n\nRead reports/R10_READY_FOR_OWNER_20261114.md. G3/G4/isolated-G5 passed. No new builds should be started by automation.\nMain XPR uncommitted; hardware/formal/SOC flags NO. No RC2 tag until owner record.\n',encoding='utf-8')
+    note('## Automated G4/G5 continuation COMPLETE\nSee R10_READY_FOR_OWNER_20261114.md. G4 two accepted builds; isolated GUI-copy gate PASS. Owner main GUI/board and freeze/tag remain. No hardware claim.')
+    registry=(ROOT/'scripts/dual_lane_jobs.json').read_bytes();config=(ROOT/'docs/decisions/dual_lane_config.json').read_bytes()
+    cmd([PY,'-E','scripts/test_dual_lane.py'],'reports/r10_gui_harness_selftest_20261114.txt')
+    cmd([PY,'-E','scripts/prepare_dual_lane.py'],'reports/r10_gui_payload_prepare_20261114.txt')
+    assert registry==(ROOT/'scripts/dual_lane_jobs.json').read_bytes() and config==(ROOT/'docs/decisions/dual_lane_config.json').read_bytes(),'unexpected registry/config change'
+    cmd([PY,'-E','scripts/dual_lane.py','preflight'],'reports/r10_gui_preflight_20261114.txt')
+    manifest=json.loads((ROOT/'automation/dual_lane_payload/update_manifest.json').read_text())
+    files=['scripts/merged_gui_runs.tcl','docs/STATUS.md','reports/NEXT_STEP.md','reports/R10_EXECUTION_CHECKPOINT_20261113.md','reports/R10_READY_FOR_OWNER_20261114.md','reports/R10_G5_GUI_GATE_20261114.md','reports/r10_gui_copy_prepare_20261114.txt','reports/r10_gui_harness_selftest_20261114.txt','reports/r10_gui_payload_prepare_20261114.txt','reports/r10_gui_preflight_20261114.txt','automation/dual_lane_payload/update_manifest.json']
+    files += [str(p.relative_to(ROOT)) for p in ev.rglob('*') if p.is_file()]
+    files += ['automation/dual_lane_payload/'+v['payload'] for v in manifest['files']]
+    commit(files,'G5 copy PASS: qualify revision-10 GUI bitstream flow and hand off owner validation')
+    state('READY_FOR_OWNER',metrics=m,gui_sha256=facts['sha256'],handoff=str(handoff))
+except BaseException as error:
+    state('STOPPED_NEEDS_REVIEW',error=str(error));note('## Automatic continuation stopped\n'+str(error)+'\nInspect C:/vivado_verilog_proj/_r10g/finalize_status.json and logs. No unrun gate is PASS.')
+    raise
+finally:
+    LOCK.unlink(missing_ok=True)

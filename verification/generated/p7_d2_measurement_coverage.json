@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "title": "PQ-Attest D2 64-Byte IMEM Measurement Coverage Report",
+    "version": "1.0",
+    "timestamp": "2026-11-06",
+    "requirement_id": "REQ-D2-IMEM-64",
+    "requirement_statement": "IMEM bytes 16..63 are included in the measurement (87-byte total input: 7-byte Tile ID + 16-byte Config + 64-byte IMEM).",
+    "status": "COVERED"
+  },
+  "coverage_metrics": {
+    "window_length": {
+      "historical_imem_bytes": 16,
+      "d2_expanded_imem_bytes": 64,
+      "tested_window_bytes": 64,
+      "coverage_pct": 100.0
+    },
+    "expansion_sensitivity": {
+      "tested_bytes_range": "16..63",
+      "total_expansion_bytes": 48,
+      "divergent_bytes": 48,
+      "sensitivity_pct": 100.0,
+      "status": "PASS"
+    },
+    "single_block_absorption": {
+      "rate_bytes": 136,
+      "single_block_bound_bytes": 135,
+      "message_length_bytes": 87,
+      "keccak_permutations": 1,
+      "within_bound": true,
+      "status": "PASS"
+    },
+    "multi_tile_coverage": {
+      "total_tiles": 6,
+      "tested_tiles": [
+        "TILE_00",
+        "TILE_01",
+        "TILE_02",
+        "TILE_03",
+        "TILE_04",
+        "TILE_05"
+      ],
+      "all_unique_measurements": true,
+      "status": "PASS"
+    },
+    "historical_non_equivalence": {
+      "historical_16b_measurement": "959b61960366c705b889e2c09ffaead296e296475f32a610732ab9eac293182a",
+      "d2_64b_measurement": "5d44a067029ba92ba45ad0a87b229c4480e8d6cda2756f907afa8715ddc27ccb",
+      "are_distinct": true,
+      "status": "PASS"
+    },
+    "reference_cross_check": {
+      "teammate_reference": "software/pq_attest_final/PQ_Attest/software/measurement_ref.py",
+      "standard_hashlib": "hashlib.sha3_256",
+      "agreement_pct": 100.0,
+      "vectors_verified": 12,
+      "status": "PASS"
+    }
+  },
+  "sensitivity_sweep_summary": {
+    "total_mutations": 48,
+    "successful_kills": 48,
+    "kill_rate": "48/48 (100%)"
+  }
+}

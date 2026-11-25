@@ -1,0 +1,7 @@
+RX_DECISION_CONE 1739
+MAC_COMPARE (rx_tag vs rb[rn-4+i], in decision cone) 72
+  of which also fed by rn (runtime index) 72
+SUPPLIED_TAG_SELECT (rb x rn in decision cone) 1156
+SEQ_COMPARE (rx_seq in decision cone) 273
+EPOCH_COMPARE (boot_epoch in decision cone) 45
+PLAY_READ (play -> ni) 294

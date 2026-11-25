@@ -1,0 +1,6 @@
+﻿20:01:42 GATE free=3.72GB pagefile=19456MB need free>=2GB pagefile>=8192MB
+20:01:43 STARTED select=b1_ooc scheduler=13628 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261020_200142_eb49e57d log=C:\Users\kalas\AppData\Local\Temp\i3_b1_ooc2_20261020_200141.log
+20:01:43 free=3.66GB
+20:04:03 DONE b1_ooc_kmac128_l2 state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[vivado=1836MB xsimk=14MB] free=3.82GB
+20:06:45 free=1.15GB
+20:08:04 scheduler exited stopped=False

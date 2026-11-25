@@ -1,0 +1,521 @@
+{
+  "manifest_name": "Engineer 4 P7 Final Handoff Manifest",
+  "date": "2026-11-06",
+  "author": "PQ-Attest Engineer 4",
+  "status": "COMPLETE_WITH_EXTERNAL_LIMITATIONS",
+  "git_head": "b62b78d",
+  "rtl_modifications": 0,
+  "claims": {
+    "HARDWARE_VALIDATED": false,
+    "SOC_INTEGRATION_COMPLETE": false,
+    "FORMAL_PROOF": false,
+    "PYTHON_MUTANTS_ARE_RTL_MUTANTS": false,
+    "SYNTHETIC_STIMULUS_IS_RTL_EVIDENCE": false
+  },
+  "scope_summary": {
+    "brief_v2_steps_completed": [
+      "Step 3: Pair Matrix (30 directed pairs, 6 self-pairs rejected)",
+      "F1: KMAC Teammate Reference Correction (SHA-256 047bb5a9...c6a0)",
+      "F3: Portable Verification Infrastructure (CLI paths, dynamic resolution)",
+      "I-9: NI Timeout & Integration Reference Model (60/60 fresh, 5/5 controls killed)",
+      "D2 / Step 14: 64-Byte IMEM Measurement Window (87B msg, 12 vectors, 48/48 sensitivity)",
+      "Step 11: Link Monitor (Assertion catalog, credit/VC/flit/handshake checking)",
+      "Step 12: Latency and Timeout Model (Measured/Specified/Derived bounds, 1000-cycle threshold analysis)",
+      "Step 13: NI Slot-Leak Analysis (State-machine modeling, leak analysis, 14 scenarios)",
+      "Step 17: Report Figures (10 reproducible SVGs)",
+      "Step 18: RTL Mutant Proposals (15 grounded RTL mutant proposals)"
+    ],
+    "explicitly_excluded_steps": [
+      "Step 8: Bridge Oracle (Explicitly excluded by user instruction)",
+      "Step 15: Bridge Vectors (Explicitly excluded by user instruction)"
+    ]
+  },
+  "test_summary": {
+    "pytest_test_count": 387,
+    "pytest_pass_count": 387,
+    "pytest_fail_count": 0,
+    "pytest_skip_count": 0,
+    "regression_stages_total": 15,
+    "regression_stages_passed": 15,
+    "regression_stages_failed": 0,
+    "requirements_modeled": 58,
+    "requirements_status": "58/58 mapped"
+  },
+  "evidence_classification": {
+    "SYNTHETIC_TEST_INPUT": "Unit test fixtures for link monitor, NI slot stimulus, packet model tests",
+    "REGISTERED_RTL_SIM_LOG": "S4 release run (run_023806_ae7d5152) and Nov 3 XSim run (E4_P7_XSIM_20261103)",
+    "MEASURED_IMPLEMENTATION_TIMING": "reports/n25_2026-09-23/paths_lt3ns.csv (empirical Vivado timing slack)",
+    "SPECIFIED_DESIGN_REQUIREMENT": "Brief v2 specifications, M-F1 revision 8 contract, C-5, K-3",
+    "DERIVED_ANALYTICAL_BOUND": "Latency compositions, round-trip formulas, and timeout safety margins"
+  },
+  "file_inventory": {
+    "verification_scripts": [
+      {
+        "path": "verification/crypto_compare.py",
+        "size_bytes": 17142,
+        "sha256": "5414b1c6530c0a9c3aa9beb53735a52f7b97bb016e6f599a94130d1fdbeac258"
+      },
+      {
+        "path": "verification/p7_coverage_audit.py",
+        "size_bytes": 52515,
+        "sha256": "f35eb7c8935bfdbdb88b3d0bcd7ecd18cfecc871cc414dc117969e45ea779130"
+      },
+      {
+        "path": "verification/p7_d2_measurement.py",
+        "size_bytes": 20673,
+        "sha256": "84a4b5876e078dbfcbbaca7920d9c9857293a74afa5b7acf8cd319d8b380e1d4"
+      },
+      {
+        "path": "verification/p7_differential.py",
+        "size_bytes": 46974,
+        "sha256": "c66bbdcaeb474df77a7cfd855cedec623f8fc28447d42c03734dbac67453660e"
+      },
+      {
+        "path": "verification/p7_i9_model.py",
+        "size_bytes": 47424,
+        "sha256": "2ca9b6b20742f66e7d2f49086c022ae4bdcf6e47d64559582c8813597deb5d47"
+      },
+      {
+        "path": "verification/p7_integration_scenarios.py",
+        "size_bytes": 51315,
+        "sha256": "587624a2044704d16c2aff21ee090ab2b55cf801868f776609c505d800cb75f5"
+      },
+      {
+        "path": "verification/p7_kmac_adapter.py",
+        "size_bytes": 13185,
+        "sha256": "259ac513f89863872ac45ade92e0aaf9697c2e991ff957b4cc9111e85b860085"
+      },
+      {
+        "path": "verification/p7_latency_model.py",
+        "size_bytes": 20760,
+        "sha256": "d1a576bfe28179300201a45caecff0b5a6531c397111000a4a743de0383a675f"
+      },
+      {
+        "path": "verification/p7_link_monitor.py",
+        "size_bytes": 23519,
+        "sha256": "c14b955bcc9975e47e1601817333f07e7e523b3129c0c92be6be6b3faab53210"
+      },
+      {
+        "path": "verification/p7_mutation_analysis.py",
+        "size_bytes": 29750,
+        "sha256": "44d4e46e24e553c03b1a649cb6c8a0a67e8d99964bfff4e57cdd2abf6e9d0fd1"
+      },
+      {
+        "path": "verification/p7_ni_slot_analysis.py",
+        "size_bytes": 21988,
+        "sha256": "e03e4c707129ba7b69688fd6596b596fd1777c007d2094e302d48651a75f7dc2"
+      },
+      {
+        "path": "verification/p7_packet_model.py",
+        "size_bytes": 23751,
+        "sha256": "87ab2239be489245096c4ade0c8b38b282ac41651bcdd5808d533cedd747cf49"
+      },
+      {
+        "path": "verification/p7_pair_matrix.py",
+        "size_bytes": 21517,
+        "sha256": "c8c88fcb48bbc8644c24297a3bb051316a9542c6b517e2fb75e4ca9667d20f0b"
+      },
+      {
+        "path": "verification/p7_paths.py",
+        "size_bytes": 13450,
+        "sha256": "abed14857d9388d36e8f831fd9f5ef8d5e5dd1c8ea11fa478bd4a0bea61eaa11"
+      },
+      {
+        "path": "verification/p7_regression.py",
+        "size_bytes": 52894,
+        "sha256": "5d04def0923c0061d030572b80404805fe38a89c476e10844f19ef44e61d29a6"
+      },
+      {
+        "path": "verification/p7_release_evidence.py",
+        "size_bytes": 38234,
+        "sha256": "265e506b3307793207d422c1406070d6a2ca7b86dd447a62ca66af1ee7118600"
+      },
+      {
+        "path": "verification/p7_report_figures.py",
+        "size_bytes": 34318,
+        "sha256": "a94f4f2ae4f14279f48b528c6f55aa04a812d3f8f6e8fa1d1c8cc7a269d10bb4"
+      },
+      {
+        "path": "verification/p7_rtl_mutant_proposals.py",
+        "size_bytes": 16983,
+        "sha256": "b156772e030572c431d8dbca3cde38756d91eb534194b86039f9cb2c613fd015"
+      },
+      {
+        "path": "verification/p7_rtl_parser.py",
+        "size_bytes": 49864,
+        "sha256": "85b50cef8e1c6c0be62acb6d69778872f6b099a94b9a0392ef8700aa66a0b160"
+      },
+      {
+        "path": "verification/p7_s4_evidence.py",
+        "size_bytes": 17420,
+        "sha256": "69ac54c04ebda4839c4ae37e431248d59a3ec27cd9d490fb795241951a6d83d3"
+      },
+      {
+        "path": "verification/p7_security_model.py",
+        "size_bytes": 26479,
+        "sha256": "1e41cb1bdfb29fc98c0ec200c635fb7551ff283ee82450fb913420b27f060e34"
+      }
+    ],
+    "verification_tests": [
+      {
+        "path": "verification/tests/test_p7_coverage_audit.py",
+        "size_bytes": 3322,
+        "sha256": "58647fda04ff14e44cefea0db36084408b475d99e9d4994c2cd17e947e744431"
+      },
+      {
+        "path": "verification/tests/test_p7_d2_measurement.py",
+        "size_bytes": 14232,
+        "sha256": "aad376cfbc87c3f0f5b4fd84e1f96718b507f0d6174cd1565f8579ae99964419"
+      },
+      {
+        "path": "verification/tests/test_p7_differential.py",
+        "size_bytes": 10637,
+        "sha256": "f684d849005f734ff6236ab5b4240fceebaf885dd1c61ee48b447db866dce5d4"
+      },
+      {
+        "path": "verification/tests/test_p7_i9_model.py",
+        "size_bytes": 24551,
+        "sha256": "9256f9115d58eda6081789901f82d7191bbad590f332eeb68ba23556c267e9d5"
+      },
+      {
+        "path": "verification/tests/test_p7_integration_scenarios.py",
+        "size_bytes": 18787,
+        "sha256": "b35b0df09db5a83ef9ca03479531d4f308551354c070651e61c7128215be91f6"
+      },
+      {
+        "path": "verification/tests/test_p7_kmac_adapter.py",
+        "size_bytes": 9239,
+        "sha256": "6f38b44614dd9d9fca8692cb581a745eeb3d48edf78b642896c63a4277f5045b"
+      },
+      {
+        "path": "verification/tests/test_p7_latency_model.py",
+        "size_bytes": 6987,
+        "sha256": "768db48e60d9a3a17468d154d4cd010ef5a2f608de6712e67c46531f849a77ee"
+      },
+      {
+        "path": "verification/tests/test_p7_link_monitor.py",
+        "size_bytes": 8497,
+        "sha256": "1b534191a91251b753bf91571df0734dbc3df20c5f8b92f3c17a4676bf7c691a"
+      },
+      {
+        "path": "verification/tests/test_p7_mutation_analysis.py",
+        "size_bytes": 15313,
+        "sha256": "bbaac3d202a32b3f0d409ddfaa4989858e6cc905ea3b55bea0156ce0b60ebb78"
+      },
+      {
+        "path": "verification/tests/test_p7_ni_slot_analysis.py",
+        "size_bytes": 4877,
+        "sha256": "f4943358124b275768f6d85d8ffa67d4ae377b16c2414ce4d266736c77c82e7e"
+      },
+      {
+        "path": "verification/tests/test_p7_packet_model.py",
+        "size_bytes": 17061,
+        "sha256": "b9dd97c8dca920246339934af8663221548c5489aa8902a6fc2b6992df8728db"
+      },
+      {
+        "path": "verification/tests/test_p7_pair_matrix.py",
+        "size_bytes": 13722,
+        "sha256": "7110b357c1b3f134614fea76d113b6ab35d9f2dce3c201b11e8aad8616d87078"
+      },
+      {
+        "path": "verification/tests/test_p7_portability.py",
+        "size_bytes": 9764,
+        "sha256": "7dbe7e3e9f899a6cf180a365fce221342fa85ed90793783b310187214a1f4767"
+      },
+      {
+        "path": "verification/tests/test_p7_regression.py",
+        "size_bytes": 7299,
+        "sha256": "d269f455496b3548d53e095ae42437923efd97402e1d912e18fe160ef88183ef"
+      },
+      {
+        "path": "verification/tests/test_p7_release_evidence.py",
+        "size_bytes": 13869,
+        "sha256": "60d914972aae08af0244cd1b235560fa300301080aeeb3b69a1029c8a4f76661"
+      },
+      {
+        "path": "verification/tests/test_p7_report_figures.py",
+        "size_bytes": 3717,
+        "sha256": "080b6f1508ef7e4ab939c158092800fd5b74b86d9f5e67c8b9b276c354903e97"
+      },
+      {
+        "path": "verification/tests/test_p7_rtl_mutant_proposals.py",
+        "size_bytes": 3818,
+        "sha256": "9bf6a3baff8783021a52b8f041b02b5b2b824b84506d27982a8a607e7622bb1e"
+      },
+      {
+        "path": "verification/tests/test_p7_rtl_parser.py",
+        "size_bytes": 14656,
+        "sha256": "8383264a43c68e26d21755c11f51a021bebc57c2ce5c74881212337a77c108dd"
+      },
+      {
+        "path": "verification/tests/test_p7_s4_evidence.py",
+        "size_bytes": 6959,
+        "sha256": "faaf747349678869b56a5f5f6b243eacbcc883129ba495e6deed883a42b72926"
+      },
+      {
+        "path": "verification/tests/test_p7_security_model.py",
+        "size_bytes": 19837,
+        "sha256": "7a67fb0f414b486936cb83a25d57810b1d8b6029be7d07a630bfd38f9830c93f"
+      }
+    ],
+    "generated_manifests": [
+      {
+        "path": "verification/generated/p7_coverage_audit.json",
+        "size_bytes": 36513,
+        "sha256": "c95131db850788cbcd5bdbe1ceb3cbc80035f0ef91ea9812d48d344e982742be"
+      },
+      {
+        "path": "verification/generated/p7_d2_measurement_coverage.json",
+        "size_bytes": 1980,
+        "sha256": "b3a90c978d79c01a7c905d1eb06f10522d20168beee97662acd14810758cfbc7"
+      },
+      {
+        "path": "verification/generated/p7_d2_measurement_vectors.json",
+        "size_bytes": 8803,
+        "sha256": "e10d13f8c41a6c28bdea929fb2038f769087e5717fce7bad1baf24230869da86"
+      },
+      {
+        "path": "verification/generated/p7_differential_report.json",
+        "size_bytes": 12156,
+        "sha256": "9e8b75fb7231bd464e6c8e3b03c029d32d9a2e90e86397e02c28077f9c8bb411"
+      },
+      {
+        "path": "verification/generated/p7_differential_vectors.json",
+        "size_bytes": 11659,
+        "sha256": "3c4f292a8ba89de92e5c7360ed5122434dd996a2cb171166d43066b4ee8a6ab0"
+      },
+      {
+        "path": "verification/generated/p7_differential_vectors.sv",
+        "size_bytes": 4660,
+        "sha256": "49b3f6c21c1c95a99557744880f3a0d81e75cdb1220b843ac4cbdd11bd8642fc"
+      },
+      {
+        "path": "verification/generated/p7_i9_mutation_results.json",
+        "size_bytes": 2835,
+        "sha256": "f031aae0a019cd0f8b58d2979c99eaf499b0d04d9782190c9d9e3379814df290"
+      },
+      {
+        "path": "verification/generated/p7_i9_vectors.json",
+        "size_bytes": 5693,
+        "sha256": "4db004f74288166b076324948ccd44555ed34a102cb41eedb841177d6e447ee9"
+      },
+      {
+        "path": "verification/generated/p7_integration_scenarios.json",
+        "size_bytes": 29623,
+        "sha256": "4770128b3ffe88448bbdf83a58605b002b1efe1e5cd325d91695ae34ee7098aa"
+      },
+      {
+        "path": "verification/generated/p7_kmac_reference_provenance.json",
+        "size_bytes": 1722,
+        "sha256": "b80a49b3f119eaf324ff64d03e595fd193963cc85c408e108a2d2e9f0b3cd2ec"
+      },
+      {
+        "path": "verification/generated/p7_latency_model_coverage.json",
+        "size_bytes": 1017,
+        "sha256": "6400ba19d11afab79935a3299f8fa31c86dd9a01760ed487f05995637e6c9420"
+      },
+      {
+        "path": "verification/generated/p7_latency_model_results.json",
+        "size_bytes": 6956,
+        "sha256": "c7535b419e57d6dff1ff8823ef6b802bef4593916d05da24d60a7efa64e26951"
+      },
+      {
+        "path": "verification/generated/p7_link_monitor_results.json",
+        "size_bytes": 6957,
+        "sha256": "c5ee2a613d071cd8aaf1f3c2819c0e308365b3c74bf2c3035e58a918e4c9ae76"
+      },
+      {
+        "path": "verification/generated/p7_mutation_report.json",
+        "size_bytes": 7791,
+        "sha256": "4eb2dde83b0b2c834637909d18d6aaddd61855efe88ead1c9c55b42e0c1549b5"
+      },
+      {
+        "path": "verification/generated/p7_ni_slot_analysis.json",
+        "size_bytes": 9721,
+        "sha256": "e7f41df30c1d97f865419bf72d8ff89b6c123e134a24e47a505f6d22ed2666b5"
+      },
+      {
+        "path": "verification/generated/p7_pair_matrix.json",
+        "size_bytes": 16277,
+        "sha256": "7ea2b281f4c982e7f4ceefeca3c4726200accffa66b317c784d9e091cae44a07"
+      },
+      {
+        "path": "verification/generated/p7_portability_manifest.json",
+        "size_bytes": 2864,
+        "sha256": "3dce42d0c34c48552671e41e3f1b3eb0bc2bfc00cf2b8d27d8433990cbfc0db0"
+      },
+      {
+        "path": "verification/generated/p7_protocol_manifest.json",
+        "size_bytes": 19245,
+        "sha256": "23f1bd83560e5a278da20b62dbd3a7c1af24ed7dfc8685b65adcd0561b6c8ac2"
+      },
+      {
+        "path": "verification/generated/p7_regression_summary.json",
+        "size_bytes": 7615,
+        "sha256": "dbb348ca8d1ca160f64479a0b034f13e270491e60fc9f1fb35a2712f7e4a276a"
+      },
+      {
+        "path": "verification/generated/p7_release_evidence.json",
+        "size_bytes": 17174,
+        "sha256": "dfea18841c8f22a30e98b759021952988579a99375d105c3a9f16cf368fb82b3"
+      },
+      {
+        "path": "verification/generated/p7_report_figure_manifest.json",
+        "size_bytes": 5978,
+        "sha256": "073e69b898b040b5f8422ce5f5095aa768fb10fcb9d513f16f1f2a50a3090ff2"
+      },
+      {
+        "path": "verification/generated/p7_rtl_mutant_proposals.json",
+        "size_bytes": 12002,
+        "sha256": "4b80d157a5dd2c493bd95265df8d0d8eccab326f08d143e8bc7f122506dc8059"
+      },
+      {
+        "path": "verification/generated/p7_s4_evidence_summary.json",
+        "size_bytes": 3940,
+        "sha256": "c02ca462c3740e327e5cbc00bbc3f1c941df8f6ceedb6357e037e1e6fadea4a3"
+      },
+      {
+        "path": "verification/generated/p7_s4_source_manifest.json",
+        "size_bytes": 31707,
+        "sha256": "f2d05c8729a706b56d97cfc9c0efaaa4ce6612f8d804c41c51862cc60433ecfe"
+      }
+    ],
+    "figures": [
+      {
+        "path": "reports/figures/fig01_pair_matrix.svg",
+        "size_bytes": 9018,
+        "sha256": "30556cf94da6c3c4d95b2270550290c2c93693d375dabaffafcc0e59f1dd38c7"
+      },
+      {
+        "path": "reports/figures/fig02_requirement_coverage.svg",
+        "size_bytes": 2956,
+        "sha256": "2c1c684921e956adce725688567b1b71294a545e39f2df14bf5b67806da9bbaa"
+      },
+      {
+        "path": "reports/figures/fig03_mutation_results.svg",
+        "size_bytes": 1941,
+        "sha256": "1252e3643735a8d22a896249ffe27b791ecdd3c2bf792eb791b781938f90fc51"
+      },
+      {
+        "path": "reports/figures/fig04_ni_slot_occupancy.svg",
+        "size_bytes": 2280,
+        "sha256": "cca471def06c290aa4119c587e5d8fcd538943104597c8ad7ea6fb0282d14e8b"
+      },
+      {
+        "path": "reports/figures/fig05_timeout_behavior.svg",
+        "size_bytes": 2193,
+        "sha256": "4417c53be4c3222e632c38307ff6ae170eb0c83baab7a76172d3e953fe232f22"
+      },
+      {
+        "path": "reports/figures/fig06_latency_breakdown.svg",
+        "size_bytes": 3124,
+        "sha256": "0de6d119a9a3749aacd937123ff500f98c7f85e5b5f8a316e15da815480d0926"
+      },
+      {
+        "path": "reports/figures/fig07_link_monitor.svg",
+        "size_bytes": 3762,
+        "sha256": "5aa80ea238a42e24fd6b521f30284e31e5fff74ef5daa2e0597f0fb926ae9464"
+      },
+      {
+        "path": "reports/figures/fig08_d2_sensitivity.svg",
+        "size_bytes": 5240,
+        "sha256": "4dd2c82f75ef0901714f91ee185f49bc27118a558fcf22508b6962df2d3c3b46"
+      },
+      {
+        "path": "reports/figures/fig09_regression_status.svg",
+        "size_bytes": 6320,
+        "sha256": "60b8c438682bb0ce960dc287f8f42d6e676f91e5a68020878dd5f2a95b74df76"
+      },
+      {
+        "path": "reports/figures/fig10_performance_curves.svg",
+        "size_bytes": 3697,
+        "sha256": "11dabe8a2614077f7638059548cdcc957c9736f5d2c1be1e874176503efcd0b5"
+      }
+    ],
+    "reports": [
+      {
+        "path": "reports/E4_P7_BRIEF_V2_STEP3_PAIR_MATRIX.md",
+        "size_bytes": 14195,
+        "sha256": "22d45e855bac58c23d6617ac05ddfee82172835580fd7ef5b990b36e232c87a2"
+      },
+      {
+        "path": "reports/E4_P7_F1_KMAC_REFERENCE_CORRECTION.md",
+        "size_bytes": 8969,
+        "sha256": "5d1a648bc5fdeb99b114b94a171d0632b8f6596f619e7cb5d1d5864071f3ebe7"
+      },
+      {
+        "path": "reports/E4_P7_F3_PORTABILITY.md",
+        "size_bytes": 11200,
+        "sha256": "dca8c835275ad223b8f1515d3b9d55274511bd1394354051bd51a9839dc829c2"
+      },
+      {
+        "path": "reports/E4_P7_I9_MODEL_EXTENSION.md",
+        "size_bytes": 15674,
+        "sha256": "10c6849b504c0b022b363163a2cd0c59591ea06bcb0e8703fb066de653af06c2"
+      },
+      {
+        "path": "reports/E4_P7_D2_MEASUREMENT_EXTENSION.md",
+        "size_bytes": 12766,
+        "sha256": "32d997ebbc34fba3dc39c7a5f63a3514d8fa612e6fb41d3b5cd92ed2a6efe104"
+      },
+      {
+        "path": "reports/E4_P7_STEP11_LINK_MONITOR.md",
+        "size_bytes": 4337,
+        "sha256": "6318dd119c2a7a02bf1b0b3a5ee2854ed6ae82b2895a4b1791c47faea327dda0"
+      },
+      {
+        "path": "reports/E4_P7_STEP12_LATENCY_TIMEOUT.md",
+        "size_bytes": 4030,
+        "sha256": "56222171a1cfd86ab4d6d4c19892780c848cb44c91870d172f644cd04de7ed72"
+      },
+      {
+        "path": "reports/E4_P7_STEP13_NI_SLOT_LEAK.md",
+        "size_bytes": 4321,
+        "sha256": "1c1b5043c17439572d323e272889993c3c75536444f4ad9d201707a9ed34b099"
+      },
+      {
+        "path": "reports/E4_P7_STEP17_REPORT_FIGURES.md",
+        "size_bytes": 3506,
+        "sha256": "69f4e6a65b36be7caaa6cb0be2163a6c24cf3bc2ec503f83971e8468e11dbcc1"
+      },
+      {
+        "path": "reports/E4_P7_STEP18_RTL_MUTANT_PROPOSALS.md",
+        "size_bytes": 4553,
+        "sha256": "9c3ff5c8c6ad45132de8ace2818a011bc74316be759f0d46b37f9abb50900876"
+      },
+      {
+        "path": "reports/E4_P7_S4_RECONCILIATION.md",
+        "size_bytes": 9940,
+        "sha256": "c2c318615fa1fcaab3b88b21246e41e375b16856a6d835f87f250032ad21515a"
+      },
+      {
+        "path": "reports/E4_P7_STEP8_FINAL_HANDOFF.md",
+        "size_bytes": 28001,
+        "sha256": "bc8e254c0d7da566c8191070fd8f9cd00467993494401d4fd6d2af3dc321dcd8"
+      },
+      {
+        "path": "reports/E4_P7_FINAL_HANDOFF_20261106.md",
+        "size_bytes": 16393,
+        "sha256": "e110bf66051d6c9a580b7180d42d6e9a17c9006c46e10c3ca757f2934a9d7420"
+      }
+    ],
+    "vectors": [
+      {
+        "path": "vectors/d2_k3_64.json",
+        "size_bytes": 8803,
+        "sha256": "e10d13f8c41a6c28bdea929fb2038f769087e5717fce7bad1baf24230869da86"
+      },
+      {
+        "path": "vectors/d2_k3_64.svh",
+        "size_bytes": 8795,
+        "sha256": "a78bee832e73b897ff001a79c057cdb00d038ea4636c512ca95861b5df52fb0d"
+      }
+    ]
+  },
+  "missing_files": [],
+  "handoff_archive": {
+    "filename": "E4_P7_FINAL_HANDOFF_20261106.zip",
+    "size_bytes": 780600,
+    "sha256": "c23e9b999e67622f532ef7a1703ec08e9b1770f8a3f720dd89e3e1779f47769c"
+  }
+}

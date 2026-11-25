@@ -1,0 +1,37 @@
+NOC_PQATTEST release simulations in the project, Wed Nov 04 02:23:16 +0530 2026
+OK   dl_p7_area_smoke                         CHECKS      3 / 3      ERRORS 0    RESULT PASS  
+OK   dl_p7_board_smoke                        CHECKS      6 / 6      ERRORS 0    RESULT PASS  
+OK   dl_rel_hop_probes_p7                     CHECKS    414 / 414    ERRORS 0    RESULT PASS  
+OK   dl_rel_i6_gate                           CHECKS     25 / 25     ERRORS 0    RESULT PASS  
+OK   dl_rel_i6_p7_ingress                     CHECKS     39 / 39     ERRORS 0    RESULT PASS  
+OK   dl_rel_i6_p7_refuse_grant                CHECKS     12 / 12     ERRORS 0    RESULT PASS  
+OK   dl_rel_i6_retry                          CHECKS     24 / 24     ERRORS 0    RESULT PASS  
+OK   dl_rel_i7_full_chain                     CHECKS     21 / 21     ERRORS 0    RESULT PASS  
+OK   dl_rel_i7_sec                            CHECKS     30 / 30     ERRORS 0    RESULT PASS  
+OK   dl_rel_n2p7_matrix                       CHECKS    106 / 106    ERRORS 0    RESULT PASS  
+OK   dl_rel_n2p7_rtt                          CHECKS     11 / 11     ERRORS 0    RESULT PASS  
+OK   dl_rel_n75p7_reset                       CHECKS     19 / 19     ERRORS 0    RESULT PASS  
+OK   dl_rel_n75p7_sat_vc2                     CHECKS     18 / 18     ERRORS 0    RESULT PASS  
+OK   dl_rel_n75p7_second_challenge            CHECKS     20 / 20     ERRORS 0    RESULT PASS  
+OK   dl_rel_n81p7_long                        CHECKS      2 / 2      ERRORS 0    RESULT PASS  
+OK   dl_rel_n81p7_long_n0                     CHECKS      2 / 2      ERRORS 1    RESULT FAIL  expected-FAIL control: effective
+OK   dl_rel_n81p7_n0                          CHECKS      2 / 2      ERRORS 0    RESULT PASS  
+OK   dl_rel_n81p7_ni_t0w1                     CHECKS    126 / 126    ERRORS 0    RESULT PASS  
+OK   dl_rel_n81p7_ni_t0w16                    CHECKS    126 / 126    ERRORS 0    RESULT PASS  
+OK   dl_rel_n81p7_ni_t3w1                     CHECKS    122 / 122    ERRORS 0    RESULT PASS  
+OK   dl_rel_n81p7_ni_t3w16                    CHECKS    123 / 123    ERRORS 0    RESULT PASS  
+OK   dl_rel_n81p7_sys                         CHECKS     24 / 24     ERRORS 0    RESULT PASS  
+OK   dl_rel_p7_gate_data                      CHECKS      4 / 4      ERRORS 0    RESULT PASS  
+OK   dl_rel_s2_attacks                        CHECKS     30 / 30     ERRORS 0    RESULT PASS  
+OK   dl_rel_s2_sf1_flood                      CHECKS    487 / 487    ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_f234_p7                        CHECKS     26 / 26     ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_ks_excl                        CHECKS     42 / 42     ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_l2e_engine                     CHECKS   8020 / 8020   ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_l2p7_equiv                     CHECKS   2425 / 2425   ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_meas_equiv                     CHECKS  33809 / 33809  ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_p7_c4                          CHECKS     18 / 18     ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_perm_share                     CHECKS     45 / 45     ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_pq_endpoint_unit               CHECKS    275 / 275    ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_s8_golden                      CHECKS     95 / 95     ERRORS 0    RESULT PASS  
+OK   dl_rel_s3_verifier_revoke                CHECKS     48 / 48     ERRORS 0    RESULT PASS  
+STEP 3 VERDICT: ALL VERIFIED  (35 OK, 0 BAD of 35)

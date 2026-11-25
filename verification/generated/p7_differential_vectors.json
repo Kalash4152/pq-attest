@@ -1,0 +1,528 @@
+[
+  {
+    "scenario_id": "SCEN_01_VALID_CONTROL_PACKET",
+    "scenario_name": "Valid control packet (RoT -> Tile 3 CHALLENGE)",
+    "stimulus_type": "CONTROL_WIRE",
+    "source_tile": 4,
+    "dest_tile": 3,
+    "message_type": "ATTEST_CHALLENGE",
+    "payload_words": [
+      268435457,
+      268435458,
+      268435459,
+      268435460,
+      268435461,
+      268435462,
+      268435463
+    ],
+    "freshness": {
+      "epoch": 123579083782828490592931,
+      "seq": 1
+    },
+    "mac_tag": 337517321788726905427738233945486188062,
+    "ni_flits": [
+      76832896,
+      268435457,
+      268435458,
+      268435459,
+      268435460,
+      268435461,
+      268435462,
+      268435463,
+      3745701406,
+      502415713,
+      3884480989,
+      4260067519
+    ],
+    "wire_flits": [
+      76843136,
+      1,
+      0,
+      1887539875,
+      1011703407,
+      6699,
+      268435457,
+      268435458,
+      268435459,
+      268435460,
+      268435461,
+      268435462,
+      268435463,
+      3745701406,
+      502415713,
+      3884480989,
+      4260067519
+    ],
+    "expected_verdict": "ACCEPT",
+    "expected_reason": null,
+    "expected_signals": {
+      "pacc": 1,
+      "pwhy": 0,
+      "prh": 1
+    }
+  },
+  {
+    "scenario_id": "SCEN_02_INVALID_MAC",
+    "scenario_name": "Control packet with corrupted MAC",
+    "stimulus_type": "CONTROL_WIRE",
+    "source_tile": 4,
+    "dest_tile": 3,
+    "message_type": "ATTEST_CHALLENGE",
+    "payload_words": [
+      536870913,
+      536870914,
+      536870915,
+      536870916,
+      536870917,
+      536870918,
+      536870919
+    ],
+    "freshness": {
+      "epoch": 123579083782828490592931,
+      "seq": 2
+    },
+    "mac_tag": 24197857218201955512839569239266148079,
+    "ni_flits": [
+      76832896,
+      536870913,
+      536870914,
+      536870915,
+      536870916,
+      536870917,
+      536870918,
+      536870919,
+      3735928559,
+      3131961357,
+      3405709037,
+      305419896
+    ],
+    "wire_flits": [
+      76843136,
+      2,
+      0,
+      1887539875,
+      1011703407,
+      6699,
+      536870913,
+      536870914,
+      536870915,
+      536870916,
+      536870917,
+      536870918,
+      536870919,
+      3735928559,
+      3131961357,
+      3405709037,
+      305419896
+    ],
+    "expected_verdict": "REJECT",
+    "expected_reason": 2,
+    "expected_signals": {
+      "prej": 1,
+      "pwhy": 2,
+      "prh": 0
+    }
+  },
+  {
+    "scenario_id": "SCEN_03_INCORRECT_EPOCH",
+    "scenario_name": "Control packet under mismatched boot epoch",
+    "stimulus_type": "CONTROL_WIRE",
+    "source_tile": 4,
+    "dest_tile": 3,
+    "message_type": "ATTEST_CHALLENGE",
+    "payload_words": [
+      805306369,
+      805306370,
+      805306371,
+      805306372,
+      805306373,
+      805306374,
+      805306375
+    ],
+    "freshness": {
+      "epoch": 725355491768777504823705,
+      "seq": 3
+    },
+    "mac_tag": 38961980007970689737867721310922666773,
+    "ni_flits": [
+      76832896,
+      805306369,
+      805306370,
+      805306371,
+      805306372,
+      805306373,
+      805306374,
+      805306375,
+      3407409941,
+      3804008549,
+      397935458,
+      491769325
+    ],
+    "wire_flits": [
+      76843136,
+      3,
+      0,
+      2576980377,
+      2576980377,
+      39321,
+      805306369,
+      805306370,
+      805306371,
+      805306372,
+      805306373,
+      805306374,
+      805306375,
+      3407409941,
+      3804008549,
+      397935458,
+      491769325
+    ],
+    "expected_verdict": "REJECT",
+    "expected_reason": 3,
+    "expected_signals": {
+      "prej": 1,
+      "pwhy": 3,
+      "prh": 0
+    }
+  },
+  {
+    "scenario_id": "SCEN_04_SEQUENCE_ZERO",
+    "scenario_name": "Control packet with sequence number zero",
+    "stimulus_type": "CONTROL_WIRE",
+    "source_tile": 4,
+    "dest_tile": 3,
+    "message_type": "ATTEST_GRANT",
+    "payload_words": [],
+    "freshness": {
+      "epoch": 123579083782828490592931,
+      "seq": 0
+    },
+    "mac_tag": 141146926098061642448428331517004051976,
+    "ni_flits": [
+      76949632,
+      3059840520,
+      4210051747,
+      1091276489,
+      1781524670
+    ],
+    "wire_flits": [
+      76959872,
+      0,
+      0,
+      1887539875,
+      1011703407,
+      6699,
+      3059840520,
+      4210051747,
+      1091276489,
+      1781524670
+    ],
+    "expected_verdict": "REJECT",
+    "expected_reason": 4,
+    "expected_signals": {
+      "prej": 1,
+      "pwhy": 4,
+      "authorized[3]": 0
+    }
+  },
+  {
+    "scenario_id": "SCEN_05_REPLAYED_SEQUENCE",
+    "scenario_name": "Control packet with replayed sequence number",
+    "stimulus_type": "CONTROL_WIRE",
+    "source_tile": 4,
+    "dest_tile": 3,
+    "message_type": "ATTEST_GRANT",
+    "payload_words": [],
+    "freshness": {
+      "epoch": 123579083782828490592931,
+      "seq": 1
+    },
+    "mac_tag": 303955319869051812692541588520908132692,
+    "ni_flits": [
+      76949632,
+      3824718164,
+      3944719452,
+      1968291321,
+      3836455500
+    ],
+    "wire_flits": [
+      76959872,
+      1,
+      0,
+      1887539875,
+      1011703407,
+      6699,
+      3824718164,
+      3944719452,
+      1968291321,
+      3836455500
+    ],
+    "expected_verdict": "REJECT",
+    "expected_reason": 4,
+    "expected_signals": {
+      "prej": 1,
+      "pwhy": 4,
+      "peer_replayed": 1
+    }
+  },
+  {
+    "scenario_id": "SCEN_06_VALID_GRANT",
+    "scenario_name": "Valid GRANT authorizing Tile 3",
+    "stimulus_type": "CONTROL_WIRE",
+    "source_tile": 4,
+    "dest_tile": 3,
+    "message_type": "ATTEST_GRANT",
+    "payload_words": [],
+    "freshness": {
+      "epoch": 123579083782828490592931,
+      "seq": 10
+    },
+    "mac_tag": 82185783632849441019802988867840594394,
+    "ni_flits": [
+      76949632,
+      1363628506,
+      1885886100,
+      3292200747,
+      1037330426
+    ],
+    "wire_flits": [
+      76959872,
+      10,
+      0,
+      1887539875,
+      1011703407,
+      6699,
+      1363628506,
+      1885886100,
+      3292200747,
+      1037330426
+    ],
+    "expected_verdict": "ACCEPT",
+    "expected_reason": null,
+    "expected_signals": {
+      "authorized[3]": 1,
+      "grant_done": 1,
+      "gate_faults[3]": 0
+    }
+  },
+  {
+    "scenario_id": "SCEN_07_INVALID_GRANT",
+    "scenario_name": "GRANT with status != 1 rejected by Gate",
+    "stimulus_type": "CONTROL_WIRE",
+    "source_tile": 4,
+    "dest_tile": 3,
+    "message_type": "ATTEST_GRANT",
+    "payload_words": [],
+    "freshness": {
+      "epoch": 123579083782828490592931,
+      "seq": 11
+    },
+    "mac_tag": 151702626060489635545683639624389317024,
+    "ni_flits": [
+      76949504,
+      3252638112,
+      1086817215,
+      2988095328,
+      1914756334
+    ],
+    "wire_flits": [
+      76959744,
+      11,
+      0,
+      1887539875,
+      1011703407,
+      6699,
+      3252638112,
+      1086817215,
+      2988095328,
+      1914756334
+    ],
+    "expected_verdict": "REJECT",
+    "expected_reason": 3,
+    "expected_signals": {
+      "authorized[3]": 0,
+      "gate_faults[3]": 1
+    }
+  },
+  {
+    "scenario_id": "SCEN_08_REVOKE",
+    "scenario_name": "REVOKE de-authorizes Tile 3",
+    "stimulus_type": "CONTROL_WIRE",
+    "source_tile": 4,
+    "dest_tile": 3,
+    "message_type": "ATTEST_REVOKE",
+    "payload_words": [],
+    "freshness": {
+      "epoch": 123579083782828490592931,
+      "seq": 12
+    },
+    "mac_tag": 23945831317321073147143965533605383301,
+    "ni_flits": [
+      77015040,
+      1568590981,
+      1730499995,
+      3040943728,
+      302238882
+    ],
+    "wire_flits": [
+      77025280,
+      12,
+      0,
+      1887539875,
+      1011703407,
+      6699,
+      1568590981,
+      1730499995,
+      3040943728,
+      302238882
+    ],
+    "expected_verdict": "ACCEPT",
+    "expected_reason": null,
+    "expected_signals": {
+      "authorized[3]": 0
+    }
+  },
+  {
+    "scenario_id": "SCEN_09_UNAUTHORIZED_MEM_READ",
+    "scenario_name": "Unauthorized memory read dropped at HEAD",
+    "stimulus_type": "DATA_PLAIN",
+    "source_tile": 0,
+    "dest_tile": 2,
+    "message_type": "MEM_RD_REQ",
+    "payload_words": [
+      570425408
+    ],
+    "freshness": null,
+    "mac_tag": null,
+    "ni_flits": [
+      1073745920,
+      570425408
+    ],
+    "wire_flits": [
+      1073745920,
+      570425408
+    ],
+    "expected_verdict": "REJECT",
+    "expected_reason": 6,
+    "expected_signals": {
+      "app_ready[0]": 0,
+      "mem_faults": 1,
+      "rd_resp": 0
+    }
+  },
+  {
+    "scenario_id": "SCEN_10_UNAUTHORIZED_MEM_WRITE",
+    "scenario_name": "Unauthorized memory write rejected before commit",
+    "stimulus_type": "DATA_PLAIN",
+    "source_tile": 0,
+    "dest_tile": 2,
+    "message_type": "MEM_WR_REQ",
+    "payload_words": [
+      570425472,
+      3405691582
+    ],
+    "freshness": null,
+    "mac_tag": null,
+    "ni_flits": [
+      1073880960,
+      570425472,
+      3405691582
+    ],
+    "wire_flits": [
+      1073880960,
+      570425472,
+      3405691582
+    ],
+    "expected_verdict": "REJECT",
+    "expected_reason": 6,
+    "expected_signals": {
+      "memory_commits": 0,
+      "app_ready[0]": 0
+    }
+  },
+  {
+    "scenario_id": "SCEN_11_REVOCATION_DURING_READ",
+    "scenario_name": "Revocation during read transaction suppresses response",
+    "stimulus_type": "TRANSACTION_FLOW",
+    "source_tile": 3,
+    "dest_tile": 2,
+    "message_type": "MEM_RD_REQ",
+    "payload_words": [
+      570425360
+    ],
+    "freshness": null,
+    "mac_tag": null,
+    "ni_flits": [],
+    "wire_flits": [],
+    "expected_verdict": "REJECT",
+    "expected_reason": 6,
+    "expected_signals": {
+      "rd_resp_suppressed": 1,
+      "mem_faults": 1
+    }
+  },
+  {
+    "scenario_id": "SCEN_12_REVOCATION_DURING_WRITE",
+    "scenario_name": "Revocation before final write word blocks commit",
+    "stimulus_type": "TRANSACTION_FLOW",
+    "source_tile": 3,
+    "dest_tile": 2,
+    "message_type": "MEM_WR_REQ",
+    "payload_words": [
+      570425376,
+      3735884340
+    ],
+    "freshness": null,
+    "mac_tag": null,
+    "ni_flits": [],
+    "wire_flits": [],
+    "expected_verdict": "REJECT",
+    "expected_reason": 6,
+    "expected_signals": {
+      "memory_commits": 0,
+      "wr_resp_suppressed": 1
+    }
+  },
+  {
+    "scenario_id": "SCEN_13_TAG_MISMATCH",
+    "scenario_name": "Mismatched response tag leaves transaction pending",
+    "stimulus_type": "NI_TRANSACTION",
+    "source_tile": 3,
+    "dest_tile": 2,
+    "message_type": "MEM_RD_RESP",
+    "payload_words": [
+      305419896
+    ],
+    "freshness": null,
+    "mac_tag": null,
+    "ni_flits": [],
+    "wire_flits": [],
+    "expected_verdict": "REJECT",
+    "expected_reason": "RESPONSE_UNMATCHED",
+    "expected_signals": {
+      "txn_valid_q": 1,
+      "rx_match": 0
+    }
+  },
+  {
+    "scenario_id": "SCEN_14_SLOT_EXHAUSTION",
+    "scenario_name": "3rd transaction blocked when 2 slots are occupied",
+    "stimulus_type": "NI_TRANSACTION",
+    "source_tile": 3,
+    "dest_tile": 2,
+    "message_type": "MEM_RD_REQ",
+    "payload_words": [
+      570425392
+    ],
+    "freshness": null,
+    "mac_tag": null,
+    "ni_flits": [],
+    "wire_flits": [],
+    "expected_verdict": "REJECT",
+    "expected_reason": null,
+    "expected_signals": {
+      "app_ready": 0,
+      "txn_valid_q": 3
+    }
+  }
+]

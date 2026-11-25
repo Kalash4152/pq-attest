@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "contract": "docs/decisions/S4_AREA_CONTRACT.md",
+  "files": {
+    "rtl/dual_lane/kmac_128_a5.sv": {
+      "source": "NOC_PQATTEST.srcs/sources_1/new/kmac_128.sv",
+      "source_sha256": "796164790af7073a6260b561e9ac943a3291cfa278e5d3d6a8709fd2dafe0a72",
+      "output_sha256": "4b5c867d5cffc5ca2811ef785b0bb381f5b5a1be401ae3d85c1fc3f6671685bb"
+    },
+    "rtl/dual_lane/kmac_128_xp_a5.sv": {
+      "source": "NOC_PQATTEST.srcs/sources_1/new/kmac_128.sv",
+      "source_sha256": "796164790af7073a6260b561e9ac943a3291cfa278e5d3d6a8709fd2dafe0a72",
+      "output_sha256": "e0302fd5503dc5ddd322432731016e8a7d3d335d9f829bfbf51ab34461017b04"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "contract": "docs/decisions/T4_LOOKAHEAD_CONTRACT.md",
+  "files": {
+    "rtl/dual_lane/noc_fifo_la.sv": {
+      "source": "NOC_PQATTEST.srcs/sources_1/new/NOC_FIFO.sv",
+      "source_sha256": "abaadfd2551f06e659034b61e77d0551982c188af2e63559f6c6b5d825c4c175",
+      "output_sha256": "13dde52e391d4297b7dee1a3721748f23618b562298955a45874db5e62c42a2f"
+    },
+    "rtl/dual_lane/noc_router_datapath_la.sv": {
+      "source": "NOC_PQATTEST.srcs/sources_1/new/NOC_DATAPTAH.sv",
+      "source_sha256": "2c77b62919e2fe1f67e2267c1344847d170f6fc4451b35c9589332ecf8cc1565",
+      "output_sha256": "b267c597664d712721bfb54748eedc374c9fe13c70937546cf6fa4108e66a112"
+    },
+    "rtl/dual_lane/allocator_la.sv": {
+      "source": "NOC_PQATTEST.srcs/sources_1/new/allocator.sv",
+      "source_sha256": "cfafbd752c1f67f3d4eb9719f8382cf7fad9e96bf5e97b1e4815fdeb12b50907",
+      "output_sha256": "1dae310051fe517cf738c33dda42452fb1ce4c0026a3d2efebd71549e6555d36"
+    },
+    "rtl/dual_lane/noc_router_la.sv": {
+      "source": "NOC_PQATTEST.srcs/sources_1/new/noc_router.sv",
+      "source_sha256": "6bd5d99794358361d07df834b7141b0cfb2c952e0dbd5f427549bf583b85f773",
+      "output_sha256": "50192c66414d0f2befc6da9e3062b9de40264c4e4cb7eee76d9a51e2b00bbdf6"
+    },
+    "sim/t4/noc_router_datapath_t4eq.sv": {
+      "source": "NOC_PQATTEST.srcs/sources_1/new/NOC_DATAPTAH.sv",
+      "source_sha256": "2c77b62919e2fe1f67e2267c1344847d170f6fc4451b35c9589332ecf8cc1565",
+      "output_sha256": "1a7d52599b5c0b5f0381a23c249096602a071f27a6ada78778bf373fd2dce13d"
+    },
+    "sim/t4/allocator_t4eq.sv": {
+      "source": "NOC_PQATTEST.srcs/sources_1/new/allocator.sv",
+      "source_sha256": "cfafbd752c1f67f3d4eb9719f8382cf7fad9e96bf5e97b1e4815fdeb12b50907",
+      "output_sha256": "9cd49271ee47bc795fc13cc7f2ad43fc562795c87c483a8c95f9b1ca70b2edd2"
+    },
+    "sim/t4/noc_router_t4eq.sv": {
+      "source": "NOC_PQATTEST.srcs/sources_1/new/noc_router.sv",
+      "source_sha256": "6bd5d99794358361d07df834b7141b0cfb2c952e0dbd5f427549bf583b85f773",
+      "output_sha256": "2c46208a74ed1c2b4180d037121bac399fb42ecbae6427a885803ead773ff528"
+    }
+  }
+}

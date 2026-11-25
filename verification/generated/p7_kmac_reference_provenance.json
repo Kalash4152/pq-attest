@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "generator": "verification.p7_kmac_adapter",
+  "timestamp": "2026-11-05T19:08:41.740860+00:00",
+  "provenance": {
+    "status": "AUTHORITATIVE_PINNED",
+    "authoritative_reference": {
+      "path": "software/pq_attest_final/PQ_Attest/software/kmac128_ref.py",
+      "sha256": "ac8076e665b6b838c58b9b3458b6e3cd16101fbab4dc0d90fbc78f90497ce394",
+      "size_bytes": 10861,
+      "source_archive": "Pq_Attest_final.zip",
+      "source_archive_sha256": "047bb5a981050f11a572a60e850f7c7511ff5d636f7903c6a8d239891003c6a0"
+    },
+    "companion_keccak_reference": {
+      "path": "software/pq_attest_final/PQ_Attest/software/keccak_ref.py",
+      "sha256": "80cbd3a8c2cc73065ab153be7ba21c204c5d529f3951c1f7187ea9580baa1824",
+      "size_bytes": 5017
+    },
+    "demoted_reference": {
+      "path": "software/kmac128_ref.py",
+      "sha256": "73d9b064b6b546fede85ed182259d7ed33f8e0d9ec512abee57db6827b5bde62",
+      "status": "DEMOTED_SUPPLEMENTARY_KAT_ONLY"
+    },
+    "adapter": {
+      "path": "verification/p7_kmac_adapter.py",
+      "active_module": "C:\\Users\\Arnav Bhandari\\PQ_Attest\\software\\pq_attest_final\\PQ_Attest\\software\\kmac128_ref.py"
+    },
+    "updated_import_locations": [
+      "verification/p7_packet_model.py",
+      "verification/p7_differential.py",
+      "verification/crypto_compare.py",
+      "verification/tests/test_p7_differential.py"
+    ]
+  },
+  "self_test_verification": {
+    "nist_sp800_185_sample1_match": true,
+    "sample1_hex": "e5780b0d3ea6f7d3a429c5706aa43a00fadbd7d49628839e3187243f456ee14e",
+    "expected_hex": "e5780b0d3ea6f7d3a429c5706aa43a00fadbd7d49628839e3187243f456ee14e",
+    "status": "PASS"
+  }
+}

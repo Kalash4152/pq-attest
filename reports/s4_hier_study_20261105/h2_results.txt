@@ -1,0 +1,1 @@
+H2 routed LUT=33796 FF=28083 WNS=-0.477 WHS=-0.049 levels=25 end=mesh/GEN_R[1].G_LINK_REG.q_s_reg[flit_data][30]/D

@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "title": "I-9 Python-Model Mutation Analysis Results",
+    "generator": "verification.p7_i9_model",
+    "contract": "M-F1 revision 8",
+    "total_mutants": 8,
+    "killed_mutants": 8,
+    "mutation_score_percent": 100.0,
+    "status": "PASS"
+  },
+  "mutants": [
+    {
+      "mutant_id": "I9-MUT-01",
+      "name": "No Timeout Release",
+      "negative_control_job": "i9_mut_no_timeout",
+      "oracle": "^[FAIL] I9_SLOT_RECOVER",
+      "status": "KILLED",
+      "kill_diagnostic": "Assertion failed: slot 0 remained occupied after 600 cycles (slots[0] is not None)."
+    },
+    {
+      "mutant_id": "I9-MUT-02",
+      "name": "Late Response Delivered",
+      "negative_control_job": null,
+      "oracle": "^[FAIL] I9_LATE_DROPPED",
+      "status": "KILLED",
+      "kill_diagnostic": "Assertion failed: response after timeout returned delivery=DELIVER instead of DROP."
+    },
+    {
+      "mutant_id": "I9-MUT-03",
+      "name": "Stale Reused Tag Delivered",
+      "negative_control_job": "i9_mut_stale_deliver",
+      "oracle": "^[FAIL] I9_STALE_DROPPED",
+      "status": "KILLED",
+      "kill_diagnostic": "Assertion failed: stale response completed newer transaction t1 on reused tag 0."
+    },
+    {
+      "mutant_id": "I9-MUT-04",
+      "name": "app_rx Export to All Tiles",
+      "negative_control_job": "i9_mut_rx_all",
+      "oracle": "^[FAIL] I9_RX_ACCOUNTED",
+      "status": "KILLED",
+      "kill_diagnostic": "Assertion failed: app_rx permitted memory response export to unauthorized tile 1."
+    },
+    {
+      "mutant_id": "I9-MUT-05",
+      "name": "BRAM Upper Boundary Inclusive",
+      "negative_control_job": null,
+      "oracle": "^[FAIL] I9_WINDOW_LIMIT_STRICT",
+      "status": "KILLED",
+      "kill_diagnostic": "Assertion failed: BRAM accepted out-of-window address 0x2200_4000."
+    },
+    {
+      "mutant_id": "I9-MUT-06",
+      "name": "BRAM Window Restricted to 1K",
+      "negative_control_job": "i9_mut_window_1k",
+      "oracle": "^[FAIL] I9_WINDOW_TOP_OK",
+      "status": "KILLED",
+      "kill_diagnostic": "Assertion failed: BRAM rejected valid address 0x2200_3FFC due to 1KB artificial bound."
+    },
+    {
+      "mutant_id": "I9-MUT-07",
+      "name": "Byte-Lane Enables Ignored",
+      "negative_control_job": "i9_mut_bram_lanes",
+      "oracle": "^[FAIL] I9_BYTE_LANES",
+      "status": "KILLED",
+      "kill_diagnostic": "Assertion failed: write with wstrb=0x1 overwrote all 4 byte lanes."
+    },
+    {
+      "mutant_id": "I9-MUT-08",
+      "name": "Disabled Lanes Zeroed Out",
+      "negative_control_job": null,
+      "oracle": "^[FAIL] I9_LANE_PRESERVE",
+      "status": "KILLED",
+      "kill_diagnostic": "Assertion failed: unselected byte lanes 1..3 were wiped instead of preserved."
+    }
+  ]
+}

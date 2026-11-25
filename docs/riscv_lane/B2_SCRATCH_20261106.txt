@@ -1,0 +1,64 @@
+B2 cpu_tile_noc scratch run (XSim 2024.1), 2026-11-06. SCRATCH evidence, not harness-registered.
+IMPORTANT: meas_window_reader (B3, fork) has not landed; this run used the scratch stand-in reproduced at the end.
+Re-run with the real B3 before any registration.
+
+== tb_cpu_tile_noc (CHECKS=12 frozen before run; attempt 1 start-stall, attempt 2 ran):
+CONFIG: TOP=tb_cpu_tile_noc CHECKS=12
+[PASS] CTN_MEAS_AFTER_RESET cycle=21
+[PASS] CTN_MEAS_IMAGE w0=220000b7 w15=00000013
+[PASS] CTN_MEAS_LEN len=64
+[PASS] CTN_GPIO_UPPER_ZERO bad=0
+[PASS] CTN_UNAUTH_NO_APP_VALID valid_cycles=0 pkts=0
+[PASS] CTN_UNAUTH_POISON dmem0=badbe002
+[PASS] CTN_UNAUTH_STATUS fault=1 code=2 addr=22000100
+[PASS] CTN_AUTH_WRITE_PACKET pkts=2 msg=2 ctl=780 w0=22000100 w1=0000005a
+[PASS] CTN_AUTH_READ_BACK dmem0=0000005a fault=0
+[PASS] CTN_REMOTE_ERR_POISON dmem0=badbe003
+[PASS] CTN_REMOTE_ERR_STATUS fault=1 code=3
+[PASS] CTN_ERRKIND_ALIGNED err_cycles=4 kind0=0
+CHECKS : 12
+RESULT : PASS
+
+== mutant: tmem_err_code_i tied to 4'd0 (A3 sideband disconnected): KILLED
+[FAIL] CTN_UNAUTH_POISON dmem0=badbe003
+[FAIL] CTN_UNAUTH_STATUS fault=1 code=3 addr=22000100
+RESULT : FAIL
+
+== scratch stand-in meas_window_reader used:
+// SCRATCH ONLY (not committed): stand-in for the fork's B3 meas_window_reader, used to elaborate cpu_tile_noc.
+module meas_window_reader #(parameter logic [31:0] MEAS_BASE = 32'h0) (
+  input logic clk, rst, start_i, output logic rd_en_o, output logic [31:0] rd_addr_o, input logic [31:0] rd_data_i,
+  output logic [511:0] meas_o, output logic [6:0] meas_len_o, output logic meas_valid_o);
+  logic busy, have; logic [4:0] k; logic [3:0] wk;
+  assign meas_len_o = 7'd64;
+  assign rd_en_o = busy && k < 16; assign rd_addr_o = MEAS_BASE + {k[3:0], 2'b00};
+  always_ff @(posedge clk) if (rst) begin busy<=0; have<=0; k<=0; wk<=0; meas_valid_o<=0; meas_o<='0; end
+  else begin
+    have <= rd_en_o; wk <= k[3:0];
+    if (start_i) begin busy<=1; k<=0; meas_valid_o<=0; end
+    else if (busy) begin
+      if (k < 16) k <= k + 1;
+      if (have) begin meas_o[32*wk +: 32] <= rd_data_i; if (wk == 15) begin busy<=0; meas_valid_o<=1; end end
+    end
+  end
+endmodule
+
+== RE-RUN 2026-11-07 with the fork's REAL meas_window_reader (uncommitted fork file, sha256 c698c1c2c512f54d0e6712d1354b6ddb2ce0506d1f0c800bc24eb59340c6ef12),
+   cpu_tile_noc instantiation adapted to the fork's port names (meas_rd_*_o/_i, meas_imem_o, meas_imem_len_o, busy_o).
+   attempt 1 start-stall, attempt 2 ran:
+CONFIG: TOP=tb_cpu_tile_noc CHECKS=12
+[PASS] CTN_MEAS_AFTER_RESET cycle=21
+[PASS] CTN_MEAS_IMAGE w0=220000b7 w15=00000013
+[PASS] CTN_MEAS_LEN len=64
+[PASS] CTN_GPIO_UPPER_ZERO bad=0
+[PASS] CTN_UNAUTH_NO_APP_VALID valid_cycles=0 pkts=0
+[PASS] CTN_UNAUTH_POISON dmem0=badbe002
+[PASS] CTN_UNAUTH_STATUS fault=1 code=2 addr=22000100
+[PASS] CTN_AUTH_WRITE_PACKET pkts=2 msg=2 ctl=780 w0=22000100 w1=0000005a
+[PASS] CTN_AUTH_READ_BACK dmem0=0000005a fault=0
+[PASS] CTN_REMOTE_ERR_POISON dmem0=badbe003
+[PASS] CTN_REMOTE_ERR_STATUS fault=1 code=3
+[PASS] CTN_ERRKIND_ALIGNED err_cycles=4 kind0=0
+CHECKS : 12
+ERRORS : 0
+RESULT : PASS

@@ -1,0 +1,9 @@
+{
+  "checks": 9,
+  "errors": 0,
+  "result": "PASS",
+  "config": {
+    "TOP": "tb_meas_imem_trial",
+    "CHECKS": 9
+  }
+}

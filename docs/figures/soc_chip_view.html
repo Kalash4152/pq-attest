@@ -1,0 +1,503 @@
+<title>PQ-Attest SoC Chip View</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a lit 3D stage with a details rail beside it, a transport strip under it, then three reference cards. */
+:root{
+  --bg:#edf0f2; --panel:#ffffff; --panel2:#f5f7f8; --line:#d3dae0; --ink:#151b20; --dim:#5b6974; --stage:#d5dbe0;
+  --accent:#0d7d74; --vc0:#2f7fe0; --vc1:#1b9a66; --vc2:#c2850f; --bad:#cf3f36; --local:#66727c; --dark:0;
+  --sans:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"Geist Mono",ui-monospace,Consolas,monospace;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0b0f12; --panel:#141a1f; --panel2:#10151a; --line:#26303a; --ink:#e7edf0; --dim:#93a1ab; --stage:#080b0e;
+  --accent:#3cc4b6; --vc0:#5aa8ff; --vc1:#49d49b; --vc2:#f2b54a; --bad:#ff6a5e; --local:#c5ced5; --dark:1; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0b0f12; --panel:#141a1f; --panel2:#10151a; --line:#26303a; --ink:#e7edf0; --dim:#93a1ab; --stage:#080b0e;
+  --accent:#3cc4b6; --vc0:#5aa8ff; --vc1:#49d49b; --vc2:#f2b54a; --bad:#ff6a5e; --local:#c5ced5; --dark:1; color-scheme:dark }
+[hidden]{display:none!important}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+.wrap{max-width:1320px;margin:0 auto;padding-block:22px 44px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:14px}
+h1{font-size:clamp(20px,2.4vw,27px);font-weight:600;margin:0;letter-spacing:-.015em;line-height:1.2;text-wrap:balance}
+.sub{color:var(--dim);margin:4px 0 0;max-width:68ch}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;align-items:stretch}
+@media (max-width:980px){.main{grid-template-columns:minmax(0,1fr)}}
+.stage{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--stage);
+  aspect-ratio:16/10;max-width:100%;min-height:320px}
+@media (max-width:560px){.stage{aspect-ratio:4/5}}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+.stage canvas.pick{cursor:pointer}
+.labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lab{position:absolute;left:0;top:0;white-space:nowrap;font:500 11.5px/1.25 var(--sans);color:var(--ink);
+  background:color-mix(in srgb,var(--panel) 86%,transparent);border:1px solid var(--line);border-radius:4px;padding:2px 6px;
+  will-change:transform;opacity:0;transition:opacity .25s var(--ease)}
+.lab.on{opacity:1}
+.lab.minor{font:400 10.5px/1.2 var(--mono);color:var(--dim);padding:1px 5px}
+.lab.sub{font-size:10.5px;border-color:var(--accent)}
+.lab.sel{border-color:var(--accent);color:var(--accent)}
+.lab .ok{margin-left:6px;font:500 10px var(--mono);color:var(--vc1)}
+.presets{position:absolute;left:10px;top:10px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 20px)}
+.tip{position:absolute;left:0;top:0;pointer-events:none;font:500 12px var(--sans);background:var(--ink);color:var(--bg);
+  border-radius:4px;padding:3px 8px;white-space:nowrap;will-change:transform}
+.fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;color:var(--dim);text-align:center}
+button,select{font:500 12.5px var(--sans);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:5px;
+  padding:6px 11px;cursor:pointer;transition:background .2s var(--ease),border-color .2s var(--ease),transform .15s var(--ease)}
+button:hover,select:hover{background:var(--panel2);border-color:var(--dim)}
+button:active{transform:scale(.97)}
+button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.rail{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.kind{font:500 11px var(--mono);color:var(--dim);letter-spacing:.04em}
+.rail h2{font-size:17px;font-weight:600;margin:0;letter-spacing:-.01em;line-height:1.25}
+.rail p{margin:0;color:var(--ink)}
+.rail ul{margin:0;padding-left:17px}
+.rail li{margin:3px 0}
+.rail li.hit{color:var(--accent);font-weight:500}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;font-size:13.5px;margin:0}
+.kv dt{color:var(--dim)} .kv dd{margin:0;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.small{color:var(--dim);font-size:12.5px}
+.bar{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.steps{display:flex;flex-wrap:wrap;gap:6px}
+.steps button{font-family:var(--mono);font-size:12px}
+.steps button[aria-current="step"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cap{font-weight:500;min-width:0;flex:1 1 380px}
+.cap small{display:block;font-weight:400;color:var(--dim);font-size:13px}
+.read{font:500 12.5px var(--mono);border:1px solid var(--line);border-radius:5px;padding:5px 9px;background:var(--panel2);white-space:nowrap}
+.read b{font-weight:500;color:var(--dim);margin-right:6px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:980px){.cards{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.card h3{font-size:13px;font-weight:600;margin:0 0 10px;color:var(--dim)}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:5px 10px 5px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-weight:500}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;padding-right:0}
+.lg{display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 10px;align-items:center;font-size:13.5px}
+.dot{width:22px;height:8px;border-radius:2px;display:inline-block}
+.sq{width:12px;height:12px;border-radius:2px;display:inline-block;margin-left:5px}
+.flag{font-family:var(--mono);font-size:12.5px}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>NoC + PQ-Attest SoC: illustrative chip view</h1>
+    <p class="sub">A 3&times;2 mesh network with two RISC-V tiles, shared memory and a root of trust that must attest a tile before it may use that memory. Drag to orbit, scroll to zoom, select any block.</p>
+  </header>
+
+  <div class="main">
+    <div class="stage" id="stage">
+      <div class="labels" id="labels"></div>
+      <div class="presets" id="presets">
+        <button type="button" data-v="package">Package</button>
+        <button type="button" data-v="die">Die</button>
+        <button type="button" data-v="mesh">Mesh</button>
+        <button type="button" data-v="tile3">Tile 3 detail</button>
+        <button type="button" data-v="demo">Demo walkthrough</button>
+        <button type="button" id="blab" aria-pressed="true">Labels</button>
+      </div>
+      <div class="tip" id="tip" hidden></div>
+      <div class="fallback" id="fallback" hidden>The 3D view is not available in this browser. The reference cards below still apply.</div>
+    </div>
+    <aside class="rail" id="rail" aria-live="polite"></aside>
+  </div>
+
+  <div class="bar">
+    <div class="row">
+      <div class="steps" id="steps"></div>
+      <button type="button" id="bprev">Previous</button>
+      <button type="button" id="bplay" aria-pressed="false">Play</button>
+      <button type="button" id="bnext">Next</button>
+      <label class="small" for="speed">Speed</label>
+      <select id="speed"><option value="0.5">0.5&times;</option><option value="1" selected>1&times;</option><option value="2">2&times;</option></select>
+    </div>
+    <div class="row">
+      <div class="cap" id="cap">Loading the scene&hellip;<small id="cap2"></small></div>
+      <span class="read"><b>UART</b><span id="uart">&nbsp;&mdash;</span></span>
+      <span class="read"><b>LED</b><span id="led">&nbsp;&mdash;</span></span>
+    </div>
+  </div>
+
+  <div class="cards">
+    <section class="card">
+      <h3>Legend</h3>
+      <div class="lg">
+        <span class="dot" style="background:var(--vc0)"></span><span>VC0, memory requests</span>
+        <span class="dot" style="background:var(--vc1)"></span><span>VC1, memory responses</span>
+        <span class="dot" style="background:var(--vc2)"></span><span>VC2, attestation control</span>
+        <span class="dot" style="background:var(--local)"></span><span>Local signal, not on the NoC</span>
+        <span class="dot" style="background:var(--bad)"></span><span>Refused or rejected</span>
+        <span class="sq" style="background:#2f8f86"></span><span>Router and mesh links</span>
+        <span class="sq" style="background:#4f7fb5"></span><span>RISC-V CPU tile</span>
+        <span class="sq" style="background:#b8892f"></span><span>Cryptography and root of trust</span>
+        <span class="sq" style="background:#7d68b3"></span><span>Shared memory</span>
+        <span class="sq" style="background:#a5523a"></span><span>Untrusted port</span>
+      </div>
+      <p class="small" style="margin:10px 0 0">One packet is drawn as a short train of flits (wormhole switching). The three virtual channels share each physical link; colour shows the channel.</p>
+    </section>
+    <section class="card">
+      <h3>Platform and release RC1 (2026-11-12)</h3>
+      <dl class="kv">
+        <dt>Device</dt><dd>Artix-7 xc7a100tcsg324-1</dd>
+        <dt>Board</dt><dd>Arty A7-100T</dd>
+        <dt>Clock</dt><dd>one 50 MHz (board 100 MHz &rarr; MMCM)</dd>
+        <dt>Tool</dt><dd>Vivado 2024.1</dd>
+        <dt>Area</dt><dd>34,952 LUT (~55 % of 63,400)</dd>
+        <dt>Setup slack</dt><dd>WNS +0.120 ns</dd>
+        <dt>Hold slack</dt><dd>WHS +0.009 ns</dd>
+        <dt>Timing</dt><dd>met, 0 errors / critical warnings</dd>
+      </dl>
+      <p class="flag" style="margin:10px 0 0">HARDWARE_VALIDATED = NO for the RC1 image (board record pending)</p>
+      <p class="small" style="margin:4px 0 0">Earlier 7 Nov image: demo PASS on the board. FPGA design only: no ASIC, formal proof, TRNG or side-channel protection is claimed. Cryptography is symmetric only.</p>
+    </section>
+    <section class="card">
+      <h3>Area used to size the blocks (post-route, 7 Nov board build)</h3>
+      <div class="tw"><table>
+        <thead><tr><th>Block</th><th class="n">LUT</th></tr></thead>
+        <tbody>
+          <tr><td>NoC mesh (6 routers)</td><td class="n">10,311</td></tr>
+          <tr><td>L2 authenticated link</td><td class="n">6,591</td></tr>
+          <tr><td>PQ-Attest endpoint</td><td class="n">6,586</td></tr>
+          <tr><td>RoT verifier</td><td class="n">5,804</td></tr>
+          <tr><td>RISC-V tile 3</td><td class="n">2,696</td></tr>
+          <tr><td>RISC-V tile 0</td><td class="n">2,560</td></tr>
+          <tr><td>NIs + gates</td><td class="n">~370</td></tr>
+          <tr><td>Whole design, that build</td><td class="n">34,987</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small" style="margin:10px 0 0">Illustrative floorplan: footprints are proportional to these figures, positions are chosen for clarity. Blocks without a figure (memory, plain tile, SPOOF port, MMCM) and the NIs are not to scale.</p>
+    </section>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+  'use strict';
+  var $=function(id){return document.getElementById(id);};
+  var stage=$('stage'), rail=$('rail'), tip=$('tip'), labLayer=$('labels');
+
+  // ------------------------------------------------------------------ facts shown in the details rail
+  var SUBS=['PicoRV32 core + adapter','Address decoder','STATUS registers','UART','GPIO','Local memories','TMEM→NoC bridge','Measurement window reader'];
+  var ROUTER={kind:'NETWORK',role:'One of six mesh routers. Five ports (N/S/E/W/Local), XY routing, wormhole switching and credit-based flow control.',
+    kv:[['Flit width','32 bit'],['Virtual channels','3 × 4-flit buffers'],['VC0 / VC1 / VC2','mem request / mem response / attestation control'],['Whole mesh','10,311 LUT']]};
+  var NI={kind:'NETWORK INTERFACE',role:'Connects the tile to its router. Each tile has an authorization gate, and every port has an ingress parser.',
+    kv:[['All NIs + gates','~370 LUT']],note:'Drawn larger than scale so it can be seen.'};
+  var INFO={
+    cpuA:{t:'RISC-V CPU tile A',kind:'CPU · TILE 3 (0,1)',role:'PicoRV32 running demo_fw (RV32I assembly). This is the attested tile; it shares the tile’s network port with the PQ-Attest endpoint.',kv:[['Area','2,696 LUT']],subs:true},
+    cpuB:{t:'RISC-V CPU tile B',kind:'CPU · TILE 0 (0,0)',role:'PicoRV32 running demo_fw. Never authorized: its bridge refuses remote access locally, so no packet enters the NoC.',kv:[['Area','2,560 LUT']],subs:true},
+    endp:{t:'PQ-Attest endpoint',kind:'CRYPTOGRAPHY · TILE 3',role:'Measures the tile and answers the root of trust. SHA3-256 over tile ID || config || 64-byte IMEM window; KMAC128 key derivation and a 32-byte attestation tag.',
+      kv:[['Permutation','Keccak-f[1600]'],['Challenge','224 bit'],['Response payload','512 bit (measurement + tag)'],['Area','6,586 LUT']]},
+    l2:{t:'L2 authenticated link',kind:'CRYPTOGRAPHY · TILES 3 ↔ 4',role:'Authenticates control packets between tiles 3 and 4 only. One shared KMAC engine with an arbiter.',
+      kv:[['Tag','KMAC128, 128 bit'],['Epoch','80 bit'],['Sequence number','64 bit (replay rejection)'],['Area','6,591 LUT']]},
+    ver:{t:'RoT verifier',kind:'ROOT OF TRUST · TILE 4 (1,1)',role:'Issues CHALLENGE, GRANT and REVOKE. It grants tile 3 access only after checking the returned measurement and KMAC tag.',kv:[['Area','5,804 LUT']]},
+    memfe:{t:'Memory front end',kind:'MEMORY · TILE 2 (2,0)',role:'Sits in front of the shared memory and checks authorization at the moment of each write or read.',kv:[]},
+    bram:{t:'Shared memory',kind:'MEMORY · TILE 2 (2,0)',role:'Block RAM behind the memory front end. In the demo, tile 3 writes 0xC0DE5A5A here and reads it back.',kv:[],note:'No separate figure in the area table; not to scale.'},
+    plain:{t:'Plain tile',kind:'TILE 1 (1,0)',role:'A plain tile: no CPU in this build.',kv:[],note:'Not to scale.'},
+    spoof:{t:'SPOOF port',kind:'UNTRUSTED · TILE 5 (2,1)',role:'An untrusted injection port used to test the design with rogue packets.',kv:[],note:'Not to scale.'},
+    quar:{t:'Ingress quarantine',kind:'UNTRUSTED · TILE 5 (2,1)',role:'Stands between the SPOOF port and the network. Rogue packets are rejected here.',kv:[],note:'Not to scale.'},
+    mmcm:{t:'MMCM',kind:'CLOCK',role:'Turns the board’s 100 MHz into the single 50 MHz clock used by the whole design.',kv:[],note:'Not to scale.'}
+  };
+  for(var q=0;q<6;q++){ INFO['r'+q]={t:'Router R'+q,kind:ROUTER.kind+' · ('+(q%3)+','+Math.floor(q/3)+')',role:ROUTER.role,kv:ROUTER.kv};
+    INFO['ni'+q]={t:'Network interface, tile '+q,kind:NI.kind,role:NI.role,kv:NI.kv,note:NI.note}; }
+
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function showInfo(id,sub){
+    var d=id&&INFO[id];
+    if(!d){ rail.innerHTML='<div class="kind">DETAILS</div><h2>Select a block</h2><p>Hover to see a name, select to read what the block does. Numbers come from the project’s build reports.</p>'+
+      '<p class="small">Tile number = y × 3 + x. Packets route in X first, then Y.</p>'; return; }
+    var h='<div class="kind">'+esc(d.kind)+'</div><h2>'+esc(d.t)+'</h2><p>'+esc(d.role)+'</p>';
+    if(d.kv&&d.kv.length){ h+='<dl class="kv">'; d.kv.forEach(function(r){h+='<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>';}); h+='</dl>'; }
+    if(d.subs){ h+='<p class="small">Inside the tile</p><ul>'; SUBS.forEach(function(s,i){h+='<li'+(sub===i?' class="hit"':'')+'>'+esc(s)+(i===7?' (first 64 bytes of IMEM)':'')+'</li>';}); h+='</ul>'; }
+    if(d.kv&&d.kv.some(function(r){return /LUT/.test(r[1]);})) h+='<p class="small">Area: post-route, 7 Nov board build.</p>';
+    if(d.note) h+='<p class="small">'+esc(d.note)+'</p>';
+    rail.innerHTML=h;
+  }
+  showInfo(null);
+
+  function fail(){ $('fallback').hidden=false; $('cap').firstChild.nodeValue='3D view unavailable.'; }
+  if(!window.THREE||!THREE.OrbitControls){ fail(); return; }
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var renderer;
+  try{ renderer=new THREE.WebGLRenderer({antialias:true}); }catch(e){ fail(); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  renderer.outputEncoding=THREE.sRGBEncoding; renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  stage.insertBefore(renderer.domElement,stage.firstChild);
+  var canvas=renderer.domElement;
+  var scene=new THREE.Scene();
+  var cam=new THREE.PerspectiveCamera(36,1.6,1,900);
+  var ctl=new THREE.OrbitControls(cam,canvas);
+  ctl.enableDamping=true; ctl.dampingFactor=.09; ctl.minDistance=16; ctl.maxDistance=230; ctl.maxPolarAngle=Math.PI*.485;
+
+  // environment for reflections: three soft light panels in a dark room, prefiltered once
+  (function(){ var es=new THREE.Scene(); es.background=new THREE.Color(0x15191d);
+    function panel(w,h,x,y,z,i){ var m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:new THREE.Color(i,i,i*1.03),side:THREE.DoubleSide}));
+      m.position.set(x,y,z); m.lookAt(0,0,0); es.add(m); }
+    panel(90,50,10,80,10,3.4); panel(60,30,-90,30,40,1.6); panel(60,26,90,24,-50,1.1); panel(120,12,0,10,-110,.6);
+    var pm=new THREE.PMREMGenerator(renderer); scene.environment=pm.fromScene(es,.035).texture; pm.dispose(); })();
+  var hemi=new THREE.HemisphereLight(0xdfeaf2,0x1a2026,.35); scene.add(hemi);
+  var key=new THREE.DirectionalLight(0xfff4e6,1.5); key.position.set(46,92,38); key.castShadow=true;
+  key.shadow.mapSize.set(2048,2048); key.shadow.camera.left=-95; key.shadow.camera.right=95; key.shadow.camera.top=70; key.shadow.camera.bottom=-70;
+  key.shadow.camera.near=10; key.shadow.camera.far=260; key.shadow.bias=-.0006; key.shadow.radius=5; scene.add(key);
+  var fill=new THREE.DirectionalLight(0x8fc7d6,.28); fill.position.set(-60,40,-50); scene.add(fill);
+
+  // ------------------------------------------------------------------ procedural textures
+  function rnd(seed){ var s=seed; return function(){ s=(s*16807)%2147483647; return (s-1)/2147483646; }; }
+  var routeC=(function(){ var c=document.createElement('canvas'); c.width=c.height=256; var g=c.getContext('2d'), r=rnd(7);
+    g.fillStyle='#c9c9c9'; g.fillRect(0,0,256,256);
+    for(var i=0;i<150;i++){ var v=150+Math.floor(r()*105); g.strokeStyle='rgb('+v+','+v+','+v+')'; g.lineWidth=1+Math.floor(r()*2);
+      var x=Math.floor(r()*32)*8+4, y=Math.floor(r()*32)*8+4, L=16+Math.floor(r()*12)*8; g.beginPath();
+      if(r()<.5){ g.moveTo(x,y); g.lineTo(x+L,y); } else { g.moveTo(x,y); g.lineTo(x,y+L); } g.stroke(); }
+    for(var k=0;k<90;k++){ g.fillStyle=r()<.5?'#f4f4f4':'#8f8f8f'; g.fillRect(Math.floor(r()*32)*8+2,Math.floor(r()*32)*8+2,4,4); }
+    return c; })();
+  var pcbC=(function(){ var c=document.createElement('canvas'); c.width=1024; c.height=680; var g=c.getContext('2d'), r=rnd(23);
+    g.fillStyle='#d8d8d8'; g.fillRect(0,0,1024,680);
+    for(var i=0;i<70;i++){ var v=r()<.5?236:190; g.strokeStyle='rgb('+v+','+v+','+v+')'; g.lineWidth=2+Math.floor(r()*3); g.lineJoin='round';
+      var x=r()*1024, y=r()*680, a=40+r()*220, b=30+r()*90; g.beginPath(); g.moveTo(x,y); g.lineTo(x+a,y); g.lineTo(x+a+b,y+(r()<.5?b:-b)); g.lineTo(x+a+b+a*.6,y+(r()<.5?b:-b)); g.stroke(); }
+    for(var k=0;k<160;k++){ var px=r()*1024, py=r()*680; g.fillStyle='#f6f6f6'; g.beginPath(); g.arc(px,py,3.2,0,6.3); g.fill(); g.fillStyle='#7a7a7a'; g.beginPath(); g.arc(px,py,1.3,0,6.3); g.fill(); }
+    return c; })();
+  function tex(c,rx,ry,srgb){ var t=new THREE.CanvasTexture(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(rx,ry); t.anisotropy=4; if(srgb) t.encoding=THREE.sRGBEncoding; return t; }
+  var glowTex=(function(){ var c=document.createElement('canvas'); c.width=c.height=64; var g=c.getContext('2d'), gr=g.createRadialGradient(32,32,0,32,32,32);
+    gr.addColorStop(0,'rgba(255,255,255,1)'); gr.addColorStop(.3,'rgba(255,255,255,.45)'); gr.addColorStop(1,'rgba(255,255,255,0)'); g.fillStyle=gr; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); })();
+
+  // ------------------------------------------------------------------ bench, board, package, die
+  var bench=new THREE.Mesh(new THREE.PlaneGeometry(900,900),new THREE.MeshStandardMaterial({color:0x888888,roughness:1,metalness:0}));
+  bench.rotation.x=-Math.PI/2; bench.position.y=-3.75; bench.receiveShadow=true; scene.add(bench);
+  function solid(w,h,d,x,top,z,mat){ var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat); m.position.set(x,top-h/2,z); m.castShadow=true; m.receiveShadow=true; scene.add(m); return m; }
+  solid(156,1.4,104,0,-2.3,0,new THREE.MeshStandardMaterial({color:0x0c3029,map:tex(pcbC,1,1,true),bumpMap:tex(pcbC,1,1),bumpScale:.05,roughness:.5,metalness:.15}));
+  solid(78,1.0,56,0,-.5,0,new THREE.MeshStandardMaterial({color:0x27331f,map:tex(routeC,10,7,true),roughness:.72,metalness:.1}));
+  solid(60,.5,40,0,0,0,new THREE.MeshStandardMaterial({color:0x0f151c,map:tex(routeC,12,8,true),roughness:.2,metalness:1,envMapIntensity:1.25}));
+  var gold=new THREE.MeshStandardMaterial({color:0xd4af5a,roughness:.28,metalness:1});
+  var copper=new THREE.MeshStandardMaterial({color:0xb87340,roughness:.32,metalness:1});
+  var steel=new THREE.MeshStandardMaterial({color:0xc4c9cd,roughness:.25,metalness:1});
+  var tmpO=new THREE.Object3D();
+  function inst(geo,mat,list,shadow){ var m=new THREE.InstancedMesh(geo,mat,list.length); list.forEach(function(p,i){ tmpO.position.set(p[0],p[1],p[2]); tmpO.rotation.set(0,p[3]||0,0); tmpO.updateMatrix(); m.setMatrixAt(i,tmpO.matrix); });
+    m.instanceMatrix.needsUpdate=true; m.castShadow=!!shadow; m.receiveShadow=true; scene.add(m); return m; }
+  (function(){ var ring=[[0,.012,19.4,60.6,.25],[0,.012,-19.4,60.6,.25]]; ring.forEach(function(p){ solid(p[3]-1.6,.03,p[4],p[0],.03,p[2],gold); });
+    solid(.25,.03,38.8,29.3,.03,0,gold); solid(.25,.03,38.8,-29.3,.03,0,gold);
+    var tri=new THREE.Mesh(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-38,-.49,27),new THREE.Vector3(-34.5,-.49,27),new THREE.Vector3(-38,-.49,23.5)]),gold); tri.geometry.computeVertexNormals(); scene.add(tri);
+    var balls=[], x, z; for(x=-36;x<=36;x+=3){ balls.push([x,-1.75,26.4],[x,-1.75,-26.4],[x,-1.75,23.4],[x,-1.75,-23.4]); }
+    for(z=-20;z<=20;z+=3){ balls.push([37.4,-1.75,z],[-37.4,-1.75,z],[34.4,-1.75,z],[-34.4,-1.75,z]); }
+    inst(new THREE.SphereGeometry(.75,10,8),steel,balls,false);
+    var caps=[], ends=[]; [[-46,-18],[-46,-8],[-46,4],[-46,14],[46,-14],[46,-4],[46,8],[46,18],[-20,-34,1],[-6,-34,1],[10,-34,1],[24,-34,1],[-14,34,1],[4,34,1]].forEach(function(c){
+      var rot=c[2]?Math.PI/2:0; caps.push([c[0],-1.85,c[1],rot]); var dx=c[2]?1.25:0, dz=c[2]?0:1.25; ends.push([c[0]+dx,-1.85,c[1]+dz,rot],[c[0]-dx,-1.85,c[1]-dz,rot]); });
+    inst(new THREE.BoxGeometry(1.5,.9,1.9),new THREE.MeshStandardMaterial({color:0x8a6a45,roughness:.6}),caps,true);
+    inst(new THREE.BoxGeometry(1.56,.94,.6),steel,ends,true); })();
+
+  // ------------------------------------------------------------------ labels (HTML, so they stay sharp at any zoom)
+  var labs=[], labOn=true;
+  function addLab(id,text,short,kind,x,y,z){ var el=document.createElement('div'); el.className='lab'+(kind==='main'?'':' '+kind); el.textContent=text; labLayer.appendChild(el);
+    var o={id:id,el:el,text:text,short:short||text,kind:kind,p:new THREE.Vector3(x,y,z),shown:false,parent:id.split('.')[0]}; labs.push(o); return o; }
+
+  // ------------------------------------------------------------------ die blocks
+  var TYPE={net:0x2f8f86,cpu:0x4f7fb5,sec:0xb8892f,mem:0x7d68b3,bad:0xa5523a,plain:0x6b757d,clk:0x8a949c,ni:0x8fa3ad,chip:0xa9c4e2};
+  var blocks={}, picks=[], glows=[];
+  function slab(id,type,w,d,h,x,z,base){ var c=TYPE[type];
+    var mat=new THREE.MeshStandardMaterial({color:c,map:tex(routeC,Math.max(w/5,.4),Math.max(d/5,.4),true),bumpMap:tex(routeC,Math.max(w/5,.4),Math.max(d/5,.4)),bumpScale:.025,
+      roughness:.4,metalness:.6,emissive:c,emissiveIntensity:0,envMapIntensity:1.05});
+    var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat); m.position.set(x,(base||0)+h/2,z); m.castShadow=true; m.receiveShadow=true;
+    m.add(new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.16})));
+    m.userData={id:id,g:0,t:0,y0:m.position.y,lift:0}; scene.add(m); blocks[id]=m; picks.push(m); glows.push(m); return m; }
+  var K=0.012, sq=function(lut){return Math.sqrt(lut*K);};
+  var CX=[-19,0,19], RZ=[-4,4], rs=sq(10311/6);
+  for(var t=0;t<6;t++){ var row=Math.floor(t/3), rx=CX[t%3], rz=RZ[row];
+    slab('r'+t,'net',rs,rs,.9,rx,rz); addLab('r'+t,'R'+t+' ('+(t%3)+','+row+')','R'+t,'minor',rx,2.2,rz);
+    var nz=row?7.9:-7.9; slab('ni'+t,'ni',2.2,1.2,.5,rx,nz); addLab('ni'+t,'NI '+t,'','minor',rx+2.4,1.2,nz);
+    solid(.7,.1,Math.abs(nz-rz)-rs/2-.6,rx,.1,(nz+rz)/2+(row?rs/4-.15:-rs/4+.15),copper); }
+  [[0,1],[1,2],[3,4],[4,5]].forEach(function(l){ solid(CX[1]-CX[0]-rs,.12,1.1,(CX[l[0]%3]+CX[l[1]%3])/2,.12,RZ[Math.floor(l[0]/3)],copper); });
+  [0,1,2].forEach(function(c){ solid(1.1,.12,RZ[1]-RZ[0]-rs,CX[c],.12,0,copper); });
+  function wire(pts){ var g=new THREE.BufferGeometry().setFromPoints(pts.map(function(p){return new THREE.Vector3(p[0],.05,p[1]);}));
+    scene.add(new THREE.Line(g,new THREE.LineBasicMaterial({color:0xd4af5a,transparent:true,opacity:.8}))); }
+  var cB=sq(2560), cA=sq(2696), eS=sq(6586), lS=sq(6591), vS=sq(5804);
+  slab('cpuB','cpu',cB,cB,.7,-19,-13.2);  wire([[-19,-13.2+cB/2],[-19,-8.5]]);
+  slab('plain','plain',5,3.6,.35,0,-12.6); wire([[0,-10.8],[0,-8.5]]);
+  slab('memfe','mem',5,1.6,.55,19,-10.6);  wire([[19,-9.8],[19,-8.5]]);
+  slab('bram','mem',8,4.6,.8,19,-14.6);
+  slab('cpuA','cpu',cA,cA,.7,-24.4,12.8);  wire([[-24.4,12.8-cA/2],[-24.4,8.6],[-20.1,8.6]]);
+  slab('endp','sec',eS,eS,.85,-14.4,13.6); wire([[-17.9,13.6-eS/2],[-17.9,8.5]]);
+  slab('l2','sec',lS,lS,.85,-4.9,13.6);    wire([[-4.9,13.6-lS/2],[-4.9,6.2],[-17.6,6.2],[-17.6,7.3]]); wire([[-4.9,6.2],[-1.6,6.2],[-1.6,7.6],[-1.1,7.6]]);
+  slab('ver','sec',vS,vS,.85,4.6,13.2);    wire([[1.6,13.2-vS/2],[1.6,8.4],[1.1,8.4]]);
+  slab('quar','bad',5,1.6,.55,19,10.6);    wire([[19,9.8],[19,8.5]]);
+  slab('spoof','bad',5,3.4,.4,19,14.2);
+  slab('mmcm','clk',3.4,2.6,.5,26.6,16.6);
+  // the eight parts of each CPU tile, as small chips on the tile (bridge on the side facing the NI)
+  var subs={cpuA:[],cpuB:[]};
+  function cpuSubs(id,side,facingMinZ){ var b=blocks[id], cell=side/4, order=facingMinZ?[6,7,4,5,0,1,2,3]:[0,1,2,3,4,5,6,7];
+    for(var i=0;i<8;i++){ var n=order[i], col=i%4, rw=Math.floor(i/4), x=b.position.x-side/2+cell*(col+.5), z=b.position.z-side/4+rw*side/2;
+      var m=slab(id+'.'+n,'chip',cell*.78,side*.36,.22,x,z,.7); m.userData.sub=n; subs[id][n]=m;
+      addLab(id+'.'+n,SUBS[n],'','sub',x,1.9,z); } }
+  cpuSubs('cpuA',cA,true); cpuSubs('cpuB',cB,false);
+
+  addLab('cpuB','Tile 0 · CPU B','T0 CPU B','main',-19,2.6,-15.4);
+  addLab('plain','Tile 1 · plain tile','T1','main',0,1.6,-13.6);
+  addLab('bram','Tile 2 · shared memory','T2 memory','main',19,2.2,-16);
+  addLab('memfe','Memory front end','','minor',23.6,1.4,-10.6);
+  var labA=addLab('cpuA','Tile 3 · CPU A','T3 CPU A','main',-25.4,2.6,15.4);
+  addLab('endp','PQ-Attest endpoint','PQ-Attest','main',-14.4,2.8,16.2);
+  addLab('l2','L2 authenticated link, 3 ↔ 4','L2 link','main',-4.9,2.8,17.2);
+  addLab('ver','Tile 4 · RoT verifier','T4 RoT','main',5.6,2.8,15.4);
+  addLab('spoof','Tile 5 · SPOOF port','T5 SPOOF','main',19.6,1.8,15.6);
+  addLab('quar','Ingress quarantine','','minor',23.8,1.4,10.6);
+  addLab('mmcm','MMCM 100 → 50 MHz','','minor',26.6,1.6,17.6);
+
+  // board parts named in the facts: 100 MHz source, two buttons, LEDs, UART
+  solid(6,2,4,-58,-.3,-34,steel); addLab('b.osc','100 MHz board clock','','minor',-58,1,-34);
+  var btnM=new THREE.MeshStandardMaterial({color:0x1b1e21,roughness:.5,metalness:.2}), capM=new THREE.MeshStandardMaterial({color:0xd9d9d9,roughness:.35,metalness:.3});
+  [[-60,'Button 1 · re-attest'],[-50,'Button 2 · revoke']].forEach(function(b,i){ solid(4.4,1.6,4.4,b[0],-.7,38,btnM); var c=solid(2.2,.7,2.2,b[0],0,38,capM); c.userData.btn=i+1; addLab('b.btn'+i,b[1],'','minor',b[0],1.6,41.5); });
+  var ledM=new THREE.MeshStandardMaterial({color:0xe9efe6,roughness:.3,metalness:0,transparent:true,opacity:.9});
+  for(var L=0;L<4;L++){ solid(2,.9,1.3,40+L*5,-1.4,38,ledM); } addLab('b.led','LEDs','','minor',47.5,.6,41);
+  solid(9,1.5,7,58,-.8,-32,new THREE.MeshStandardMaterial({color:0x14171a,roughness:.35,metalness:.3})); addLab('b.uart','UART','','minor',58,1.4,-32);
+
+  // ------------------------------------------------------------------ packets (wormhole flit trains)
+  var VC={vc0:0x4aa3ff,vc1:0x3fd08f,vc2:0xffb84a,local:0xdfe6ea,bad:0xff5a4e};
+  var PY=1.75;
+  function node(id){ var b=blocks[id]; if(!b) throw new Error('node '+id); return new THREE.Vector3(b.position.x,PY,b.position.z); }
+  function path(ids){ var pts=ids.map(node), cum=[0], tot=0; for(var i=1;i<pts.length;i++){ tot+=pts[i].distanceTo(pts[i-1]); cum.push(tot); } return {pts:pts,cum:cum,tot:tot}; }
+  var A2='cpuA.6', toMem=[A2,'ni3','r3','r4','r5','r2','ni2','memfe'], att=['ver','ni4','r4','r3','ni3','endp'];
+  var STEPS=[
+   {name:'Boot',cap:'Both CPUs start running demo_fw. Tile 3 is measured.',auth:false,ph:[
+     {p:['cpuA.7','endp'],vc:'local',cap:'The first 64 bytes of tile 3’s IMEM are measured with SHA3-256 (local, not on the NoC).',glow:['cpuA','cpuB','endp']}]},
+   {name:'Attest',cap:'The root of trust attests tile 3. Tiles 4 and 3 are one hop apart.',auth:false,ph:[
+     {p:att,vc:'vc2',cap:'CHALLENGE: tile 4 → tile 3 on VC2, L2-authenticated.',glow:['ver','l2']},
+     {p:att.slice().reverse(),vc:'vc2',cap:'RESPONSE: measurement + KMAC tag back to the verifier.',glow:['endp','l2','ver']},
+     {p:att,vc:'vc2',cap:'The verifier checks it and sends GRANT. Tile 3 is authorized.',glow:['ver','l2','cpuA'],on:function(s){s.auth=true;}}]},
+   {name:'Authorized access',cap:'Tile 3 uses the shared memory on tile 2 over the NoC.',auth:true,ph:[
+     {p:toMem.concat(['bram']),vc:'vc0',cap:'Write request, 0xC0DE5A5A: VC0, route 3 → 4 → 5 → 2 (X first, then Y).',glow:['cpuA','memfe','bram']},
+     {p:toMem,vc:'vc0',cap:'Read request on the same route.',glow:['cpuA','memfe']},
+     {p:['bram','memfe','ni2','r2','r1','r0','r3','ni3',A2],vc:'vc1',cap:'Read data returns on VC1, route 2 → 1 → 0 → 3. The value matches.',glow:['bram','cpuA'],on:function(s){s.uart='T3 PASS';s.led='0001';}}]},
+   {name:'Refused tile',cap:'Tile 0 tries the same write. It was never authorized.',auth:true,ph:[
+     {p:['cpuB.0','cpuB.6'],vc:'vc0',end:'bad',cap:'Its bridge refuses locally: no packet enters the mesh, and the CPU gets a poison value.',glow:['cpuB'],on:function(s){s.uart='T0 REFUSED';s.led='0010';}}]},
+   {name:'Revoke',cap:'Button 2 is pressed: the root of trust revokes tile 3. Button 1 would re-attest.',auth:true,ph:[
+     {p:att,vc:'vc2',cap:'REVOKE: tile 4 → tile 3 on VC2. Tile 3 loses access.',glow:['ver','l2'],btn:true,on:function(s){s.auth=false;}},
+     {p:toMem,vc:'vc0',end:'bad',cap:'Tile 3’s next memory request is refused.',glow:['cpuA','memfe']}]},
+   {name:'Forged packet',cap:'Attack test: the untrusted SPOOF port injects a forged or replayed packet.',auth:false,ph:[
+     {p:['spoof','quar'],vc:'vc2',end:'bad',cap:'It is rejected at the ingress quarantine / L2 check.',glow:['spoof','quar']}]}
+  ];
+  STEPS.forEach(function(s){ s.ph.forEach(function(p){ p.path=path(p.p); }); });
+
+  var NF=4, flits=new THREE.InstancedMesh(new THREE.BoxGeometry(.5,.42,.95),new THREE.MeshBasicMaterial({color:0xffffff}),NF); flits.visible=false; flits.frustumCulled=false; scene.add(flits);
+  var halo=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.85})); halo.scale.set(4.2,4.2,1); halo.visible=false; scene.add(halo);
+  var ring=new THREE.Mesh(new THREE.TorusGeometry(1.5,.1,8,48),new THREE.MeshBasicMaterial({color:VC.bad,transparent:true,opacity:0})); ring.rotation.x=Math.PI/2; ring.visible=false; scene.add(ring);
+  var trails=[]; for(var ti=0;ti<3;ti++){ var tg=new THREE.BufferGeometry(); tg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(16*3),3));
+    var tl=new THREE.Line(tg,new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.75})); tl.visible=false; tl.frustumCulled=false; scene.add(tl); trails.push(tl); }
+  function setTrail(i,ph){ var a=trails[i].geometry.attributes.position, n=ph.path.pts.length; for(var k=0;k<n;k++){ a.setXYZ(k,ph.path.pts[k].x,PY-.25,ph.path.pts[k].z); }
+    a.needsUpdate=true; trails[i].geometry.setDrawRange(0,n); trails[i].material.color.setHex(VC[ph.vc]); trails[i].visible=true; }
+  var v1=new THREE.Vector3(), v2=new THREE.Vector3();
+  function at(pa,d,out){ if(d<=0) return out.copy(pa.pts[0]); if(d>=pa.tot) return out.copy(pa.pts[pa.pts.length-1]);
+    var i=1; while(pa.cum[i]<d) i++; return out.lerpVectors(pa.pts[i-1],pa.pts[i],(d-pa.cum[i-1])/(pa.cum[i]-pa.cum[i-1])); }
+  function placeFlits(pa,head){ for(var i=0;i<NF;i++){ var d=Math.max(0,head-i*1.25); at(pa,d,v1); at(pa,Math.min(pa.tot,d+.4),v2);
+      tmpO.position.copy(v1); if(v2.distanceToSquared(v1)>1e-6) tmpO.lookAt(v2); tmpO.updateMatrix(); flits.setMatrixAt(i,tmpO.matrix); }
+    flits.instanceMatrix.needsUpdate=true; at(pa,head,halo.position); }
+
+  // ------------------------------------------------------------------ walkthrough state
+  var st={step:0,phase:0,t:0,playing:false,speed:1,auth:false,uart:'',led:'',done:false,sel:null,selSub:-1};
+  var capEl=$('cap'), cap2=$('cap2'), uartEl=$('uart'), ledEl=$('led'), stepBtns=[];
+  function paint(){ uartEl.textContent=st.uart?'"'+st.uart+'"':'—'; ledEl.textContent=st.led||'—';
+    labA.el.innerHTML=esc(phone?labA.short:labA.text)+(st.auth?'<span class="ok">authorized</span>':''); }
+  function setGlow(list){ glows.forEach(function(m){ m.userData.t=0; }); (list||[]).forEach(function(id){ blocks[id].userData.t=1; }); if(st.sel&&blocks[st.sel]) blocks[st.sel].userData.t=Math.max(blocks[st.sel].userData.t,.6); }
+  function dur(ph){ return Math.max(900,ph.path.tot/20*1000); }
+  function enterPhase(i){ st.phase=i; st.t=0; st.done=false; var ph=STEPS[st.step].ph[i];
+    cap2.textContent=ph.cap; setGlow(ph.glow); flits.material.color.setHex(VC[ph.vc]); halo.material.color.setHex(VC[ph.vc]);
+    trails.forEach(function(l){ l.visible=false; }); setTrail(0,ph); flits.visible=true; halo.visible=true; ring.visible=false; placeFlits(ph.path,0); }
+  function finishPhase(){ var ph=STEPS[st.step].ph[st.phase]; if(st.done) return; st.done=true; placeFlits(ph.path,ph.path.tot);
+    if(ph.end==='bad'){ flits.material.color.setHex(VC.bad); halo.material.color.setHex(VC.bad); ring.material.color.setHex(VC.bad); } else { ring.material.color.setHex(VC[ph.vc]); }
+    ring.position.copy(ph.path.pts[ph.path.pts.length-1]); ring.visible=true; ring.userData.t0=clock; ring.userData.bad=ph.end==='bad';
+    if(ph.on) ph.on(st); paint(); }
+  function enterStep(i,instant){ st.step=i; var s=STEPS[i]; st.auth=s.auth; st.uart=''; st.led=''; if(i===3){ st.uart='T3 PASS'; st.led='0001'; }
+    capEl.firstChild.nodeValue=(i+1)+'. '+s.cap; stepBtns.forEach(function(b,k){ if(k===i) b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+    if(instant){ // reduced motion: show the end state of the whole step at once
+      s.ph.forEach(function(ph,k){ if(k<3) setTrail(k,ph); if(ph.on) ph.on(st); });
+      var last=s.ph[s.ph.length-1]; st.phase=s.ph.length-1; st.done=true; cap2.textContent=s.ph.map(function(p){return p.cap;}).join(' '); setGlow(last.glow);
+      flits.material.color.setHex(last.end==='bad'?VC.bad:VC[last.vc]); halo.material.color.setHex(last.end==='bad'?VC.bad:VC[last.vc]); flits.visible=true; halo.visible=true; placeFlits(last.path,last.path.tot);
+      ring.position.copy(last.path.pts[last.path.pts.length-1]); ring.material.color.setHex(last.end==='bad'?VC.bad:VC[last.vc]); ring.material.opacity=.9; ring.scale.setScalar(1); ring.visible=true; ring.userData.t0=-1;
+      paint(); return; }
+    paint(); enterPhase(0); }
+  function setPlaying(p){ st.playing=p; var b=$('bplay'); b.textContent=p?'Pause':'Play'; b.setAttribute('aria-pressed',p?'true':'false'); }
+  function go(i){ i=(i+STEPS.length)%STEPS.length; enterStep(i,reduce); if(!reduce) setPlaying(true); }
+
+  STEPS.forEach(function(s,i){ var b=document.createElement('button'); b.type='button'; b.textContent=(i+1)+' '+s.name; b.addEventListener('click',function(){ go(i); }); $('steps').appendChild(b); stepBtns.push(b); });
+  $('bplay').addEventListener('click',function(){ if(reduce){ go(st.step+1); return; }
+    if(!st.playing&&st.done&&st.phase===STEPS[st.step].ph.length-1&&st.step===STEPS.length-1){ go(0); return; } setPlaying(!st.playing); });
+  $('bnext').addEventListener('click',function(){ go(st.step+1); });
+  $('bprev').addEventListener('click',function(){ go(st.step-1); });
+  $('speed').addEventListener('change',function(e){ st.speed=parseFloat(e.target.value)||1; });
+
+  // ------------------------------------------------------------------ camera presets
+  var VIEWS={package:[[52,66,96],[0,-1,2]],die:[[0,60,52],[0,0,2]],mesh:[[0,58,10],[0,0,0]],tile3:[[-34,22,40],[-17,0,11]]};
+  var tw={on:false,t:0,p0:new THREE.Vector3(),p1:new THREE.Vector3(),g0:new THREE.Vector3(),g1:new THREE.Vector3()};
+  function view(name,instant){ var v=VIEWS[name]; if(!v) return; tw.p1.set(v[0][0],v[0][1],v[0][2]); tw.g1.set(v[1][0],v[1][1],v[1][2]);
+    if(phone){ tw.p1.sub(tw.g1).multiplyScalar(1.5).add(tw.g1); }
+    if(instant||reduce){ cam.position.copy(tw.p1); ctl.target.copy(tw.g1); tw.on=false; camDirty=true; return; }
+    tw.p0.copy(cam.position); tw.g0.copy(ctl.target); tw.t=0; tw.on=true; ctl.enabled=false; }
+  $('presets').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return;
+    if(b.id==='blab'){ labOn=b.getAttribute('aria-pressed')!=='true'; b.setAttribute('aria-pressed',labOn?'true':'false'); camDirty=true; return; }
+    var v=b.getAttribute('data-v'); if(v==='demo'){ view('die'); go(0); if(!reduce) setPlaying(true); } else view(v); });
+
+  // ------------------------------------------------------------------ picking: hover name, select for details
+  var ray=new THREE.Raycaster(), ptr=new THREE.Vector2(), needPick=false, hoverId=null, down=null, px=0, py=0;
+  function nameOf(id){ var parts=id.split('.'); if(parts.length>1) return SUBS[+parts[1]]+' · '+INFO[parts[0]].t; return INFO[id]?INFO[id].t:id; }
+  canvas.addEventListener('pointermove',function(e){ var r=canvas.getBoundingClientRect(); px=e.clientX-r.left; py=e.clientY-r.top; ptr.set(px/r.width*2-1,-(py/r.height)*2+1); needPick=true; });
+  canvas.addEventListener('pointerleave',function(){ hoverId=null; tip.hidden=true; canvas.classList.remove('pick'); });
+  canvas.addEventListener('pointerdown',function(e){ down=[e.clientX,e.clientY]; });
+  canvas.addEventListener('pointerup',function(e){ if(!down) return; var moved=Math.abs(e.clientX-down[0])+Math.abs(e.clientY-down[1]); down=null; if(moved>7) return;
+    var r=canvas.getBoundingClientRect(); ptr.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1); ray.setFromCamera(ptr,cam);
+    var hit=ray.intersectObjects(picks,false)[0]; select(hit?hit.object.userData.id:null); });
+  function select(id){ var root=id?id.split('.')[0]:null, sub=id&&id.indexOf('.')>0?+id.split('.')[1]:-1; st.sel=root; st.selSub=sub;
+    ['cpuA','cpuB'].forEach(function(c){ subs[c].forEach(function(m){ m.userData.lift=(root===c)?.55:0; }); });
+    labs.forEach(function(l){ l.el.classList.toggle('sel',l.id===root); }); showInfo(root,sub);
+    var ph=STEPS[st.step].ph[st.phase]; setGlow(ph?ph.glow:[]); camDirty=true; }
+
+  // ------------------------------------------------------------------ theme, size
+  var phone=false, camDirty=true, W=1, H=1, dark=false;
+  function theme(){ var cs=getComputedStyle(document.documentElement), bg=cs.getPropertyValue('--stage').trim()||'#0a0d10'; dark=cs.getPropertyValue('--dark').trim()==='1';
+    renderer.setClearColor(new THREE.Color(bg),1); bench.material.color.set(bg).convertSRGBToLinear(); scene.fog=new THREE.Fog(new THREE.Color(bg).getHex(),190,520);
+    renderer.toneMappingExposure=dark?.92:1.0; hemi.intensity=dark?.25:.4; key.intensity=dark?1.45:1.6; }
+  // material colours above are written as sRGB hex; convert once so the lit result is not washed out
+  (function(){ var seen=[]; scene.traverse(function(o){ var m=o.material; if(m&&m.isMeshStandardMaterial&&seen.indexOf(m)<0){ seen.push(m); m.color.convertSRGBToLinear(); m.emissive.convertSRGBToLinear(); } }); })();
+  theme();
+  if(window.matchMedia){ var mq=window.matchMedia('(prefers-color-scheme: dark)'); if(mq.addEventListener) mq.addEventListener('change',theme); }
+  new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  function fit(){ W=stage.clientWidth; H=stage.clientHeight; if(!W||!H) return; renderer.setSize(W,H,false); cam.aspect=W/H; var was=phone; phone=W<560; cam.fov=phone?44:36; cam.updateProjectionMatrix();
+    if(was!==phone){ labs.forEach(function(l){ if(l!==labA) l.el.textContent=phone?l.short:l.text; }); paint(); } camDirty=true; }
+  if(window.ResizeObserver) new ResizeObserver(fit).observe(stage); else window.addEventListener('resize',fit);
+  fit(); view('die',true);
+  ctl.addEventListener('change',function(){ camDirty=true; });
+
+  var pv=new THREE.Vector3();
+  function layoutLabels(){ var dist=cam.position.distanceTo(ctl.target);
+    for(var i=0;i<labs.length;i++){ var l=labs[i], show=labOn&&!!l.short||(labOn&&!phone);
+      if(l.kind==='minor') show=labOn&&!phone&&dist<105; else if(l.kind==='sub') show=labOn&&!phone&&st.sel===l.parent; else show=labOn;
+      if(show){ pv.copy(l.p).project(cam); if(pv.z>1||pv.x<-1.05||pv.x>1.05||pv.y<-1.05||pv.y>1.05) show=false;
+        else l.el.style.transform='translate('+((pv.x*.5+.5)*W).toFixed(1)+'px,'+((-pv.y*.5+.5)*H).toFixed(1)+'px) translate(-50%,-100%)'; }
+      if(show!==l.shown){ l.shown=show; l.el.classList.toggle('on',show); } } }
+
+  // ------------------------------------------------------------------ one render loop
+  var clock=0, last=performance.now();
+  function frame(now){
+    requestAnimationFrame(frame);
+    if(document.hidden){ last=now; return; }
+    var dt=Math.min(now-last,80); last=now; clock+=dt;
+    if(tw.on){ tw.t=Math.min(1,tw.t+dt/1100); var e=1-Math.pow(1-tw.t,4); cam.position.lerpVectors(tw.p0,tw.p1,e); ctl.target.lerpVectors(tw.g0,tw.g1,e); camDirty=true; if(tw.t>=1){ tw.on=false; ctl.enabled=true; } }
+    if(st.playing){ var ph=STEPS[st.step].ph[st.phase], D=dur(ph); st.t+=dt*st.speed;
+      if(!st.done){ var u=Math.min(st.t/D,1), s=u*u*(3-2*u); placeFlits(ph.path,s*ph.path.tot); if(u>=1) finishPhase(); }
+      else if(st.t>D+(ph.end==='bad'?1500:800)){ if(st.phase<STEPS[st.step].ph.length-1) enterPhase(st.phase+1); else if(st.step<STEPS.length-1) enterStep(st.step+1,false); else setPlaying(false); } }
+    if(ring.visible&&ring.userData.t0>=0){ var rt=Math.min((clock-ring.userData.t0)/520,1), re=1-Math.pow(1-rt,3); ring.scale.setScalar(.35+.65*re); ring.material.opacity=ring.userData.bad?.95:.9*(1-rt*.75); }
+    for(var i=0;i<glows.length;i++){ var m=glows[i], d=m.userData, k=Math.min(1,dt*.007); d.g+=(d.t-d.g)*k; m.material.emissiveIntensity=d.g*.5;
+      if(d.sub!==undefined){ var ty=d.y0+d.lift; if(Math.abs(m.position.y-ty)>.001){ m.position.y+=(ty-m.position.y)*Math.min(1,dt*.01); } } }
+    if(needPick){ needPick=false; ray.setFromCamera(ptr,cam); var hit=ray.intersectObjects(picks,false)[0], id=hit?hit.object.userData.id:null;
+      if(id!==hoverId){ hoverId=id; canvas.classList.toggle('pick',!!id); if(id){ tip.textContent=nameOf(id); tip.hidden=false; } else tip.hidden=true; }
+      if(id) tip.style.transform='translate('+Math.min(px+14,W-190)+'px,'+Math.max(py-30,4)+'px)'; }
+    ctl.update();
+    if(camDirty){ camDirty=false; layoutLabels(); }
+    renderer.render(scene,cam);
+  }
+  enterStep(0,reduce);
+  if(!reduce){ view('package',true); view('die'); }
+  requestAnimationFrame(frame);
+})();
+</script>

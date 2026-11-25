@@ -1,0 +1,11 @@
+S0 top=pq_noc_subsystem_p7 flatten=none default | synth LUT=38047 FF=33037 LUTRAM=2448 | opt LUT=38020 FF=33038 LUTRAM=2448
+S1 top=pq_noc_subsystem_p7 flatten=rebuilt default | synth LUT=35802 FF=32950 LUTRAM=2448 | opt LUT=35802 FF=32951 LUTRAM=2448
+S2 top=pq_noc_subsystem_p7 flatten=none -directive AreaOptimized_high | synth LUT=37773 FF=32942 LUTRAM=2448 | opt LUT=37732 FF=32943 LUTRAM=2448
+S3 top=pq_noc_subsystem_p7 flatten=rebuilt -directive AreaOptimized_high | synth LUT=33398 FF=32871 LUTRAM=2448 | opt LUT=33399 FF=32872 LUTRAM=2448
+S4 top=pq_p7_pruned flatten=rebuilt default | synth LUT=33098 FF=31169 LUTRAM=2448 | opt LUT=33097 FF=31170 LUTRAM=2448
+S5 top=pq_noc_subsystem_p7 flatten=rebuilt AreaOptimized_high +A5 | opt LUT=31749 FF=28021 LUTRAM=2448
+S6 top=pq_p7_pruned flatten=rebuilt AreaOptimized_high  | opt LUT=33097 FF=31170 LUTRAM=2448
+S7 top=pq_p7_pruned flatten=rebuilt AreaOptimized_high +A5 | opt LUT=32517 FF=26332 LUTRAM=2448
+S5 routed LUT=31476 FF=28021 WNS=-0.018 WHS=0.020 paths_lt_0.5=634 end=mesh/GEN_R[2].G_LINK_REG.qv_w_reg/D
+S7 routed LUT=32014 FF=26332 WNS=0.505 WHS=0.014 paths_lt_0.5=0 end=dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][10]/D
+STRESS_A (pruned SoC proxy + 2 full CPU placeholders, rebuilt+AOH+A5) LUT=34184 FF=30953 WNS=0.007 WHS=0.040 paths_lt_0.5=393 end=dut/mesh/GEN_R[3].G_LINK_REG.q_n_reg[flit_data][1]/D

@@ -1,0 +1,606 @@
+{
+  "metadata": {
+    "generator": "verification.p7_rtl_parser",
+    "timestamp": "2026-11-06T14:49:27.629693+00:00",
+    "status": "PASS"
+  },
+  "source_files": {
+    "noc_pkg": {
+      "path": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+      "sha256": "e428af103c9a0096f47f9ad97215a33b919dc9035c2a5e9d1255ff9fdd33a7be"
+    },
+    "noc_p7_pkg": {
+      "path": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_p7_pkg.sv",
+      "sha256": "8a10decc6d39c5b1dcb097f2aa638e8fb348e88d7a2fb85a696083d3a5ffe4f0"
+    },
+    "noc_l2_auth_p7": {
+      "path": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_l2_auth_p7.sv",
+      "sha256": "f1833f9cdfe1e78d2f5d04315d3604b86d37986d76a823f63713504678f4f901"
+    }
+  },
+  "protocol_constants": {
+    "MESH_X": {
+      "value": 3,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 40,
+        "declaration": "localparam int unsigned MESH_X = 3;"
+      }
+    },
+    "MESH_Y": {
+      "value": 2,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 41,
+        "declaration": "localparam int unsigned MESH_Y = 2;"
+      }
+    },
+    "NUM_TILES": {
+      "value": 6,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 42,
+        "declaration": "localparam int unsigned NUM_TILES = MESH_X * MESH_Y;"
+      }
+    },
+    "NUM_PORTS": {
+      "value": 5,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 43,
+        "declaration": "localparam int unsigned NUM_PORTS = 5;"
+      }
+    },
+    "FLIT_WIDTH": {
+      "value": 32,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 50,
+        "declaration": "localparam int unsigned FLIT_WIDTH = 32;"
+      }
+    },
+    "NUM_VC": {
+      "value": 3,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 51,
+        "declaration": "localparam int unsigned NUM_VC = 3;"
+      }
+    },
+    "VC0_DEPTH": {
+      "value": 4,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 53,
+        "declaration": "localparam int unsigned VC0_DEPTH = 4;"
+      }
+    },
+    "VC1_DEPTH": {
+      "value": 4,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 54,
+        "declaration": "localparam int unsigned VC1_DEPTH = 4;"
+      }
+    },
+    "VC2_DEPTH": {
+      "value": 4,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 55,
+        "declaration": "localparam int unsigned VC2_DEPTH = 4;"
+      }
+    },
+    "FIFO_DEPTH": {
+      "value": 4,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 57,
+        "declaration": "localparam int unsigned FIFO_DEPTH = 4;"
+      }
+    },
+    "MAC_TAG_BITS": {
+      "value": 128,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 86,
+        "declaration": "localparam int unsigned MAC_TAG_BITS = 128;"
+      }
+    },
+    "MAC_FLITS_FULL": {
+      "value": 4,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 88,
+        "declaration": "localparam int unsigned MAC_FLITS_FULL = (MAC_TAG_BITS + FLIT_WIDTH - 1) / FLIT_WIDTH;"
+      }
+    }
+  },
+  "virtual_channels": {
+    "VC_REQUEST": {
+      "id": 0,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 165,
+        "declaration": "VC_REQUEST     = 'd0"
+      }
+    },
+    "VC_RESPONSE": {
+      "id": 1,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 166,
+        "declaration": "VC_RESPONSE    = 'd1"
+      }
+    },
+    "VC_ATTESTATION": {
+      "id": 2,
+      "source": {
+        "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+        "line_number": 167,
+        "declaration": "VC_ATTESTATION = 'd2"
+      }
+    }
+  },
+  "freshness_overhead": {
+    "value": 5,
+    "raw_expression": "5",
+    "source": {
+      "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_l2_auth_p7.sv",
+      "line_number": 89,
+      "declaration": "v.length=h.length+5;"
+    }
+  },
+  "messages": {
+    "MEM_RD_REQ": {
+      "name": "MSG_MEM_RD_REQ",
+      "short_name": "MEM_RD_REQ",
+      "encoding": 0,
+      "is_control": false,
+      "vc_name": "VC_REQUEST",
+      "vc_id": 0,
+      "payload_flits": 1,
+      "mac_flits": 0,
+      "ni_length": 2,
+      "freshness_overhead": 0,
+      "wire_length": 2,
+      "declarations": {
+        "encoding": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 176,
+          "declaration": "MSG_MEM_RD_REQ       = 4'd0"
+        },
+        "payload": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 606,
+          "declaration": "MSG_MEM_RD_REQ: return 5'd1;"
+        },
+        "vc": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 574,
+          "declaration": "MSG_MEM_RD_REQ, MSG_MEM_WR_REQ: return VC_REQUEST;"
+        },
+        "mac": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_p7_pkg.sv",
+          "line_number": 10,
+          "declaration": "return is_control(t) ? MAC_FLITS_FULL : 0;"
+        },
+        "freshness": null
+      }
+    },
+    "MEM_RD_RESP": {
+      "name": "MSG_MEM_RD_RESP",
+      "short_name": "MEM_RD_RESP",
+      "encoding": 1,
+      "is_control": false,
+      "vc_name": "VC_RESPONSE",
+      "vc_id": 1,
+      "payload_flits": 1,
+      "mac_flits": 0,
+      "ni_length": 2,
+      "freshness_overhead": 0,
+      "wire_length": 2,
+      "declarations": {
+        "encoding": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 177,
+          "declaration": "MSG_MEM_RD_RESP      = 4'd1"
+        },
+        "payload": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 610,
+          "declaration": "MSG_MEM_RD_RESP: return 5'd1;"
+        },
+        "vc": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 580,
+          "declaration": "MSG_MEM_RD_RESP, MSG_MEM_WR_RESP: return VC_RESPONSE;"
+        },
+        "mac": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_p7_pkg.sv",
+          "line_number": 10,
+          "declaration": "return is_control(t) ? MAC_FLITS_FULL : 0;"
+        },
+        "freshness": null
+      }
+    },
+    "MEM_WR_REQ": {
+      "name": "MSG_MEM_WR_REQ",
+      "short_name": "MEM_WR_REQ",
+      "encoding": 2,
+      "is_control": false,
+      "vc_name": "VC_REQUEST",
+      "vc_id": 0,
+      "payload_flits": 2,
+      "mac_flits": 0,
+      "ni_length": 3,
+      "freshness_overhead": 0,
+      "wire_length": 3,
+      "declarations": {
+        "encoding": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 178,
+          "declaration": "MSG_MEM_WR_REQ       = 4'd2"
+        },
+        "payload": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 611,
+          "declaration": "MSG_MEM_WR_REQ: return 5'd2;"
+        },
+        "vc": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 574,
+          "declaration": "MSG_MEM_RD_REQ, MSG_MEM_WR_REQ: return VC_REQUEST;"
+        },
+        "mac": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_p7_pkg.sv",
+          "line_number": 10,
+          "declaration": "return is_control(t) ? MAC_FLITS_FULL : 0;"
+        },
+        "freshness": null
+      }
+    },
+    "MEM_WR_RESP": {
+      "name": "MSG_MEM_WR_RESP",
+      "short_name": "MEM_WR_RESP",
+      "encoding": 3,
+      "is_control": false,
+      "vc_name": "VC_RESPONSE",
+      "vc_id": 1,
+      "payload_flits": 0,
+      "mac_flits": 0,
+      "ni_length": 1,
+      "freshness_overhead": 0,
+      "wire_length": 1,
+      "declarations": {
+        "encoding": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 179,
+          "declaration": "MSG_MEM_WR_RESP      = 4'd3"
+        },
+        "payload": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 612,
+          "declaration": "MSG_MEM_WR_RESP: return 5'd0;"
+        },
+        "vc": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 580,
+          "declaration": "MSG_MEM_RD_RESP, MSG_MEM_WR_RESP: return VC_RESPONSE;"
+        },
+        "mac": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_p7_pkg.sv",
+          "line_number": 10,
+          "declaration": "return is_control(t) ? MAC_FLITS_FULL : 0;"
+        },
+        "freshness": null
+      }
+    },
+    "ATTEST_CHALLENGE": {
+      "name": "MSG_ATTEST_CHALLENGE",
+      "short_name": "ATTEST_CHALLENGE",
+      "encoding": 4,
+      "is_control": true,
+      "vc_name": "VC_ATTESTATION",
+      "vc_id": 2,
+      "payload_flits": 7,
+      "mac_flits": 4,
+      "ni_length": 12,
+      "freshness_overhead": 5,
+      "wire_length": 17,
+      "declarations": {
+        "encoding": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 181,
+          "declaration": "MSG_ATTEST_CHALLENGE = 4'd4"
+        },
+        "payload": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 613,
+          "declaration": "MSG_ATTEST_CHALLENGE: return 5'd7;"
+        },
+        "vc": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 584,
+          "declaration": "MSG_ATTEST_CHALLENGE, MSG_ATTEST_RESPONSE, MSG_ATTEST_GRANT, MSG_ATTEST_REVOKE: return VC_ATTESTATION;"
+        },
+        "mac": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_p7_pkg.sv",
+          "line_number": 10,
+          "declaration": "return is_control(t) ? MAC_FLITS_FULL : 0;"
+        },
+        "freshness": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_l2_auth_p7.sv",
+          "line_number": 89,
+          "declaration": "v.length=h.length+5;"
+        }
+      }
+    },
+    "ATTEST_RESPONSE": {
+      "name": "MSG_ATTEST_RESPONSE",
+      "short_name": "ATTEST_RESPONSE",
+      "encoding": 5,
+      "is_control": true,
+      "vc_name": "VC_ATTESTATION",
+      "vc_id": 2,
+      "payload_flits": 16,
+      "mac_flits": 4,
+      "ni_length": 21,
+      "freshness_overhead": 5,
+      "wire_length": 26,
+      "declarations": {
+        "encoding": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 182,
+          "declaration": "MSG_ATTEST_RESPONSE  = 4'd5"
+        },
+        "payload": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 615,
+          "declaration": "MSG_ATTEST_RESPONSE: return 5'd16;"
+        },
+        "vc": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 584,
+          "declaration": "MSG_ATTEST_CHALLENGE, MSG_ATTEST_RESPONSE, MSG_ATTEST_GRANT, MSG_ATTEST_REVOKE: return VC_ATTESTATION;"
+        },
+        "mac": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_p7_pkg.sv",
+          "line_number": 10,
+          "declaration": "return is_control(t) ? MAC_FLITS_FULL : 0;"
+        },
+        "freshness": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_l2_auth_p7.sv",
+          "line_number": 89,
+          "declaration": "v.length=h.length+5;"
+        }
+      }
+    },
+    "ATTEST_GRANT": {
+      "name": "MSG_ATTEST_GRANT",
+      "short_name": "ATTEST_GRANT",
+      "encoding": 6,
+      "is_control": true,
+      "vc_name": "VC_ATTESTATION",
+      "vc_id": 2,
+      "payload_flits": 0,
+      "mac_flits": 4,
+      "ni_length": 5,
+      "freshness_overhead": 5,
+      "wire_length": 10,
+      "declarations": {
+        "encoding": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 183,
+          "declaration": "MSG_ATTEST_GRANT     = 4'd6"
+        },
+        "payload": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 616,
+          "declaration": "MSG_ATTEST_GRANT: return 5'd0;"
+        },
+        "vc": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 584,
+          "declaration": "MSG_ATTEST_CHALLENGE, MSG_ATTEST_RESPONSE, MSG_ATTEST_GRANT, MSG_ATTEST_REVOKE: return VC_ATTESTATION;"
+        },
+        "mac": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_p7_pkg.sv",
+          "line_number": 10,
+          "declaration": "return is_control(t) ? MAC_FLITS_FULL : 0;"
+        },
+        "freshness": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_l2_auth_p7.sv",
+          "line_number": 89,
+          "declaration": "v.length=h.length+5;"
+        }
+      }
+    },
+    "ATTEST_REVOKE": {
+      "name": "MSG_ATTEST_REVOKE",
+      "short_name": "ATTEST_REVOKE",
+      "encoding": 7,
+      "is_control": true,
+      "vc_name": "VC_ATTESTATION",
+      "vc_id": 2,
+      "payload_flits": 0,
+      "mac_flits": 4,
+      "ni_length": 5,
+      "freshness_overhead": 5,
+      "wire_length": 10,
+      "declarations": {
+        "encoding": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 184,
+          "declaration": "MSG_ATTEST_REVOKE    = 4'd7"
+        },
+        "payload": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 617,
+          "declaration": "MSG_ATTEST_REVOKE: return 5'd0;"
+        },
+        "vc": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/NOC_PKG.sv",
+          "line_number": 584,
+          "declaration": "MSG_ATTEST_CHALLENGE, MSG_ATTEST_RESPONSE, MSG_ATTEST_GRANT, MSG_ATTEST_REVOKE: return VC_ATTESTATION;"
+        },
+        "mac": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_p7_pkg.sv",
+          "line_number": 10,
+          "declaration": "return is_control(t) ? MAC_FLITS_FULL : 0;"
+        },
+        "freshness": {
+          "source_file": "C:/Users/Arnav Bhandari/PQ_Attest/rtl/dual_lane/noc_l2_auth_p7.sv",
+          "line_number": 89,
+          "declaration": "v.length=h.length+5;"
+        }
+      }
+    }
+  },
+  "validation": {
+    "status": "PASS",
+    "total_checks": 8,
+    "passed_checks": 8,
+    "mismatches": [],
+    "checks": [
+      {
+        "message": "MEM_RD_REQ",
+        "expected": {
+          "payload": 1,
+          "mac": 0,
+          "ni_length": 2,
+          "wire_length": 2
+        },
+        "actual": {
+          "payload": 1,
+          "mac": 0,
+          "ni_length": 2,
+          "wire_length": 2
+        },
+        "passed": true,
+        "mismatches": []
+      },
+      {
+        "message": "MEM_RD_RESP",
+        "expected": {
+          "payload": 1,
+          "mac": 0,
+          "ni_length": 2,
+          "wire_length": 2
+        },
+        "actual": {
+          "payload": 1,
+          "mac": 0,
+          "ni_length": 2,
+          "wire_length": 2
+        },
+        "passed": true,
+        "mismatches": []
+      },
+      {
+        "message": "MEM_WR_REQ",
+        "expected": {
+          "payload": 2,
+          "mac": 0,
+          "ni_length": 3,
+          "wire_length": 3
+        },
+        "actual": {
+          "payload": 2,
+          "mac": 0,
+          "ni_length": 3,
+          "wire_length": 3
+        },
+        "passed": true,
+        "mismatches": []
+      },
+      {
+        "message": "MEM_WR_RESP",
+        "expected": {
+          "payload": 0,
+          "mac": 0,
+          "ni_length": 1,
+          "wire_length": 1
+        },
+        "actual": {
+          "payload": 0,
+          "mac": 0,
+          "ni_length": 1,
+          "wire_length": 1
+        },
+        "passed": true,
+        "mismatches": []
+      },
+      {
+        "message": "ATTEST_CHALLENGE",
+        "expected": {
+          "payload": 7,
+          "mac": 4,
+          "ni_length": 12,
+          "wire_length": 17
+        },
+        "actual": {
+          "payload": 7,
+          "mac": 4,
+          "ni_length": 12,
+          "wire_length": 17
+        },
+        "passed": true,
+        "mismatches": []
+      },
+      {
+        "message": "ATTEST_RESPONSE",
+        "expected": {
+          "payload": 16,
+          "mac": 4,
+          "ni_length": 21,
+          "wire_length": 26
+        },
+        "actual": {
+          "payload": 16,
+          "mac": 4,
+          "ni_length": 21,
+          "wire_length": 26
+        },
+        "passed": true,
+        "mismatches": []
+      },
+      {
+        "message": "ATTEST_GRANT",
+        "expected": {
+          "payload": 0,
+          "mac": 4,
+          "ni_length": 5,
+          "wire_length": 10
+        },
+        "actual": {
+          "payload": 0,
+          "mac": 4,
+          "ni_length": 5,
+          "wire_length": 10
+        },
+        "passed": true,
+        "mismatches": []
+      },
+      {
+        "message": "ATTEST_REVOKE",
+        "expected": {
+          "payload": 0,
+          "mac": 4,
+          "ni_length": 5,
+          "wire_length": 10
+        },
+        "actual": {
+          "payload": 0,
+          "mac": 4,
+          "ni_length": 5,
+          "wire_length": 10
+        },
+        "passed": true,
+        "mismatches": []
+      }
+    ]
+  },
+  "parser_warnings": [],
+  "parser_errors": []
+}

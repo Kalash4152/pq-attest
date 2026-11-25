@@ -1,0 +1,11 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 Latency Model Coverage",
+    "date": "2026-11-06"
+  },
+  "scenario_coverage": {
+    "total_scenarios": 9,
+    "passed_scenarios": 9,
+    "coverage_pct": 100.0
+  }
+}

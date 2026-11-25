@@ -1,0 +1,47 @@
+{
+ "created": "2026-10-21",
+ "purpose": "S1 baseline (contract docs/reviews/CC_INSTRUCTION_S1_S2_FINAL_20261021.md sec. 0.1)",
+ "head": "decd3462db2da8671dde3695f9e20793939e9392",
+ "dirty_files": {
+  "NOC_PQATTEST.xpr": "f9279fe573025d2c913bde8cf4120241eb6be6736dc35a1a1fbc587ce871978d",
+  "automation/dual_lane_payload/files/docs/DECISION_REGISTER.md": "0be098e29321e9b1d077110600d8647df6a8d405c3c860d60c354f10231215e2",
+  "automation/dual_lane_payload/files/docs/decisions/M-F1-interface-freeze.md": "6348ace56c09a8e6c85c5d824e5b233bc77403a1e8f08978631a1db460399efb",
+  "automation/dual_lane_payload/files/docs/decisions/SF-1-l2-busy-drop.md": "27867753e3c2fcd37f5baa2952b350fa0b8ea1bdd4b4302d5a92faff63e21af8",
+  "automation/dual_lane_payload/files/docs/decisions/dual_lane_config.json": "e566c87e4874556702c74a9277439c05cc6380fb1b7895e17dd1e553207184a4",
+  "automation/dual_lane_payload/files/rtl/dual_lane/pq_noc_subsystem.sv": "2a98a42476613b7e62f98b8eb8d6f746aad2eea7bef90ce24e4c3ebc7059f93d",
+  "automation/dual_lane_payload/files/rtl/dual_lane/pq_rot_verifier.sv": "c52b198f8dad8a2053058288d6736607622105bdd6952348d3ff462584ab7b8b",
+  "automation/dual_lane_payload/files/rtl/dual_lane/variant_provenance.json": "213ba39c74669ed36d0b85b7ecbaafd9060ce54a01fc4cbb1bf23cf24fd6c001",
+  "automation/dual_lane_payload/files/scripts/dual_lane.py": "76dc0c63c3bc23d768d50e7a5968b45a216d7fc76392445551ee1fd4ea916b3d",
+  "automation/dual_lane_payload/files/scripts/dual_lane_jobs.json": "c5e81b04dfdb0fb4d909d47efb303dcbd98ba2f2b5a1cc53b80c658a070b7a19",
+  "automation/dual_lane_payload/files/scripts/prepare_dual_lane.py": "ba020b16742ae2aebde89fa55d24d2107900b7c0d633bbeb0e636c25f434aff9",
+  "automation/dual_lane_payload/files/scripts/rtl_lint_waivers.json": "baea0a07700205a321768c629d3c80626d44168b3ec935ce8a23e0e25c6381fd",
+  "automation/dual_lane_payload/install_journal.json": "c9fd533e42e85ff4695b4c7eda7c0dc6e2ca032010e03ca01904bc49ccea517b",
+  "automation/dual_lane_payload/update_manifest.json": "a0c456c4845626b570361dc0f132e951b66304013bf6c232b30a15199bcd8ac9",
+  "reports/dual_lane_latest.json": "5e2674fa73e1e68e0e93d2aae8230b6e5bea8ac13f1847060722f316ca111b32"
+ },
+ "registry_sha256": "c5e81b04dfdb0fb4d909d47efb303dcbd98ba2f2b5a1cc53b80c658a070b7a19",
+ "generator_sha256": "7ee7bcf97bdf3d9bc87f66e68f55ee8a9eebe8262b5503a3ae0914477771bcd9",
+ "vectors": {
+  "sim/dual_lane/arbiter/arb_trace.mem": "2f2aa838d6767eea3b2b629f4b5e09bdabf1d1105d1d3761b04744a824101611",
+  "sim/dual_lane/arbiter/arb_trace_hdr.mem": "01dcf0296fd49c3cd0732ff565b3b1b0a11af527f1eebf59fc0420182281012a",
+  "sim/dual_lane/l2engine/l2e_keys.mem": "863f65b2561fffe839d9571cb4c126b8bb6e93a161492973df227ea1d8ef102a",
+  "sim/dual_lane/l2engine/l2e_vec.mem": "dfd640d480cd44ff9a8a22f1ed3fd9dca56e06eab6aa27c0f17402537757e50f",
+  "vectors/endpoint_golden.json": "029d61bec180ed088d8efc76b0b74cfaa835037877a275c577c83414c8391537",
+  "vectors/endpoint_golden.svh": "b2b6538112701141388601a4e2c1e8cf37053a9c9133c608aa52eb1baf82d716",
+  "vectors/full_chain.json": "bbac60a9d519099dedff689a5bbb84b5a0df456e9bd8622a9b661e02c37ac950",
+  "vectors/full_chain.svh": "eb38c2501903229287ab650c8c590fd1660d0b95f02814dafbcd3a05c03564f6",
+  "vectors/l2_golden.json": "f1d232c7b46fe85770c07e4ac5efaadcf6950adaedeca3c02649f76b7c5862a2",
+  "vectors/l2_golden.svh": "b83fc2c37a4a5599fd6a972f1bc6027c19e64b470a06e8ada819303d0133081c",
+  "vectors/s8_golden.json": "78a9b90c6e0ea04ba9e1ab8f49ff9571005e865c0dde5be6c866787bd2b31c8d",
+  "vectors/s8_golden.svh": "a4aee0b6d6f8be9c7d2e8288078dc2be964cdf28b9201ffa023554e5c714ccbe"
+ },
+ "python_reference_zip": {
+  "path": "Pq_Attest_final.zip",
+  "sha256": "047bb5a981050f11a572a60e850f7c7511ff5d636f7903c6a8d239891003c6a0"
+ },
+ "history_runs_never_promoted": [
+  "dual_lane_10_20261021_110813_699a912c (F2-F4 reproducer on the pre-fix RTL, FAIL 26/20)",
+  "dual_lane_10_20261021_113307_05c7e3fd (post-fix rev-6, INVALID 26/3: F2_DEAUTH on the single-slot L2)"
+ ],
+ "note": "Unqualified step c/d work is committed in 29ee116 / decd346; registry not regenerated since 3ee3145."
+}

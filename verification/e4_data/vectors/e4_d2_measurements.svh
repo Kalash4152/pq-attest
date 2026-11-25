@@ -1,0 +1,133 @@
+//=============================================================================
+// File   : d2_k3_64.svh
+// Module : D2 64-byte IMEM measurement test vectors
+//
+//   M = SHA3-256( TILE_ID || CONFIG || IMEM )
+//
+// Calculation:
+//   7 + 16 + 64 = 87 bytes <= 135 bytes (Single-block absorption)
+//
+// Generated from authoritative teammate reference:
+//   software/pq_attest_final/PQ_Attest/software/measurement_ref.py
+//   Package SHA-256: 047bb5a981050f11a572a60e850f7c7511ff5d636f7903c6a8d239891003c6a0
+//
+// BYTE ORDER CONVENTION:
+//   Every bus is byte i at [i*8 +: 8] (RTL order: byte 0 at LSB).
+//   Printed hex (big-endian) is provided in comments beside each literal.
+//=============================================================================
+
+`ifndef D2_K3_64_SVH
+`define D2_K3_64_SVH
+
+localparam int D2_NUM_VECTORS     = 12;
+localparam int D2_TILE_ID_BYTES   = 7;
+localparam int D2_CONFIG_BYTES    = 16;
+localparam int D2_IMEM_BYTES      = 64;
+localparam int D2_TOTAL_BYTES     = 87;
+localparam int D2_MEASURE_BYTES   = 32;
+
+// Vector Indices
+localparam int D2_IDX_V01_STD_TILE01     = 0;
+localparam int D2_IDX_V02_SENS_BYTE16    = 1;
+localparam int D2_IDX_V03_SENS_BYTE63    = 2;
+localparam int D2_IDX_V04_ALL_ZEROS_T00  = 3;
+localparam int D2_IDX_V05_ALL_ZEROS_T01  = 4;
+localparam int D2_IDX_V06_ALL_ONES_T01   = 5;
+localparam int D2_IDX_V07_TILE_00        = 6;
+localparam int D2_IDX_V08_TILE_01        = 7;
+localparam int D2_IDX_V09_TILE_02        = 8;
+localparam int D2_IDX_V10_TILE_03        = 9;
+localparam int D2_IDX_V11_TILE_04        = 10;
+localparam int D2_IDX_V12_TILE_05        = 11;
+
+// Vector Name Helper Function
+function automatic string d2_vector_name(input int idx);
+    case (idx)
+         0: return "V01_STD_TILE01";
+         1: return "V02_SENS_BYTE16";
+         2: return "V03_SENS_BYTE63";
+         3: return "V04_ALL_ZEROS_T00";
+         4: return "V05_ALL_ZEROS_T01";
+         5: return "V06_ALL_ONES_T01";
+         6: return "V07_TILE_00";
+         7: return "V08_TILE_01";
+         8: return "V09_TILE_02";
+         9: return "V10_TILE_03";
+        10: return "V11_TILE_04";
+        11: return "V12_TILE_05";
+        default: return "UNKNOWN";
+    endcase
+endfunction
+
+// ----------------------------------------------------------------------------
+// Vector Arrays (RTL byte order: byte 0 at LSB)
+// ----------------------------------------------------------------------------
+localparam logic [55:0] D2_TILE_IDS [D2_NUM_VECTORS] = '{
+    56'h31305f454c4954, // V01_STD_TILE01: "TILE_01"
+    56'h31305f454c4954, // V02_SENS_BYTE16: "TILE_01"
+    56'h31305f454c4954, // V03_SENS_BYTE63: "TILE_01"
+    56'h30305f454c4954, // V04_ALL_ZEROS_T00: "TILE_00"
+    56'h31305f454c4954, // V05_ALL_ZEROS_T01: "TILE_01"
+    56'h31305f454c4954, // V06_ALL_ONES_T01: "TILE_01"
+    56'h30305f454c4954, // V07_TILE_00: "TILE_00"
+    56'h31305f454c4954, // V08_TILE_01: "TILE_01"
+    56'h32305f454c4954, // V09_TILE_02: "TILE_02"
+    56'h33305f454c4954, // V10_TILE_03: "TILE_03"
+    56'h34305f454c4954, // V11_TILE_04: "TILE_04"
+    56'h35305f454c4954, // V12_TILE_05: "TILE_05"
+};
+
+localparam logic [127:0] D2_CONFIGS [D2_NUM_VECTORS] = '{
+    128'h0f0e0d0c0b0a09080706050403020100, // V01_STD_TILE01
+    128'h0f0e0d0c0b0a09080706050403020100, // V02_SENS_BYTE16
+    128'h0f0e0d0c0b0a09080706050403020100, // V03_SENS_BYTE63
+    128'h00000000000000000000000000000000, // V04_ALL_ZEROS_T00
+    128'h00000000000000000000000000000000, // V05_ALL_ZEROS_T01
+    128'hffffffffffffffffffffffffffffffff, // V06_ALL_ONES_T01
+    128'h0f0e0d0c0b0a09080706050403020100, // V07_TILE_00
+    128'h0f0e0d0c0b0a09080706050403020100, // V08_TILE_01
+    128'h0f0e0d0c0b0a09080706050403020100, // V09_TILE_02
+    128'h0f0e0d0c0b0a09080706050403020100, // V10_TILE_03
+    128'h0f0e0d0c0b0a09080706050403020100, // V11_TILE_04
+    128'h0f0e0d0c0b0a09080706050403020100, // V12_TILE_05
+};
+
+localparam logic [511:0] D2_IMEMS [D2_NUM_VECTORS] = '{
+    512'h4f4e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a19181716151413121110, // V01_STD_TILE01
+    512'h4f4e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221df1f1e1d1c1b1a19181716151413121110, // V02_SENS_BYTE16
+    512'hb04e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a19181716151413121110, // V03_SENS_BYTE63
+    512'h00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, // V04_ALL_ZEROS_T00
+    512'h00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, // V05_ALL_ZEROS_T01
+    512'hffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff, // V06_ALL_ONES_T01
+    512'h4f4e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a19181716151413121110, // V07_TILE_00
+    512'h4f4e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a19181716151413121110, // V08_TILE_01
+    512'h4f4e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a19181716151413121110, // V09_TILE_02
+    512'h4f4e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a19181716151413121110, // V10_TILE_03
+    512'h4f4e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a19181716151413121110, // V11_TILE_04
+    512'h4f4e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a19181716151413121110, // V12_TILE_05
+};
+
+localparam logic [255:0] D2_EXPECTED_MEASUREMENTS [D2_NUM_VECTORS] = '{
+    256'hcb7cc2dd1587fa7a906f75a2cdd6e880449c227ba8d05aa42ba99b0267a0445d, // V01_STD_TILE01: printed 5d44a067029ba92ba45ad0a87b229c4480e8d6cda2756f907afa8715ddc27ccb
+    256'h6c9d3406108fb415a8e1533bd94873473b3885ce325e9e83644c605262ae906d, // V02_SENS_BYTE16: printed 6d90ae6252604c64839e5e32ce85383b477348d93b53e1a815b48f1006349d6c
+    256'h8e5e051f52650e72d99060ec78f3612ed22893ab22569346cf8c4c7ed3314617, // V03_SENS_BYTE63: printed 174631d37e4c8ccf46935622ab9328d22e61f378ec6090d9720e65521f055e8e
+    256'ha634aae13f46548143c22de5115a192c697ec3ccacdbf98dcf6385022755c8d8, // V04_ALL_ZEROS_T00: printed d8c85527028563cf8df9dbacccc37e692c195a11e52dc2438154463fe1aa34a6
+    256'h7eeeda5d6fd4feb762aef03178bf014a9bb89b76f0a69023ae2a915efb00ae2b, // V05_ALL_ZEROS_T01: printed 2bae00fb5e912aae2390a6f0769bb89b4a01bf7831f0ae62b7fed46f5ddaee7e
+    256'h489d364cdbb390e3e9cf84eda0d310230fee3436ef591623670b282fa2130bfe, // V06_ALL_ONES_T01: printed fe0b13a22f280b67231659ef3634ee0f2310d3a0ed84cfe9e390b3db4c369d48
+    256'hefc6f40dc07f87193e5f361458ec4723f8dbe9348ebd739e373da6fb5f86e778, // V07_TILE_00: printed 78e7865ffba63d379e73bd8e34e9dbf82347ec5814365f3e19877fc00df4c6ef
+    256'hcb7cc2dd1587fa7a906f75a2cdd6e880449c227ba8d05aa42ba99b0267a0445d, // V08_TILE_01: printed 5d44a067029ba92ba45ad0a87b229c4480e8d6cda2756f907afa8715ddc27ccb
+    256'h5192cf617c60efcab9cfe5141ecc6afa9a3f9b6fb862f2ffd8d964379e644999, // V09_TILE_02: printed 9949649e3764d9d8fff262b86f9b3f9afa6acc1e14e5cfb9caef607c61cf9251
+    256'h742eb93df35f0e663096c39dde290d9a2caf58b39d5e3f57f11d8a984243ab4f, // V10_TILE_03: printed 4fab4342988a1df1573f5e9db358af2c9a0d29de9dc39630660e5ff33db92e74
+    256'h59409cd10f4fbeb75e2450eccdf4e6b2b9e4f27dc26c4bab4fdc3aea8a5493fa, // V11_TILE_04: printed fa93548aea3adc4fab4b6cc27df2e4b9b2e6f4cdec50245eb7be4f0fd19c4059
+    256'h4aa8544454c902e8becf0a4507e88796ae6ff4ca739e22e3ad38685a3e508a72, // V12_TILE_05: printed 728a503e5a6838ade3229e73caf46fae9687e807450acfbee802c9544454a84a
+};
+
+// ----------------------------------------------------------------------------
+// Standard Vector (V01) Dedicated Localparams
+// ----------------------------------------------------------------------------
+localparam logic [55:0]  D2_STD_TILE_ID  = 56'h31305f454c4954;  // "TILE_01"
+localparam logic [127:0] D2_STD_CONFIG   = 128'h0f0e0d0c0b0a09080706050403020100;
+localparam logic [511:0] D2_STD_IMEM     = 512'h4f4e4d4c4b4a494847464544434241403f3e3d3c3b3a393837363534333231302f2e2d2c2b2a292827262524232221201f1e1d1c1b1a19181716151413121110;
+localparam logic [255:0] D2_STD_MEAS_RTL = 256'hcb7cc2dd1587fa7a906f75a2cdd6e880449c227ba8d05aa42ba99b0267a0445d; // printed 5d44a067029ba92ba45ad0a87b229c4480e8d6cda2756f907afa8715ddc27ccb
+
+`endif // D2_K3_64_SVH

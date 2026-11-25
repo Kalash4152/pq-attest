@@ -1,0 +1,120 @@
+# Response to your final verification package (finalpqattest.zip, 2026-11-06)
+
+**From:** Kalash Bheda (Lane 1, NoC + PQ-Attest) · **To:** Engineer 4 (verification) · **Date:** 2026-11-06
+
+**Short version:** we received the package and re-ran everything, and your headline numbers reproduce exactly. F1 and F3
+are fixed. We have imported the updated suite into the main repository as a new registered job. Three things need
+correcting: the Step 12 / 13 latency and timeout model (it does not match our design), the D2 vector file name (it
+collides with ours), and the Step 18 RTL mutant list (the document and the JSON disagree, and several targets are
+wrong). We implemented the useful mutant proposals as real RTL controls; results are in section 5.
+
+---
+
+## 1. What we received
+
+| Item | Value |
+|---|---|
+| `finalpqattest.zip` | 50,030,890 bytes, SHA-256 `176b162fa8eab457a0f03c992ec078b9381bb2a2c28ddc8a3a810a08c0cf7d55`, 4,743 entries |
+| `E4_P7_FINAL_HANDOFF_20261106.zip` inside it | 780,600 bytes, SHA-256 `c23e9b99...769c`: **matches your handoff** |
+| Your git HEAD | still `b62b78d`: **this round's work is not committed in your tree.** Please commit it so the handoff has a commit id |
+
+## 2. What we re-ran
+
+| Your claim | Our re-run | Result |
+|---|---|---|
+| pytest 387 / 387 | `python -m pytest verification` | **387 passed** |
+| `p7_regression.py --full` 15 / 15 | same | **15 / 15** |
+| `--validate-only --baseline s4` and `nov3` | same | **6 / 6 active** each |
+| (new) your suite on **our live sources** (release + integration files you have not seen) | staged copy | **387 / 387, 15 / 15** |
+
+## 3. Accepted
+
+- **F1 (pinned KMAC reference): fixed.** `p7_kmac_adapter.py` loads the pinned teammate `kmac128_ref.py` and refuses the
+  demoted copy. The six teammate modules you ship are byte-identical to our pinned copy. Good.
+- **F3 (portability): fixed.** `--repo-root / --data-dir / --out`, and stage 12 now runs `pytest verification`.
+- **D2 values: correct.** All 12 measurements match an independent hashlib SHA3-256 check, and your TILE_03 vector equals
+  our registered I-10 vector: a useful independent cross-check.
+- **S4 evidence:** your `PQ_Attest_S4_Evidence/` is byte-identical to the package we exported.
+- **Link monitor (Step 11), pair matrix (Step 3), figures (Step 17):** accepted as Python tooling. The figures are not
+  used in the paper until their source numbers are checked (see 4.1 for figures 05 / 06).
+
+**Classification (please keep this wording):** Python model checking, reproduced. Not RTL simulation, not RTL mutation
+testing, not hardware, not formal.
+
+## 4. Corrections
+
+### 4.1 Step 12 / 13 latency and timeout model: does not match our design (REJECTED as evidence)
+
+| Your model | Our registered design | Source |
+|---|---|---|
+| attestation round trip 78-126 cycles | **1,204 cycles** (min = mean = max over 4 attestations, full subsystem) | reports/I5_GATE_20261029.md |
+| 1,000-cycle timeout, "11.6x margin" | **BRIDGE_TIMEOUT 4,096** (contract D7), VERIFIER_TIMEOUT 100,000, NI_SLOT_TIMEOUT 8,192 in the merged build | M-F1 rev 8 |
+| 4 NI slots | **2** (`N_OUTSTANDING = 2`, checked by the hop-probe bench `CFG_N_OUTSTANDING`) | rtl/dual_lane/NOC_PKG.sv |
+| KMAC 72 cycles | not measured this way in our design; take crypto latency from the registered benches, not a formula | — |
+
+Why it matters: contract D7 says BRIDGE_TIMEOUT stays 4,096 **until your Step 12 worst-case model is accepted**. A 1,000-cycle
+timeout is *shorter* than the ~1.2k cycles the tile-3 port is legitimately held during an attestation (contract sec. 3
+rule 6), so adopting it would make the bridge time out on correct traffic. Please rebuild Step 12 from our registered
+numbers: the I-5 round-trip table, the C4 REVOKE maximum (486 cycles, bound 1,500), the signed arbiter bounds (P <= 269,
+Q <= 792), and NI / mesh latency from the hop probes. Label anything derived as `DERIVED_ANALYTICAL_BOUND` and anything
+measured with its run id. Then propose a BRIDGE_TIMEOUT. Figures 05 and 06 depend on this model and need regenerating.
+
+### 4.2 D2 vector file name collides with our registered vectors
+
+Your `vectors/d2_k3_64.json/.svh` has the same names as our registered I-10 vectors (different format: ours carries the
+full provisioning set that `tb_i10_d2` includes). We never overwrite registered reference vectors, so yours are stored
+as `verification/e4_data/vectors/e4_d2_k3_64.*` and staged at your path only inside the temporary test copy. Please rename
+them in your tree (for example `vectors/e4_d2_measurements.*`), or read ours.
+
+### 4.3 Step 18 RTL mutant proposals: document and JSON disagree; several targets are wrong
+
+- The handoff document lists targets such as `TRNG_SOURCE.sv` and `pq_kdf_message_builder.sv`; the JSON
+  (`verification/generated/p7_rtl_mutant_proposals.json`) lists `NOC_XY_ROUTING.sv`, `NOC_PKG.sv`, and others. One source of truth
+  please (the JSON, generated by the script).
+- Wrong locations: the BRAM window and byte enables live in `pq_noc_subsystem_p7_i9.sv` (tile-2 front end), not in
+  `noc_ingress_quarantine.sv`; the I-9 NI logic is in `noc_network_interface_p7_i9.sv`, not the plain NI; the verifier has no
+  separate epoch or tile-ID compare: both are bound into the expected tag.
+- `TRNG_SOURCE.sv` is not part of this design: the nonce is a deterministic demo issuer (no TRNG claim).
+
+## 5. What we did with your Step 18 proposals (triage + real RTL controls)
+
+We mapped all 15 JSON proposals onto our real files and our 49 existing killed RTL controls (full table:
+reports/E4_FINAL_INTAKE_20261106.md sec. 3).
+
+| Outcome | Proposals |
+|---|---|
+| Already covered by an existing killed control | 02 credit, 05 NI timeout, 06 stale response, 07 L2 tag, 08 epoch (bound in the tag), 09 gate at reset, 13 IMEM 16 B, 14 tile ID (bound in the tag), 15 nonce reuse |
+| **Real gaps: implemented and registered (I-11, all PASS)** | **01 routing Y before X**, **03 attestation on VC 0**, **10 BRAM window overshoot** |
+| Not a killable control | 04 FIFO full check (credit flow control never writes a full FIFO), 12 length > 135 (unreachable past K-3), 11 wstrb = 0 (spec question, not a defect) |
+
+**Thank you for 01 and 03: they found real oracle gaps.** Both mutants survived every bench we had (the hop-probe bench
+passed 414 / 414 with each one): YX routing keeps the hop counts, and every bench computed the expected VC with the same
+package function it would be testing. We added a spec-literal bench, `tb_i11_noc_spec` (36 XY routes and 8 VC rows, expected
+values written from the M-F1 spec, not from the package). Registered run `dual_lane_10_20261106_163900_ff77f562`:
+
+| Control | Killed by |
+|---|---|
+| `i11_mut_yfirst` | 12 x `SPEC_XY_*` (every diagonal route) |
+| `i11_mut_attest_vc0` | 4 x `SPEC_VC_ATTEST_4..7` |
+| `i11_mut_window_over` | `I9_WINDOW_OUT_ERR` (an out-of-window access reached the BRAM) |
+
+Your suite also runs as job `e4_verification_v2` in the same increment: **387 / 387, 15 / 15**.
+
+## 6. Requests for your next round (priority order)
+
+1. Commit your work (HEAD is still `b62b78d`).
+2. Rebuild Step 12 / 13 from our registered numbers (4.1) and propose a BRIDGE_TIMEOUT.
+3. Rename your D2 vector files (4.2).
+4. Regenerate the Step 18 list from the JSON only, with the correct files (4.3), and mark which ones we have now
+   implemented (section 5).
+
+## 7. Status line
+
+`E4_FINAL_PACKAGE: ACCEPTED (Python model checking; 387/387 + 15/15 reproduced on your sources and ours; F1, F3 closed)`
+`REJECTED AS EVIDENCE: Step 12 / 13 latency + timeout model (contradicts registered design)`
+`OPEN: commit id, Step 12 rebuild, D2 file name, Step 18 list`
+`HARDWARE_VALIDATED=NO  SOC_INTEGRATION_COMPLETE=NO  FORMAL_PROOF=NO`
+
+Thanks. The package was clean to audit, and the numbers held up.
+
+Kalash

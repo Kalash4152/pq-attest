@@ -1,0 +1,17 @@
+﻿00:35:14 GATE free=3.33GB pagefile=19456MB need free>=1GB pagefile>=8192MB
+00:35:15 STARTED select=b3 scheduler=4880 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261021_003514_99ef25e7 log=C:\Users\kalas\AppData\Local\Temp\i3_b3_20261021_003513.log
+00:35:15 free=3.26GB
+00:35:18 DONE arbiter_model state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[vivado=2MB xsimk=10MB] free=3.22GB
+00:35:18 DONE kshare_variant state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[] free=3.2GB
+00:35:45 DONE ks_s8_golden state=PASS_FRESH xsimkernel_peak=13244KB proc_peak[vivado=564MB xelab=116MB xsim=115MB xsimk=10MB xvlog=31MB] free=2.84GB
+00:36:05 DONE ks_s8_mut_lost_measurement state=PASS_FRESH xsimkernel_peak=13256KB proc_peak[vivado=554MB xelab=103MB xsim=207MB xsimk=10MB] free=2.91GB
+00:36:26 DONE ks_s8_mut_lost_tag state=PASS_FRESH xsimkernel_peak=13260KB proc_peak[vivado=563MB xelab=100MB xsim=206MB xsimk=11MB xvlog=40MB] free=3.13GB
+00:36:49 DONE ks_s8_mut_key_length state=PASS_FRESH xsimkernel_peak=13264KB proc_peak[vivado=564MB xelab=113MB xsim=207MB xsimk=10MB] free=2.9GB
+00:37:09 DONE ks_s8_mut_wrong_transcript state=PASS_FRESH xsimkernel_peak=13240KB proc_peak[vivado=553MB xelab=103MB xsim=207MB xsimk=10MB] free=3.15GB
+00:37:30 DONE ks_s8_mut_field_order state=PASS_FRESH xsimkernel_peak=13264KB proc_peak[vivado=565MB xelab=102MB xsim=206MB xsimk=11MB xvlog=31MB] free=3.22GB
+00:37:50 DONE ks_s8_mut_stale_nonce state=PASS_FRESH xsimkernel_peak=13240KB proc_peak[vivado=566MB xelab=109MB xsim=206MB xsimk=11MB xvlog=31MB] free=3.1GB
+00:38:13 DONE ks_s8_mut_wrong_key state=PASS_FRESH xsimkernel_peak=13268KB proc_peak[vivado=577MB xelab=103MB xsim=207MB xsimk=13MB] free=3.28GB
+00:38:33 DONE ks_s8_control_after state=PASS_FRESH xsimkernel_peak=13256KB proc_peak[vivado=566MB xelab=102MB xsim=206MB xsimk=11MB xvlog=31MB] free=3.42GB
+00:38:54 DONE ks_pq_endpoint_unit state=PASS_FRESH xsimkernel_peak=13936KB proc_peak[vivado=565MB xelab=31MB xsim=206MB xsimk=11MB] free=3.36GB
+00:39:25 DONE ks_pq_endpoint_sys state=PASS_FRESH xsimkernel_peak=30380KB proc_peak[vivado=564MB xelab=281MB xsim=213MB xsimk=30MB] free=3.36GB
+00:39:47 scheduler exited stopped=False

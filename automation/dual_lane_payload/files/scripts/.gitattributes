@@ -1,0 +1,9 @@
+# Historical WP-0 helper provenance is pinned by raw file hash.
+.gitattributes -text
+wp0_common.tcl -text
+wp0_support.ps1 -text
+dual_lane_support.ps1 -text
+dual_lane_jobs.json -text
+controlled_diagnostics.py -text
+prepare_n6_credit_window.py -text
+test_controlled_diagnostics.py -text

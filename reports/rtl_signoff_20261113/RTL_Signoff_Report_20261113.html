@@ -1,0 +1,215 @@
+<html><head><meta charset="utf-8"><title>Final RTL design-freeze sign-off report</title><style>body{font-family:Calibri,Arial,sans-serif;font-size:10.5pt;line-height:1.15}p{margin:0 0 6pt 0}.title{font-size:22pt;font-weight:bold;margin:0 0 6pt 0}h1{font-size:15pt;margin:12pt 0 6pt 0;color:#17365D}h2{font-size:12pt;margin:10pt 0 4pt 0}.verdict{font-size:12.5pt;font-weight:bold;border:1.5pt solid #17365D;padding:6pt;margin:8pt 0}.q{font-weight:bold;margin-top:8pt}.note{font-size:9.5pt;color:#444}table{border-collapse:collapse;width:100%;margin:0 0 8pt 0}th{background:#17365D;color:#fff;font-size:9.5pt;text-align:left;border:1px solid #D9D9D9;padding:3pt 4pt}td{font-size:9.5pt;border:1px solid #D9D9D9;padding:3pt 4pt;vertical-align:top}tr.alt td{background:#F1F5F9}li{margin:0 0 4pt 0}@page{size:8.5in 11in;margin:0.6in 0.6in}</style></head><body><p class="title">Final RTL design-freeze sign-off report</p>
+<p>NoC + PQ-Attest + two RISC-V CPU tiles  |  Artix-7 xc7a100tcsg324-1, Arty A7-100T  |  Audit date 13 November 2026  |  Prepared for Kalash Bheda</p>
+<p>Audited revision: branch noc/credit-integration, commit 8fe96984. The active RTL, constraints and firmware are identical to tag rtl-rc1-20261112 (commit 416379e1); the only later source change is the block-design shell synth/merged/pq_merged_board_bd_ref.v, which is not in the build list.</p>
+<p class="verdict">Conclusion: B. RTL CONDITIONALLY CLOSED: specific verification and implementation conditions remain.</p>
+<p>The hardware RTL is functionally complete for the approved scope and can be frozen now. No defect was found that breaks the demonstrated behaviour of the board build. Closure is conditional because (1) the measured 64-byte firmware window contains only the jump stub of the current firmware, which weakens the &quot;firmware is measured&quot; claim and needs your decision; (2) the demo firmware turns itself into FAIL after a few minutes without a button press; (3) the current image has not been run on the board; and (4) several verification gaps and latent corner-case defects are documented below. None of these needs a change to the protected RTL files.</p>
+<h1>1. Executive engineering verdict</h1>
+<table>
+<tr><th width="28%">Question</th><th width="32%">Answer</th><th width="40%">Evidence</th></tr>
+<tr class=""><td>Is the RTL implementation complete?</td><td>Yes, for the approved scope.</td><td>Original R4 plan NOC 5/5 and PQ 5/5; increments I-9 to I-26 PASS; all 70 active sources read by independent reviewers.</td></tr>
+<tr class="alt"><td>Is the original approved scope satisfied?</td><td>Yes for the approved scope. The original one-page proposal had items that were later scoped out (section 3).</td><td>docs/CODEX_INSTRUCTIONS_R4_FINAL, RESEARCH_SCOPE_AND_GDS_PLAN, DECISION_REGISTER.</td></tr>
+<tr class=""><td>Is the architecture correct?</td><td>Yes. The RTL matches the approved six-tile architecture; all connections checked.</td><td>Reviewer traces of pq_noc_subsystem_p7, pq_soc_merged_core, board top.</td></tr>
+<tr class="alt"><td>Are all active modules integrated?</td><td>Yes. 70 sources, no unused active module except noc_addr_decoder (test-only, harmless).</td><td>Source list scripts/merged_bitstream_sources.tcl; synthesis log.</td></tr>
+<tr class=""><td>Is the verification evidence sufficient?</td><td>Sufficient for the demonstrated behaviour; gaps remain (no coverage, no formal, a few weak checks).</td><td>Section 5.</td></tr>
+<tr class="alt"><td>Are existing results current and reproducible?</td><td>Yes. Preflight PASS, harness self-tests PASS, fresh simulations PASS, current build gate PASS.</td><td>Section 5 and 6.</td></tr>
+<tr class=""><td>Are mandatory RTL tasks outstanding?</td><td>No mandatory RTL change found. Two firmware items and one scope decision remain.</td><td>Defect register, section 8.</td></tr>
+<tr class="alt"><td>Can the RTL be frozen?</td><td>Yes, conditionally (section 13).</td><td>Section 9 checklist.</td></tr>
+<tr class=""><td>Is the design ready for final FPGA validation?</td><td>Yes, with the button-timing note in section 10.</td><td>Gate PASS on the 12 Nov build.</td></tr>
+<tr class="alt"><td>Can ASIC RTL-to-GDSII planning begin?</td><td>Yes. ASIC adaptations are wrapper/configuration work, not RTL rework.</td><td>Section 11.</td></tr>
+</table>
+<h1>2. Audited project baseline</h1>
+<table>
+<tr><th width="24%">Item</th><th width="76%">Value</th></tr>
+<tr class=""><td>Repository</td><td>C:\vivado_verilog_proj\NOC_PQATTEST, branch noc/credit-integration, HEAD 8fe96984</td></tr>
+<tr class="alt"><td>Working tree</td><td>Uncommitted: NOC_PQATTEST.xpr and two line-ending-only decision documents (standing practice). Untracked, not in any build: pq_attest_protocol_pkg.sv, pq_attest_request.sv, pq_attest_response.sv, backup copies, the GUI block-design source set.</td></tr>
+<tr class=""><td>Top level</td><td>pq_merged_board_top (board wrapper) &gt; pq_soc_merged_core &gt; two cpu_tile_noc + pq_noc_subsystem_p7 + tile-2 BRAM</td></tr>
+<tr class="alt"><td>Active sources</td><td>70 files + firmware sw/riscv/demo_fw_v2.hex, from scripts/merged_bitstream_sources.tcl</td></tr>
+<tr class=""><td>Defines</td><td>PQ_MAC_ON, CPU_TILE_MODULE=cpu_tile_noc, REAL_CPU_TILE</td></tr>
+<tr class="alt"><td>Constraints</td><td>synth/merged/pq_merged_board_arty.xdc (12 pins, 100 MHz clock, MMCM-derived 50 MHz design clock)</td></tr>
+<tr class=""><td>Device, board, clock</td><td>xc7a100tcsg324-1, Arty A7-100T, one 50 MHz clock</td></tr>
+<tr class="alt"><td>Tools</td><td>Vivado / XSim 2024.1 (build 5076996); Python 3.13; no Verilator; no formal tool; no code-coverage collection</td></tr>
+<tr class=""><td>Verification harness</td><td>scripts/dual_lane.py with 615 registered jobs (501 simulation incl. 231 mutants, 64 Python, 22 OOC synthesis, 12 implementation, 10 reuse, 6 unimplemented gates)</td></tr>
+<tr class="alt"><td>Current build</td><td>12 Nov 2026 17:35 (GUI flow): image sha256 2b2518be...2913; release flow 14:05: 9dd6dca6...7000</td></tr>
+<tr class=""><td>ASIC artifacts</td><td>None (plan only: docs/proposals/RESEARCH_SCOPE_AND_GDS_PLAN_20261106.md)</td></tr>
+</table>
+<h2>Files inspected</h2>
+<table>
+<tr><th width="22%">Group</th><th width="50%">Files</th><th width="28%">Inspected by</th></tr>
+<tr class=""><td>NoC core</td><td>13 (packages, FIFO, crossbar, XY routing, arbiter, allocator, credit counter, datapath, router, mesh, address decoder, NI p7_i9)</td><td>Independent reviewer, every line</td></tr>
+<tr class="alt"><td>Cryptography</td><td>29 (Keccak, SHA3, KMAC, KDF, measurement, tag, shared-engine variants)</td><td>Independent reviewer, every line, against FIPS 202 / SP 800-185 and the Python reference</td></tr>
+<tr class=""><td>Attestation and subsystem</td><td>13 (protocol s3, L2 arbiter / engine / auth / pair, quarantine, parser, endpoint, gate, fault status, verifier, reset bridge, subsystem)</td><td>Independent reviewer, every line, against M-F1 rev 9</td></tr>
+<tr class="alt"><td>RISC-V tiles, core, board</td><td>14 + XDC + firmware source (PicoRV32 itself: integration only)</td><td>Independent reviewer, every line</td></tr>
+<tr class=""><td>Verification environment</td><td>Harness, registry, 8 top-level benches in full, gate reports I-24 to I-26</td><td>Independent reviewer</td></tr>
+<tr class="alt"><td>Tool evidence</td><td>Synthesis and implementation logs, gate summary, timing, CDC, methodology, DRC reports of the current build</td><td>Audit lead</td></tr>
+</table>
+<p class="note">Not inspected line by line: the third-party PicoRV32 core (integration only), about 580 older benches beyond their headers, waveform files.</p>
+<br clear="all" style="page-break-before:always"><h1>3. Original plan versus actual implementation</h1>
+<p>Sources: the original one-page proposal (PQ-Attest_OnePager.pdf), the approved plan docs/CODEX_INSTRUCTIONS_R4_FINAL_2026-10-08.md (five NoC and five PQ-Attest steps, increments I-1 to I-8), later approved revisions M-F1 rev 6 to rev 9, and docs/proposals/RESEARCH_SCOPE_AND_GDS_PLAN_20261106.md (approved scope and exclusions).</p>
+<table>
+<tr><th width="4%">#</th><th width="20%">Requirement</th><th width="12%">Source</th><th width="25%">Implementation</th><th width="21%">Verification evidence</th><th width="18%">Status</th></tr>
+<tr class=""><td>R1</td><td>Two RV32I soft cores</td><td>One-pager</td><td>Two PicoRV32 tiles (tiles 3 and 0), with MUL/DIV/compressed enabled</td><td>Closure bench (fresh), board 7 Nov</td><td>VERIFIED COMPLETE</td></tr>
+<tr class="alt"><td>R2</td><td>2D mesh NoC, deterministic XY routing</td><td>One-pager, NOC-1..5</td><td>3x2 mesh, 6 routers, 5 ports, wormhole, credits, 3 VCs</td><td>tb_i11_noc_spec + XY mutant, tb_noc_mesh</td><td>VERIFIED COMPLETE</td></tr>
+<tr class=""><td>R3</td><td>Memory subsystem</td><td>One-pager</td><td>Tile-2 BRAM behind a front end that checks authorization at access time</td><td>Closure, phase sweep, in-flight benches</td><td>VERIFIED COMPLETE</td></tr>
+<tr class="alt"><td>R4</td><td>Hardware root of trust</td><td>One-pager, PQ-2..5</td><td>RoT verifier on tile 4: CHALLENGE, GRANT, REVOKE, timeout</td><td>Full-chain, verifier-revoke, closure</td><td>VERIFIED COMPLETE</td></tr>
+<tr class=""><td>R5</td><td>Keccak / SHA-3 primitive</td><td>One-pager, PQ-1/PQ-3</td><td>Keccak-f[1600], SHA3-256, KMAC128, KDF</td><td>Vectors from the hash-pinned Python reference; NIST SP 800-185 sample</td><td>VERIFIED COMPLETE</td></tr>
+<tr class="alt"><td>R6</td><td>NTT (shared ML-KEM / ML-DSA kernel)</td><td>One-pager</td><td>Not implemented</td><td>none</td><td>APPROVED DEFERRED (scoped out: symmetric only)</td></tr>
+<tr class=""><td>R7</td><td>Post-quantum-signed measurement</td><td>One-pager</td><td>Symmetric KMAC128 tag instead of a signature</td><td>Full chain</td><td>APPROVED DEFERRED (scope: symmetric only)</td></tr>
+<tr class="alt"><td>R8</td><td>NI withholds routing until the tile is attested</td><td>One-pager, NOC-4</td><td>Per-tile authorization gates; tile 3 attestable; tile 0 refused locally</td><td>Gate benches + mutants, closure</td><td>VERIFIED COMPLETE (one tile attested)</td></tr>
+<tr class=""><td>R9</td><td>Continuous verification while running</td><td>One-pager</td><td>Authorization checked on every memory access; re-attestation on demand (button 1); no timer</td><td>Phase sweep, closure re-attest</td><td>PARTIALLY COMPLETE (no periodic re-attestation)</td></tr>
+<tr class="alt"><td>R10</td><td>Overhead vs non-attested baseline (area, latency, throughput)</td><td>One-pager</td><td>Fixed-admission research baseline built and measured</td><td>I-25 matched experiment</td><td>VERIFIED COMPLETE</td></tr>
+<tr class=""><td>R11</td><td>Spoofed-tile threat model over a physical link, second board</td><td>One-pager</td><td>SPOOF injection port + quarantine (simulation); no second board</td><td>tb_p7_ingress, tb_i7_sec</td><td>PARTIALLY COMPLETE (simulation only; tied off on the board)</td></tr>
+<tr class="alt"><td>R12</td><td>L2 link authentication with replay rejection</td><td>NOC-3, M-F1 rev 6/7</td><td>KMAC128 tag, 80-bit epoch, 64-bit sequence on tiles 3/4</td><td>tb_s2_attacks, tb_i7_sec + replay mutants</td><td>VERIFIED COMPLETE</td></tr>
+<tr class=""><td>R13</td><td>Measurement over tile ID, config and 64-byte IMEM window</td><td>D2 / K-3, RESEARCH_SCOPE</td><td>Implemented as specified</td><td>tb_i10_d2, closure</td><td>IMPLEMENTED; see finding D-01 (window holds only the jump stub)</td></tr>
+<tr class="alt"><td>R14</td><td>FPGA demonstration on the board</td><td>One-pager, plan step 12</td><td>Current image gate PASS; 7 Nov image &quot;PASS&quot; (not itemised)</td><td>HARDWARE_RUN_20261107.md</td><td>IMPLEMENTED BUT INSUFFICIENTLY VERIFIED (current image not on board)</td></tr>
+<tr class=""><td>R15</td><td>ASIC GDSII with the college Cadence flow</td><td>RESEARCH_SCOPE phase A</td><td>Not started</td><td>none</td><td>APPROVED DEFERRED (next phase)</td></tr>
+</table>
+<h2>Items flagged on the website as &quot;not built&quot;: why, and should we build them?</h2>
+<table>
+<tr><th width="20%">Item</th><th width="38%">Why it was not built</th><th width="42%">Should we build it?</th></tr>
+<tr class=""><td>Second board and physical attacker link</td><td>The spoofed-tile threat is exercised on one chip through the SPOOF injection port, which made a second board unnecessary for the protocol evidence. Integration time went to the two CPU tiles instead.</td><td>Not as two boards. The cheaper and stronger option is to drive the existing injection port from the board (for example a PMOD or a second UART into the quarantine) so the forged-packet rejection becomes board evidence instead of simulation only. That is a small RTL change in the board top plus a contract revision; worth doing only if the paper needs a hardware attack demonstration.</td></tr>
+<tr class="alt"><td>NTT, ML-KEM, ML-DSA, post-quantum signatures</td><td>Scoped out on 6 Nov (RESEARCH_SCOPE): the attestation protocol was built on symmetric KMAC128. A lattice signature engine would be a separate large block on an FPGA already at 55 % LUTs, and NTT alone is not a post-quantum scheme.</td><td>Not in this phase. Keep it as future work and keep the honest wording (&quot;symmetric, hash-based; post-quantum signatures not implemented&quot;). If the &quot;PQ&quot; claim must be strengthened, the realistic next step is a verify-only ML-DSA block in a separate study, not added to this frozen design.</td></tr>
+<tr class=""><td>Attestation of every tile</td><td>The demo needs one attested tile and one refused tile. Each attestable tile adds an endpoint (about 6,600 LUTs) and link authentication (about 6,600 LUTs for the pair).</td><td>No. The mechanism is per-tile and parameterised (ATTESTABLE); the paper can state that it generalises. Building more copies adds area, not new evidence.</td></tr>
+<tr class="alt"><td>Periodic (continuous) re-attestation</td><td>Rev 9 chose RoT- or button-started attestation only; a periodic start was not requested.</td><td>Optional and cheap: a timer in the board top (not a protected file) that pulses start_attestation every few seconds would match the original &quot;continuous&quot; wording. It changes behaviour, so it needs your decision and a re-run of the closure and lifecycle benches.</td></tr>
+<tr class=""><td>Formal proof, side-channel protection, TRNG</td><td>Out of scope by decision (RESEARCH_SCOPE section 4). No formal tool is available on this machine.</td><td>Formal: worth doing later on a few small properties (gate cannot set authorized without GRANT, replay rejected) if the college has JasperGold. Side-channel protection and a TRNG: no, state as limitations.</td></tr>
+<tr class="alt"><td>ASIC flow (RTL to GDSII)</td><td>Planned as the next phase; needs the college tools and PDK.</td><td>Yes, it is the next milestone (section 11).</td></tr>
+</table>
+<p class="note">Missed from the original plan in substance: the two-board physical attack demonstration, post-quantum signatures / NTT, attestation of every unit, and continuous re-attestation. All four were scoped out or narrowed by later decisions; none is an unfinished approved requirement.</p>
+<h1>4. File-by-file audit summary</h1>
+<table>
+<tr><th width="24%">Group / file</th><th width="22%">Purpose</th><th width="16%">Status</th><th width="38%">Findings</th></tr>
+<tr class=""><td>NOC_PKG, noc_p7_pkg</td><td>Types, header layout, per-type MAC</td><td>Clean</td><td>Duplicate package names across folders are kept apart by explicit source lists (INFO)</td></tr>
+<tr class="alt"><td>NOC_FIFO, CROSSBAR, XY_ROUTING, arbiter, allocator, credit counter, datapath</td><td>Router internals</td><td>Clean</td><td>No latch / driver / loop issues; wormhole lock per physical output (by design); unguarded immediate asserts (INFO); credit counter lacks `timescale (INFO)</td></tr>
+<tr class=""><td>noc_router, noc_mesh_3x2</td><td>Router and 3x2 mesh with LINK_PIPE</td><td>Clean</td><td>All 24 data and 14 credit links checked; out-of-mesh destinations would block a VC (LOW, unreachable)</td></tr>
+<tr class="alt"><td>noc_addr_decoder</td><td>Address decoder</td><td>Not used by the active design</td><td>Test-only</td></tr>
+<tr class=""><td>noc_network_interface_p7_i9</td><td>NI TX/RX, outstanding table, watchdog, slot timeout</td><td>One latent defect</td><td>D-03 slot double-free race (MEDIUM, latent)</td></tr>
+<tr class="alt"><td>Keccak / SHA3 / KMAC / KDF / measurement / tag (29 files)</td><td>Cryptography</td><td>Clean; conformance verified by reading</td><td>D-08 to D-11 (LOW, guarded by the parent); secrets kept in registers after use (INFO); dead logic (INFO); D-12 use-before-declaration in SHA3_256_xp.sv</td></tr>
+<tr class=""><td>pq_attest_protocol_s3, endpoint, verifier</td><td>Attestation protocol</td><td>Clean</td><td>D-07 GRANT vs fail ordering (LOW); nonce/epoch freshness is the input&#x27;s responsibility (INFO); stale &quot;not compiled&quot; header (INFO)</td></tr>
+<tr class="alt"><td>l2_arbiter, l2_kmac_engine, l2_auth, l2_pair</td><td>Link authentication</td><td>Clean</td><td>Replay rejection, full-width tags, owner routing all hold</td></tr>
+<tr class=""><td>ingress parser / quarantine / merge</td><td>Ingress checks</td><td>Clean</td><td>D-04 data packets to tile 4 can disturb attestation (MEDIUM, tied off on the board)</td></tr>
+<tr class="alt"><td>noc_attest_gate, noc_fault_status, rst_bridge</td><td>Authorization gate, fault record, reset</td><td>Clean</td><td>D-14 clear-vs-event ordering (LOW)</td></tr>
+<tr class=""><td>pq_noc_subsystem_p7_i9</td><td>Subsystem top, memory front end</td><td>Clean wiring</td><td>D-05 front end drops a request while busy (MEDIUM, not reachable in the merged build)</td></tr>
+<tr class="alt"><td>cpu_tile_noc, tile_top, adapter, decoder, memories, UART, GPIO, status</td><td>RISC-V tile</td><td>Clean</td><td>D-06 DMEM is executable (MEDIUM, scope); D-15 minor UART / poison behaviours (LOW)</td></tr>
+<tr class=""><td>tmem_app_bridge, meas_window_reader</td><td>Remote memory bridge, measurement window</td><td>Clean</td><td>Refusal never sends a packet (verified); window reads exactly bytes 0x00-0x3F</td></tr>
+<tr class="alt"><td>pq_soc_merged_core, pq_merged_board_top, XDC</td><td>Core and board wrapper</td><td>Clean</td><td>MMCM 1000 MHz VCO, exactly 50 MHz; all 13 ports pinned; synchronisers correct; missing ASYNC_REG (INFO)</td></tr>
+<tr class=""><td>demo_fw_v2.S / .hex</td><td>Demo firmware</td><td>Two issues</td><td>D-01 measured window holds only the jump stub (HIGH, scope); D-02 waits time out into FAIL after a few minutes (HIGH, demo)</td></tr>
+</table>
+<br clear="all" style="page-break-before:always"><h1>5. Verification evidence</h1>
+<h2>Fresh checks run for this audit (13 Nov 2026, current sources)</h2>
+<table>
+<tr><th width="18%">Check</th><th width="34%">Command / method</th><th width="12%">Checks</th><th width="10%">Result</th><th width="26%">Notes</th></tr>
+<tr class=""><td>Harness preflight</td><td>python -E scripts/dual_lane.py preflight</td><td>249 guarded files, 615 source lists</td><td>PASS</td><td>Protected files and harness unchanged</td></tr>
+<tr class="alt"><td>Harness self-tests</td><td>python -E scripts/test_dual_lane.py</td><td>150 tests</td><td>PASS</td><td>Includes the controlled-diagnostics tests</td></tr>
+<tr class=""><td>Freshness of sources</td><td>git diff since the accepted I-26 run (b80baee1)</td><td>-</td><td>PASS</td><td>Only the block-design shell changed; not in the build</td></tr>
+<tr class="alt"><td>Core changes since I-24</td><td>git diff -w 392deb80 05733498 (core) and 423a81c4 392deb80 (bridge)</td><td>-</td><td>Comments only / one elaboration-time check</td><td>Closes most of verification gap V-06</td></tr>
+<tr class=""><td>tb_merged_closure (14 checks)</td><td>xvlog --relax / xelab --standalone / axsim, 70 sources + bench, defines as the build</td><td>14/14</td><td>PASS</td><td>Real CPUs, firmware v2: measured boot, grant, CPU A success, CPU B refused, revoke, re-attest, both UARTs</td></tr>
+<tr class="alt"><td>tb_merged_inflight (6 checks)</td><td>same</td><td>6/6</td><td>PASS</td><td>Revoke while a request is in flight; no commit after the boundary</td></tr>
+<tr class=""><td>tb_merged_contention (8 checks)</td><td>same</td><td>8/8</td><td>PASS</td><td>CPU traffic overlapping a second attestation; exact accounting</td></tr>
+<tr class="alt"><td>CDC and timing checks</td><td>report_cdc, check_timing on the routed 12 Nov checkpoint (12 Nov 21:05)</td><td>-</td><td>PASS</td><td>No clock-to-clock crossings; 0 unconstrained endpoints, loops, latch loops</td></tr>
+<tr class=""><td>Static scans</td><td>grep of the 70 active sources</td><td>-</td><td>PASS</td><td>0 TODO/FIXME; 11 initial blocks: 8 guarded, 3 legitimate (FIFO $fatal check, PicoRV32 register init, BRAM firmware load)</td></tr>
+</table>
+<h2>Historical evidence (accepted gate runs)</h2>
+<p>Increments I-13 to I-26 PASS; I-25 accepted 17/17 in run 170116 (3 fresh, 14 identity-matched reuse); I-26 3/3 fresh in run 225013. Recorded failures (I-25 runs 132805 and 124233) were kept, diagnosed (tool environment, wall-clock timeout during sleep, a gate comparing the wrong property) and fixed with negative controls; no expected count was changed.</p>
+<h2>Verification gaps (not defects in the design)</h2>
+<table>
+<tr><th width="7%">ID</th><th width="38%">Gap</th><th width="28%">Evidence</th><th width="27%">Effect</th></tr>
+<tr class=""><td>V-01</td><td>MC_CONFIG_BINDING compares two testbench constants</td><td>tb_merged_closure.sv:77</td><td>That check cannot fail because of the DUT</td></tr>
+<tr class="alt"><td>V-02</td><td>The spoof injection helper does not confirm the flit was accepted</td><td>tb_i9_integ.sv:182-187</td><td>I9_UNAUTH_NO_BRAM could pass vacuously</td></tr>
+<tr class=""><td>V-03</td><td>CHECKS printed as a constant in two benches</td><td>tb_random_latency.sv:421, tb_mixed_conformance.sv:410</td><td>Skipped checks would not be caught by the count (offset by RESULT conditions)</td></tr>
+<tr class="alt"><td>V-04</td><td>Random-latency campaign covers instruction fetches only</td><td>tb_random_latency.sv:241-242</td><td>&quot;1000 seeds&quot; are 1000 single-read runs</td></tr>
+<tr class=""><td>V-05</td><td>&quot;Something happened&quot; style checks</td><td>tb_merged_inflight.sv:91,93; tb_merged_phase_sweep.sv:74; tb_i10_d2.sv:130</td><td>Weaker than exact expected values</td></tr>
+<tr class="alt"><td>V-06</td><td>In-flight and contention benches and their mutant controls last ran on an older hash of the core</td><td>Run records 020751 / 225013</td><td>Closed for the benches: code difference is comments plus one elaboration check, and both benches PASS fresh in this audit. The two mutant controls were not re-run.</td></tr>
+<tr class=""><td>V-07</td><td>No code coverage, no functional coverage on the final design, no formal proof</td><td>Harness has no coverage flags</td><td>Untested corners cannot be ruled out</td></tr>
+<tr class="alt"><td>V-08</td><td>Board run of the current image not done; 7 Nov run not itemised</td><td>HARDWARE_RUN_20261107.md</td><td>FPGA validation open</td></tr>
+</table>
+<h1>6. Compilation, lint, synthesis and timing</h1>
+<table>
+<tr><th width="24%">Item</th><th width="60%">Result</th><th width="16%">Status</th></tr>
+<tr class=""><td>Fresh XSim compile of all 70 sources</td><td>Compiles with the project flow option --relax. Strict compile fails on SHA3_256_xp.sv:70 (identifier used before declaration).</td><td>PASS with note (D-12)</td></tr>
+<tr class="alt"><td>Synthesis (12 Nov 17:35)</td><td>0 errors, 0 critical warnings. Warning classes: unconnected / unused PicoRV32 ports (expected), constant-driven ports, removed unused registers, ignored SVA, one unreachable PicoRV32 case item, one trimmed register (pq_measurement_xp.sv:80). No latch, multi-driver or loop warnings.</td><td>PASS</td></tr>
+<tr class=""><td>Implementation</td><td>Route errors 0, DRC 0, methodology 12 (11 XDCH-2 warnings: same min/max I/O delay; 1 RTGT-1 advisory). Four tool warnings (power estimate, virtual grid, DRC tab).</td><td>PASS</td></tr>
+<tr class="alt"><td>Timing at 20 ns</td><td>WNS +0.120 ns, TNS 0, WHS +0.009 ns, THS 0, pulse-width slack +3.000 ns. Hold margin is thin but positive.</td><td>PASS (current build)</td></tr>
+<tr class=""><td>Resources</td><td>34,952 LUT (55 %), 25,328 FF, 20 BRAM36, 0 DSP, 12 IOB</td><td>Measured</td></tr>
+<tr class="alt"><td>Firmware in the bitstream</td><td>Gate checks 4/4 IMEM BRAMs initialised for each CPU</td><td>PASS</td></tr>
+</table>
+<h1>7. Clock, reset and integration findings</h1>
+<ul><li>One clock domain: 100 MHz board clock to MMCM (VCO 1000 MHz, inside the 600-1200 MHz range of the -1 grade) to exactly 50 MHz; BUFGs on clock and feedback.</li><li>Reset: asserted asynchronously while the MMCM is unlocked, released synchronously after 16 clean cycles with button 0 released; the subsystem uses a 2-flop reset bridge.</li><li>Asynchronous inputs (three buttons, one switch) pass through two-flop synchronisers; buttons are debounced (2^20 cycles, about 21 ms). ASYNC_REG attributes are missing (INFO).</li><li>report_cdc lists no crossings; check_timing: 0 unclocked pins, 0 unconstrained endpoints, 0 loops. I/O paths are declared false with justification.</li><li>Integration: every parent-child connection in the subsystem, core and board top was checked for order, width and polarity; bench-only hooks (TB_INJECT, BYPASS_*) are off in the build.</li><li>UART: 434 clocks per bit, 115,207 baud (+0.006 %). Memories: 5 x 16 KB = 20 RAMB36.</li></ul>
+<br clear="all" style="page-break-before:always"><h1>8. Remaining defect register</h1>
+<table>
+<tr><th width="6%">ID</th><th width="9%">Severity</th><th width="15%">File / module</th><th width="18%">Problem</th><th width="12%">Evidence</th><th width="14%">Impact</th><th width="16%">Required action</th><th width="10%">Blocks freeze?</th></tr>
+<tr class=""><td>D-01</td><td>HIGH (scope)</td><td>sw/riscv/demo_fw_v2.S:3-6 with K3_IMEM_LEN=64</td><td>The 64 measured bytes hold only &quot;j main&quot;, &quot;j handler&quot; and NOPs; all program code from 0x40 is outside the measurement</td><td>Confirmed: first 16 hex words</td><td>A modified firmware with the same first 64 bytes passes attestation, which is the attack attestation is meant to catch. Runtime exposure is limited because the CPU cannot write its IMEM.</td><td>Decision (security scope, hard stop). Recommended: measure the whole IMEM in a contract revision (multi-block SHA3 over 16 KB is 121 blocks of 136 bytes; reading 4,096 words plus 121 permutations is roughly 8,000 cycles, about 0.16 ms at 50 MHz, re-using the existing core). Minimum: state in the paper that the window covers the boot vectors only. Re-arranging the firmware cannot fix it: 64 bytes hold 16 instructions.</td><td>Blocks the claim, not the RTL</td></tr>
+<tr class="alt"><td>D-02</td><td>HIGH (demo)</td><td>demo_fw_v2.S:59-66, 83-90</td><td>Wait loops run out after 268,435,455 iterations and jump to FAIL</td><td>Confirmed by reading; at about 30 to 40 cycles per iteration on PicoRV32 this is roughly 2.5 to 4.5 minutes (estimate, not measured)</td><td>Board shows a false FAIL if revoke / re-attest is not pressed in time</td><td>Firmware change (wait without a limit on the board, keep the bound in simulation), then re-run the closure profile and lifecycle benches; or a board procedure with a time limit. No RTL change; the measured window, and so APPROVED_MEAS, is unaffected (itself a symptom of D-01).</td><td>No (blocks a clean board demo)</td></tr>
+<tr class=""><td>D-03</td><td>MEDIUM (latent)</td><td>noc_network_interface_p7_i9.sv:765-770, 823-826</td><td>Slot timeout can free a slot in the same cycle its multi-flit response header is accepted</td><td>Confirmed by reading</td><td>Needs a read response exactly 16,384 cycles late; measured worst case is 459 cycles</td><td>Fix in a later revision (exclude the matching slot from ageing) or document</td><td>No</td></tr>
+<tr class="alt"><td>D-04</td><td>MEDIUM (availability)</td><td>pq_rot_verifier.sv:106-115; ingress policy</td><td>A data packet to tile 4 during verification makes attestation fail</td><td>Confirmed by reading</td><td>Denial of service only; impossible on the board (port tied off)</td><td>Document as limitation; destination policy if the port is ever enabled</td><td>No</td></tr>
+<tr class=""><td>D-05</td><td>MEDIUM (availability)</td><td>pq_noc_subsystem_p7_i9.sv:313</td><td>Memory front end ignores a request header that arrives while busy</td><td>Confirmed by reading</td><td>Not reachable in the merged build (one outstanding request, one authorised tile)</td><td>Document; fix if more tiles are authorised</td><td>No</td></tr>
+<tr class="alt"><td>D-06</td><td>MEDIUM (scope)</td><td>addr_decode.sv:231</td><td>Instruction fetch from writable DMEM is allowed</td><td>Confirmed by reading</td><td>Code written to DMEM can run unmeasured; demo firmware does not do it</td><td>Decision: accept and document, or refuse fetches from DMEM</td><td>No</td></tr>
+<tr class=""><td>D-07</td><td>LOW</td><td>noc_attest_gate.sv:39 vs :47</td><td>A GRANT in the same cycle as a trusted fail leaves authorized set until the following REVOKE</td><td>Confirmed by reading</td><td>Bounded transient</td><td>Document</td><td>No</td></tr>
+<tr class="alt"><td>D-08..D-11</td><td>LOW (latent)</td><td>SHA3_PAD.sv:17; pq_measurement.sv:72-73, 135; pq_kdf.sv:141-147, 223; kmac_128_xp_a5.sv:251-258</td><td>Full-block final not padded; oversize request dropped silently; context length 15 / key-length codes; start lost in DONE</td><td>Confirmed by reading; all guarded by the parent</td><td>None in this design</td><td>Document; fix only if the blocks are reused</td><td>No</td></tr>
+<tr class=""><td>D-12</td><td>LOW (portability)</td><td>SHA3_256_xp.sv:70</td><td>Identifier used before its declaration</td><td>Fresh strict compile error</td><td>Vivado accepts it with --relax; ASIC tools may not</td><td>Fix in an ASIC wrapper copy before Genus</td><td>No</td></tr>
+<tr class="alt"><td>D-13</td><td>LOW</td><td>NI:363; NOC_XY_ROUTING.sv:71; allocator.sv:210</td><td>Self-addressed packets cause an assertion message; an out-of-mesh destination would block a VC</td><td>Confirmed; both unreachable today</td><td>None now</td><td>Document</td><td>No</td></tr>
+<tr class=""><td>D-14</td><td>LOW</td><td>noc_attest_gate.sv:36; noc_fault_status.sv:8</td><td>Clear and fault event in the same cycle handled differently in two blocks</td><td>Confirmed by reading</td><td>Diagnostic counters only</td><td>Document</td><td>No</td></tr>
+<tr class="alt"><td>D-15</td><td>LOW</td><td>tmem_app_bridge.sv:175; adapter:212; uart_mmio.sv:57-74; board top:132</td><td>Stale error code, poison executed as an instruction, silent UART writes, possible UART low pulse at power-up</td><td>Confirmed (one suspected)</td><td>Cosmetic or firmware-only triggers</td><td>Document</td><td>No</td></tr>
+<tr class=""><td>INFO</td><td>INFO</td><td>various</td><td>Secrets stay in registers after use; dead logic; stale comments; missing ASYNC_REG; duplicate module names handled by source lists</td><td>Reviewer reports</td><td>None</td><td>Optional clean-up</td><td>No</td></tr>
+</table>
+<h1>9. RTL freeze checklist</h1>
+<table>
+<tr><th width="70%">Check</th><th width="30%">Result</th></tr>
+<tr class=""><td>All mandatory requirements accounted for</td><td>PASS</td></tr>
+<tr class="alt"><td>All mandatory modules implemented</td><td>PASS</td></tr>
+<tr class=""><td>No known functional blocker in the board build</td><td>PASS</td></tr>
+<tr class="alt"><td>No integration blocker</td><td>PASS</td></tr>
+<tr class=""><td>No critical lint / elaboration issue in the project flow</td><td>PASS (strict compile note D-12)</td></tr>
+<tr class="alt"><td>Regressions pass on the current baseline</td><td>PASS (accepted gates + fresh simulations PASS)</td></tr>
+<tr class=""><td>Warnings examined and classified</td><td>PASS</td></tr>
+<tr class="alt"><td>Configuration reproducible</td><td>PASS (four identical builds; preflight PASS)</td></tr>
+<tr class=""><td>Documentation reflects the hardware</td><td>PASS with notes (stale comments, D-01 wording)</td></tr>
+<tr class="alt"><td>Measurement binds the firmware as claimed</td><td>FAIL (D-01)</td></tr>
+<tr class=""><td>Demo firmware runs indefinitely without operator action</td><td>FAIL (D-02)</td></tr>
+<tr class="alt"><td>Code / functional coverage</td><td>NOT TESTED</td></tr>
+<tr class=""><td>Formal proof of security properties</td><td>NOT TESTED</td></tr>
+<tr class="alt"><td>Current image validated on the board</td><td>NOT TESTED</td></tr>
+</table>
+<h1>10. Remaining FPGA validation</h1>
+<p>Only the board run remains; synthesis, implementation, timing and bitstream are done for the current sources.</p>
+<table>
+<tr><th width="40%">Step</th><th width="60%">Acceptance criterion</th></tr>
+<tr class=""><td>1. Program the recorded image</td><td>Record the sha256 of the .bit programmed (2b2518be...2913 or 9dd6dca6...7000)</td></tr>
+<tr class="alt"><td>2. Power-up</td><td>LED 3 blinks (about 0.67 s period); within about 1 s LED 0 lights (tile 3 authorised)</td></tr>
+<tr class=""><td>3. CPU A UART (switch 0 down)</td><td>Text &quot;PASS T3 cycles=...&quot; and LED 2 on; LED 1 and the green LED off</td></tr>
+<tr class="alt"><td>4. CPU B UART (switch 0 up)</td><td>Text &quot;PASS T0 REFUSED OK&quot; and the red LED on</td></tr>
+<tr class=""><td>5. Revoke (button 2) within 2 minutes of power-up (D-02, safety margin on the 2.5 to 4.5 minute estimate)</td><td>LED 0 off; CPU A reports the refused access</td></tr>
+<tr class="alt"><td>6. Re-attest (button 1) within 2 minutes of the revoke</td><td>LED 0 on again; CPU A reports recovery</td></tr>
+<tr class=""><td>6b. Optional: wait 5 minutes without pressing anything</td><td>Confirms D-02 on hardware: LED 2 goes out and the green LED lights (expected with the current firmware)</td></tr>
+<tr class="alt"><td>7. Record</td><td>Itemised observations against the image hash in a hardware record</td></tr>
+</table>
+<h1>11. ASIC handoff assessment</h1>
+<table>
+<tr><th width="26%">Category</th><th width="74%">Item</th></tr>
+<tr class=""><td>A. Changes to existing RTL</td><td>None required by this audit.</td></tr>
+<tr class="alt"><td>B. Adaptations by wrapper or configuration</td><td>ASIC top without MMCM / BUFG (clock from a pad); memories as SRAM macros or smaller flip-flop arrays; firmware loading (the FPGA uses $readmemh initial values, an ASIC needs a boot ROM or loader); demo secrets as inputs or an OTP model; register file not zero-initialised (PicoRV32 REGS_INIT_ZERO is simulation only); fix D-12 in the ASIC copy.</td></tr>
+<tr class=""><td>C. Normal physical-design tasks</td><td>Genus synthesis with SDC from the XDC, Conformal LEC, Innovus floorplan / place / CTS / route, Tempus STA, Voltus power, DRC / LVS, gate-level simulation.</td></tr>
+<tr class="alt"><td>Prerequisites to confirm first</td><td>Licensed tools and server access; PDK (gpdk045 / 090 or a foundry PDK); SRAM compiler availability; standard-cell and technology files.</td></tr>
+</table>
+<h1>12. Scope decision</h1>
+<p>The existing RTL development scope can be closed. Freeze the 70 active sources, the constraints and the release recipe as of tag rtl-rc1-20261112. Two items need your decision before the board run and the paper: D-01 (what the measurement must cover) and D-02 (firmware wait limits). Both are firmware or contract decisions; neither touches a protected RTL file. Technology-specific adaptation (section 11) belongs to the ASIC phase. The items in section 3 marked deferred belong to future work.</p>
+<br clear="all" style="page-break-before:always"><h1>13. Final sign-off matrix</h1>
+<table>
+<tr><th width="18%">Sign-off gate</th><th width="16%">Verdict</th><th width="36%">Evidence</th><th width="30%">Outstanding conditions</th></tr>
+<tr class=""><td>RTL implementation</td><td>CONDITIONAL GO</td><td>All approved functions present; five independent line-by-line reviews; no blocker</td><td>D-01 decision</td></tr>
+<tr class="alt"><td>RTL verification</td><td>CONDITIONAL GO</td><td>615 registered jobs, 231 mutants, accepted gates, fresh preflight and simulations</td><td>V-01 to V-07; no coverage, no formal</td></tr>
+<tr class=""><td>RTL freeze</td><td>CONDITIONAL GO</td><td>No mandatory RTL change found; sources unchanged since RC1</td><td>D-01 and D-02 decided (firmware / contract)</td></tr>
+<tr class="alt"><td>FPGA validation</td><td>INSUFFICIENT EVIDENCE</td><td>Current build gate PASS; 7 Nov board &quot;PASS&quot; not itemised</td><td>Itemised board run of the current image (section 10)</td></tr>
+<tr class=""><td>ASIC handoff</td><td>CONDITIONAL GO</td><td>No RTL rework needed; adaptations identified</td><td>PDK, memories, firmware loading, D-12</td></tr>
+</table>
+<h1>14. Final decision</h1>
+<p class="q">Q1. Is every mandatory component of the RTL project finished?</p>
+<p>Yes. Every approved hardware block is implemented, integrated and verified for the demonstrated behaviour.</p>
+<p class="q">Q2. Is there any mandatory RTL coding, debugging or verification work left?</p>
+<p>No mandatory RTL coding. Firmware work (D-02) and one scope decision (D-01) remain; the verification gaps are improvements, not blockers.</p>
+<p class="q">Q3. Can we officially freeze the current RTL?</p>
+<p>Yes, conditionally: freeze the RTL now and record D-01 and D-02 decisions. If D-01 is resolved by widening the window, that is a contract change and reopens the freeze.</p>
+<p class="q">Q4. Is the only remaining FPGA work the board validation?</p>
+<p>Yes, plus the firmware timing note (D-02) for the procedure.</p>
+<p class="q">Q5. Can we move on to the ASIC scope without unresolved RTL debt?</p>
+<p>Yes. The ASIC items are adaptations and physical design, not RTL debt.</p>
+<p class="verdict">B. RTL CONDITIONALLY CLOSED: specific verification or implementation conditions remain.</p>
+<p>Why: the design is complete and the evidence for the demonstrated behaviour is current and reproducible, but the measured firmware window does not cover the program (D-01), the demo firmware times out into FAIL (D-02), the current image has not been run on the board, and verification has no coverage or formal component. HARDWARE_VALIDATED=NO for this image, SOC_INTEGRATION_COMPLETE=NO, FORMAL_PROOF=NO.</p></body></html>

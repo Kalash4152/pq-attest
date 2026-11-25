@@ -1,0 +1,131 @@
+PQ_ATTEST — Lane 2 A1 Handoff
+Prepared for Kalash | 6 November 2026
+Purpose: Transfer the current A1 duplicate-request investigation, exact local evidence, known code changes, unresolved verification issues, and the remaining work. This is a handoff, not a claim that A1 is complete.
+1. Executive status
+A1 is NOT VERIFIED / NOT COMPLETE. The adapter contains the intended IDLE capture guard, and the CPU has demonstrably progressed beyond PC 0x12C in the observed run. However, the full tb_tile_top simulation did not complete, the latest observed run stopped producing heartbeat output around cycle 250, and no completed tb_two_tiles regression with transaction accounting has been demonstrated.
+Current likely RTL correction: suppress capture in IDLE while the previous registered mem_ready_q pulse is being presented to PicoRV32.
+Current unresolved issue: why the latest simulation appears to stop progressing after cycle 250 (time shown around 5.21 us). This has not been diagnosed.
+Current verification issue: the assertion and transaction counters added in the working copy need review; the assertion was made tautological by a local edit, and counter mismatches observed at intermediate cycles are not by themselves proof of duplicate transactions.
+No commit has been made. Work is in a separate extracted working-copy folder.
+2. Project context and controlling requirements
+Project: PQ_ATTEST, Lane 2 CPU tile work. Lane 2 owns the PicoRV32 CPU tile, local memory/peripherals and software; Lane 1 owns the NoC and attestation subsystem. Do not claim full NoC integration, packet-level verification, or post-quantum cryptography unless separately demonstrated.
+The user supplied BRIEF_RISCV_LANE_v2_20261101.pdf and BRIEF_RISCV_LANE_NEXT10_20261031.pdf. The 1 November v2 brief supersedes the 31 October brief wherever they conflict. The area addendum BRIEF_RISCV_LANE_AREA_ADDENDUM_20261103.md was not supplied with the project ZIP and is still missing.
+A1 acceptance criteria identified from the v2 brief (page 5, as reviewed in the conversation):
+Count core transfers using mem_valid &amp;&amp; mem_ready and count adapter request captures; reconcile the counts correctly.
+Add the a_no_capture_during_ready assertion / equivalent assertion so a request is not captured while mem_ready_q is asserted.
+tb_tile_top CPU must progress beyond PC 0x12C.
+Both CPUs in tb_two_tiles must progress beyond PC 0x12C.
+Other project-wide constraints relevant to future work: do not modify rtl/picorv32.v; do not modify Lane 1 snapshot files or the exact 10 TMEM signals; preserve CATCH_MISALIGN and CATCH_ILLINSN; do not weaken existing conformance/protocol checks or alter expected counts; use 20 ns / 50 MHz clock; testbenches should self-check, include bounded timeouts, and print unambiguous PASS/FAIL. Keep later A-series/B-series requirements separate from this A1 task.
+3. Environment and repository
+Windows PowerShell 5.1, VS Code.
+Repository extracted by user at: C:\Users\HP\Downloads\PQ_ATTEST_A1_working_copy\PQ_ATTEST
+Icarus Verilog: C:\iverilog\bin\iverilog.exe; VVP: C:\iverilog\bin\vvp.exe; version previously reported as 14.0 (devel).
+Vivado 2024.1 is installed per project context; not used for A1 simulation.
+The working copy was opened in VS Code. The user confirmed these paths all returned True: A1_PATCH_NOTES.md, rtl\picorv32_adapter.sv, sw\hello_words.hex.
+The working copy is separate from the original PQ_ATTEST folder. Preserve the original as backup.
+The uploaded working-copy ZIP contains the project and A1_PATCH_NOTES.md. It did not include the 2026-11-03 area addendum. The current local folder may contain edits made after that ZIP was generated; inspect the actual working tree before assuming it exactly matches the archive.
+4. Root-cause hypothesis and adapter behavior
+The suspected A1 defect is in rtl/picorv32_adapter.sv. The adapter uses IDLE, REQUEST and RESPONSE. In RESPONSE, on local_rvalid_i or tmem_rvalid_i, it registers mem_ready_q &lt;= 1 and state_q &lt;= IDLE on the same edge. PicoRV32 samples the registered ready pulse on a later rising edge. During the interval before the CPU lowers or changes mem_valid/address, the adapter is already IDLE and can see the old request again.
+The intended guard in the IDLE capture path is:
+if (mem_valid_i &amp;&amp; !mem_ready_q) begin
+In the uploaded working-copy adapter this behavior is factored into:
+wire capture_attempt = (state_q == IDLE) &amp;&amp; mem_valid_i;\nwire capture = capture_attempt &amp;&amp; !mem_ready_q;
+The sequential IDLE branch captures only when capture is true. The expected edge behavior, to verify against the exact PicoRV32 RTL, is: (1) response edge: adapter schedules ready=1 and IDLE; (2) next edge: CPU samples ready while the old valid may still be high, adapter sees ready_q=1 and suppresses capture; (3) after that edge CPU may lower valid or present the next compressed fetch address; (4) following edge, with ready_q cleared, a still-valid new request can be captured. Compressed-ISA back-to-back fetches must be explicitly tested; do not assume valid must go low between all transfers.
+The guard is plausible and initial CPU traces show progress past 0x12C, but this is not sufficient to certify correctness.
+5. Changes present in the A1 working copy
+File
+Change in working-copy ZIP
+Review status
+rtl/picorv32_adapter.sv
+Explicit capture_attempt and capture wires; capture includes !mem_ready_q; IDLE uses capture. An assertion block was added.
+Needs assertion correction/review.
+rtl/tb_tile_top.sv
+Added cycle/core-transfer/adapter-capture/response counters, heartbeat, bounded final drain, PC check and watchdog. IMEM init path changed to sw/hello_words.hex.
+Current counters/checks are not yet trusted; simulation incomplete.
+rtl/tb_two_tiles.sv
+Changed memory init paths to sw/hello_words.hex; prints/checks architectural reg_pc for both CPUs; adds simulation watchdog.
+No completed regression evidence; still contains direct forced TMEM test and waits to inspect.
+A1_PATCH_NOTES.md
+Documents scope, compile/run commands and states verification was not run when ZIP was produced.
+Useful but should be updated after real verification.
+6. Exact local simulation evidence
+6.1 Compile
+The user compiled tb_tile_top successfully from the working-copy root with Icarus. Compiler exit code was 0. Icarus emitted non-fatal “sorry: constant selects in always_* processes are not fully supported” messages in rtl/uart_mmio.sv at lines 55 and 58.
+iverilog -g2012 -s tb_tile_top -o build/tb_tile_top_A1.vvp \\  rtl/picorv32.v rtl/picorv32_adapter.sv rtl/addr_decode.sv \\  rtl/tile_status.sv rtl/uart_tx.sv rtl/uart_mmio.sv \\  rtl/tile_top.sv rtl/mem_bram.sv rtl/gpio.sv \\  rtl/tile_mem_wrapper.sv rtl/tb_tile_top.sv
+6.2 Assertion failure from initial run
+First run stopped at 310 ns with:
+ERROR: rtl/picorv32_adapter.sv:73: A1 FAIL: adapter capture attempted while mem_ready_q is high\nFATAL: rtl/picorv32_adapter.sv:74
+This is consistent with the intended situation: a live CPU valid may still be present while the prior ready pulse is being presented. The assertion checked capture_attempt, not actual capture, and therefore flagged a suppressed attempt. The user then changed the assertion condition to test capture instead.
+6.3 Assertion issue in current local version
+The screenshot of the local adapter after the edit showed:
+wire capture_attempt = (state_q == IDLE) &amp;&amp; mem_valid_i;\nwire capture = capture_attempt &amp;&amp; !mem_ready_q;\n...\nif (!reset_i &amp;&amp; mem_ready_q &amp;&amp; capture) begin\n    $error(...);\n    $fatal(1);\nend
+This check is tautological: capture is defined to include !mem_ready_q, so mem_ready_q &amp;&amp; capture can never be true. It will not independently detect a violation. Replace it with a meaningful assertion on the actual sequential capture event or structure the logic so the property checks the capture enable independently. The specification’s intent is no accepted capture while ready is high, not no capture_attempt.
+6.4 CPU heartbeat run
+After changing the tb_tile_top heartbeat interval locally from 500 to 10 cycles and recompiling, the user ran VVP interactively. The output showed simulation progressing through cycle 250 (time 5.21 us). Representative lines:
+cycle=10  time=410000  pc=00000004  state=2 captures=2 core_xfers=1 responses=1\ncycle=130 time=2810000 pc=0000012c state=2 captures=21 core_xfers=20 responses=20\ncycle=140 time=3010000 pc=0000003e state=0 captures=22 core_xfers=22 responses=22\ncycle=170 time=3610000 pc=00000044 state=0 captures=27 core_xfers=26 responses=27\ncycle=250 time=5210000 pc=00000030 state=2 captures=40 core_xfers=39 responses=38
+The PC progressed beyond 0x12C, including later addresses. It also moved to lower addresses, which can be valid control flow; do not require monotonic PC. At intermediate heartbeat samples, counters differ by one or two. Because these are sampled on clock edges with nonblocking updates and transactions may be in flight, those intermediate differences alone do not prove duplication. The current counters need edge-accurate transaction accounting and a valid quiescent reconciliation point.
+The user reported that output stopped progressing after cycle 250 and said it was not progressing. No final A1 result or completed 5,000-cycle run was captured.
+6.5 Verbose VVP diagnostic
+A separate VVP run using -v was launched with a 15-second external timeout. It timed out. Verbose stdout showed successful VVP compilation/linking, scheduler startup and “Starting A1 tile_top test...”. No later heartbeat was captured in that run. This does not prove a zero-delay loop; possibilities include very slow event processing, scheduler/event explosion, a simulation deadlock, or process/runtime behavior. Diagnose rather than guess.
+6.6 Current evidence table
+Test / item
+Observed result
+Status
+tb_tile_top compile
+Exit code 0; two non-fatal Icarus warnings
+PASS compile
+tb_tile_top first run
+Assertion fatal at 310 ns (attempt-vs-capture assertion)
+FAIL test setup/assertion
+tb_tile_top after assertion edit
+Reached cycle 250 / 5.21 us; PC advanced beyond 0x12C; then no further output observed
+INCOMPLETE
+tb_conformance baseline
+1000 transactions/grants/responses; stability/fetch/response/protocol errors all zero (from prior original-project run)
+Historical baseline only; rerun on current copy
+tb_random_latency baseline
+1000/1000 seeds passed; zero errors (from prior original-project run)
+Historical baseline only; rerun on current copy
+tb_two_tiles baseline
+Original run showed both PCs at 0x12C and manual forced remote-memory test passed; CPU check was weak
+Baseline failure/insufficient check
+tb_two_tiles A1
+Compile previously succeeded in original repo; later working-copy regression not completed
+NOT RUN / NOT VERIFIED
+7. Critical issues for Kalash to resolve
+Inspect the exact current local working tree, not just the ZIP. Ask for/receive the latest rtl/picorv32_adapter.sv and rtl/tb_tile_top.sv if the folder has changed since the archive.
+Correct the assertion. The current capture-based assertion is tautological. Add an assertion that checks the actual capture event/enable is never accepted while mem_ready_q is high, without making the property true by definition.
+Prove cycle timing directly from rtl/picorv32.v, including COMPRESSED_ISA=1 behavior where mem_valid can stay high and the address can change across a transfer.
+Investigate why the tb_tile_top run ceases producing heartbeat after cycle 250. Add independent heartbeat/watchdog evidence and determine whether simulation time advances. Do not infer a delta-cycle loop from missing console output alone.
+Repair transaction accounting. Capture, core transfer, grant and response events occur at different cycle phases. Use transaction IDs or a scoreboard/one-outstanding accounting with explicit pending state. Compare totals only after all in-flight work drains. Do not compare counters at arbitrary heartbeat points.
+Ensure response counting is edge-accurate and counts one response per accepted adapter transaction. Include local and remote paths.
+Review tb_tile_top final PC check. Confirm reg_pc is the correct architectural/retirement PC signal for the stated criterion and that it is not merely the current fetch address. If RVFI is required for retirement sequencing, follow the brief.
+Review tb_two_tiles: add per-tile core transfer/capture/response accounting, bounded waits, timeout and actual CPU progress checks. The existing forced TMEM read/write is a direct interface test and does not prove CPU-to-adapter remote transaction integration.
+Keep existing conformance and random-latency checks unchanged; rerun them against the current working copy.
+Update A1_PATCH_NOTES.md / DESIGN_LOG.md only after actual completed tests. Do not claim PASS for interrupted/timed-out runs.
+8. Suggested next commands / artifacts
+From the repository root in PowerShell, first capture the exact local source and Git status:
+git status --short\ngit rev-parse --abbrev-ref HEAD\ngit rev-parse HEAD\nGet-Content rtl/picorv32_adapter.sv\nGet-Content rtl/tb_tile_top.sv
+Recompile after any source edit, checking $LASTEXITCODE immediately. Run each simulation with stdout and stderr redirected to a fresh log, not a stale log. Use a bounded external timeout and report simulator exit code. Example:
+$p = Start-Process -FilePath "C:\\iverilog\\bin\\vvp.exe" `\n  -ArgumentList "build/tb_tile_top_A1.vvp" `\n  -RedirectStandardOutput "build/tb_tile_top_A1_latest.log" `\n  -RedirectStandardError "build/tb_tile_top_A1_latest.err" `\n  -PassThru\nif (-not $p.WaitForExit(60000)) { $p.Kill(); $p.WaitForExit(); "EXTERNAL TIMEOUT" }\nelse { "VVP exit code: $($p.ExitCode)" }
+The project must be run from the repository root for the relative sw/hello_words.hex initialization path to resolve.
+9. Remaining A1 deliverables
+Meaningful a_no_capture_during_ready assertion (not tautological).
+Cycle-accurate directed CPU handshake test, including compressed back-to-back fetch behavior.
+Root cause of the cycle-250 simulation stall/slowdown identified and fixed if it is a design/testbench issue.
+tb_tile_top completes normally and reports PC &gt; 0x12C with correct reconciled counts.
+tb_two_tiles completes normally and both CPUs report PC &gt; 0x12C with correct reconciled counts.
+Conformance test rerun: original 1000/1000 expectations and all zero-error checks preserved.
+Random-latency test rerun: original 1000/1000 expectations and zero errors preserved.
+No protocol checks or expected counts weakened.
+Fresh logs and exit codes saved; A1 notes and DESIGN_LOG updated with evidence.
+No commit until review/approval.
+10. Explicit non-claims / scope boundaries
+A1 is not complete.
+No current completed tb_tile_top or tb_two_tiles PASS is available.
+The 4.43 us earlier log and the later 5.21 us heartbeat are partial traces, not regression passes.
+The conformance/random-latency results are historical baseline results from the original project, not reruns on this A1 working copy.
+No Vivado synthesis, timing, FPGA implementation, hardware validation, NoC co-simulation, attestation gate integration or cryptographic verification is claimed.
+The 2026-11-03 area addendum is still missing from the handoff inputs.
+11. Handoff message
+Kalash — please start by checking the current working-tree versions of picorv32_adapter.sv and tb_tile_top.sv. The IDLE guard appears to let PicoRV32 progress beyond 0x12C, but the current assertion was initially too strict and then made tautological. The latest heartbeat reached cycle 250 / 5.21 us and then stopped producing output; the full run never reached its 5,000-cycle completion. Please diagnose that first, fix transaction-aware accounting, and complete tb_tile_top + tb_two_tiles plus unchanged conformance/random-latency regressions. Do not mark A1 done until the simulations complete and the counts reconcile. The exact history and commands are in this document.

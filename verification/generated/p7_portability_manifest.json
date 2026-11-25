@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "manifest": "p7_portability_manifest",
+    "generator": "verification.p7_paths",
+    "version": "1.0.0",
+    "timestamp": "2026-11-06T07:10:00Z",
+    "status": "PASS",
+    "review_finding": "F3",
+    "finding_title": "Portable Verification Infrastructure"
+  },
+  "cli_interface": {
+    "supported_options": [
+      {
+        "flag": "--repo-root",
+        "metavar": "PATH",
+        "description": "PQ-Attest repository root directory containing rtl/dual_lane and verification/p7_regression.py.",
+        "env_fallback": "P7_REPO_ROOT",
+        "default": "Auto-discovered via script location ancestry"
+      },
+      {
+        "flag": "--data-dir",
+        "metavar": "PATH",
+        "description": "Directory holding historical reports, logs, software references, and release evidence packages.",
+        "env_fallback": "P7_DATA_DIR",
+        "default": "Defaults to resolved repo root"
+      },
+      {
+        "flag": "--out",
+        "metavar": "PATH",
+        "description": "Output directory for generated manifests, reports, and regression summaries.",
+        "env_fallback": "P7_OUT_DIR",
+        "default": "<repo_root>/verification/generated"
+      }
+    ],
+    "resolution_precedence": [
+      "1. Explicit command-line options (--repo-root, --data-dir, --out)",
+      "2. Environment variables (P7_REPO_ROOT, P7_DATA_DIR, P7_OUT_DIR)",
+      "3. Default script-anchored discovery relative to verification/ package (never cwd)"
+    ]
+  },
+  "data_layout_contract": {
+    "repo_root": {
+      "marker_file": "verification/p7_regression.py",
+      "required_subtrees": [
+        "rtl/dual_lane",
+        "verification"
+      ]
+    },
+    "data_dir": {
+      "required_subtrees": [
+        "reports",
+        "software"
+      ],
+      "optional_evidence": [
+        "E4_P7_XSIM_20261103",
+        "PQ_Attest_S4_Evidence"
+      ]
+    },
+    "out_dir": {
+      "behavior": "Created automatically if absent; all generated files and logs redirected here",
+      "committed_default": "verification/generated"
+    }
+  },
+  "stage_12_scoping": {
+    "target": "verification",
+    "exact_command": "python -m pytest verification",
+    "prohibited_command": "pytest .",
+    "justification": "Prevents sweeping untracked root files or vivado project temps while including all P7 verification and legacy tests."
+  },
+  "test_suite_status": {
+    "portability_suite": "verification/tests/test_p7_portability.py",
+    "portability_tests_total": 14,
+    "portability_tests_passed": 14,
+    "portability_tests_failed": 0,
+    "full_verification_suite_tests": 283,
+    "full_verification_suite_passed": 283,
+    "full_verification_suite_failed": 0
+  },
+  "path_hygiene_audit": {
+    "hardcoded_machine_specific_paths": 0,
+    "cwd_dependent_resolutions": 0,
+    "relative_paths_normalized_posix": true,
+    "in_repo_relative_display": true
+  }
+}
+

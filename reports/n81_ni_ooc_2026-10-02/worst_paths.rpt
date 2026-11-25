@@ -1,0 +1,481 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date         : Fri Oct  2 01:15:56 2026
+| Host         : LAPTOP-N9F2OTPF running 64-bit major release  (build 9200)
+| Command      : report_timing -max_paths 10 -sort_by group -file C:/vivado_verilog_proj/NOC_PQATTEST/reports/n81_ni_ooc_2026-10-02/worst_paths.rpt
+| Design       : noc_network_interface
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Synthesized
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             4.656ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][0]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_head_valid
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        5.309ns  (logic 0.770ns (14.504%)  route 4.539ns (85.496%))
+  Logic Levels:           6  (LUT2=1 LUT3=2 LUT6=3)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][0] (IN)
+                         net (fo=31, unset)           0.973     5.973    noc_rx_flit[flit_data][0]
+                         LUT3 (Prop_lut3_I1_O)        0.150     6.123 r  rx_protocol_error_INST_0_i_14/O
+                         net (fo=3, unplaced)         0.467     6.590    rx_protocol_error_INST_0_i_14_n_0
+                         LUT6 (Prop_lut6_I4_O)        0.124     6.714 r  rx_protocol_error_INST_0_i_9/O
+                         net (fo=1, unplaced)         0.732     7.446    rx_protocol_error_INST_0_i_9_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.570 r  rx_protocol_error_INST_0_i_4/O
+                         net (fo=3, unplaced)         0.467     8.037    rx_protocol_error_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     8.161 f  rx_protocol_error_INST_0_i_2/O
+                         net (fo=2, unplaced)         0.460     8.621    rx_protocol_error_INST_0_i_2_n_0
+                         LUT3 (Prop_lut3_I0_O)        0.124     8.745 f  rx_head_valid_INST_0_i_2/O
+                         net (fo=3, unplaced)         0.467     9.212    rx_head_valid_INST_0_i_2_n_0
+                         LUT2 (Prop_lut2_I1_O)        0.124     9.336 r  rx_head_valid_INST_0/O
+                         net (fo=0)                   0.973    10.309    rx_head_valid
+                                                                      r  rx_head_valid (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                         -10.309    
+  -------------------------------------------------------------------
+                         slack                                  4.656    
+
+Slack (MET) :             4.656ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][0]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_length_error
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        5.309ns  (logic 0.770ns (14.504%)  route 4.539ns (85.496%))
+  Logic Levels:           6  (LUT2=1 LUT3=2 LUT6=3)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][0] (IN)
+                         net (fo=31, unset)           0.973     5.973    noc_rx_flit[flit_data][0]
+                         LUT3 (Prop_lut3_I1_O)        0.150     6.123 r  rx_protocol_error_INST_0_i_14/O
+                         net (fo=3, unplaced)         0.467     6.590    rx_protocol_error_INST_0_i_14_n_0
+                         LUT6 (Prop_lut6_I4_O)        0.124     6.714 r  rx_protocol_error_INST_0_i_9/O
+                         net (fo=1, unplaced)         0.732     7.446    rx_protocol_error_INST_0_i_9_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.570 r  rx_protocol_error_INST_0_i_4/O
+                         net (fo=3, unplaced)         0.467     8.037    rx_protocol_error_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     8.161 f  rx_protocol_error_INST_0_i_2/O
+                         net (fo=2, unplaced)         0.460     8.621    rx_protocol_error_INST_0_i_2_n_0
+                         LUT3 (Prop_lut3_I0_O)        0.124     8.745 f  rx_head_valid_INST_0_i_2/O
+                         net (fo=3, unplaced)         0.467     9.212    rx_head_valid_INST_0_i_2_n_0
+                         LUT2 (Prop_lut2_I1_O)        0.124     9.336 r  rx_length_error_INST_0/O
+                         net (fo=0)                   0.973    10.309    rx_length_error
+                                                                      r  rx_length_error (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                         -10.309    
+  -------------------------------------------------------------------
+                         slack                                  4.656    
+
+Slack (MET) :             4.656ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][0]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_payload_last
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        5.309ns  (logic 0.770ns (14.504%)  route 4.539ns (85.496%))
+  Logic Levels:           6  (LUT3=2 LUT5=1 LUT6=3)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][0] (IN)
+                         net (fo=31, unset)           0.973     5.973    noc_rx_flit[flit_data][0]
+                         LUT3 (Prop_lut3_I1_O)        0.150     6.123 r  rx_protocol_error_INST_0_i_14/O
+                         net (fo=3, unplaced)         0.467     6.590    rx_protocol_error_INST_0_i_14_n_0
+                         LUT6 (Prop_lut6_I4_O)        0.124     6.714 r  rx_protocol_error_INST_0_i_9/O
+                         net (fo=1, unplaced)         0.732     7.446    rx_protocol_error_INST_0_i_9_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.570 r  rx_protocol_error_INST_0_i_4/O
+                         net (fo=3, unplaced)         0.467     8.037    rx_protocol_error_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     8.161 f  rx_protocol_error_INST_0_i_2/O
+                         net (fo=2, unplaced)         0.460     8.621    rx_protocol_error_INST_0_i_2_n_0
+                         LUT3 (Prop_lut3_I0_O)        0.124     8.745 f  rx_head_valid_INST_0_i_2/O
+                         net (fo=3, unplaced)         0.467     9.212    rx_head_valid_INST_0_i_2_n_0
+                         LUT5 (Prop_lut5_I1_O)        0.124     9.336 r  rx_payload_last_INST_0/O
+                         net (fo=0)                   0.973    10.309    rx_payload_last
+                                                                      r  rx_payload_last (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                         -10.309    
+  -------------------------------------------------------------------
+                         slack                                  4.656    
+
+Slack (MET) :             5.277ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][0]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_protocol_error
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.688ns  (logic 0.646ns (13.780%)  route 4.042ns (86.220%))
+  Logic Levels:           5  (LUT3=1 LUT5=1 LUT6=3)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][0] (IN)
+                         net (fo=31, unset)           0.973     5.973    noc_rx_flit[flit_data][0]
+                         LUT3 (Prop_lut3_I1_O)        0.150     6.123 r  rx_protocol_error_INST_0_i_14/O
+                         net (fo=3, unplaced)         0.467     6.590    rx_protocol_error_INST_0_i_14_n_0
+                         LUT6 (Prop_lut6_I4_O)        0.124     6.714 f  rx_protocol_error_INST_0_i_9/O
+                         net (fo=1, unplaced)         0.732     7.446    rx_protocol_error_INST_0_i_9_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.570 f  rx_protocol_error_INST_0_i_4/O
+                         net (fo=3, unplaced)         0.467     8.037    rx_protocol_error_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     8.161 r  rx_protocol_error_INST_0_i_2/O
+                         net (fo=2, unplaced)         0.430     8.591    rx_protocol_error_INST_0_i_2_n_0
+                         LUT5 (Prop_lut5_I4_O)        0.124     8.715 r  rx_protocol_error_INST_0/O
+                         net (fo=0)                   0.973     9.688    rx_protocol_error
+                                                                      r  rx_protocol_error (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                          -9.688    
+  -------------------------------------------------------------------
+                         slack                                  5.277    
+
+Slack (MET) :             5.357ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][17]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_control[0]
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.608ns  (logic 0.496ns (10.764%)  route 4.112ns (89.236%))
+  Logic Levels:           4  (LUT3=1 LUT5=1 LUT6=2)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][17] (IN)
+                         net (fo=25, unset)           0.973     5.973    noc_rx_flit[flit_data][17]
+                         LUT5 (Prop_lut5_I4_O)        0.124     6.097 f  rx_head_valid_INST_0_i_5/O
+                         net (fo=2, unplaced)         0.975     7.072    rx_head_valid_INST_0_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     7.196 f  noc_rx_ready_INST_0_i_4/O
+                         net (fo=1, unplaced)         0.665     7.861    noc_rx_ready_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.985 r  noc_rx_ready_INST_0_i_1/O
+                         net (fo=40, unplaced)        0.526     8.511    noc_rx_ready_INST_0_i_1_n_0
+                         LUT3 (Prop_lut3_I1_O)        0.124     8.635 r  rx_control[0]_INST_0/O
+                         net (fo=0)                   0.973     9.608    rx_control[0]
+                                                                      r  rx_control[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                          -9.608    
+  -------------------------------------------------------------------
+                         slack                                  5.357    
+
+Slack (MET) :             5.357ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][17]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_control[10]
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.608ns  (logic 0.496ns (10.764%)  route 4.112ns (89.236%))
+  Logic Levels:           4  (LUT3=1 LUT5=1 LUT6=2)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][17] (IN)
+                         net (fo=25, unset)           0.973     5.973    noc_rx_flit[flit_data][17]
+                         LUT5 (Prop_lut5_I4_O)        0.124     6.097 f  rx_head_valid_INST_0_i_5/O
+                         net (fo=2, unplaced)         0.975     7.072    rx_head_valid_INST_0_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     7.196 f  noc_rx_ready_INST_0_i_4/O
+                         net (fo=1, unplaced)         0.665     7.861    noc_rx_ready_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.985 r  noc_rx_ready_INST_0_i_1/O
+                         net (fo=40, unplaced)        0.526     8.511    noc_rx_ready_INST_0_i_1_n_0
+                         LUT3 (Prop_lut3_I1_O)        0.124     8.635 r  rx_control[10]_INST_0/O
+                         net (fo=0)                   0.973     9.608    rx_control[10]
+                                                                      r  rx_control[10] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                          -9.608    
+  -------------------------------------------------------------------
+                         slack                                  5.357    
+
+Slack (MET) :             5.357ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][17]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_control[1]
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.608ns  (logic 0.496ns (10.764%)  route 4.112ns (89.236%))
+  Logic Levels:           4  (LUT3=1 LUT5=1 LUT6=2)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][17] (IN)
+                         net (fo=25, unset)           0.973     5.973    noc_rx_flit[flit_data][17]
+                         LUT5 (Prop_lut5_I4_O)        0.124     6.097 f  rx_head_valid_INST_0_i_5/O
+                         net (fo=2, unplaced)         0.975     7.072    rx_head_valid_INST_0_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     7.196 f  noc_rx_ready_INST_0_i_4/O
+                         net (fo=1, unplaced)         0.665     7.861    noc_rx_ready_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.985 r  noc_rx_ready_INST_0_i_1/O
+                         net (fo=40, unplaced)        0.526     8.511    noc_rx_ready_INST_0_i_1_n_0
+                         LUT3 (Prop_lut3_I1_O)        0.124     8.635 r  rx_control[1]_INST_0/O
+                         net (fo=0)                   0.973     9.608    rx_control[1]
+                                                                      r  rx_control[1] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                          -9.608    
+  -------------------------------------------------------------------
+                         slack                                  5.357    
+
+Slack (MET) :             5.357ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][17]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_control[2]
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.608ns  (logic 0.496ns (10.764%)  route 4.112ns (89.236%))
+  Logic Levels:           4  (LUT3=1 LUT5=1 LUT6=2)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][17] (IN)
+                         net (fo=25, unset)           0.973     5.973    noc_rx_flit[flit_data][17]
+                         LUT5 (Prop_lut5_I4_O)        0.124     6.097 f  rx_head_valid_INST_0_i_5/O
+                         net (fo=2, unplaced)         0.975     7.072    rx_head_valid_INST_0_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     7.196 f  noc_rx_ready_INST_0_i_4/O
+                         net (fo=1, unplaced)         0.665     7.861    noc_rx_ready_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.985 r  noc_rx_ready_INST_0_i_1/O
+                         net (fo=40, unplaced)        0.526     8.511    noc_rx_ready_INST_0_i_1_n_0
+                         LUT3 (Prop_lut3_I1_O)        0.124     8.635 r  rx_control[2]_INST_0/O
+                         net (fo=0)                   0.973     9.608    rx_control[2]
+                                                                      r  rx_control[2] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                          -9.608    
+  -------------------------------------------------------------------
+                         slack                                  5.357    
+
+Slack (MET) :             5.357ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][17]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_control[3]
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.608ns  (logic 0.496ns (10.764%)  route 4.112ns (89.236%))
+  Logic Levels:           4  (LUT3=1 LUT5=1 LUT6=2)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][17] (IN)
+                         net (fo=25, unset)           0.973     5.973    noc_rx_flit[flit_data][17]
+                         LUT5 (Prop_lut5_I4_O)        0.124     6.097 f  rx_head_valid_INST_0_i_5/O
+                         net (fo=2, unplaced)         0.975     7.072    rx_head_valid_INST_0_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     7.196 f  noc_rx_ready_INST_0_i_4/O
+                         net (fo=1, unplaced)         0.665     7.861    noc_rx_ready_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.985 r  noc_rx_ready_INST_0_i_1/O
+                         net (fo=40, unplaced)        0.526     8.511    noc_rx_ready_INST_0_i_1_n_0
+                         LUT3 (Prop_lut3_I1_O)        0.124     8.635 r  rx_control[3]_INST_0/O
+                         net (fo=0)                   0.973     9.608    rx_control[3]
+                                                                      r  rx_control[3] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                          -9.608    
+  -------------------------------------------------------------------
+                         slack                                  5.357    
+
+Slack (MET) :             5.357ns  (required time - arrival time)
+  Source:                 noc_rx_flit[flit_data][17]
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            rx_control[4]
+                            (output port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Max at Slow Process Corner
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.608ns  (logic 0.496ns (10.764%)  route 4.112ns (89.236%))
+  Logic Levels:           4  (LUT3=1 LUT5=1 LUT6=2)
+  Input Delay:            5.000ns
+  Output Delay:           5.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 r  noc_rx_flit[flit_data][17] (IN)
+                         net (fo=25, unset)           0.973     5.973    noc_rx_flit[flit_data][17]
+                         LUT5 (Prop_lut5_I4_O)        0.124     6.097 f  rx_head_valid_INST_0_i_5/O
+                         net (fo=2, unplaced)         0.975     7.072    rx_head_valid_INST_0_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.124     7.196 f  noc_rx_ready_INST_0_i_4/O
+                         net (fo=1, unplaced)         0.665     7.861    noc_rx_ready_INST_0_i_4_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.124     7.985 r  noc_rx_ready_INST_0_i_1/O
+                         net (fo=40, unplaced)        0.526     8.511    noc_rx_ready_INST_0_i_1_n_0
+                         LUT3 (Prop_lut3_I1_O)        0.124     8.635 r  rx_control[4]_INST_0/O
+                         net (fo=0)                   0.973     9.608    rx_control[4]
+                                                                      r  rx_control[4] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                         clock pessimism              0.000    20.000    
+                         clock uncertainty           -0.035    19.965    
+                         output delay                -5.000    14.965    
+  -------------------------------------------------------------------
+                         required time                         14.965    
+                         arrival time                          -9.608    
+  -------------------------------------------------------------------
+                         slack                                  5.357    
+
+
+
+

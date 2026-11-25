@@ -1,0 +1,75 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date         : Wed Nov  4 11:55:08 2026
+| Host         : LAPTOP-N9F2OTPF running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -hierarchical_depth 3 -file C:/vivado_verilog_proj/NOC_PQATTEST/vivado_sim/_phase0/stress_util_hier.rpt
+| Design       : pq_phase0_stress_top
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Physopt postRoute
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++--------------------------+------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+|         Instance         |                  Module                  | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP Blocks |
++--------------------------+------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+| pq_phase0_stress_top     |                                    (top) |      39765 |      37769 |    1986 |   10 | 36847 |      0 |      1 |          0 |
+|   (pq_phase0_stress_top) |                                    (top) |         10 |          0 |       0 |   10 |  2677 |      0 |      0 |          0 |
+|   CPU[0].u               |                          cpu_placeholder |       1126 |       1082 |      44 |    0 |   616 |      0 |      0 |          0 |
+|   CPU[1].u               |          cpu_placeholder__parameterized0 |       1126 |       1082 |      44 |    0 |   616 |      0 |      0 |          0 |
+|   dut                    |                      pq_noc_subsystem_p7 |      36994 |      35096 |    1898 |    0 | 32873 |      0 |      1 |          0 |
+|     (dut)                |                      pq_noc_subsystem_p7 |        204 |        204 |       0 |    0 |   294 |      0 |      1 |          0 |
+|     GN[0].PLAIN.ni       |                 noc_network_interface_p7 |         92 |         70 |      22 |    0 |    36 |      0 |      0 |          0 |
+|     GN[0].gate           |                          noc_attest_gate |         11 |         11 |       0 |    0 |    41 |      0 |      0 |          0 |
+|     GN[1].PLAIN.ni       | noc_network_interface_p7__parameterized0 |         92 |         70 |      22 |    0 |    36 |      0 |      0 |          0 |
+|     GN[1].gate           |          noc_attest_gate__parameterized0 |         11 |         11 |       0 |    0 |    41 |      0 |      0 |          0 |
+|     GN[2].PLAIN.ni       | noc_network_interface_p7__parameterized1 |        182 |        160 |      22 |    0 |    90 |      0 |      0 |          0 |
+|     GN[2].gate           |          noc_attest_gate__parameterized1 |         16 |         16 |       0 |    0 |    42 |      0 |      0 |          0 |
+|     GN[3].gate           |          noc_attest_gate__parameterized2 |         40 |         40 |       0 |    0 |    44 |      0 |      0 |          0 |
+|     GN[4].gate           |          noc_attest_gate__parameterized3 |         53 |         53 |       0 |    0 |    43 |      0 |      0 |          0 |
+|     GN[5].PLAIN.ni       | noc_network_interface_p7__parameterized2 |        163 |        141 |      22 |    0 |    85 |      0 |      0 |          0 |
+|     GN[5].gate           |          noc_attest_gate__parameterized4 |         16 |         16 |       0 |    0 |    42 |      0 |      0 |          0 |
+|     IG[0].parser         |                       noc_ingress_parser |         32 |         32 |       0 |    0 |    74 |      0 |      0 |          0 |
+|     IG[1].parser         |       noc_ingress_parser__parameterized0 |         32 |         32 |       0 |    0 |    74 |      0 |      0 |          0 |
+|     IG[2].parser         |       noc_ingress_parser__parameterized1 |         36 |         36 |       0 |    0 |    76 |      0 |      0 |          0 |
+|     IG[3].parser         |       noc_ingress_parser__parameterized2 |         36 |         36 |       0 |    0 |    76 |      0 |      0 |          0 |
+|     IG[4].parser         |       noc_ingress_parser__parameterized3 |         36 |         36 |       0 |    0 |    76 |      0 |      0 |          0 |
+|     IG[5].parser         |       noc_ingress_parser__parameterized4 |         36 |         36 |       0 |    0 |    76 |      0 |      0 |          0 |
+|     endpoint             |                       pq_attest_endpoint |       9960 |       9960 |       0 |    0 | 12263 |      0 |      0 |          0 |
+|       (endpoint)         |                       pq_attest_endpoint |        344 |        344 |       0 |    0 |   503 |      0 |      0 |          0 |
+|       controller         |                pq_attestation_controller |       9616 |       9616 |       0 |    0 | 11760 |      0 |      0 |          0 |
+|     fstat                |                         noc_fault_status |         10 |         10 |       0 |    0 |   124 |      0 |      0 |          0 |
+|     l2                   |                           noc_l2_p7_pair |       8240 |       8056 |     184 |    0 |  9083 |      0 |      0 |          0 |
+|       W[0].l2            |                           noc_l2_auth_p7 |       1078 |        986 |      92 |    0 |  1371 |      0 |      0 |          0 |
+|       W[1].l2            |           noc_l2_auth_p7__parameterized0 |       1035 |        943 |      92 |    0 |  1288 |      0 |      0 |          0 |
+|       engine             |                           l2_kmac_engine |       6127 |       6127 |       0 |    0 |  6424 |      0 |      0 |          0 |
+|     merge5               |                       noc_ingress_merge2 |         26 |         26 |       0 |    0 |     3 |      0 |      0 |          0 |
+|     mesh                 |                             noc_mesh_3x2 |       9680 |       8080 |    1600 |    0 |  1906 |      0 |      0 |          0 |
+|       (mesh)             |                             noc_mesh_3x2 |          0 |          0 |       0 |    0 |   518 |      0 |      0 |          0 |
+|       GEN_R[0].r         |                               noc_router |       1350 |       1148 |     202 |    0 |   217 |      0 |      0 |          0 |
+|       GEN_R[1].r         |                            noc_router__1 |       1797 |       1517 |     280 |    0 |   232 |      0 |      0 |          0 |
+|       GEN_R[2].r         |                            noc_router__2 |       1571 |       1311 |     260 |    0 |   231 |      0 |      0 |          0 |
+|       GEN_R[3].r         |                            noc_router__3 |       1510 |       1250 |     260 |    0 |   231 |      0 |      0 |          0 |
+|       GEN_R[4].r         |                            noc_router__4 |       1982 |       1644 |     338 |    0 |   246 |      0 |      0 |          0 |
+|       GEN_R[5].r         |                            noc_router__5 |       1470 |       1210 |     260 |    0 |   231 |      0 |      0 |          0 |
+|     quarantine           |                   noc_ingress_quarantine |        101 |         75 |      26 |    0 |    69 |      0 |      0 |          0 |
+|     rstb                 |                               rst_bridge |          0 |          0 |       0 |    0 |     3 |      0 |      0 |          0 |
+|     verifier             |                          pq_rot_verifier |       7895 |       7895 |       0 |    0 |  8176 |      0 |      0 |          0 |
+|       (verifier)         |                          pq_rot_verifier |        499 |        499 |       0 |    0 |  1448 |      0 |      0 |          0 |
+|       kdf                |                                pq_kdf_xk |        152 |        152 |       0 |    0 |   713 |      0 |      0 |          0 |
+|       kshare             |                            pq_kmac_share |       7177 |       7177 |       0 |    0 |  5034 |      0 |      0 |          0 |
+|       tagger             |                    pq_attestation_tag_xk |         68 |         68 |       0 |    0 |   981 |      0 |      0 |          0 |
+|   obs                    |                              n13_observe |        511 |        511 |       0 |    0 |    65 |      0 |      0 |          0 |
++--------------------------+------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

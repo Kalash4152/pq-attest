@@ -1,0 +1,2367 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date         : Wed Nov  4 13:41:28 2026
+| Host         : LAPTOP-N9F2OTPF running 64-bit major release  (build 9200)
+| Command      : report_timing_summary -max_paths 10 -file C:/vivado_verilog_proj/NOC_PQATTEST/vivado_sim/_area/S7_routed_timing.rpt
+| Design       : pq_p7_pruned
+| Device       : 7a100t-csg324
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+| Design State : Physopt postRoute
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Summary Report
+
+------------------------------------------------------------------------------------------------
+| Timer Settings
+| --------------
+------------------------------------------------------------------------------------------------
+
+  Enable Multi Corner Analysis               :  Yes
+  Enable Pessimism Removal                   :  Yes
+  Pessimism Removal Resolution               :  Nearest Common Node
+  Enable Input Delay Default Clock           :  No
+  Enable Preset / Clear Arcs                 :  No
+  Disable Flight Delays                      :  No
+  Ignore I/O Paths                           :  No
+  Timing Early Launch at Borrowing Latches   :  No
+  Borrow Time for Max Delay Exceptions       :  Yes
+  Merge Timing Exceptions                    :  Yes
+  Inter-SLR Compensation                     :  Conservative
+
+  Corner  Analyze    Analyze    
+  Name    Max Paths  Min Paths  
+  ------  ---------  ---------  
+  Slow    Yes        Yes        
+  Fast    Yes        Yes        
+
+
+------------------------------------------------------------------------------------------------
+| Report Methodology
+| ------------------
+------------------------------------------------------------------------------------------------
+
+No report available as report_methodology has not been run prior. Run report_methodology on the current design for the summary of methodology violations.
+
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock (0)
+2. checking constant_clock (0)
+3. checking pulse_width_clock (0)
+4. checking unconstrained_internal_endpoints (0)
+5. checking no_input_delay (0)
+6. checking no_output_delay (0)
+7. checking multiple_clock (0)
+8. checking generated_clocks (0)
+9. checking loops (0)
+10. checking partial_input_delay (0)
+11. checking partial_output_delay (0)
+12. checking latch_loops (0)
+
+1. checking no_clock (0)
+------------------------
+ There are 0 register/latch pins with no clock.
+
+
+2. checking constant_clock (0)
+------------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock (0)
+---------------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints (0)
+------------------------------------------------
+ There are 0 pins that are not constrained for maximum delay.
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay (0)
+------------------------------
+ There are 0 input ports with no input delay specified.
+
+ There are 0 input ports with no input delay but user has a false path constraint.
+
+
+6. checking no_output_delay (0)
+-------------------------------
+ There are 0 ports with no output delay specified.
+
+ There are 0 ports with no output delay but user has a false path constraint
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock (0)
+------------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks (0)
+--------------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops (0)
+---------------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay (0)
+------------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay (0)
+-------------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking latch_loops (0)
+----------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+    -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+      0.505        0.000                      0                95327        0.014        0.000                      0                95327        8.750        0.000                       0                 30362  
+
+
+All user specified timing constraints are met.
+
+
+------------------------------------------------------------------------------------------------
+| Clock Summary
+| -------------
+------------------------------------------------------------------------------------------------
+
+Clock  Waveform(ns)       Period(ns)      Frequency(MHz)
+-----  ------------       ----------      --------------
+clk    {0.000 10.000}     20.000          50.000          
+
+
+------------------------------------------------------------------------------------------------
+| Intra Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+clk                 0.505        0.000                      0                93893        0.014        0.000                      0                93893        8.750        0.000                       0                 30362  
+
+
+------------------------------------------------------------------------------------------------
+| Inter Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Other Path Groups Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group         From Clock         To Clock               WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------         ----------         --------               -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+**async_default**  clk                clk                     14.966        0.000                      0                 1434        0.994        0.000                      0                 1434  
+
+
+------------------------------------------------------------------------------------------------
+| Timing Details
+| --------------
+------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------------------------
+From Clock:  clk
+  To Clock:  clk
+
+Setup :            0  Failing Endpoints,  Worst Slack        0.505ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.014ns,  Total Violation        0.000ns
+PW    :            0  Failing Endpoints,  Worst Slack        8.750ns,  Total Violation        0.000ns
+---------------------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.505ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][10]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.447ns  (logic 3.879ns (19.946%)  route 15.568ns (80.054%))
+  Logic Levels:           18  (LUT2=1 LUT4=1 LUT5=5 LUT6=9 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.490ns = ( 21.490 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.611ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.611     1.611    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk
+    SLICE_X35Y130        FDRE                                         r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y130        FDRE (Prop_fdre_C_Q)         0.456     2.067 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/Q
+                         net (fo=38, routed)          1.173     3.240    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DPRA0
+    SLICE_X30Y130        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.153     3.393 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/O
+                         net (fo=3, routed)           0.931     4.324    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk_1
+    SLICE_X33Y131        LUT6 (Prop_lut6_I2_O)        0.331     4.655 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___61_i_1/O
+                         net (fo=6, routed)           1.002     5.657    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/count_reg[1]_11
+    SLICE_X33Y135        LUT6 (Prop_lut6_I1_O)        0.124     5.781 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9/O
+                         net (fo=1, routed)           0.819     6.600    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9_n_0
+    SLICE_X32Y136        LUT5 (Prop_lut5_I2_O)        0.124     6.724 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6/O
+                         net (fo=3, routed)           0.580     7.304    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6_n_0
+    SLICE_X29Y138        LUT6 (Prop_lut6_I0_O)        0.124     7.428 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_3/O
+                         net (fo=1, routed)           0.648     8.076    dut/mesh/GEN_R[0].r/request_matrix__43[13]
+    SLICE_X29Y138        LUT6 (Prop_lut6_I2_O)        0.124     8.200 f  dut/mesh/GEN_R[0].r/i___175/O
+                         net (fo=5, routed)           0.875     9.075    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/in_req[4]_59[1]
+    SLICE_X15Y139        LUT5 (Prop_lut5_I2_O)        0.124     9.199 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___205_i_1/O
+                         net (fo=15, routed)          0.848    10.047    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___32_i_1_1
+    SLICE_X15Y140        LUT5 (Prop_lut5_I1_O)        0.124    10.171 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3/O
+                         net (fo=5, routed)           1.040    11.212    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3_n_0
+    SLICE_X14Y139        LUT4 (Prop_lut4_I1_O)        0.150    11.362 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___33_i_1/O
+                         net (fo=15, routed)          0.824    12.186    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___206
+    SLICE_X9Y138         LUT2 (Prop_lut2_I0_O)        0.357    12.543 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/rr_ptr[2]_i_5__1/O
+                         net (fo=2, routed)           0.627    13.169    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[0]_9
+    SLICE_X12Y137        LUT6 (Prop_lut6_I3_O)        0.327    13.496 f  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1/O
+                         net (fo=1, routed)           0.000    13.496    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1_n_0
+    SLICE_X12Y137        MUXF7 (Prop_muxf7_I1_O)      0.214    13.710 f  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[2]_i_1__1/O
+                         net (fo=41, routed)          1.221    14.931    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/E[0]
+    SLICE_X9Y134         LUT6 (Prop_lut6_I0_O)        0.297    15.228 f  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/i___107_i_4/O
+                         net (fo=24, routed)          1.262    16.490    dut/mesh/GEN_R[0].r/xbar_sel[2]_38[1]
+    SLICE_X15Y131        LUT5 (Prop_lut5_I0_O)        0.152    16.642 f  dut/mesh/GEN_R[0].r/i___0_i_65/O
+                         net (fo=1, routed)           0.950    17.592    dut/mesh/GEN_R[0].r/i___0_i_65_n_0
+    SLICE_X29Y131        LUT6 (Prop_lut6_I1_O)        0.326    17.918 f  dut/mesh/GEN_R[0].r/i___0_i_27/O
+                         net (fo=4, routed)           0.732    18.650    dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/sel_east_vc0
+    SLICE_X37Y131        LUT5 (Prop_lut5_I0_O)        0.124    18.774 r  dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/G_EJECT_REG.eject_flit_q[flit_data][31]_i_9/O
+                         net (fo=36, routed)          1.061    19.835    dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/count_reg[2]_0
+    SLICE_X41Y123        LUT6 (Prop_lut6_I2_O)        0.124    19.959 r  dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/G_EJECT_REG.eject_flit_q[flit_data][10]_i_3/O
+                         net (fo=3, routed)           0.975    20.934    dut/mesh/GEN_R[0].r/crossbar_in_east[flit_data][10]
+    SLICE_X36Y121        LUT6 (Prop_lut6_I1_O)        0.124    21.058 r  dut/mesh/GEN_R[0].r/GEN_R[0].G_LINK_REG.q_e[flit_data][10]_i_1/O
+                         net (fo=1, routed)           0.000    21.058    dut/mesh/GEN_R[0].p_out_e[flit_data][10]
+    SLICE_X36Y121        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][10]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.490    21.490    dut/mesh/clk
+    SLICE_X36Y121        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][10]/C
+                         clock pessimism              0.080    21.570    
+                         clock uncertainty           -0.035    21.535    
+    SLICE_X36Y121        FDRE (Setup_fdre_C_D)        0.029    21.564    dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][10]
+  -------------------------------------------------------------------
+                         required time                         21.564    
+                         arrival time                         -21.058    
+  -------------------------------------------------------------------
+                         slack                                  0.505    
+
+Slack (MET) :             0.582ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rd_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[2].G_LINK_REG.q_s_reg[flit_data][23]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.295ns  (logic 4.110ns (21.300%)  route 15.185ns (78.700%))
+  Logic Levels:           19  (LUT2=1 LUT3=1 LUT4=1 LUT5=6 LUT6=8 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.116ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.494ns = ( 21.494 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.690ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.690     1.690    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/clk
+    SLICE_X73Y117        FDRE                                         r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rd_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X73Y117        FDRE (Prop_fdre_C_Q)         0.419     2.109 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rd_ptr_reg[1]/Q
+                         net (fo=37, routed)          1.071     3.180    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_24_29/ADDRC1
+    SLICE_X70Y116        RAMD32 (Prop_ramd32_RADR1_O)
+                                                      0.328     3.508 f  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_24_29/RAMC/O
+                         net (fo=4, routed)           0.940     4.448    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/clk_2[28]
+    SLICE_X65Y116        LUT5 (Prop_lut5_I0_O)        0.331     4.779 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___84_i_1/O
+                         net (fo=3, routed)           0.440     5.219    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/count_reg[1]_3
+    SLICE_X66Y116        LUT4 (Prop_lut4_I0_O)        0.124     5.343 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___46_i_6/O
+                         net (fo=6, routed)           0.716     6.059    dut/mesh/GEN_R[2].r/u_allocator/GEN_IN_ARB[3].u_in_arbiter/route_port[11]_133[1]
+    SLICE_X66Y116        LUT6 (Prop_lut6_I2_O)        0.124     6.183 r  dut/mesh/GEN_R[2].r/u_allocator/GEN_IN_ARB[3].u_in_arbiter/i___46_i_4/O
+                         net (fo=4, routed)           0.464     6.647    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___49
+    SLICE_X66Y117        LUT5 (Prop_lut5_I0_O)        0.124     6.771 f  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___49_i_2/O
+                         net (fo=1, routed)           0.641     7.412    dut/mesh/GEN_R[2].r/u_datapath_n_343
+    SLICE_X66Y117        LUT6 (Prop_lut6_I4_O)        0.124     7.536 f  dut/mesh/GEN_R[2].r/i___49/O
+                         net (fo=2, routed)           1.225     8.761    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rr_ptr_reg[1]_3
+    SLICE_X74Y117        LUT5 (Prop_lut5_I1_O)        0.124     8.885 f  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rr_ptr[1]_i_5__12/O
+                         net (fo=5, routed)           0.703     9.588    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___46[0]
+    SLICE_X74Y118        LUT5 (Prop_lut5_I0_O)        0.124     9.712 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___186_i_1__0/O
+                         net (fo=16, routed)          0.678    10.389    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rr_ptr_reg[1]
+    SLICE_X74Y118        LUT6 (Prop_lut6_I4_O)        0.124    10.513 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___31_i_8/O
+                         net (fo=3, routed)           0.830    11.343    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___31_i_8_n_0
+    SLICE_X79Y117        LUT5 (Prop_lut5_I2_O)        0.124    11.467 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___31_i_2__0/O
+                         net (fo=15, routed)          0.997    12.465    dut/mesh/GEN_R[2].r/u_datapath/local_vc2_fifo/i___182_i_2__1_1
+    SLICE_X85Y117        LUT2 (Prop_lut2_I1_O)        0.117    12.582 f  dut/mesh/GEN_R[2].r/u_datapath/local_vc2_fifo/i___200_i_11/O
+                         net (fo=1, routed)           0.664    13.246    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_1__0_1
+    SLICE_X84Y117        LUT6 (Prop_lut6_I4_O)        0.332    13.578 f  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_5/O
+                         net (fo=1, routed)           0.000    13.578    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_5_n_0
+    SLICE_X84Y117        MUXF7 (Prop_muxf7_I1_O)      0.214    13.792 f  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_1__0/O
+                         net (fo=6, routed)           1.045    14.837    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/out_winner[3]_150[2]
+    SLICE_X82Y118        LUT5 (Prop_lut5_I4_O)        0.325    15.162 f  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___152_i_1__1/O
+                         net (fo=21, routed)          1.155    16.317    dut/mesh/GEN_R[2].r/xbar_sel[3]_157[3]
+    SLICE_X80Y112        LUT3 (Prop_lut3_I2_O)        0.352    16.669 f  dut/mesh/GEN_R[2].r/i___2_i_5/O
+                         net (fo=3, routed)           0.999    17.668    dut/mesh/GEN_R[2].r/i___2_i_5_n_0
+    SLICE_X80Y109        LUT6 (Prop_lut6_I3_O)        0.328    17.996 f  dut/mesh/GEN_R[2].r/i___0_i_19/O
+                         net (fo=2, routed)           0.738    18.733    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[4].u_arbiter/G_EJECT_REG.eject_flit_q[flit_data][0]_i_4__1_2
+    SLICE_X79Y107        LUT6 (Prop_lut6_I3_O)        0.124    18.857 r  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[4].u_arbiter/i___0_i_6__1/O
+                         net (fo=37, routed)          0.957    19.815    dut/mesh/GEN_R[2].r/u_datapath/local_vc0_fifo/GEN_R[2].G_LINK_REG.q_s_reg[flit_type][1]
+    SLICE_X75Y107        LUT6 (Prop_lut6_I0_O)        0.124    19.939 r  dut/mesh/GEN_R[2].r/u_datapath/local_vc0_fifo/G_EJECT_REG.eject_flit_q[flit_data][23]_i_4__1/O
+                         net (fo=3, routed)           0.923    20.861    dut/mesh/GEN_R[2].r/crossbar_in_local[flit_data][23]
+    SLICE_X69Y107        LUT6 (Prop_lut6_I4_O)        0.124    20.985 r  dut/mesh/GEN_R[2].r/GEN_R[2].G_LINK_REG.q_s[flit_data][23]_i_1/O
+                         net (fo=1, routed)           0.000    20.985    dut/mesh/GEN_R[2].p_out_s[flit_data][23]
+    SLICE_X69Y107        FDRE                                         r  dut/mesh/GEN_R[2].G_LINK_REG.q_s_reg[flit_data][23]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.494    21.494    dut/mesh/clk
+    SLICE_X69Y107        FDRE                                         r  dut/mesh/GEN_R[2].G_LINK_REG.q_s_reg[flit_data][23]/C
+                         clock pessimism              0.080    21.574    
+                         clock uncertainty           -0.035    21.539    
+    SLICE_X69Y107        FDRE (Setup_fdre_C_D)        0.029    21.568    dut/mesh/GEN_R[2].G_LINK_REG.q_s_reg[flit_data][23]
+  -------------------------------------------------------------------
+                         required time                         21.568    
+                         arrival time                         -20.985    
+  -------------------------------------------------------------------
+                         slack                                  0.582    
+
+Slack (MET) :             0.594ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][3]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.359ns  (logic 3.879ns (20.037%)  route 15.480ns (79.963%))
+  Logic Levels:           18  (LUT2=1 LUT4=1 LUT5=4 LUT6=10 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.042ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.489ns = ( 21.489 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.611ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.611     1.611    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk
+    SLICE_X35Y130        FDRE                                         r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y130        FDRE (Prop_fdre_C_Q)         0.456     2.067 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/Q
+                         net (fo=38, routed)          1.173     3.240    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DPRA0
+    SLICE_X30Y130        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.153     3.393 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/O
+                         net (fo=3, routed)           0.931     4.324    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk_1
+    SLICE_X33Y131        LUT6 (Prop_lut6_I2_O)        0.331     4.655 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___61_i_1/O
+                         net (fo=6, routed)           1.002     5.657    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/count_reg[1]_11
+    SLICE_X33Y135        LUT6 (Prop_lut6_I1_O)        0.124     5.781 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9/O
+                         net (fo=1, routed)           0.819     6.600    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9_n_0
+    SLICE_X32Y136        LUT5 (Prop_lut5_I2_O)        0.124     6.724 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6/O
+                         net (fo=3, routed)           0.580     7.304    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6_n_0
+    SLICE_X29Y138        LUT6 (Prop_lut6_I0_O)        0.124     7.428 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_3/O
+                         net (fo=1, routed)           0.648     8.076    dut/mesh/GEN_R[0].r/request_matrix__43[13]
+    SLICE_X29Y138        LUT6 (Prop_lut6_I2_O)        0.124     8.200 f  dut/mesh/GEN_R[0].r/i___175/O
+                         net (fo=5, routed)           0.875     9.075    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/in_req[4]_59[1]
+    SLICE_X15Y139        LUT5 (Prop_lut5_I2_O)        0.124     9.199 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___205_i_1/O
+                         net (fo=15, routed)          0.848    10.047    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___32_i_1_1
+    SLICE_X15Y140        LUT5 (Prop_lut5_I1_O)        0.124    10.171 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3/O
+                         net (fo=5, routed)           1.040    11.212    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3_n_0
+    SLICE_X14Y139        LUT4 (Prop_lut4_I1_O)        0.150    11.362 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___33_i_1/O
+                         net (fo=15, routed)          0.824    12.186    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___206
+    SLICE_X9Y138         LUT2 (Prop_lut2_I0_O)        0.357    12.543 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/rr_ptr[2]_i_5__1/O
+                         net (fo=2, routed)           0.627    13.169    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[0]_9
+    SLICE_X12Y137        LUT6 (Prop_lut6_I3_O)        0.327    13.496 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1/O
+                         net (fo=1, routed)           0.000    13.496    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1_n_0
+    SLICE_X12Y137        MUXF7 (Prop_muxf7_I1_O)      0.214    13.710 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[2]_i_1__1/O
+                         net (fo=41, routed)          1.221    14.931    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/E[0]
+    SLICE_X9Y134         LUT6 (Prop_lut6_I0_O)        0.297    15.228 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/i___107_i_4/O
+                         net (fo=24, routed)          1.227    16.455    dut/mesh/GEN_R[0].r/xbar_sel[2]_38[1]
+    SLICE_X13Y131        LUT5 (Prop_lut5_I0_O)        0.152    16.607 f  dut/mesh/GEN_R[0].r/i___0_i_74/O
+                         net (fo=1, routed)           0.937    17.544    dut/mesh/GEN_R[0].r/i___0_i_74_n_0
+    SLICE_X15Y129        LUT6 (Prop_lut6_I3_O)        0.326    17.870 f  dut/mesh/GEN_R[0].r/i___0_i_29/O
+                         net (fo=2, routed)           0.621    18.491    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[0].u_arbiter/sel_south_vc1
+    SLICE_X29Y128        LUT6 (Prop_lut6_I4_O)        0.124    18.615 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[0].u_arbiter/G_EJECT_REG.eject_flit_q[flit_data][31]_i_5/O
+                         net (fo=36, routed)          1.289    19.904    dut/mesh/GEN_R[0].r/u_datapath/south_vc0_fifo/GEN_R[0].G_LINK_REG.q_s_reg[flit_type][1]
+    SLICE_X37Y119        LUT6 (Prop_lut6_I0_O)        0.124    20.028 r  dut/mesh/GEN_R[0].r/u_datapath/south_vc0_fifo/G_EJECT_REG.eject_flit_q[flit_data][3]_i_2/O
+                         net (fo=3, routed)           0.819    20.846    dut/mesh/GEN_R[0].r/crossbar_in_south[flit_data][3]
+    SLICE_X39Y121        LUT6 (Prop_lut6_I0_O)        0.124    20.970 r  dut/mesh/GEN_R[0].r/GEN_R[0].G_LINK_REG.q_e[flit_data][3]_i_1/O
+                         net (fo=1, routed)           0.000    20.970    dut/mesh/GEN_R[0].p_out_e[flit_data][3]
+    SLICE_X39Y121        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][3]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.489    21.489    dut/mesh/clk
+    SLICE_X39Y121        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][3]/C
+                         clock pessimism              0.080    21.569    
+                         clock uncertainty           -0.035    21.534    
+    SLICE_X39Y121        FDRE (Setup_fdre_C_D)        0.031    21.565    dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][3]
+  -------------------------------------------------------------------
+                         required time                         21.565    
+                         arrival time                         -20.970    
+  -------------------------------------------------------------------
+                         slack                                  0.594    
+
+Slack (MET) :             0.604ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][0]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.348ns  (logic 3.877ns (20.038%)  route 15.471ns (79.962%))
+  Logic Levels:           18  (LUT2=1 LUT3=1 LUT4=1 LUT5=3 LUT6=10 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.490ns = ( 21.490 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.611ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.611     1.611    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk
+    SLICE_X35Y130        FDRE                                         r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y130        FDRE (Prop_fdre_C_Q)         0.456     2.067 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/Q
+                         net (fo=38, routed)          1.173     3.240    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DPRA0
+    SLICE_X30Y130        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.153     3.393 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/O
+                         net (fo=3, routed)           0.931     4.324    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk_1
+    SLICE_X33Y131        LUT6 (Prop_lut6_I2_O)        0.331     4.655 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___61_i_1/O
+                         net (fo=6, routed)           1.002     5.657    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/count_reg[1]_11
+    SLICE_X33Y135        LUT6 (Prop_lut6_I1_O)        0.124     5.781 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9/O
+                         net (fo=1, routed)           0.819     6.600    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9_n_0
+    SLICE_X32Y136        LUT5 (Prop_lut5_I2_O)        0.124     6.724 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6/O
+                         net (fo=3, routed)           0.580     7.304    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6_n_0
+    SLICE_X29Y138        LUT6 (Prop_lut6_I0_O)        0.124     7.428 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_3/O
+                         net (fo=1, routed)           0.648     8.076    dut/mesh/GEN_R[0].r/request_matrix__43[13]
+    SLICE_X29Y138        LUT6 (Prop_lut6_I2_O)        0.124     8.200 f  dut/mesh/GEN_R[0].r/i___175/O
+                         net (fo=5, routed)           0.875     9.075    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/in_req[4]_59[1]
+    SLICE_X15Y139        LUT5 (Prop_lut5_I2_O)        0.124     9.199 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___205_i_1/O
+                         net (fo=15, routed)          0.848    10.047    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___32_i_1_1
+    SLICE_X15Y140        LUT5 (Prop_lut5_I1_O)        0.124    10.171 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3/O
+                         net (fo=5, routed)           1.040    11.212    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3_n_0
+    SLICE_X14Y139        LUT4 (Prop_lut4_I1_O)        0.150    11.362 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___33_i_1/O
+                         net (fo=15, routed)          0.824    12.186    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___206
+    SLICE_X9Y138         LUT2 (Prop_lut2_I0_O)        0.357    12.543 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/rr_ptr[2]_i_5__1/O
+                         net (fo=2, routed)           0.627    13.169    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[0]_9
+    SLICE_X12Y137        LUT6 (Prop_lut6_I3_O)        0.327    13.496 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1/O
+                         net (fo=1, routed)           0.000    13.496    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1_n_0
+    SLICE_X12Y137        MUXF7 (Prop_muxf7_I1_O)      0.214    13.710 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[2]_i_1__1/O
+                         net (fo=41, routed)          1.221    14.931    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/E[0]
+    SLICE_X9Y134         LUT6 (Prop_lut6_I0_O)        0.297    15.228 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/i___107_i_4/O
+                         net (fo=24, routed)          1.341    16.569    dut/mesh/GEN_R[0].r/xbar_sel[2]_38[1]
+    SLICE_X29Y128        LUT3 (Prop_lut3_I2_O)        0.150    16.719 r  dut/mesh/GEN_R[0].r/i___0_i_35/O
+                         net (fo=1, routed)           0.810    17.529    dut/mesh/GEN_R[0].r/i___0_i_35_n_0
+    SLICE_X29Y129        LUT6 (Prop_lut6_I2_O)        0.326    17.855 r  dut/mesh/GEN_R[0].r/i___0_i_17/O
+                         net (fo=1, routed)           0.801    18.656    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[4].u_arbiter/G_EJECT_REG.eject_flit_q[flit_data][0]_i_4
+    SLICE_X31Y129        LUT6 (Prop_lut6_I0_O)        0.124    18.780 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[4].u_arbiter/i___0_i_6/O
+                         net (fo=37, routed)          1.273    20.053    dut/mesh/GEN_R[0].r/u_datapath/local_vc0_fifo/GEN_R[0].G_LINK_REG.q_s_reg[flit_type][1]
+    SLICE_X39Y121        LUT6 (Prop_lut6_I0_O)        0.124    20.177 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc0_fifo/G_EJECT_REG.eject_flit_q[flit_data][0]_i_4/O
+                         net (fo=3, routed)           0.658    20.835    dut/mesh/GEN_R[0].r/crossbar_in_local[flit_data][0]
+    SLICE_X39Y120        LUT6 (Prop_lut6_I4_O)        0.124    20.959 r  dut/mesh/GEN_R[0].r/GEN_R[0].G_LINK_REG.q_s[flit_data][0]_i_1/O
+                         net (fo=1, routed)           0.000    20.959    dut/mesh/GEN_R[0].p_out_s[flit_data][0]
+    SLICE_X39Y120        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.490    21.490    dut/mesh/clk
+    SLICE_X39Y120        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][0]/C
+                         clock pessimism              0.080    21.570    
+                         clock uncertainty           -0.035    21.535    
+    SLICE_X39Y120        FDRE (Setup_fdre_C_D)        0.029    21.564    dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][0]
+  -------------------------------------------------------------------
+                         required time                         21.564    
+                         arrival time                         -20.959    
+  -------------------------------------------------------------------
+                         slack                                  0.604    
+
+Slack (MET) :             0.606ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rd_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q_reg[flit_data][12]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.275ns  (logic 4.110ns (21.323%)  route 15.165ns (78.677%))
+  Logic Levels:           19  (LUT2=1 LUT3=1 LUT4=1 LUT5=6 LUT6=8 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.115ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.495ns = ( 21.495 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.690ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.690     1.690    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/clk
+    SLICE_X73Y117        FDRE                                         r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rd_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X73Y117        FDRE (Prop_fdre_C_Q)         0.419     2.109 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rd_ptr_reg[1]/Q
+                         net (fo=37, routed)          1.071     3.180    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_24_29/ADDRC1
+    SLICE_X70Y116        RAMD32 (Prop_ramd32_RADR1_O)
+                                                      0.328     3.508 f  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_24_29/RAMC/O
+                         net (fo=4, routed)           0.940     4.448    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/clk_2[28]
+    SLICE_X65Y116        LUT5 (Prop_lut5_I0_O)        0.331     4.779 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___84_i_1/O
+                         net (fo=3, routed)           0.440     5.219    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/count_reg[1]_3
+    SLICE_X66Y116        LUT4 (Prop_lut4_I0_O)        0.124     5.343 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___46_i_6/O
+                         net (fo=6, routed)           0.716     6.059    dut/mesh/GEN_R[2].r/u_allocator/GEN_IN_ARB[3].u_in_arbiter/route_port[11]_133[1]
+    SLICE_X66Y116        LUT6 (Prop_lut6_I2_O)        0.124     6.183 r  dut/mesh/GEN_R[2].r/u_allocator/GEN_IN_ARB[3].u_in_arbiter/i___46_i_4/O
+                         net (fo=4, routed)           0.464     6.647    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___49
+    SLICE_X66Y117        LUT5 (Prop_lut5_I0_O)        0.124     6.771 f  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___49_i_2/O
+                         net (fo=1, routed)           0.641     7.412    dut/mesh/GEN_R[2].r/u_datapath_n_343
+    SLICE_X66Y117        LUT6 (Prop_lut6_I4_O)        0.124     7.536 f  dut/mesh/GEN_R[2].r/i___49/O
+                         net (fo=2, routed)           1.225     8.761    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rr_ptr_reg[1]_3
+    SLICE_X74Y117        LUT5 (Prop_lut5_I1_O)        0.124     8.885 f  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rr_ptr[1]_i_5__12/O
+                         net (fo=5, routed)           0.703     9.588    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___46[0]
+    SLICE_X74Y118        LUT5 (Prop_lut5_I0_O)        0.124     9.712 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___186_i_1__0/O
+                         net (fo=16, routed)          0.678    10.389    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rr_ptr_reg[1]
+    SLICE_X74Y118        LUT6 (Prop_lut6_I4_O)        0.124    10.513 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___31_i_8/O
+                         net (fo=3, routed)           0.830    11.343    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___31_i_8_n_0
+    SLICE_X79Y117        LUT5 (Prop_lut5_I2_O)        0.124    11.467 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___31_i_2__0/O
+                         net (fo=15, routed)          0.997    12.465    dut/mesh/GEN_R[2].r/u_datapath/local_vc2_fifo/i___182_i_2__1_1
+    SLICE_X85Y117        LUT2 (Prop_lut2_I1_O)        0.117    12.582 f  dut/mesh/GEN_R[2].r/u_datapath/local_vc2_fifo/i___200_i_11/O
+                         net (fo=1, routed)           0.664    13.246    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_1__0_1
+    SLICE_X84Y117        LUT6 (Prop_lut6_I4_O)        0.332    13.578 f  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_5/O
+                         net (fo=1, routed)           0.000    13.578    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_5_n_0
+    SLICE_X84Y117        MUXF7 (Prop_muxf7_I1_O)      0.214    13.792 f  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_1__0/O
+                         net (fo=6, routed)           1.045    14.837    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/out_winner[3]_150[2]
+    SLICE_X82Y118        LUT5 (Prop_lut5_I4_O)        0.325    15.162 f  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___152_i_1__1/O
+                         net (fo=21, routed)          1.155    16.317    dut/mesh/GEN_R[2].r/xbar_sel[3]_157[3]
+    SLICE_X80Y112        LUT3 (Prop_lut3_I2_O)        0.352    16.669 f  dut/mesh/GEN_R[2].r/i___2_i_5/O
+                         net (fo=3, routed)           0.999    17.668    dut/mesh/GEN_R[2].r/i___2_i_5_n_0
+    SLICE_X80Y109        LUT6 (Prop_lut6_I3_O)        0.328    17.996 f  dut/mesh/GEN_R[2].r/i___0_i_19/O
+                         net (fo=2, routed)           0.738    18.733    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[4].u_arbiter/G_EJECT_REG.eject_flit_q[flit_data][0]_i_4__1_2
+    SLICE_X79Y107        LUT6 (Prop_lut6_I3_O)        0.124    18.857 r  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[4].u_arbiter/i___0_i_6__1/O
+                         net (fo=37, routed)          1.171    20.029    dut/mesh/GEN_R[2].r/u_datapath/local_vc0_fifo/GEN_R[2].G_LINK_REG.q_s_reg[flit_type][1]
+    SLICE_X73Y106        LUT6 (Prop_lut6_I0_O)        0.124    20.153 r  dut/mesh/GEN_R[2].r/u_datapath/local_vc0_fifo/G_EJECT_REG.eject_flit_q[flit_data][12]_i_4__1/O
+                         net (fo=3, routed)           0.688    20.841    dut/mesh/GEN_R[2].r/crossbar_in_local[flit_data][12]
+    SLICE_X68Y105        LUT6 (Prop_lut6_I4_O)        0.124    20.965 r  dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q[flit_data][12]_i_1/O
+                         net (fo=1, routed)           0.000    20.965    dut/mesh/GEN_R[2].r/xb_out_local[flit_data][12]
+    SLICE_X68Y105        FDRE                                         r  dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q_reg[flit_data][12]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.495    21.495    dut/mesh/GEN_R[2].r/clk
+    SLICE_X68Y105        FDRE                                         r  dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q_reg[flit_data][12]/C
+                         clock pessimism              0.080    21.575    
+                         clock uncertainty           -0.035    21.540    
+    SLICE_X68Y105        FDRE (Setup_fdre_C_D)        0.031    21.571    dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q_reg[flit_data][12]
+  -------------------------------------------------------------------
+                         required time                         21.571    
+                         arrival time                         -20.965    
+  -------------------------------------------------------------------
+                         slack                                  0.606    
+
+Slack (MET) :             0.630ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[0].r/G_EJECT_REG.eject_flit_q_reg[flit_data][6]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.321ns  (logic 3.879ns (20.077%)  route 15.442ns (79.923%))
+  Logic Levels:           18  (LUT2=1 LUT4=1 LUT5=5 LUT6=9 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.485ns = ( 21.485 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.611ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.611     1.611    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk
+    SLICE_X35Y130        FDRE                                         r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y130        FDRE (Prop_fdre_C_Q)         0.456     2.067 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/Q
+                         net (fo=38, routed)          1.173     3.240    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DPRA0
+    SLICE_X30Y130        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.153     3.393 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/O
+                         net (fo=3, routed)           0.931     4.324    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk_1
+    SLICE_X33Y131        LUT6 (Prop_lut6_I2_O)        0.331     4.655 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___61_i_1/O
+                         net (fo=6, routed)           1.002     5.657    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/count_reg[1]_11
+    SLICE_X33Y135        LUT6 (Prop_lut6_I1_O)        0.124     5.781 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9/O
+                         net (fo=1, routed)           0.819     6.600    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9_n_0
+    SLICE_X32Y136        LUT5 (Prop_lut5_I2_O)        0.124     6.724 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6/O
+                         net (fo=3, routed)           0.580     7.304    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6_n_0
+    SLICE_X29Y138        LUT6 (Prop_lut6_I0_O)        0.124     7.428 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_3/O
+                         net (fo=1, routed)           0.648     8.076    dut/mesh/GEN_R[0].r/request_matrix__43[13]
+    SLICE_X29Y138        LUT6 (Prop_lut6_I2_O)        0.124     8.200 f  dut/mesh/GEN_R[0].r/i___175/O
+                         net (fo=5, routed)           0.875     9.075    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/in_req[4]_59[1]
+    SLICE_X15Y139        LUT5 (Prop_lut5_I2_O)        0.124     9.199 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___205_i_1/O
+                         net (fo=15, routed)          0.848    10.047    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___32_i_1_1
+    SLICE_X15Y140        LUT5 (Prop_lut5_I1_O)        0.124    10.171 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3/O
+                         net (fo=5, routed)           1.040    11.212    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3_n_0
+    SLICE_X14Y139        LUT4 (Prop_lut4_I1_O)        0.150    11.362 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___33_i_1/O
+                         net (fo=15, routed)          0.824    12.186    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___206
+    SLICE_X9Y138         LUT2 (Prop_lut2_I0_O)        0.357    12.543 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/rr_ptr[2]_i_5__1/O
+                         net (fo=2, routed)           0.627    13.169    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[0]_9
+    SLICE_X12Y137        LUT6 (Prop_lut6_I3_O)        0.327    13.496 f  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1/O
+                         net (fo=1, routed)           0.000    13.496    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1_n_0
+    SLICE_X12Y137        MUXF7 (Prop_muxf7_I1_O)      0.214    13.710 f  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[2]_i_1__1/O
+                         net (fo=41, routed)          1.221    14.931    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/E[0]
+    SLICE_X9Y134         LUT6 (Prop_lut6_I0_O)        0.297    15.228 f  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/i___107_i_4/O
+                         net (fo=24, routed)          1.262    16.490    dut/mesh/GEN_R[0].r/xbar_sel[2]_38[1]
+    SLICE_X15Y131        LUT5 (Prop_lut5_I0_O)        0.152    16.642 f  dut/mesh/GEN_R[0].r/i___0_i_65/O
+                         net (fo=1, routed)           0.950    17.592    dut/mesh/GEN_R[0].r/i___0_i_65_n_0
+    SLICE_X29Y131        LUT6 (Prop_lut6_I1_O)        0.326    17.918 f  dut/mesh/GEN_R[0].r/i___0_i_27/O
+                         net (fo=4, routed)           0.732    18.650    dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/sel_east_vc0
+    SLICE_X37Y131        LUT5 (Prop_lut5_I0_O)        0.124    18.774 r  dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/G_EJECT_REG.eject_flit_q[flit_data][31]_i_9/O
+                         net (fo=36, routed)          1.064    19.838    dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/count_reg[2]_0
+    SLICE_X41Y124        LUT6 (Prop_lut6_I2_O)        0.124    19.962 r  dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/G_EJECT_REG.eject_flit_q[flit_data][6]_i_3/O
+                         net (fo=3, routed)           0.846    20.808    dut/mesh/GEN_R[0].r/crossbar_in_east[flit_data][6]
+    SLICE_X37Y124        LUT6 (Prop_lut6_I1_O)        0.124    20.932 r  dut/mesh/GEN_R[0].r/G_EJECT_REG.eject_flit_q[flit_data][6]_i_1/O
+                         net (fo=1, routed)           0.000    20.932    dut/mesh/GEN_R[0].r/xb_out_local[flit_data][6]
+    SLICE_X37Y124        FDRE                                         r  dut/mesh/GEN_R[0].r/G_EJECT_REG.eject_flit_q_reg[flit_data][6]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.485    21.485    dut/mesh/GEN_R[0].r/clk
+    SLICE_X37Y124        FDRE                                         r  dut/mesh/GEN_R[0].r/G_EJECT_REG.eject_flit_q_reg[flit_data][6]/C
+                         clock pessimism              0.080    21.565    
+                         clock uncertainty           -0.035    21.530    
+    SLICE_X37Y124        FDRE (Setup_fdre_C_D)        0.032    21.562    dut/mesh/GEN_R[0].r/G_EJECT_REG.eject_flit_q_reg[flit_data][6]
+  -------------------------------------------------------------------
+                         required time                         21.562    
+                         arrival time                         -20.932    
+  -------------------------------------------------------------------
+                         slack                                  0.630    
+
+Slack (MET) :             0.631ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][9]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.322ns  (logic 3.877ns (20.066%)  route 15.445ns (79.934%))
+  Logic Levels:           18  (LUT2=1 LUT3=1 LUT4=1 LUT5=3 LUT6=10 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.041ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.490ns = ( 21.490 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.611ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.611     1.611    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk
+    SLICE_X35Y130        FDRE                                         r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y130        FDRE (Prop_fdre_C_Q)         0.456     2.067 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/Q
+                         net (fo=38, routed)          1.173     3.240    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DPRA0
+    SLICE_X30Y130        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.153     3.393 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/O
+                         net (fo=3, routed)           0.931     4.324    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk_1
+    SLICE_X33Y131        LUT6 (Prop_lut6_I2_O)        0.331     4.655 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___61_i_1/O
+                         net (fo=6, routed)           1.002     5.657    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/count_reg[1]_11
+    SLICE_X33Y135        LUT6 (Prop_lut6_I1_O)        0.124     5.781 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9/O
+                         net (fo=1, routed)           0.819     6.600    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9_n_0
+    SLICE_X32Y136        LUT5 (Prop_lut5_I2_O)        0.124     6.724 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6/O
+                         net (fo=3, routed)           0.580     7.304    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6_n_0
+    SLICE_X29Y138        LUT6 (Prop_lut6_I0_O)        0.124     7.428 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_3/O
+                         net (fo=1, routed)           0.648     8.076    dut/mesh/GEN_R[0].r/request_matrix__43[13]
+    SLICE_X29Y138        LUT6 (Prop_lut6_I2_O)        0.124     8.200 f  dut/mesh/GEN_R[0].r/i___175/O
+                         net (fo=5, routed)           0.875     9.075    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/in_req[4]_59[1]
+    SLICE_X15Y139        LUT5 (Prop_lut5_I2_O)        0.124     9.199 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___205_i_1/O
+                         net (fo=15, routed)          0.848    10.047    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___32_i_1_1
+    SLICE_X15Y140        LUT5 (Prop_lut5_I1_O)        0.124    10.171 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3/O
+                         net (fo=5, routed)           1.040    11.212    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3_n_0
+    SLICE_X14Y139        LUT4 (Prop_lut4_I1_O)        0.150    11.362 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___33_i_1/O
+                         net (fo=15, routed)          0.824    12.186    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___206
+    SLICE_X9Y138         LUT2 (Prop_lut2_I0_O)        0.357    12.543 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/rr_ptr[2]_i_5__1/O
+                         net (fo=2, routed)           0.627    13.169    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[0]_9
+    SLICE_X12Y137        LUT6 (Prop_lut6_I3_O)        0.327    13.496 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1/O
+                         net (fo=1, routed)           0.000    13.496    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1_n_0
+    SLICE_X12Y137        MUXF7 (Prop_muxf7_I1_O)      0.214    13.710 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[2]_i_1__1/O
+                         net (fo=41, routed)          1.221    14.931    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/E[0]
+    SLICE_X9Y134         LUT6 (Prop_lut6_I0_O)        0.297    15.228 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/i___107_i_4/O
+                         net (fo=24, routed)          1.341    16.569    dut/mesh/GEN_R[0].r/xbar_sel[2]_38[1]
+    SLICE_X29Y128        LUT3 (Prop_lut3_I2_O)        0.150    16.719 r  dut/mesh/GEN_R[0].r/i___0_i_35/O
+                         net (fo=1, routed)           0.810    17.529    dut/mesh/GEN_R[0].r/i___0_i_35_n_0
+    SLICE_X29Y129        LUT6 (Prop_lut6_I2_O)        0.326    17.855 r  dut/mesh/GEN_R[0].r/i___0_i_17/O
+                         net (fo=1, routed)           0.801    18.656    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[4].u_arbiter/G_EJECT_REG.eject_flit_q[flit_data][0]_i_4
+    SLICE_X31Y129        LUT6 (Prop_lut6_I0_O)        0.124    18.780 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[4].u_arbiter/i___0_i_6/O
+                         net (fo=37, routed)          1.217    19.997    dut/mesh/GEN_R[0].r/u_datapath/local_vc0_fifo/GEN_R[0].G_LINK_REG.q_s_reg[flit_type][1]
+    SLICE_X35Y121        LUT6 (Prop_lut6_I0_O)        0.124    20.121 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc0_fifo/G_EJECT_REG.eject_flit_q[flit_data][9]_i_4/O
+                         net (fo=3, routed)           0.688    20.809    dut/mesh/GEN_R[0].r/crossbar_in_local[flit_data][9]
+    SLICE_X35Y121        LUT6 (Prop_lut6_I4_O)        0.124    20.933 r  dut/mesh/GEN_R[0].r/GEN_R[0].G_LINK_REG.q_e[flit_data][9]_i_1/O
+                         net (fo=1, routed)           0.000    20.933    dut/mesh/GEN_R[0].p_out_e[flit_data][9]
+    SLICE_X35Y121        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][9]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.490    21.490    dut/mesh/clk
+    SLICE_X35Y121        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][9]/C
+                         clock pessimism              0.080    21.570    
+                         clock uncertainty           -0.035    21.535    
+    SLICE_X35Y121        FDRE (Setup_fdre_C_D)        0.029    21.564    dut/mesh/GEN_R[0].G_LINK_REG.q_e_reg[flit_data][9]
+  -------------------------------------------------------------------
+                         required time                         21.564    
+                         arrival time                         -20.933    
+  -------------------------------------------------------------------
+                         slack                                  0.631    
+
+Slack (MET) :             0.633ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rd_ptr_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q_reg[flit_data][0]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.247ns  (logic 4.110ns (21.355%)  route 15.137ns (78.645%))
+  Logic Levels:           19  (LUT2=1 LUT3=1 LUT4=1 LUT5=6 LUT6=8 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.116ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.494ns = ( 21.494 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.690ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.690     1.690    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/clk
+    SLICE_X73Y117        FDRE                                         r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rd_ptr_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X73Y117        FDRE (Prop_fdre_C_Q)         0.419     2.109 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rd_ptr_reg[1]/Q
+                         net (fo=37, routed)          1.071     3.180    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_24_29/ADDRC1
+    SLICE_X70Y116        RAMD32 (Prop_ramd32_RADR1_O)
+                                                      0.328     3.508 f  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_24_29/RAMC/O
+                         net (fo=4, routed)           0.940     4.448    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/clk_2[28]
+    SLICE_X65Y116        LUT5 (Prop_lut5_I0_O)        0.331     4.779 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___84_i_1/O
+                         net (fo=3, routed)           0.440     5.219    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/count_reg[1]_3
+    SLICE_X66Y116        LUT4 (Prop_lut4_I0_O)        0.124     5.343 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___46_i_6/O
+                         net (fo=6, routed)           0.716     6.059    dut/mesh/GEN_R[2].r/u_allocator/GEN_IN_ARB[3].u_in_arbiter/route_port[11]_133[1]
+    SLICE_X66Y116        LUT6 (Prop_lut6_I2_O)        0.124     6.183 r  dut/mesh/GEN_R[2].r/u_allocator/GEN_IN_ARB[3].u_in_arbiter/i___46_i_4/O
+                         net (fo=4, routed)           0.464     6.647    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___49
+    SLICE_X66Y117        LUT5 (Prop_lut5_I0_O)        0.124     6.771 f  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___49_i_2/O
+                         net (fo=1, routed)           0.641     7.412    dut/mesh/GEN_R[2].r/u_datapath_n_343
+    SLICE_X66Y117        LUT6 (Prop_lut6_I4_O)        0.124     7.536 f  dut/mesh/GEN_R[2].r/i___49/O
+                         net (fo=2, routed)           1.225     8.761    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rr_ptr_reg[1]_3
+    SLICE_X74Y117        LUT5 (Prop_lut5_I1_O)        0.124     8.885 f  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rr_ptr[1]_i_5__12/O
+                         net (fo=5, routed)           0.703     9.588    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___46[0]
+    SLICE_X74Y118        LUT5 (Prop_lut5_I0_O)        0.124     9.712 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___186_i_1__0/O
+                         net (fo=16, routed)          0.678    10.389    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/rr_ptr_reg[1]
+    SLICE_X74Y118        LUT6 (Prop_lut6_I4_O)        0.124    10.513 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___31_i_8/O
+                         net (fo=3, routed)           0.830    11.343    dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___31_i_8_n_0
+    SLICE_X79Y117        LUT5 (Prop_lut5_I2_O)        0.124    11.467 r  dut/mesh/GEN_R[2].r/u_datapath/west_vc2_fifo/i___31_i_2__0/O
+                         net (fo=15, routed)          0.997    12.465    dut/mesh/GEN_R[2].r/u_datapath/local_vc2_fifo/i___182_i_2__1_1
+    SLICE_X85Y117        LUT2 (Prop_lut2_I1_O)        0.117    12.582 f  dut/mesh/GEN_R[2].r/u_datapath/local_vc2_fifo/i___200_i_11/O
+                         net (fo=1, routed)           0.664    13.246    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_1__0_1
+    SLICE_X84Y117        LUT6 (Prop_lut6_I4_O)        0.332    13.578 f  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_5/O
+                         net (fo=1, routed)           0.000    13.578    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_5_n_0
+    SLICE_X84Y117        MUXF7 (Prop_muxf7_I1_O)      0.214    13.792 f  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___200_i_1__0/O
+                         net (fo=6, routed)           1.045    14.837    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/out_winner[3]_150[2]
+    SLICE_X82Y118        LUT5 (Prop_lut5_I4_O)        0.325    15.162 f  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[3].u_arbiter/i___152_i_1__1/O
+                         net (fo=21, routed)          1.155    16.317    dut/mesh/GEN_R[2].r/xbar_sel[3]_157[3]
+    SLICE_X80Y112        LUT3 (Prop_lut3_I2_O)        0.352    16.669 f  dut/mesh/GEN_R[2].r/i___2_i_5/O
+                         net (fo=3, routed)           0.999    17.668    dut/mesh/GEN_R[2].r/i___2_i_5_n_0
+    SLICE_X80Y109        LUT6 (Prop_lut6_I3_O)        0.328    17.996 f  dut/mesh/GEN_R[2].r/i___0_i_19/O
+                         net (fo=2, routed)           0.738    18.733    dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[4].u_arbiter/G_EJECT_REG.eject_flit_q[flit_data][0]_i_4__1_2
+    SLICE_X79Y107        LUT6 (Prop_lut6_I3_O)        0.124    18.857 r  dut/mesh/GEN_R[2].r/u_allocator/GEN_ARB[4].u_arbiter/i___0_i_6__1/O
+                         net (fo=37, routed)          1.014    19.871    dut/mesh/GEN_R[2].r/u_datapath/local_vc0_fifo/GEN_R[2].G_LINK_REG.q_s_reg[flit_type][1]
+    SLICE_X74Y106        LUT6 (Prop_lut6_I0_O)        0.124    19.995 r  dut/mesh/GEN_R[2].r/u_datapath/local_vc0_fifo/G_EJECT_REG.eject_flit_q[flit_data][0]_i_4__1/O
+                         net (fo=3, routed)           0.818    20.813    dut/mesh/GEN_R[2].r/crossbar_in_local[flit_data][0]
+    SLICE_X71Y107        LUT6 (Prop_lut6_I4_O)        0.124    20.937 r  dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q[flit_data][0]_i_1/O
+                         net (fo=1, routed)           0.000    20.937    dut/mesh/GEN_R[2].r/xb_out_local[flit_data][0]
+    SLICE_X71Y107        FDRE                                         r  dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q_reg[flit_data][0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.494    21.494    dut/mesh/GEN_R[2].r/clk
+    SLICE_X71Y107        FDRE                                         r  dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q_reg[flit_data][0]/C
+                         clock pessimism              0.080    21.574    
+                         clock uncertainty           -0.035    21.539    
+    SLICE_X71Y107        FDRE (Setup_fdre_C_D)        0.031    21.570    dut/mesh/GEN_R[2].r/G_EJECT_REG.eject_flit_q_reg[flit_data][0]
+  -------------------------------------------------------------------
+                         required time                         21.570    
+                         arrival time                         -20.937    
+  -------------------------------------------------------------------
+                         slack                                  0.633    
+
+Slack (MET) :             0.634ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][23]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.317ns  (logic 3.879ns (20.081%)  route 15.438ns (79.919%))
+  Logic Levels:           18  (LUT2=1 LUT4=2 LUT5=4 LUT6=9 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.045ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.486ns = ( 21.486 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.611ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.611     1.611    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk
+    SLICE_X35Y130        FDRE                                         r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y130        FDRE (Prop_fdre_C_Q)         0.456     2.067 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/Q
+                         net (fo=38, routed)          1.173     3.240    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DPRA0
+    SLICE_X30Y130        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.153     3.393 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/O
+                         net (fo=3, routed)           0.931     4.324    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk_1
+    SLICE_X33Y131        LUT6 (Prop_lut6_I2_O)        0.331     4.655 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___61_i_1/O
+                         net (fo=6, routed)           1.002     5.657    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/count_reg[1]_11
+    SLICE_X33Y135        LUT6 (Prop_lut6_I1_O)        0.124     5.781 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9/O
+                         net (fo=1, routed)           0.819     6.600    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9_n_0
+    SLICE_X32Y136        LUT5 (Prop_lut5_I2_O)        0.124     6.724 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6/O
+                         net (fo=3, routed)           0.580     7.304    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6_n_0
+    SLICE_X29Y138        LUT6 (Prop_lut6_I0_O)        0.124     7.428 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_3/O
+                         net (fo=1, routed)           0.648     8.076    dut/mesh/GEN_R[0].r/request_matrix__43[13]
+    SLICE_X29Y138        LUT6 (Prop_lut6_I2_O)        0.124     8.200 f  dut/mesh/GEN_R[0].r/i___175/O
+                         net (fo=5, routed)           0.875     9.075    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/in_req[4]_59[1]
+    SLICE_X15Y139        LUT5 (Prop_lut5_I2_O)        0.124     9.199 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___205_i_1/O
+                         net (fo=15, routed)          0.848    10.047    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___32_i_1_1
+    SLICE_X15Y140        LUT5 (Prop_lut5_I1_O)        0.124    10.171 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3/O
+                         net (fo=5, routed)           1.040    11.212    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3_n_0
+    SLICE_X14Y139        LUT4 (Prop_lut4_I1_O)        0.150    11.362 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___33_i_1/O
+                         net (fo=15, routed)          0.824    12.186    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___206
+    SLICE_X9Y138         LUT2 (Prop_lut2_I0_O)        0.357    12.543 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/rr_ptr[2]_i_5__1/O
+                         net (fo=2, routed)           0.627    13.169    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[0]_9
+    SLICE_X12Y137        LUT6 (Prop_lut6_I3_O)        0.327    13.496 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1/O
+                         net (fo=1, routed)           0.000    13.496    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1_n_0
+    SLICE_X12Y137        MUXF7 (Prop_muxf7_I1_O)      0.214    13.710 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[2]_i_1__1/O
+                         net (fo=41, routed)          1.221    14.931    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/E[0]
+    SLICE_X9Y134         LUT6 (Prop_lut6_I0_O)        0.297    15.228 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/i___107_i_4/O
+                         net (fo=24, routed)          1.262    16.490    dut/mesh/GEN_R[0].r/xbar_sel[2]_38[1]
+    SLICE_X15Y131        LUT5 (Prop_lut5_I0_O)        0.152    16.642 r  dut/mesh/GEN_R[0].r/i___0_i_65/O
+                         net (fo=1, routed)           0.950    17.592    dut/mesh/GEN_R[0].r/i___0_i_65_n_0
+    SLICE_X29Y131        LUT6 (Prop_lut6_I1_O)        0.326    17.918 r  dut/mesh/GEN_R[0].r/i___0_i_27/O
+                         net (fo=4, routed)           0.759    18.677    dut/mesh/GEN_R[0].r/u_datapath/east_vc0_fifo/sel_east_vc0
+    SLICE_X39Y131        LUT4 (Prop_lut4_I3_O)        0.124    18.801 r  dut/mesh/GEN_R[0].r/u_datapath/east_vc0_fifo/G_EJECT_REG.eject_flit_q[flit_data][31]_i_10/O
+                         net (fo=36, routed)          0.825    19.626    dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][0]
+    SLICE_X36Y127        LUT6 (Prop_lut6_I5_O)        0.124    19.750 r  dut/mesh/GEN_R[0].r/u_datapath/east_vc1_fifo/G_EJECT_REG.eject_flit_q[flit_data][23]_i_3/O
+                         net (fo=3, routed)           1.054    20.804    dut/mesh/GEN_R[0].r/crossbar_in_east[flit_data][23]
+    SLICE_X33Y124        LUT6 (Prop_lut6_I1_O)        0.124    20.928 r  dut/mesh/GEN_R[0].r/GEN_R[0].G_LINK_REG.q_s[flit_data][23]_i_1/O
+                         net (fo=1, routed)           0.000    20.928    dut/mesh/GEN_R[0].p_out_s[flit_data][23]
+    SLICE_X33Y124        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][23]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.486    21.486    dut/mesh/clk
+    SLICE_X33Y124        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][23]/C
+                         clock pessimism              0.080    21.566    
+                         clock uncertainty           -0.035    21.531    
+    SLICE_X33Y124        FDRE (Setup_fdre_C_D)        0.031    21.562    dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][23]
+  -------------------------------------------------------------------
+                         required time                         21.562    
+                         arrival time                         -20.928    
+  -------------------------------------------------------------------
+                         slack                                  0.634    
+
+Slack (MET) :             0.638ns  (required time - arrival time)
+  Source:                 dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][2]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        19.312ns  (logic 3.879ns (20.086%)  route 15.433ns (79.914%))
+  Logic Levels:           18  (LUT2=1 LUT4=1 LUT5=4 LUT6=10 MUXF7=1 RAMD32=1)
+  Clock Path Skew:        -0.046ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.485ns = ( 21.485 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.611ns
+    Clock Pessimism Removal (CPR):    0.080ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.611     1.611    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk
+    SLICE_X35Y130        FDRE                                         r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X35Y130        FDRE (Prop_fdre_C_Q)         0.456     2.067 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/rd_ptr_reg[0]/Q
+                         net (fo=38, routed)          1.173     3.240    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DPRA0
+    SLICE_X30Y130        RAMD32 (Prop_ramd32_RADR0_O)
+                                                      0.153     3.393 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/O
+                         net (fo=3, routed)           0.931     4.324    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/clk_1
+    SLICE_X33Y131        LUT6 (Prop_lut6_I2_O)        0.331     4.655 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___61_i_1/O
+                         net (fo=6, routed)           1.002     5.657    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/count_reg[1]_11
+    SLICE_X33Y135        LUT6 (Prop_lut6_I1_O)        0.124     5.781 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9/O
+                         net (fo=1, routed)           0.819     6.600    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_9_n_0
+    SLICE_X32Y136        LUT5 (Prop_lut5_I2_O)        0.124     6.724 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6/O
+                         net (fo=3, routed)           0.580     7.304    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_6_n_0
+    SLICE_X29Y138        LUT6 (Prop_lut6_I0_O)        0.124     7.428 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___175_i_3/O
+                         net (fo=1, routed)           0.648     8.076    dut/mesh/GEN_R[0].r/request_matrix__43[13]
+    SLICE_X29Y138        LUT6 (Prop_lut6_I2_O)        0.124     8.200 f  dut/mesh/GEN_R[0].r/i___175/O
+                         net (fo=5, routed)           0.875     9.075    dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/in_req[4]_59[1]
+    SLICE_X15Y139        LUT5 (Prop_lut5_I2_O)        0.124     9.199 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc1_fifo/i___205_i_1/O
+                         net (fo=15, routed)          0.848    10.047    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___32_i_1_1
+    SLICE_X15Y140        LUT5 (Prop_lut5_I1_O)        0.124    10.171 f  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3/O
+                         net (fo=5, routed)           1.040    11.212    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___30_i_3_n_0
+    SLICE_X14Y139        LUT4 (Prop_lut4_I1_O)        0.150    11.362 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___33_i_1/O
+                         net (fo=15, routed)          0.824    12.186    dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/i___206
+    SLICE_X9Y138         LUT2 (Prop_lut2_I0_O)        0.357    12.543 r  dut/mesh/GEN_R[0].r/u_datapath/local_vc2_fifo/rr_ptr[2]_i_5__1/O
+                         net (fo=2, routed)           0.627    13.169    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[0]_9
+    SLICE_X12Y137        LUT6 (Prop_lut6_I3_O)        0.327    13.496 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1/O
+                         net (fo=1, routed)           0.000    13.496    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr[2]_i_4__1_n_0
+    SLICE_X12Y137        MUXF7 (Prop_muxf7_I1_O)      0.214    13.710 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/rr_ptr_reg[2]_i_1__1/O
+                         net (fo=41, routed)          1.221    14.931    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/E[0]
+    SLICE_X9Y134         LUT6 (Prop_lut6_I0_O)        0.297    15.228 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[2].u_arbiter/i___107_i_4/O
+                         net (fo=24, routed)          1.227    16.455    dut/mesh/GEN_R[0].r/xbar_sel[2]_38[1]
+    SLICE_X13Y131        LUT5 (Prop_lut5_I0_O)        0.152    16.607 f  dut/mesh/GEN_R[0].r/i___0_i_74/O
+                         net (fo=1, routed)           0.937    17.544    dut/mesh/GEN_R[0].r/i___0_i_74_n_0
+    SLICE_X15Y129        LUT6 (Prop_lut6_I3_O)        0.326    17.870 f  dut/mesh/GEN_R[0].r/i___0_i_29/O
+                         net (fo=2, routed)           0.621    18.491    dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[0].u_arbiter/sel_south_vc1
+    SLICE_X29Y128        LUT6 (Prop_lut6_I4_O)        0.124    18.615 r  dut/mesh/GEN_R[0].r/u_allocator/GEN_ARB[0].u_arbiter/G_EJECT_REG.eject_flit_q[flit_data][31]_i_5/O
+                         net (fo=36, routed)          1.127    19.742    dut/mesh/GEN_R[0].r/u_datapath/south_vc0_fifo/GEN_R[0].G_LINK_REG.q_s_reg[flit_type][1]
+    SLICE_X37Y120        LUT6 (Prop_lut6_I0_O)        0.124    19.866 r  dut/mesh/GEN_R[0].r/u_datapath/south_vc0_fifo/G_EJECT_REG.eject_flit_q[flit_data][2]_i_2/O
+                         net (fo=3, routed)           0.933    20.799    dut/mesh/GEN_R[0].r/crossbar_in_south[flit_data][2]
+    SLICE_X37Y124        LUT6 (Prop_lut6_I0_O)        0.124    20.923 r  dut/mesh/GEN_R[0].r/GEN_R[0].G_LINK_REG.q_s[flit_data][2]_i_1/O
+                         net (fo=1, routed)           0.000    20.923    dut/mesh/GEN_R[0].p_out_s[flit_data][2]
+    SLICE_X37Y124        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][2]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.485    21.485    dut/mesh/clk
+    SLICE_X37Y124        FDRE                                         r  dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][2]/C
+                         clock pessimism              0.080    21.565    
+                         clock uncertainty           -0.035    21.530    
+    SLICE_X37Y124        FDRE (Setup_fdre_C_D)        0.031    21.561    dut/mesh/GEN_R[0].G_LINK_REG.q_s_reg[flit_data][2]
+  -------------------------------------------------------------------
+                         required time                         21.561    
+                         arrival time                         -20.923    
+  -------------------------------------------------------------------
+                         slack                                  0.638    
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.014ns  (arrival time - required time)
+  Source:                 dut/l2/W[0].l2/tx_tag_q_reg[22]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[22]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.342ns  (logic 0.141ns (41.251%)  route 0.201ns (58.749%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.265ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.823ns
+    Source Clock Delay      (SCD):    0.553ns
+    Clock Pessimism Removal (CPR):    0.005ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.553     0.553    dut/l2/W[0].l2/clk
+    SLICE_X55Y77         FDRE                                         r  dut/l2/W[0].l2/tx_tag_q_reg[22]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X55Y77         FDRE (Prop_fdre_C_Q)         0.141     0.694 r  dut/l2/W[0].l2/tx_tag_q_reg[22]/Q
+                         net (fo=1, routed)           0.201     0.895    dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[127]_0[22]
+    SLICE_X50Y79         FDRE                                         r  dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[22]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.823     0.823    dut/l2/W[0].l2/ni/clk
+    SLICE_X50Y79         FDRE                                         r  dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[22]/C
+                         clock pessimism             -0.005     0.818    
+    SLICE_X50Y79         FDRE (Hold_fdre_C_D)         0.063     0.881    dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[22]
+  -------------------------------------------------------------------
+                         required time                         -0.881    
+                         arrival time                           0.895    
+  -------------------------------------------------------------------
+                         slack                                  0.014    
+
+Slack (MET) :             0.015ns  (arrival time - required time)
+  Source:                 dut/l2/W[0].l2/tx_tag_q_reg[54]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[54]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.340ns  (logic 0.141ns (41.526%)  route 0.199ns (58.474%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.265ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.823ns
+    Source Clock Delay      (SCD):    0.553ns
+    Clock Pessimism Removal (CPR):    0.005ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.553     0.553    dut/l2/W[0].l2/clk
+    SLICE_X55Y77         FDRE                                         r  dut/l2/W[0].l2/tx_tag_q_reg[54]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X55Y77         FDRE (Prop_fdre_C_Q)         0.141     0.694 r  dut/l2/W[0].l2/tx_tag_q_reg[54]/Q
+                         net (fo=1, routed)           0.199     0.893    dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[127]_0[54]
+    SLICE_X50Y79         FDRE                                         r  dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[54]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.823     0.823    dut/l2/W[0].l2/ni/clk
+    SLICE_X50Y79         FDRE                                         r  dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[54]/C
+                         clock pessimism             -0.005     0.818    
+    SLICE_X50Y79         FDRE (Hold_fdre_C_D)         0.060     0.878    dut/l2/W[0].l2/ni/tx_mac_tag_q_reg[54]
+  -------------------------------------------------------------------
+                         required time                         -0.878    
+                         arrival time                           0.893    
+  -------------------------------------------------------------------
+                         slack                                  0.015    
+
+Slack (MET) :             0.016ns  (arrival time - required time)
+  Source:                 dut/endpoint/controller/u_pq_kmac_share/u_kmac/msg_reg_reg[340]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/endpoint/controller/u_pq_kmac_share/u_kmac/u_kmac_encode/msg_reg_reg[340]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.375ns  (logic 0.128ns (34.144%)  route 0.247ns (65.856%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.353ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.922ns
+    Source Clock Delay      (SCD):    0.564ns
+    Clock Pessimism Removal (CPR):    0.005ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.564     0.564    dut/endpoint/controller/u_pq_kmac_share/u_kmac/clk
+    SLICE_X33Y145        FDRE                                         r  dut/endpoint/controller/u_pq_kmac_share/u_kmac/msg_reg_reg[340]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X33Y145        FDRE (Prop_fdre_C_Q)         0.128     0.692 r  dut/endpoint/controller/u_pq_kmac_share/u_kmac/msg_reg_reg[340]/Q
+                         net (fo=1, routed)           0.247     0.939    dut/endpoint/controller/u_pq_kmac_share/u_kmac/u_kmac_encode/msg_reg_reg[519]_0[289]
+    SLICE_X34Y150        FDRE                                         r  dut/endpoint/controller/u_pq_kmac_share/u_kmac/u_kmac_encode/msg_reg_reg[340]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.922     0.922    dut/endpoint/controller/u_pq_kmac_share/u_kmac/u_kmac_encode/clk
+    SLICE_X34Y150        FDRE                                         r  dut/endpoint/controller/u_pq_kmac_share/u_kmac/u_kmac_encode/msg_reg_reg[340]/C
+                         clock pessimism             -0.005     0.917    
+    SLICE_X34Y150        FDRE (Hold_fdre_C_D)         0.006     0.923    dut/endpoint/controller/u_pq_kmac_share/u_kmac/u_kmac_encode/msg_reg_reg[340]
+  -------------------------------------------------------------------
+                         required time                         -0.923    
+                         arrival time                           0.939    
+  -------------------------------------------------------------------
+                         slack                                  0.016    
+
+Slack (MET) :             0.021ns  (arrival time - required time)
+  Source:                 dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/DP/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.347ns  (logic 0.141ns (40.599%)  route 0.206ns (59.401%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.016ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.837ns
+    Source Clock Delay      (SCD):    0.567ns
+    Clock Pessimism Removal (CPR):    0.254ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.567     0.567    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/clk
+    SLICE_X43Y95         FDRE                                         r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y95         FDRE (Prop_fdre_C_Q)         0.141     0.708 r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/Q
+                         net (fo=60, routed)          0.206     0.914    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/A0
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/DP/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.837     0.837    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/WCLK
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/DP/CLK
+                         clock pessimism             -0.254     0.583    
+    SLICE_X42Y95         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.893    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/DP
+  -------------------------------------------------------------------
+                         required time                         -0.893    
+                         arrival time                           0.914    
+  -------------------------------------------------------------------
+                         slack                                  0.021    
+
+Slack (MET) :             0.021ns  (arrival time - required time)
+  Source:                 dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/SP/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.347ns  (logic 0.141ns (40.599%)  route 0.206ns (59.401%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.016ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.837ns
+    Source Clock Delay      (SCD):    0.567ns
+    Clock Pessimism Removal (CPR):    0.254ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.567     0.567    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/clk
+    SLICE_X43Y95         FDRE                                         r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y95         FDRE (Prop_fdre_C_Q)         0.141     0.708 r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/Q
+                         net (fo=60, routed)          0.206     0.914    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/A0
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/SP/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.837     0.837    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/WCLK
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/SP/CLK
+                         clock pessimism             -0.254     0.583    
+    SLICE_X42Y95         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.893    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31/SP
+  -------------------------------------------------------------------
+                         required time                         -0.893    
+                         arrival time                           0.914    
+  -------------------------------------------------------------------
+                         slack                                  0.021    
+
+Slack (MET) :             0.021ns  (arrival time - required time)
+  Source:                 dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.347ns  (logic 0.141ns (40.599%)  route 0.206ns (59.401%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.016ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.837ns
+    Source Clock Delay      (SCD):    0.567ns
+    Clock Pessimism Removal (CPR):    0.254ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.567     0.567    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/clk
+    SLICE_X43Y95         FDRE                                         r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y95         FDRE (Prop_fdre_C_Q)         0.141     0.708 r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/Q
+                         net (fo=60, routed)          0.206     0.914    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/A0
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.837     0.837    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/WCLK
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP/CLK
+                         clock pessimism             -0.254     0.583    
+    SLICE_X42Y95         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.893    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/DP
+  -------------------------------------------------------------------
+                         required time                         -0.893    
+                         arrival time                           0.914    
+  -------------------------------------------------------------------
+                         slack                                  0.021    
+
+Slack (MET) :             0.021ns  (arrival time - required time)
+  Source:                 dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/SP/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.347ns  (logic 0.141ns (40.599%)  route 0.206ns (59.401%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.016ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.837ns
+    Source Clock Delay      (SCD):    0.567ns
+    Clock Pessimism Removal (CPR):    0.254ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.567     0.567    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/clk
+    SLICE_X43Y95         FDRE                                         r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y95         FDRE (Prop_fdre_C_Q)         0.141     0.708 r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/Q
+                         net (fo=60, routed)          0.206     0.914    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/A0
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/SP/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.837     0.837    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/WCLK
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/SP/CLK
+                         clock pessimism             -0.254     0.583    
+    SLICE_X42Y95         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.893    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_data]_0_3_30_31__0/SP
+  -------------------------------------------------------------------
+                         required time                         -0.893    
+                         arrival time                           0.914    
+  -------------------------------------------------------------------
+                         slack                                  0.021    
+
+Slack (MET) :             0.021ns  (arrival time - required time)
+  Source:                 dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/DP/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.347ns  (logic 0.141ns (40.599%)  route 0.206ns (59.401%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.016ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.837ns
+    Source Clock Delay      (SCD):    0.567ns
+    Clock Pessimism Removal (CPR):    0.254ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.567     0.567    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/clk
+    SLICE_X43Y95         FDRE                                         r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y95         FDRE (Prop_fdre_C_Q)         0.141     0.708 r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/Q
+                         net (fo=60, routed)          0.206     0.914    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/A0
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/DP/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.837     0.837    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/WCLK
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/DP/CLK
+                         clock pessimism             -0.254     0.583    
+    SLICE_X42Y95         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.893    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/DP
+  -------------------------------------------------------------------
+                         required time                         -0.893    
+                         arrival time                           0.914    
+  -------------------------------------------------------------------
+                         slack                                  0.021    
+
+Slack (MET) :             0.021ns  (arrival time - required time)
+  Source:                 dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/SP/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.347ns  (logic 0.141ns (40.599%)  route 0.206ns (59.401%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.016ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.837ns
+    Source Clock Delay      (SCD):    0.567ns
+    Clock Pessimism Removal (CPR):    0.254ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.567     0.567    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/clk
+    SLICE_X43Y95         FDRE                                         r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y95         FDRE (Prop_fdre_C_Q)         0.141     0.708 r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/Q
+                         net (fo=60, routed)          0.206     0.914    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/A0
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/SP/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.837     0.837    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/WCLK
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/SP/CLK
+                         clock pessimism             -0.254     0.583    
+    SLICE_X42Y95         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.893    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_0_0/SP
+  -------------------------------------------------------------------
+                         required time                         -0.893    
+                         arrival time                           0.914    
+  -------------------------------------------------------------------
+                         slack                                  0.021    
+
+Slack (MET) :             0.021ns  (arrival time - required time)
+  Source:                 dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_1_1/DP/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.347ns  (logic 0.141ns (40.599%)  route 0.206ns (59.401%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.016ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.837ns
+    Source Clock Delay      (SCD):    0.567ns
+    Clock Pessimism Removal (CPR):    0.254ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.567     0.567    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/clk
+    SLICE_X43Y95         FDRE                                         r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X43Y95         FDRE (Prop_fdre_C_Q)         0.141     0.708 r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/wr_ptr_reg[0]/Q
+                         net (fo=60, routed)          0.206     0.914    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_1_1/A0
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_1_1/DP/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.837     0.837    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_1_1/WCLK
+    SLICE_X42Y95         RAMD32                                       r  dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_1_1/DP/CLK
+                         clock pessimism             -0.254     0.583    
+    SLICE_X42Y95         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     0.893    dut/mesh/GEN_R[4].r/u_datapath/east_vc2_fifo/fifo_mem_reg[0][flit_type]_0_3_1_1/DP
+  -------------------------------------------------------------------
+                         required time                         -0.893    
+                         arrival time                           0.914    
+  -------------------------------------------------------------------
+                         slack                                  0.021    
+
+
+
+
+
+Pulse Width Checks
+--------------------------------------------------------------------------------------
+Clock Name:         clk
+Waveform(ns):       { 0.000 10.000 }
+Period(ns):         20.000
+Sources:            { clk }
+
+Check Type        Corner  Lib Pin             Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location       Pin
+Min Period        n/a     RAMB18E1/CLKARDCLK  n/a            2.944         20.000      17.056     RAMB18_X3Y34   dut/memory_reg/CLKARDCLK
+Min Period        n/a     RAMB18E1/CLKBWRCLK  n/a            2.944         20.000      17.056     RAMB18_X3Y34   dut/memory_reg/CLKBWRCLK
+Min Period        n/a     FDRE/C              n/a            1.000         20.000      19.000     SLICE_X87Y86   dut/m_ev_reg/C
+Min Period        n/a     FDRE/C              n/a            1.000         20.000      19.000     SLICE_X86Y88   dut/m_op_reg[0]/C
+Min Period        n/a     FDRE/C              n/a            1.000         20.000      19.000     SLICE_X86Y89   dut/m_op_reg[1]/C
+Min Period        n/a     FDRE/C              n/a            1.000         20.000      19.000     SLICE_X86Y88   dut/m_op_reg[2]/C
+Min Period        n/a     FDRE/C              n/a            1.000         20.000      19.000     SLICE_X86Y88   dut/m_op_reg[3]/C
+Min Period        n/a     FDRE/C              n/a            1.000         20.000      19.000     SLICE_X85Y89   dut/m_reason_reg[1]/C
+Min Period        n/a     FDRE/C              n/a            1.000         20.000      19.000     SLICE_X84Y79   dut/m_reason_reg[2]/C
+Min Period        n/a     FDRE/C              n/a            1.000         20.000      19.000     SLICE_X85Y90   dut/m_reason_reg[3]/C
+Low Pulse Width   Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMA/CLK
+Low Pulse Width   Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMA/CLK
+Low Pulse Width   Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMA_D1/CLK
+Low Pulse Width   Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMA_D1/CLK
+Low Pulse Width   Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMB/CLK
+Low Pulse Width   Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMB/CLK
+Low Pulse Width   Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMB_D1/CLK
+Low Pulse Width   Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMB_D1/CLK
+Low Pulse Width   Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMC/CLK
+Low Pulse Width   Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMC/CLK
+High Pulse Width  Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMA/CLK
+High Pulse Width  Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMA/CLK
+High Pulse Width  Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMA_D1/CLK
+High Pulse Width  Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMA_D1/CLK
+High Pulse Width  Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMB/CLK
+High Pulse Width  Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMB/CLK
+High Pulse Width  Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMB_D1/CLK
+High Pulse Width  Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMB_D1/CLK
+High Pulse Width  Slow    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMC/CLK
+High Pulse Width  Fast    RAMD32/CLK          n/a            1.250         10.000      8.750      SLICE_X50Y122  dut/GN[0].PLAIN.ni/tx_buf_reg_0_15_0_5/RAMC/CLK
+
+
+
+---------------------------------------------------------------------------------------------------
+Path Group:  **async_default**
+From Clock:  clk
+  To Clock:  clk
+
+Setup :            0  Failing Endpoints,  Worst Slack       14.966ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.994ns,  Total Violation        0.000ns
+---------------------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             14.966ns  (required time - arrival time)
+  Source:                 rst
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/rstb/r0_reg/PRE
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Fast Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.432ns  (logic 0.000ns (0.000%)  route 0.432ns (100.000%))
+  Logic Levels:           0  
+  Input Delay:            5.000ns
+  Clock Path Skew:        0.559ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.559ns = ( 20.559 - 20.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 f  rst (IN)
+                         net (fo=2, unset)            0.432     5.432    dut/rstb/rst
+    SLICE_X61Y105        FDPE                                         f  dut/rstb/r0_reg/PRE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559    20.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r0_reg/C
+                         clock pessimism              0.000    20.559    
+                         clock uncertainty           -0.035    20.524    
+    SLICE_X61Y105        FDPE (Recov_fdpe_C_PRE)     -0.126    20.398    dut/rstb/r0_reg
+  -------------------------------------------------------------------
+                         required time                         20.398    
+                         arrival time                          -5.432    
+  -------------------------------------------------------------------
+                         slack                                 14.966    
+
+Slack (MET) :             14.966ns  (required time - arrival time)
+  Source:                 rst
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/rstb/r1_reg/PRE
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Fast Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.432ns  (logic 0.000ns (0.000%)  route 0.432ns (100.000%))
+  Logic Levels:           0  
+  Input Delay:            5.000ns
+  Clock Path Skew:        0.559ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.559ns = ( 20.559 - 20.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 f  rst (IN)
+                         net (fo=2, unset)            0.432     5.432    dut/rstb/rst
+    SLICE_X61Y105        FDPE                                         f  dut/rstb/r1_reg/PRE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559    20.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg/C
+                         clock pessimism              0.000    20.559    
+                         clock uncertainty           -0.035    20.524    
+    SLICE_X61Y105        FDPE (Recov_fdpe_C_PRE)     -0.126    20.398    dut/rstb/r1_reg
+  -------------------------------------------------------------------
+                         required time                         20.398    
+                         arrival time                          -5.432    
+  -------------------------------------------------------------------
+                         slack                                 14.966    
+
+Slack (MET) :             14.966ns  (required time - arrival time)
+  Source:                 rst
+                            (input port clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/rstb/r1_reg_lopt_replica/PRE
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Fast Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        0.432ns  (logic 0.000ns (0.000%)  route 0.432ns (100.000%))
+  Logic Levels:           0  
+  Input Delay:            5.000ns
+  Clock Path Skew:        0.559ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.559ns = ( 20.559 - 20.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                         input delay                  5.000     5.000    
+                                                      0.000     5.000 f  rst (IN)
+                         net (fo=2, unset)            0.432     5.432    dut/rstb/rst
+    SLICE_X61Y105        FDPE                                         f  dut/rstb/r1_reg_lopt_replica/PRE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559    20.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+                         clock pessimism              0.000    20.559    
+                         clock uncertainty           -0.035    20.524    
+    SLICE_X61Y105        FDPE (Recov_fdpe_C_PRE)     -0.126    20.398    dut/rstb/r1_reg_lopt_replica
+  -------------------------------------------------------------------
+                         required time                         20.398    
+                         arrival time                          -5.432    
+  -------------------------------------------------------------------
+                         slack                                 14.966    
+
+Slack (MET) :             15.618ns  (required time - arrival time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/ctx_q_reg[10]/CLR
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        3.930ns  (logic 0.552ns (14.045%)  route 3.378ns (85.955%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        -0.011ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.603ns = ( 21.603 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.614ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.614     1.614    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.456     2.070 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           1.071     3.141    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.237 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       2.307     5.544    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X5Y53          FDCE                                         f  dut/verifier/kdf/ctx_q_reg[10]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.603    21.603    dut/verifier/kdf/clk
+    SLICE_X5Y53          FDCE                                         r  dut/verifier/kdf/ctx_q_reg[10]/C
+                         clock pessimism              0.000    21.603    
+                         clock uncertainty           -0.035    21.568    
+    SLICE_X5Y53          FDCE (Recov_fdce_C_CLR)     -0.405    21.163    dut/verifier/kdf/ctx_q_reg[10]
+  -------------------------------------------------------------------
+                         required time                         21.163    
+                         arrival time                          -5.544    
+  -------------------------------------------------------------------
+                         slack                                 15.618    
+
+Slack (MET) :             15.618ns  (required time - arrival time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/ctx_q_reg[42]/CLR
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        3.930ns  (logic 0.552ns (14.045%)  route 3.378ns (85.955%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        -0.011ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.603ns = ( 21.603 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.614ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.614     1.614    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.456     2.070 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           1.071     3.141    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.237 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       2.307     5.544    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X5Y53          FDCE                                         f  dut/verifier/kdf/ctx_q_reg[42]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.603    21.603    dut/verifier/kdf/clk
+    SLICE_X5Y53          FDCE                                         r  dut/verifier/kdf/ctx_q_reg[42]/C
+                         clock pessimism              0.000    21.603    
+                         clock uncertainty           -0.035    21.568    
+    SLICE_X5Y53          FDCE (Recov_fdce_C_CLR)     -0.405    21.163    dut/verifier/kdf/ctx_q_reg[42]
+  -------------------------------------------------------------------
+                         required time                         21.163    
+                         arrival time                          -5.544    
+  -------------------------------------------------------------------
+                         slack                                 15.618    
+
+Slack (MET) :             15.618ns  (required time - arrival time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/ctx_q_reg[74]/CLR
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        3.930ns  (logic 0.552ns (14.045%)  route 3.378ns (85.955%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        -0.011ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.603ns = ( 21.603 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.614ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.614     1.614    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.456     2.070 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           1.071     3.141    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.237 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       2.307     5.544    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X5Y53          FDCE                                         f  dut/verifier/kdf/ctx_q_reg[74]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.603    21.603    dut/verifier/kdf/clk
+    SLICE_X5Y53          FDCE                                         r  dut/verifier/kdf/ctx_q_reg[74]/C
+                         clock pessimism              0.000    21.603    
+                         clock uncertainty           -0.035    21.568    
+    SLICE_X5Y53          FDCE (Recov_fdce_C_CLR)     -0.405    21.163    dut/verifier/kdf/ctx_q_reg[74]
+  -------------------------------------------------------------------
+                         required time                         21.163    
+                         arrival time                          -5.544    
+  -------------------------------------------------------------------
+                         slack                                 15.618    
+
+Slack (MET) :             15.618ns  (required time - arrival time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/ctx_q_reg[79]/CLR
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        3.930ns  (logic 0.552ns (14.045%)  route 3.378ns (85.955%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        -0.011ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.603ns = ( 21.603 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.614ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.614     1.614    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.456     2.070 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           1.071     3.141    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.237 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       2.307     5.544    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X5Y53          FDCE                                         f  dut/verifier/kdf/ctx_q_reg[79]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.603    21.603    dut/verifier/kdf/clk
+    SLICE_X5Y53          FDCE                                         r  dut/verifier/kdf/ctx_q_reg[79]/C
+                         clock pessimism              0.000    21.603    
+                         clock uncertainty           -0.035    21.568    
+    SLICE_X5Y53          FDCE (Recov_fdce_C_CLR)     -0.405    21.163    dut/verifier/kdf/ctx_q_reg[79]
+  -------------------------------------------------------------------
+                         required time                         21.163    
+                         arrival time                          -5.544    
+  -------------------------------------------------------------------
+                         slack                                 15.618    
+
+Slack (MET) :             15.982ns  (required time - arrival time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/ctx_q_reg[3]/CLR
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        3.651ns  (logic 0.552ns (15.120%)  route 3.099ns (84.880%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.073ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.687ns = ( 21.687 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.614ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.614     1.614    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.456     2.070 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           1.071     3.141    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.237 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       2.028     5.265    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X24Y46         FDCE                                         f  dut/verifier/kdf/ctx_q_reg[3]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.687    21.687    dut/verifier/kdf/clk
+    SLICE_X24Y46         FDCE                                         r  dut/verifier/kdf/ctx_q_reg[3]/C
+                         clock pessimism              0.000    21.687    
+                         clock uncertainty           -0.035    21.652    
+    SLICE_X24Y46         FDCE (Recov_fdce_C_CLR)     -0.405    21.247    dut/verifier/kdf/ctx_q_reg[3]
+  -------------------------------------------------------------------
+                         required time                         21.247    
+                         arrival time                          -5.265    
+  -------------------------------------------------------------------
+                         slack                                 15.982    
+
+Slack (MET) :             15.982ns  (required time - arrival time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/ctx_q_reg[70]/CLR
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        3.651ns  (logic 0.552ns (15.120%)  route 3.099ns (84.880%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.073ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.687ns = ( 21.687 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.614ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.614     1.614    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.456     2.070 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           1.071     3.141    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.237 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       2.028     5.265    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X24Y46         FDCE                                         f  dut/verifier/kdf/ctx_q_reg[70]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.687    21.687    dut/verifier/kdf/clk
+    SLICE_X24Y46         FDCE                                         r  dut/verifier/kdf/ctx_q_reg[70]/C
+                         clock pessimism              0.000    21.687    
+                         clock uncertainty           -0.035    21.652    
+    SLICE_X24Y46         FDCE (Recov_fdce_C_CLR)     -0.405    21.247    dut/verifier/kdf/ctx_q_reg[70]
+  -------------------------------------------------------------------
+                         required time                         21.247    
+                         arrival time                          -5.265    
+  -------------------------------------------------------------------
+                         slack                                 15.982    
+
+Slack (MET) :             15.982ns  (required time - arrival time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/epoch_q_reg[25]/CLR
+                            (recovery check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            20.000ns  (clk rise@20.000ns - clk rise@0.000ns)
+  Data Path Delay:        3.651ns  (logic 0.552ns (15.120%)  route 3.099ns (84.880%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.073ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.687ns = ( 21.687 - 20.000 ) 
+    Source Clock Delay      (SCD):    1.614ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        1.614     1.614    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.456     2.070 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           1.071     3.141    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.096     3.237 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       2.028     5.265    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X18Y42         FDCE                                         f  dut/verifier/kdf/epoch_q_reg[25]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)       20.000    20.000 r  
+                                                      0.000    20.000 r  clk (IN)
+                         net (fo=30361, unset)        1.687    21.687    dut/verifier/kdf/clk
+    SLICE_X18Y42         FDCE                                         r  dut/verifier/kdf/epoch_q_reg[25]/C
+                         clock pessimism              0.000    21.687    
+                         clock uncertainty           -0.035    21.652    
+    SLICE_X18Y42         FDCE (Recov_fdce_C_CLR)     -0.405    21.247    dut/verifier/kdf/epoch_q_reg[25]
+  -------------------------------------------------------------------
+                         required time                         21.247    
+                         arrival time                          -5.265    
+  -------------------------------------------------------------------
+                         slack                                 15.982    
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.994ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/root_q_reg[52]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.314ns  (logic 0.167ns (12.711%)  route 1.147ns (87.289%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.387ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.946ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.732     1.873    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X2Y5           FDCE                                         f  dut/verifier/kdf/root_q_reg[52]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.946     0.946    dut/verifier/kdf/clk
+    SLICE_X2Y5           FDCE                                         r  dut/verifier/kdf/root_q_reg[52]/C
+                         clock pessimism              0.000     0.946    
+    SLICE_X2Y5           FDCE (Remov_fdce_C_CLR)     -0.067     0.879    dut/verifier/kdf/root_q_reg[52]
+  -------------------------------------------------------------------
+                         required time                         -0.879    
+                         arrival time                           1.873    
+  -------------------------------------------------------------------
+                         slack                                  0.994    
+
+Slack (MET) :             0.994ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/root_q_reg[58]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.314ns  (logic 0.167ns (12.711%)  route 1.147ns (87.289%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.387ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.946ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.732     1.873    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X2Y5           FDCE                                         f  dut/verifier/kdf/root_q_reg[58]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.946     0.946    dut/verifier/kdf/clk
+    SLICE_X2Y5           FDCE                                         r  dut/verifier/kdf/root_q_reg[58]/C
+                         clock pessimism              0.000     0.946    
+    SLICE_X2Y5           FDCE (Remov_fdce_C_CLR)     -0.067     0.879    dut/verifier/kdf/root_q_reg[58]
+  -------------------------------------------------------------------
+                         required time                         -0.879    
+                         arrival time                           1.873    
+  -------------------------------------------------------------------
+                         slack                                  0.994    
+
+Slack (MET) :             0.995ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/root_q_reg[70]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.300ns  (logic 0.167ns (12.848%)  route 1.133ns (87.152%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.372ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.931ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.718     1.859    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X78Y2          FDCE                                         f  dut/verifier/kdf/root_q_reg[70]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.931     0.931    dut/verifier/kdf/clk
+    SLICE_X78Y2          FDCE                                         r  dut/verifier/kdf/root_q_reg[70]/C
+                         clock pessimism              0.000     0.931    
+    SLICE_X78Y2          FDCE (Remov_fdce_C_CLR)     -0.067     0.864    dut/verifier/kdf/root_q_reg[70]
+  -------------------------------------------------------------------
+                         required time                         -0.864    
+                         arrival time                           1.859    
+  -------------------------------------------------------------------
+                         slack                                  0.995    
+
+Slack (MET) :             0.995ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/root_q_reg[71]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.300ns  (logic 0.167ns (12.848%)  route 1.133ns (87.152%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.372ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.931ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.718     1.859    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X78Y2          FDCE                                         f  dut/verifier/kdf/root_q_reg[71]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.931     0.931    dut/verifier/kdf/clk
+    SLICE_X78Y2          FDCE                                         r  dut/verifier/kdf/root_q_reg[71]/C
+                         clock pessimism              0.000     0.931    
+    SLICE_X78Y2          FDCE (Remov_fdce_C_CLR)     -0.067     0.864    dut/verifier/kdf/root_q_reg[71]
+  -------------------------------------------------------------------
+                         required time                         -0.864    
+                         arrival time                           1.859    
+  -------------------------------------------------------------------
+                         slack                                  0.995    
+
+Slack (MET) :             0.995ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/root_q_reg[160]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.279ns  (logic 0.167ns (13.059%)  route 1.112ns (86.941%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.351ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.910ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.697     1.838    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X38Y47         FDCE                                         f  dut/verifier/kdf/root_q_reg[160]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.910     0.910    dut/verifier/kdf/clk
+    SLICE_X38Y47         FDCE                                         r  dut/verifier/kdf/root_q_reg[160]/C
+                         clock pessimism              0.000     0.910    
+    SLICE_X38Y47         FDCE (Remov_fdce_C_CLR)     -0.067     0.843    dut/verifier/kdf/root_q_reg[160]
+  -------------------------------------------------------------------
+                         required time                         -0.843    
+                         arrival time                           1.838    
+  -------------------------------------------------------------------
+                         slack                                  0.995    
+
+Slack (MET) :             0.995ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/root_q_reg[161]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.279ns  (logic 0.167ns (13.059%)  route 1.112ns (86.941%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.351ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.910ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.697     1.838    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X38Y47         FDCE                                         f  dut/verifier/kdf/root_q_reg[161]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.910     0.910    dut/verifier/kdf/clk
+    SLICE_X38Y47         FDCE                                         r  dut/verifier/kdf/root_q_reg[161]/C
+                         clock pessimism              0.000     0.910    
+    SLICE_X38Y47         FDCE (Remov_fdce_C_CLR)     -0.067     0.843    dut/verifier/kdf/root_q_reg[161]
+  -------------------------------------------------------------------
+                         required time                         -0.843    
+                         arrival time                           1.838    
+  -------------------------------------------------------------------
+                         slack                                  0.995    
+
+Slack (MET) :             0.995ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/root_q_reg[252]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.299ns  (logic 0.167ns (12.858%)  route 1.132ns (87.142%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.371ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.930ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.717     1.858    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X78Y3          FDCE                                         f  dut/verifier/kdf/root_q_reg[252]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.930     0.930    dut/verifier/kdf/clk
+    SLICE_X78Y3          FDCE                                         r  dut/verifier/kdf/root_q_reg[252]/C
+                         clock pessimism              0.000     0.930    
+    SLICE_X78Y3          FDCE (Remov_fdce_C_CLR)     -0.067     0.863    dut/verifier/kdf/root_q_reg[252]
+  -------------------------------------------------------------------
+                         required time                         -0.863    
+                         arrival time                           1.858    
+  -------------------------------------------------------------------
+                         slack                                  0.995    
+
+Slack (MET) :             0.995ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/root_q_reg[80]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.299ns  (logic 0.167ns (12.858%)  route 1.132ns (87.142%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.371ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.930ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.717     1.858    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X78Y3          FDCE                                         f  dut/verifier/kdf/root_q_reg[80]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.930     0.930    dut/verifier/kdf/clk
+    SLICE_X78Y3          FDCE                                         r  dut/verifier/kdf/root_q_reg[80]/C
+                         clock pessimism              0.000     0.930    
+    SLICE_X78Y3          FDCE (Remov_fdce_C_CLR)     -0.067     0.863    dut/verifier/kdf/root_q_reg[80]
+  -------------------------------------------------------------------
+                         required time                         -0.863    
+                         arrival time                           1.858    
+  -------------------------------------------------------------------
+                         slack                                  0.995    
+
+Slack (MET) :             0.996ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/ctx_q_reg[37]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.285ns  (logic 0.167ns (12.998%)  route 1.118ns (87.002%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.356ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.915ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.703     1.844    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X10Y46         FDCE                                         f  dut/verifier/kdf/ctx_q_reg[37]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.915     0.915    dut/verifier/kdf/clk
+    SLICE_X10Y46         FDCE                                         r  dut/verifier/kdf/ctx_q_reg[37]/C
+                         clock pessimism              0.000     0.915    
+    SLICE_X10Y46         FDCE (Remov_fdce_C_CLR)     -0.067     0.848    dut/verifier/kdf/ctx_q_reg[37]
+  -------------------------------------------------------------------
+                         required time                         -0.848    
+                         arrival time                           1.844    
+  -------------------------------------------------------------------
+                         slack                                  0.996    
+
+Slack (MET) :             0.996ns  (arrival time - required time)
+  Source:                 dut/rstb/r1_reg_lopt_replica/C
+                            (rising edge-triggered cell FDPE clocked by clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Destination:            dut/verifier/kdf/ctx_q_reg[71]/CLR
+                            (removal check against rising-edge clock clk  {rise@0.000ns fall@10.000ns period=20.000ns})
+  Path Group:             **async_default**
+  Path Type:              Removal (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk rise@0.000ns - clk rise@0.000ns)
+  Data Path Delay:        1.285ns  (logic 0.167ns (12.998%)  route 1.118ns (87.002%))
+  Logic Levels:           1  (BUFG=1)
+  Clock Path Skew:        0.356ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.915ns
+    Source Clock Delay      (SCD):    0.559ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.559     0.559    dut/rstb/clk
+    SLICE_X61Y105        FDPE                                         r  dut/rstb/r1_reg_lopt_replica/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X61Y105        FDPE (Prop_fdpe_C_Q)         0.141     0.700 f  dut/rstb/r1_reg_lopt_replica/Q
+                         net (fo=1, routed)           0.415     1.115    dut/rstb/Q_replN
+    BUFGCTRL_X0Y16       BUFG (Prop_bufg_I_O)         0.026     1.141 f  dut/rstb/r1_reg_0_BUFG_inst/O
+                         net (fo=25144, routed)       0.703     1.844    dut/verifier/kdf/derived_key_reg[255]_1
+    SLICE_X10Y46         FDCE                                         f  dut/verifier/kdf/ctx_q_reg[71]/CLR
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=30361, unset)        0.915     0.915    dut/verifier/kdf/clk
+    SLICE_X10Y46         FDCE                                         r  dut/verifier/kdf/ctx_q_reg[71]/C
+                         clock pessimism              0.000     0.915    
+    SLICE_X10Y46         FDCE (Remov_fdce_C_CLR)     -0.067     0.848    dut/verifier/kdf/ctx_q_reg[71]
+  -------------------------------------------------------------------
+                         required time                         -0.848    
+                         arrival time                           1.844    
+  -------------------------------------------------------------------
+                         slack                                  0.996    
+
+
+
+
+

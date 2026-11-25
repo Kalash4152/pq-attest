@@ -1,0 +1,18 @@
+﻿12:09:23 GATE free=2.75GB pagefile=19456MB need free>=1GB pagefile>=8192MB
+12:09:24 STARTED select=dsyn1 scheduler=28004 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261020_120923_d4209d12 log=C:\Users\kalas\AppData\Local\Temp\i3_i4dsyn1_20261020_120922.log
+12:09:24 free=2.72GB
+12:09:25 DONE dsyn1_variants state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[] free=2.69GB
+12:10:06 DONE dsyn1_sha3_pad_equiv state=PASS_FRESH xsimkernel_peak=11568KB proc_peak[vivado=578MB xelab=62MB xsim=209MB] free=2.44GB
+12:10:43 DONE dsyn1_iota_equiv state=PASS_FRESH xsimkernel_peak=11580KB proc_peak[vivado=565MB xelab=31MB xsim=206MB xvlog=7MB] free=2.79GB
+12:11:22 DONE dsyn1_s8_golden state=PASS_FRESH xsimkernel_peak=13236KB proc_peak[vivado=565MB xelab=121MB xsim=207MB xvlog=31MB] free=2.84GB
+12:11:47 DONE dsyn1_s8_mut_lost_measurement state=PASS_FRESH xsimkernel_peak=13236KB proc_peak[vivado=566MB xelab=105MB xsim=210MB xsimk=11MB xvlog=52MB] free=3.25GB
+12:12:10 DONE dsyn1_s8_mut_lost_tag state=PASS_FRESH xsimkernel_peak=13228KB proc_peak[vivado=556MB xelab=116MB xsim=207MB xsimk=13MB] free=3.19GB
+12:12:30 DONE dsyn1_s8_mut_key_length state=PASS_FRESH xsimkernel_peak=13232KB proc_peak[vivado=564MB xelab=105MB xsim=209MB xsimk=11MB xvlog=45MB] free=3.28GB
+12:13:03 DONE dsyn1_s8_mut_wrong_transcript state=PASS_FRESH xsimkernel_peak=13236KB proc_peak[vivado=565MB xelab=117MB xsim=207MB] free=3.1GB
+12:13:36 DONE dsyn1_s8_mut_field_order state=PASS_FRESH xsimkernel_peak=13240KB proc_peak[vivado=564MB xelab=121MB xsim=167MB xvlog=31MB] free=3.33GB
+12:14:11 DONE dsyn1_s8_mut_stale_nonce state=PASS_FRESH xsimkernel_peak=13248KB proc_peak[vivado=565MB xelab=115MB xsim=206MB xsimk=11MB xvlog=31MB] free=3.4GB
+12:14:25 free=2.94GB
+12:14:46 DONE dsyn1_s8_mut_wrong_key state=PASS_FRESH xsimkernel_peak=13220KB proc_peak[vivado=563MB xelab=108MB xsim=207MB] free=3.21GB
+12:15:19 DONE dsyn1_s8_control_after state=PASS_FRESH xsimkernel_peak=13220KB proc_peak[vivado=567MB xelab=122MB xsim=206MB xsimk=11MB xvlog=31MB] free=3.32GB
+12:15:56 DONE dsyn1_pq_endpoint_unit state=PASS_FRESH xsimkernel_peak=13912KB proc_peak[vivado=565MB xelab=31MB xsim=207MB xsimk=11MB xvlog=15MB] free=3.47GB
+12:17:01 scheduler exited stopped=False

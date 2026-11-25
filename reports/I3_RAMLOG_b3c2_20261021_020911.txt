@@ -1,0 +1,9 @@
+﻿02:09:12 GATE free=2.74GB pagefile=19456MB need free>=1GB pagefile>=8192MB
+02:09:13 STARTED select=b3c scheduler=26476 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261021_020912_85e42f27 log=C:\Users\kalas\AppData\Local\Temp\i3_b3c2_20261021_020911.log
+02:09:13 free=2.65GB
+02:09:14 DONE arbiter_traces_check state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[xsim=206MB xsimk=10MB] free=2.66GB
+02:09:36 DONE arb_trace_equiv state=PASS_FRESH xsimkernel_peak=14752KB proc_peak[vivado=563MB xelab=66MB xsim=207MB xsimk=14MB xvlog=31MB] free=2.64GB
+02:09:57 DONE arb_trace_mut_a0_pointer state=INVALID xsimkernel_peak=15012KB proc_peak[vivado=564MB xelab=71MB xsim=216MB xsimk=13MB] free=2.49GB
+02:10:16 DONE arb_bounds state=PASS_FRESH xsimkernel_peak=12968KB proc_peak[vivado=555MB xelab=73MB xsim=206MB xsimk=11MB] free=2.68GB
+02:10:36 DONE arb_mut_a0_pointer state=PASS_FRESH xsimkernel_peak=12988KB proc_peak[vivado=554MB xelab=31MB xsim=208MB xsimk=10MB xvlog=31MB] free=2.59GB
+02:10:54 scheduler exited stopped=False

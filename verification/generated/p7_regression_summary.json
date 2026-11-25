@@ -1,0 +1,227 @@
+{
+  "metadata": {
+    "run_id": "e4_p7_run_1793976567",
+    "start_time": "2026-11-06T20:19:27",
+    "end_time": "2026-11-06T20:19:32",
+    "git_revision": "00d58c1",
+    "mode": "QUICK",
+    "release_baseline": "nov3",
+    "overall_status": "PASS",
+    "status_claims": {
+      "HARDWARE_VALIDATED": false,
+      "FORMAL_PROOF": false,
+      "SOC_INTEGRATION_COMPLETE": false
+    },
+    "path_configuration": {
+      "repo_root": ".",
+      "data_dir": ".",
+      "out_dir": "verification/generated",
+      "out_dir_is_default": true,
+      "stage_12_command": "python -m pytest verification"
+    }
+  },
+  "boundary_disclosures": {
+    "HARDWARE_VALIDATED": false,
+    "FORMAL_PROOF": false,
+    "SOC_INTEGRATION_COMPLETE": false,
+    "disclaimer": "Python simulation is an architectural reference and is NOT equivalent to hardware execution."
+  },
+  "summary": {
+    "total_stages": 15,
+    "passed_stages": 11,
+    "failed_stages": 0,
+    "skipped_stages": 4
+  },
+  "metrics": {
+    "requirements_total": 57,
+    "requirements_covered": 57,
+    "integration_scenarios": 20,
+    "mutations_evaluated": 16,
+    "mutations_killed": 16,
+    "mutation_score_pct": 100.0,
+    "regression_tests_passed": null,
+    "pytest_summary": null
+  },
+  "stages": [
+    {
+      "stage_id": "01_ENV_DISCOVERY",
+      "description": "Git HEAD: 00d58c1, Python: 3.13.5, Platform: win32",
+      "status": "PASS",
+      "start_time": "20:19:27",
+      "end_time": "20:19:27",
+      "duration_s": 0.034,
+      "command": "git rev-parse --short HEAD",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": "git_head=00d58c1"
+    },
+    {
+      "stage_id": "02_BASELINE_SNAPSHOT",
+      "description": "Recorded baseline SHA-256 hashes for 40 protected files",
+      "status": "PASS",
+      "start_time": "20:19:27",
+      "end_time": "20:19:27",
+      "duration_s": 0.004,
+      "command": "",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": "protected_files=40"
+    },
+    {
+      "stage_id": "03_PROTOCOL_EXTRACTION",
+      "description": "Extracted protocol matrix from dual_lane SystemVerilog sources",
+      "status": "PASS",
+      "start_time": "20:19:27",
+      "end_time": "20:19:27",
+      "duration_s": 0.103,
+      "command": "python verification/p7_rtl_parser.py",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "04_PROTOCOL_VALIDATION",
+      "description": "Verified frozen architecture invariants (topology, freshness, C-5, K-3)",
+      "status": "PASS",
+      "start_time": "20:19:27",
+      "end_time": "20:19:27",
+      "duration_s": 0.021,
+      "command": "",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": "verification/generated/p7_protocol_manifest.json"
+    },
+    {
+      "stage_id": "05_PACKET_MODEL_REGRESSION",
+      "description": "Packet model unit tests (19 passed, 0 failed, 0 skipped, 0 errors)",
+      "status": "PASS",
+      "start_time": "20:19:27",
+      "end_time": "20:19:28",
+      "duration_s": 1.242,
+      "command": "python -m pytest verification/tests/test_p7_packet_model.py",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "06_SECURITY_MODEL_REGRESSION",
+      "description": "Security model unit tests (30 passed, 0 failed, 0 skipped, 0 errors)",
+      "status": "PASS",
+      "start_time": "20:19:28",
+      "end_time": "20:19:30",
+      "duration_s": 1.333,
+      "command": "python -m pytest verification/tests/test_p7_security_model.py",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "07_DIFFERENTIAL_VECTORS",
+      "description": "Skipped in QUICK mode",
+      "status": "SKIPPED",
+      "start_time": "20:19:30",
+      "end_time": "20:19:30",
+      "duration_s": 0.0,
+      "command": "",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "08_RELEASE_EVIDENCE_RECONCILE",
+      "description": "XSim release evidence tests (12 passed, 0 failed, 0 skipped, 0 errors)",
+      "status": "PASS",
+      "start_time": "20:19:30",
+      "end_time": "20:19:31",
+      "duration_s": 1.144,
+      "command": "python -m pytest verification/tests/test_p7_release_evidence.py",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "09_INTEGRATION_SCENARIOS",
+      "description": "20-flow stateful integration scenario tests (12 passed, 0 failed, 0 skipped, 0 errors)",
+      "status": "PASS",
+      "start_time": "20:19:31",
+      "end_time": "20:19:32",
+      "duration_s": 1.114,
+      "command": "python -m pytest verification/tests/test_p7_integration_scenarios.py",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "10_COVERAGE_AUDIT",
+      "description": "Skipped in QUICK mode",
+      "status": "SKIPPED",
+      "start_time": "20:19:32",
+      "end_time": "20:19:32",
+      "duration_s": 0.0,
+      "command": "",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "11_MUTATION_ANALYSIS",
+      "description": "Skipped in QUICK mode",
+      "status": "SKIPPED",
+      "start_time": "20:19:32",
+      "end_time": "20:19:32",
+      "duration_s": 0.0,
+      "command": "",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "12_FULL_PYTEST",
+      "description": "Skipped in QUICK mode",
+      "status": "SKIPPED",
+      "start_time": "20:19:32",
+      "end_time": "20:19:32",
+      "duration_s": 0.0,
+      "command": "",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "13_ARTIFACT_VALIDATION",
+      "description": "Validated syntax, schemas, counts & math across all 8 generated artifacts",
+      "status": "PASS",
+      "start_time": "20:19:32",
+      "end_time": "20:19:32",
+      "duration_s": 0.003,
+      "command": "",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "14_HISTORICAL_INTEGRITY",
+      "description": "Post-run verification confirmed zero modifications to RTL or historical reports",
+      "status": "PASS",
+      "start_time": "20:19:32",
+      "end_time": "20:19:32",
+      "duration_s": 0.003,
+      "command": "",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": ""
+    },
+    {
+      "stage_id": "15_FINAL_SUMMARY",
+      "description": "Generated p7_regression_summary.json",
+      "status": "PASS",
+      "start_time": "20:19:32",
+      "end_time": "20:19:32",
+      "duration_s": 0.0,
+      "command": "",
+      "exit_code": 0,
+      "failure_reason": null,
+      "output_ref": "verification/generated/p7_regression_summary.json"
+    }
+  ]
+}

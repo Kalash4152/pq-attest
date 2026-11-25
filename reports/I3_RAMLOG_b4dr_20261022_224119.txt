@@ -1,0 +1,20 @@
+﻿22:41:19 GATE free=0.89GB pagefile=20480MB need free>=1GB pagefile>=8192MB
+22:46:20 GATE free=0.86GB pagefile=20480MB need free>=1GB pagefile>=8192MB
+22:51:21 GATE free=1.21GB pagefile=20480MB need free>=1GB pagefile>=8192MB
+22:51:22 STARTED select=b4d scheduler=29296 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261022_225121_5fedde31 log=C:\Users\kalas\AppData\Local\Temp\i3_b4dr_20261022_224119.log
+22:51:23 free=1.07GB
+22:54:43 DONE f234_p7 state=PASS_FRESH xsimkernel_peak=29892KB proc_peak[vivado=605MB xelab=300MB xsim=213MB xsimk=29MB xvlog=41MB] free=1.54GB
+22:56:25 free=1GB
+22:56:37 DONE f234_p7_f2only state=PASS_FRESH xsimkernel_peak=29868KB proc_peak[vivado=566MB xelab=294MB xsim=213MB xsimk=29MB] free=1.29GB
+22:58:33 DONE f234_p7_mut_f2 state=PASS_FRESH xsimkernel_peak=29808KB proc_peak[vivado=579MB xelab=298MB xsim=214MB xsimk=29MB xvlog=54MB] free=1.74GB
+22:59:49 DONE f234_p7_f3only state=PASS_FRESH xsimkernel_peak=29900KB proc_peak[vivado=566MB xelab=300MB xsim=214MB xsimk=29MB xvlog=31MB] free=1.4GB
+23:01:27 free=1.72GB
+23:02:22 DONE f234_p7_mut_f3 state=PASS_FRESH xsimkernel_peak=29788KB proc_peak[vivado=566MB xelab=299MB xsim=216MB xsimk=29MB] free=1.36GB
+23:05:36 DONE f234_p7_mut_f4 state=PASS_FRESH xsimkernel_peak=29844KB proc_peak[vivado=565MB xelab=296MB xsim=214MB xsimk=29MB] free=1.78GB
+23:06:29 free=2.25GB
+23:06:44 DONE p7_refuse_grant state=PASS_FRESH xsimkernel_peak=29824KB proc_peak[vivado=566MB xelab=301MB xsim=212MB xsimk=29MB xvlog=31MB] free=2.37GB
+23:07:54 DONE p7_mut_control_allowed state=PASS_FRESH xsimkernel_peak=29780KB proc_peak[vivado=556MB xelab=303MB xsim=206MB xsimk=22MB xvlog=58MB] free=2.38GB
+23:08:39 DONE verifier_revoke state=PASS_FRESH xsimkernel_peak=13192KB proc_peak[vivado=565MB xelab=111MB xsim=184MB] free=2.22GB
+23:09:22 DONE vrev_mut_req_cancel state=PASS_FRESH xsimkernel_peak=13156KB proc_peak[vivado=567MB xelab=91MB xsim=208MB xsimk=8MB xvlog=31MB] free=2.42GB
+23:10:05 DONE vrev_mut_level state=PASS_FRESH xsimkernel_peak=13160KB proc_peak[vivado=565MB xelab=111MB xsim=207MB] free=2.19GB
+23:10:45 scheduler exited stopped=False

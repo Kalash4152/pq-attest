@@ -1,0 +1,5 @@
+﻿11:42:39 GATE free=2.57GB pagefile=19456MB need free>=1.0GB pagefile>=8192MB
+11:42:40 STARTED select=I-3-hop scheduler=1892 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261020_114239_aaf4df34 log=C:\Users\kalas\AppData\Local\Temp\i3_hop_20261020_114238.log
+11:42:40 free=2.48GB
+11:43:33 DONE hop_probes_m0 state=PASS_FRESH xsimkernel_peak=28800KB proc_peak[vivado=567MB xelab=274MB xsim=211MB xsimk=22MB xvlog=31MB] free=2.51GB
+11:44:26 scheduler exited stopped=False

@@ -1,0 +1,2 @@
+RESULT M1 routed LUT=32457 FF=28021 WNS=0.334 WHS=0.013 levels=21 end=mesh/GEN_R[4].G_LINK_REG.q_e_reg[flit_data][2]/D
+RESULT T4 routed LUT=31172 FF=28021 WNS=0.016 WHS=0.004 levels=27 end=mesh/GEN_R[1].G_LINK_REG.q_w_reg[flit_data][19]/D

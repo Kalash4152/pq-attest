@@ -1,0 +1,36 @@
+XVLOG errors: 0
+== tb_cpu_alu: ELAB_ERROR ERROR: [VRFC 10-3180] cannot find port 'rvfi_csr_minstret_wdata' on this module [C:/Users/kalas/AppData/Local/Temp/claude/9ea737159a6fbcdd/0
+== tb_cpu_branch: ELAB_ERROR ERROR: [VRFC 10-3180] cannot find port 'rvfi_csr_minstret_wdata' on this module [C:/Users/kalas/AppData/Local/Temp/claude/9ea737159a6fbcdd/0
+== tb_cpu_mem: ELAB_ERROR ERROR: [VRFC 10-3180] cannot find port 'rvfi_csr_minstret_wdata' on this module [C:/Users/kalas/AppData/Local/Temp/claude/9ea737159a6fbcdd/0
+tb_gpio: start stall attempt 1
+== tb_gpio: ENDED | PASS-lines=0 FAIL-lines=0 Error-lines=0 | 
+tb_tile_status: start stall attempt 1
+== tb_tile_status: ENDED | PASS-lines=0 FAIL-lines=0 Error-lines=0 | 
+tb_uart_tx: start stall attempt 1
+== tb_uart_tx: ENDED | PASS-lines=1 FAIL-lines=0 Error-lines=0 | 
+tb_uart_mmio: start stall attempt 1
+== tb_uart_mmio: ENDED | PASS-lines=1 FAIL-lines=0 Error-lines=0 | 
+== tb_addr_decode: ELAB_ERROR ERROR: [VRFC 10-2996] 'local_req_i' is not found for implicit .* port connection [C:/Users/kalas/AppData/Local/Temp/claude/9ea737159a6fbcdd/
+tb_memory_tile: start stall attempt 1
+== tb_memory_tile: ENDED | PASS-lines=1 FAIL-lines=0 Error-lines=1 | RESULT PASS: Memory tile tests passed. 
+tb_memory_full: start stall attempt 1
+== tb_memory_full: ENDED | PASS-lines=1 FAIL-lines=0 Error-lines=1 |  MEMORY VERIFICATION RESULT PASS: Full memory verification passed. 
+tb_traffic_gen: start stall attempt 1
+== tb_traffic_gen: ENDED | PASS-lines=1 FAIL-lines=0 Error-lines=1 | PASS: Traffic generator completed successfully. 
+tb_mutation_checks: start stall attempt 1
+== tb_mutation_checks: ENDED | PASS-lines=8 FAIL-lines=0 Error-lines=1 |  MUTATION TEST RESULT PASS: All representative mutations were detected. 
+== tb_cpu_memory_integration: ELAB_ERROR ERROR: [VRFC 10-3180] cannot find port 'rvfi_csr_minstret_wdata' on this module [C:/Users/kalas/AppData/Local/Temp/claude/9ea737159a6fbcdd/0
+tb_conformance: start stall attempt 1
+== tb_conformance: ENDED | PASS-lines=1 FAIL-lines=0 Error-lines=0 |  CONFORMANCE RESULTS PASS: 1000 TMEM conformance transactions passed. 
+== tb_random_latency: ELAB_ERROR ERROR: [XSIM 43-3122] "C:/Users/kalas/AppData/Local/Temp/claude/9ea737159a6fbcdd/0a4a085c-458f-46d5-a827-2462954bbbaa/scratchpad/rv_baseline
+tb_tile_top: start stall attempt 1
+== tb_tile_top: TIMEOUT_300s | PASS-lines=0 FAIL-lines=458375 Error-lines=458349 | Error: A1 FAIL: adapter capture attempted while mem_ready_q is high Error: A1 FAIL: adapter capture attempted while mem_ready_q is high 
+tb_two_tiles: start stall attempt 1
+Stop-Process : Cannot find a process with the process identifier 35268.
+At line:1 char:136
++ ... wo_tiles' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
++                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (35268:Int32) [Stop-Process], ProcessCommandException
+    + FullyQualifiedErrorId : NoProcessFoundForGivenId,Microsoft.PowerShell.Commands.StopProcessCommand
+ 
+== tb_two_tiles: ENDED | PASS-lines=2 FAIL-lines=306 Error-lines=305 | CPU RESULTS Error: A1 FAIL: adapter capture attempted while mem_ready_q is high 

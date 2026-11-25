@@ -1,0 +1,738 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 Step 6: Coverage Closure and Traceability Audit",
+    "version": "6.0",
+    "evidence_package": "E4_P7_XSIM_20261103",
+    "run_identity": "reports/dual_lane_10_20261103_140235_46039411",
+    "commit": "19f06a0",
+    "release": "f99e0d5",
+    "status_claims": {
+      "HARDWARE_VALIDATED": false,
+      "FORMAL_PROOF": false,
+      "SOC_INTEGRATION_COMPLETE": false
+    }
+  },
+  "metrics": {
+    "overall_requirement_coverage": {
+      "numerator": 58,
+      "denominator": 58,
+      "percentage": 100.0,
+      "partial": 0,
+      "unverified": 0
+    },
+    "group_coverage": {
+      "A. Packet and Protocol": {
+        "tested": 11,
+        "total": 11,
+        "percentage": 100.0
+      },
+      "B. Authentication and Freshness": {
+        "tested": 8,
+        "total": 8,
+        "percentage": 100.0
+      },
+      "C. Authorization": {
+        "tested": 9,
+        "total": 9,
+        "percentage": 100.0
+      },
+      "D. Memory Enforcement": {
+        "tested": 9,
+        "total": 9,
+        "percentage": 100.0
+      },
+      "E. Verifier and I-6/I-7": {
+        "tested": 12,
+        "total": 12,
+        "percentage": 100.0
+      },
+      "F. NI Transactions": {
+        "tested": 9,
+        "total": 9,
+        "percentage": 100.0
+      }
+    },
+    "domain_metrics": {
+      "authentication_rejection_coverage": {
+        "numerator": 8,
+        "denominator": 8,
+        "percentage": 100.0
+      },
+      "authorization_transition_coverage": {
+        "numerator": 6,
+        "denominator": 6,
+        "percentage": 100.0
+      },
+      "memory_enforcement_coverage": {
+        "numerator": 8,
+        "denominator": 8,
+        "percentage": 100.0
+      },
+      "ni_transaction_lifecycle_coverage": {
+        "numerator": 7,
+        "denominator": 7,
+        "percentage": 100.0
+      },
+      "busy_retry_boundary_coverage": {
+        "numerator": 6,
+        "denominator": 6,
+        "percentage": 100.0
+      },
+      "k3_length_binding_boundary_coverage": {
+        "numerator": 6,
+        "denominator": 6,
+        "percentage": 100.0
+      },
+      "integration_scenario_coverage": {
+        "numerator": 20,
+        "denominator": 20,
+        "percentage": 100.0
+      },
+      "rtl_evidence_mapping_coverage": {
+        "numerator": 58,
+        "denominator": 58,
+        "percentage": 100.0
+      }
+    }
+  },
+  "traceability_matrix": [
+    {
+      "req_id": "REQ_PKT_01",
+      "group": "A. Packet and Protocol",
+      "statement": "Message type names and numeric encodings (0..5) extracted dynamically from RTL packages.",
+      "python_impl": "verification/p7_rtl_parser.py:P7RTLParser.extract_protocol_matrix",
+      "test_function": "verification/tests/test_p7_rtl_parser.py::test_extracted_message_types",
+      "integration_scenario": "INT_01",
+      "rtl_evidence": "rel_s3_l2p7_equiv (simulate.log line 29, 2425 checks)",
+      "status": "COVERED",
+      "notes": "Encodings verified against rtl/dual_lane/noc_p7_pkg.sv."
+    },
+    {
+      "req_id": "REQ_PKT_02",
+      "group": "A. Packet and Protocol",
+      "statement": "Payload lengths defined per message type (0 for control, 1..7 for memory).",
+      "python_impl": "verification/p7_packet_model.py:ProtocolProfile.payload_length",
+      "test_function": "verification/tests/test_p7_packet_model.py::test_payload_lengths_match_manifest",
+      "integration_scenario": "INT_02",
+      "rtl_evidence": "rel_s3_l2p7_equiv (accepted=500 genuine packets)",
+      "status": "COVERED",
+      "notes": "Dynamic extraction from manifest verified."
+    },
+    {
+      "req_id": "REQ_PKT_03",
+      "group": "A. Packet and Protocol",
+      "statement": "MAC lengths (4 words for authenticated control packets, 0 for data packets).",
+      "python_impl": "verification/p7_packet_model.py:ProtocolProfile.mac_length",
+      "test_function": "verification/tests/test_p7_packet_model.py::test_mac_lengths_matrix",
+      "integration_scenario": "INT_04",
+      "rtl_evidence": "rel_s3_l2e_engine (8020 checks PASS, 2000 MAC jobs)",
+      "status": "COVERED",
+      "notes": "Verified across both control and memory message profiles."
+    },
+    {
+      "req_id": "REQ_PKT_04",
+      "group": "A. Packet and Protocol",
+      "statement": "NI packet lengths derived dynamically as payload + MAC.",
+      "python_impl": "verification/p7_packet_model.py:ProtocolProfile.ni_packet_length",
+      "test_function": "verification/tests/test_p7_packet_model.py::test_ni_lengths_matrix",
+      "integration_scenario": "INT_02",
+      "rtl_evidence": "rel_n81p7_ni_t0w16 (126 checks PASS)",
+      "status": "COVERED",
+      "notes": "Verified at network interface flit construction."
+    },
+    {
+      "req_id": "REQ_PKT_05",
+      "group": "A. Packet and Protocol",
+      "statement": "Mesh wire packet lengths (NI length + 5 freshness overhead flits on control messages).",
+      "python_impl": "verification/p7_packet_model.py:ProtocolProfile.wire_packet_length",
+      "test_function": "verification/tests/test_p7_packet_model.py::test_wire_lengths_with_freshness",
+      "integration_scenario": "INT_04",
+      "rtl_evidence": "rel_s3_l2p7_equiv (2425 checks PASS)",
+      "status": "COVERED",
+      "notes": "Freshness extension adds exactly 5 flits on mesh wires."
+    },
+    {
+      "req_id": "REQ_PKT_06",
+      "group": "A. Packet and Protocol",
+      "statement": "Freshness extension expression parsed dynamically from noc_l2_auth_p7.sv.",
+      "python_impl": "verification/p7_rtl_parser.py:P7RTLParser._extract_freshness_extension",
+      "test_function": "verification/tests/test_p7_rtl_parser.py::test_freshness_extension_parsed",
+      "integration_scenario": "INT_04",
+      "rtl_evidence": "rel_s3_l2p7_equiv (simulate.log line 29)",
+      "status": "COVERED",
+      "notes": "Parsed length-extension expression without hardcoding +5."
+    },
+    {
+      "req_id": "REQ_PKT_07",
+      "group": "A. Packet and Protocol",
+      "statement": "Freshness field ordering (16-bit padding, 80-bit epoch, 64-bit sequence number).",
+      "python_impl": "verification/p7_packet_model.py:FreshnessMetadata.to_flits",
+      "test_function": "verification/tests/test_p7_packet_model.py::test_freshness_encoding_and_ordering",
+      "integration_scenario": "INT_08",
+      "rtl_evidence": "rel_s3_l2p7_equiv (r3=70 epoch checks)",
+      "status": "COVERED",
+      "notes": "Byte and flit ordering verified against noc_l2_auth_p7.sv:281-284."
+    },
+    {
+      "req_id": "REQ_PKT_08",
+      "group": "A. Packet and Protocol",
+      "statement": "Padding validation (upper 16 bits of freshness flit 0 must be 0x0000).",
+      "python_impl": "verification/p7_packet_model.py:FreshnessMetadata.from_flits",
+      "test_function": "verification/tests/test_p7_packet_model.py::test_freshness_padding_validation",
+      "integration_scenario": "INT_07",
+      "rtl_evidence": "rel_s3_l2p7_equiv (r1=framing bad)",
+      "status": "COVERED",
+      "notes": "Non-zero padding rejected with header/framing error."
+    },
+    {
+      "req_id": "REQ_PKT_09",
+      "group": "A. Packet and Protocol",
+      "statement": "MAC 4-flit ordering (flits 0..3 ordered big-endian word wise).",
+      "python_impl": "verification/p7_packet_model.py:P7Packet.mac_flits",
+      "test_function": "verification/tests/test_p7_packet_model.py::test_mac_flit_ordering",
+      "integration_scenario": "INT_03",
+      "rtl_evidence": "rel_s3_l2e_engine (8020 checks PASS)",
+      "status": "COVERED",
+      "notes": "Verified against l2_kmac_engine.sv tag extraction."
+    },
+    {
+      "req_id": "REQ_PKT_10",
+      "group": "A. Packet and Protocol",
+      "statement": "KMAC-128 transcript framing (domain separation, NIST SP 800-185 formatting).",
+      "python_impl": "verification/p7_packet_model.py:compute_p7_mac_reference",
+      "test_function": "verification/tests/test_p7_packet_model.py::test_kmac128_transcript_framing",
+      "integration_scenario": "INT_03",
+      "rtl_evidence": "SCRATCH_kmac_tb (11 NIST KATs) & rel_s3_l2e_engine (8020 checks)",
+      "status": "COVERED",
+      "notes": "3-tier KMAC equivalence confirmed across standalone KAT and hardware engine."
+    },
+    {
+      "req_id": "REQ_PKT_11",
+      "group": "A. Packet and Protocol",
+      "statement": "Virtual Channel mapping (VC0=Req, VC1=Resp, VC2=Attest).",
+      "python_impl": "verification/p7_rtl_parser.py:P7RTLParser.extract_vc_mappings",
+      "test_function": "verification/tests/test_p7_rtl_parser.py::test_vc_mappings_extracted",
+      "integration_scenario": "INT_02",
+      "rtl_evidence": "rel_n75p7_sat_vc2 (18 checks PASS) & dl_rel_hop_probes_p7 (414 checks)",
+      "status": "COVERED",
+      "notes": "VC assignment validated across all message classes."
+    },
+    {
+      "req_id": "REQ_AUTH_01",
+      "group": "B. Authentication and Freshness",
+      "statement": "Valid KMAC tag accepted by L2 auth engine.",
+      "python_impl": "verification/p7_security_model.py:ReplayState.check_and_update",
+      "test_function": "verification/tests/test_p7_security_model.py::test_valid_mac_acceptance",
+      "integration_scenario": "INT_04",
+      "rtl_evidence": "rel_s3_l2p7_equiv (accepted=500 genuine packets)",
+      "status": "COVERED",
+      "notes": "500 genuine packets authenticated across mesh wires with zero errors."
+    },
+    {
+      "req_id": "REQ_AUTH_02",
+      "group": "B. Authentication and Freshness",
+      "statement": "Invalid or corrupted MAC rejected with reason 2 (MAC_MISMATCH).",
+      "python_impl": "verification/p7_security_model.py:ReplayState.check_and_update",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_replay_state_monotonicity",
+      "integration_scenario": "INT_07",
+      "rtl_evidence": "rel_s3_l2p7_equiv (r2=20 checks) & rel_i7_sec (SEC_WRONG_TAG)",
+      "status": "COVERED",
+      "notes": "Verified in both unit L2 pair and full subsystem SEC testbench."
+    },
+    {
+      "req_id": "REQ_AUTH_03",
+      "group": "B. Authentication and Freshness",
+      "statement": "Incorrect or stale boot epoch rejected with reason 3 (EPOCH_MISMATCH).",
+      "python_impl": "verification/p7_security_model.py:ReplayState.check_and_update",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_replay_state_monotonicity",
+      "integration_scenario": "INT_08",
+      "rtl_evidence": "rel_s3_l2p7_equiv (r3=70 checks) & rel_i7_sec (SEC3_RESET_REPLAY)",
+      "status": "COVERED",
+      "notes": "Verified across cold reboot and reset replay scenarios."
+    },
+    {
+      "req_id": "REQ_AUTH_04",
+      "group": "B. Authentication and Freshness",
+      "statement": "Sequence number zero rejected with reason 4 (SEQUENCE_VIOLATION).",
+      "python_impl": "verification/p7_security_model.py:ReplayState.check_and_update",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_replay_state_monotonicity",
+      "integration_scenario": "INT_09",
+      "rtl_evidence": "rel_s3_l2p7_equiv (r4=66 checks)",
+      "status": "COVERED",
+      "notes": "Zero sequence is unconditionally illegal per noc_l2_auth_p7.sv:283."
+    },
+    {
+      "req_id": "REQ_AUTH_05",
+      "group": "B. Authentication and Freshness",
+      "statement": "Sequence numbers must be strictly increasing (seq > last_accepted_seq).",
+      "python_impl": "verification/p7_security_model.py:ReplayState.check_and_update",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_replay_state_monotonicity",
+      "integration_scenario": "INT_09",
+      "rtl_evidence": "rel_s3_l2p7_equiv (r4=66 checks)",
+      "status": "COVERED",
+      "notes": "Strict monotonicity enforced; equal and decreasing numbers rejected."
+    },
+    {
+      "req_id": "REQ_AUTH_06",
+      "group": "B. Authentication and Freshness",
+      "statement": "Replayed sequence numbers rejected with reason 4.",
+      "python_impl": "verification/p7_security_model.py:ReplayState.check_and_update",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_replay_state_monotonicity",
+      "integration_scenario": "INT_09",
+      "rtl_evidence": "rel_s3_l2p7_equiv (r4=66) & rel_i7_sec (SEC3_L2_REPLAY)",
+      "status": "COVERED",
+      "notes": "Replay of captured genuine control packets blocked."
+    },
+    {
+      "req_id": "REQ_AUTH_07",
+      "group": "B. Authentication and Freshness",
+      "statement": "Replay state updated only after all checks and MAC succeed.",
+      "python_impl": "verification/p7_security_model.py:ReplayState.check_and_update",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_replay_state_monotonicity",
+      "integration_scenario": "INT_04",
+      "rtl_evidence": "rel_s3_l2p7_equiv (2425 checks PASS)",
+      "status": "COVERED",
+      "notes": "Strict sequential gate prevents state corruption."
+    },
+    {
+      "req_id": "REQ_AUTH_08",
+      "group": "B. Authentication and Freshness",
+      "statement": "Invalid packets do not advance replay sequence state.",
+      "python_impl": "verification/p7_security_model.py:ReplayState.check_and_update",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_replay_state_monotonicity",
+      "integration_scenario": "INT_07",
+      "rtl_evidence": "rel_s3_l2p7_equiv (2425 checks PASS)",
+      "status": "COVERED",
+      "notes": "Verified: failed checks preserve last_accepted_seq."
+    },
+    {
+      "req_id": "REQ_GATE_01",
+      "group": "C. Authorization",
+      "statement": "RoT tile (Tile 4) is always authorized at reset and run.",
+      "python_impl": "verification/p7_security_model.py:TileAuthorizationState.is_tile_authorized",
+      "test_function": "verification/tests/test_p7_security_model.py::test_rot_always_authorized",
+      "integration_scenario": "INT_01",
+      "rtl_evidence": "rel_p7_gate_data (4 checks PASS) & rel_i7_full_chain",
+      "status": "COVERED",
+      "notes": "Tied active in pq_noc_subsystem_p7.sv:259."
+    },
+    {
+      "req_id": "REQ_GATE_02",
+      "group": "C. Authorization",
+      "statement": "Tile 3 authorized only after valid GRANT with status=1 from RoT.",
+      "python_impl": "verification/p7_security_model.py:TileAuthorizationState.process_grant",
+      "test_function": "verification/tests/test_p7_security_model.py::test_tile_3_grant_authorization",
+      "integration_scenario": "INT_04",
+      "rtl_evidence": "rel_s3_p7_c4 (18 checks PASS) & rel_i7_sec (SEC1_GENUINE_GRANT)",
+      "status": "COVERED",
+      "notes": "Verified via both handshake latency checks and SEC1 matrix."
+    },
+    {
+      "req_id": "REQ_GATE_03",
+      "group": "C. Authorization",
+      "statement": "Invalid GRANT rejected (non-RoT issuer or status != 1).",
+      "python_impl": "verification/p7_security_model.py:TileAuthorizationState.process_grant",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_recovery_only_through_valid_authorization",
+      "integration_scenario": "INT_10",
+      "rtl_evidence": "rel_i6_p7_refuse_grant (12 checks PASS) & dl_rel_i6_gate",
+      "status": "COVERED",
+      "notes": "Generates GateFaultReason.INVALID_ISSUER or INVALID_GRANT_STATUS."
+    },
+    {
+      "req_id": "REQ_GATE_04",
+      "group": "C. Authorization",
+      "statement": "REVOKE clears Tile 3 authorization within latency bound.",
+      "python_impl": "verification/p7_security_model.py:TileAuthorizationState.process_revoke",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_revoke_prevents_subsequent_access",
+      "integration_scenario": "INT_11",
+      "rtl_evidence": "rel_s3_p7_c4 (486 cycles <= 1500 bound) & dl_rel_s3_verifier_revoke",
+      "status": "COVERED",
+      "notes": "Latency bound strictly validated in rel_s3_p7_c4."
+    },
+    {
+      "req_id": "REQ_GATE_05",
+      "group": "C. Authorization",
+      "statement": "Authorization cleared immediately on verifier attestation failure.",
+      "python_impl": "verification/p7_security_model.py:TileAuthorizationState.signal_trusted_fail_or_timeout",
+      "test_function": "verification/tests/test_p7_security_model.py::test_verifier_failure_removes_authorization",
+      "integration_scenario": "INT_15",
+      "rtl_evidence": "dl_rel_i6_retry (24 checks PASS) & rel_i7_sec",
+      "status": "COVERED",
+      "notes": "Pulses trusted_fail to gate at Tile 3."
+    },
+    {
+      "req_id": "REQ_GATE_06",
+      "group": "C. Authorization",
+      "statement": "Authorization cleared immediately on verifier timeout.",
+      "python_impl": "verification/p7_security_model.py:TileAuthorizationState.signal_trusted_fail_or_timeout",
+      "test_function": "verification/tests/test_p7_security_model.py::test_verifier_timeout_removes_authorization",
+      "integration_scenario": "INT_11",
+      "rtl_evidence": "dl_rel_s3_verifier_revoke (48 checks PASS)",
+      "status": "COVERED",
+      "notes": "Pulses trusted_timeout to gate at Tile 3."
+    },
+    {
+      "req_id": "REQ_GATE_07",
+      "group": "C. Authorization",
+      "statement": "Unauthorized tiles (0, 1, 2, 5) never become authorized.",
+      "python_impl": "verification/p7_security_model.py:TileAuthorizationState.is_tile_authorized",
+      "test_function": "verification/tests/test_p7_security_model.py::test_unauthorized_tiles_never_authorized",
+      "integration_scenario": "INT_01",
+      "rtl_evidence": "rel_p7_gate_data (GATE_DATA_REFUSED_0, 1, 2, 5)",
+      "status": "COVERED",
+      "notes": "Hard-wired ATTESTABLE=0 in subsystem for plain tiles."
+    },
+    {
+      "req_id": "REQ_GATE_08",
+      "group": "C. Authorization",
+      "statement": "Spoofed control packets rejected at ingress parser (reason 9).",
+      "python_impl": "verification/p7_security_model.py:SecurityOrchestrator.audit_packet",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_all_20_scenarios_execute_and_pass",
+      "integration_scenario": "INT_13",
+      "rtl_evidence": "rel_i6_p7_ingress (Q9_CHALLENGE_SRC4, QP_FORGED rej=+1)",
+      "status": "COVERED",
+      "notes": "Quarantined and dropped before reaching routing crossbar."
+    },
+    {
+      "req_id": "REQ_GATE_09",
+      "group": "C. Authorization",
+      "statement": "Control traffic permitted only between designated endpoints.",
+      "python_impl": "verification/p7_security_model.py:TileAuthorizationState.process_grant",
+      "test_function": "verification/tests/test_p7_security_model.py::test_control_traffic_endpoint_restrictions",
+      "integration_scenario": "INT_10",
+      "rtl_evidence": "rel_i6_p7_refuse_grant (P7R_REFUSE_0, 1, 2, 5)",
+      "status": "COVERED",
+      "notes": "Plain tiles reject control flits and assert app_tx_error."
+    },
+    {
+      "req_id": "REQ_MEM_01",
+      "group": "D. Memory Enforcement",
+      "statement": "Authorized memory read at 0x2200_0100 succeeds.",
+      "python_impl": "verification/p7_security_model.py:MemoryEndpoint.handle_read_request",
+      "test_function": "verification/tests/test_p7_security_model.py::test_authorized_memory_read",
+      "integration_scenario": "INT_05",
+      "rtl_evidence": "rel_i7_full_chain (FC_TXN0_DATA ok=1 read=fc000000)",
+      "status": "COVERED",
+      "notes": "Checked at request HEAD and returned via VC1."
+    },
+    {
+      "req_id": "REQ_MEM_02",
+      "group": "D. Memory Enforcement",
+      "statement": "Unauthorized memory read blocked at request HEAD.",
+      "python_impl": "verification/p7_security_model.py:MemoryEndpoint.handle_read_request",
+      "test_function": "verification/tests/test_p7_security_model.py::test_unauthorized_memory_read_blocked",
+      "integration_scenario": "INT_12",
+      "rtl_evidence": "rel_p7_gate_data (GATE_DATA_REFUSED)",
+      "status": "COVERED",
+      "notes": "Request dropped at gate; no memory read performed."
+    },
+    {
+      "req_id": "REQ_MEM_03",
+      "group": "D. Memory Enforcement",
+      "statement": "Read response authorization rechecked; suppressed if revoked.",
+      "python_impl": "verification/p7_security_model.py:MemoryEndpoint.handle_read_request",
+      "test_function": "verification/tests/test_p7_security_model.py::test_read_response_revocation_recheck",
+      "integration_scenario": "INT_11",
+      "rtl_evidence": "rel_i7_full_chain (FC_TXN*_REVOKE_BLOCKS ok=1)",
+      "status": "COVERED",
+      "notes": "pq_noc_subsystem_p7.sv:263 rd_gate suppresses response offer."
+    },
+    {
+      "req_id": "REQ_MEM_04",
+      "group": "D. Memory Enforcement",
+      "statement": "Authorized memory write commits data word.",
+      "python_impl": "verification/p7_security_model.py:MemoryEndpoint.handle_write_request",
+      "test_function": "verification/tests/test_p7_security_model.py::test_authorized_memory_write",
+      "integration_scenario": "INT_06",
+      "rtl_evidence": "rel_i7_sec (SEC1_AUTH_WRITE committed=1)",
+      "status": "COVERED",
+      "notes": "Increments memory_commits and persists data word."
+    },
+    {
+      "req_id": "REQ_MEM_05",
+      "group": "D. Memory Enforcement",
+      "statement": "Unauthorized write suppressed; memory commits remains unchanged.",
+      "python_impl": "verification/p7_security_model.py:MemoryEndpoint.handle_write_request",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_invalid_operations_do_not_change_memory",
+      "integration_scenario": "INT_12",
+      "rtl_evidence": "rel_p7_gate_data (commits == c0) & rel_i7_sec (SEC_NO_UNAUTH_COMMIT)",
+      "status": "COVERED",
+      "notes": "Memory remains strictly unmodified."
+    },
+    {
+      "req_id": "REQ_MEM_06",
+      "group": "D. Memory Enforcement",
+      "statement": "Write commit occurs only after final accepted data word.",
+      "python_impl": "verification/p7_security_model.py:MemoryEndpoint.handle_write_request",
+      "test_function": "verification/tests/test_p7_security_model.py::test_write_commit_at_final_data_word",
+      "integration_scenario": "INT_06",
+      "rtl_evidence": "rel_i7_sec (committed=1)",
+      "status": "COVERED",
+      "notes": "Re-checked at side-effect acceptance point."
+    },
+    {
+      "req_id": "REQ_MEM_07",
+      "group": "D. Memory Enforcement",
+      "statement": "Revoked access blocked from all subsequent memory operations.",
+      "python_impl": "verification/p7_integration_scenarios.py:P7IntegrationEngine.memory_write",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_revoke_prevents_subsequent_access",
+      "integration_scenario": "INT_12",
+      "rtl_evidence": "rel_p7_gate_data & rel_i7_full_chain",
+      "status": "COVERED",
+      "notes": "Verified in both read and write operations."
+    },
+    {
+      "req_id": "REQ_MEM_08",
+      "group": "D. Memory Enforcement",
+      "statement": "Memory window strictly A[31:28] == 4'h2 (0x2200_0100 standard).",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseMemoryWindowModel.check_address",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_memory_window_boundaries",
+      "integration_scenario": "INT_05",
+      "rtl_evidence": "rel_i7_full_chain (0x2 window memory access)",
+      "status": "COVERED",
+      "notes": "I-6 contract C-5 relocation verified."
+    },
+    {
+      "req_id": "REQ_MEM_09",
+      "group": "D. Memory Enforcement",
+      "statement": "Old 0x8200_0100 address rejected with fault reason 13.",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseMemoryWindowModel.check_address",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_memory_window_boundaries",
+      "integration_scenario": "INT_17",
+      "rtl_evidence": "rel_i7_sec (fault status recorded) & I6_CONTRACT.md",
+      "status": "COVERED",
+      "notes": "Generates OUT_OF_WINDOW_ADDRESS fault and 0x400 reply."
+    },
+    {
+      "req_id": "REQ_VERIF_01",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "BUSY retry uses identical challenge (same epoch, nonce, derived key).",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseBusyRetryModel.handle_response_status",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_busy_retries_preserve_challenge_identity",
+      "integration_scenario": "INT_14",
+      "rtl_evidence": "dl_rel_i6_retry (24 checks PASS)",
+      "status": "COVERED",
+      "notes": "No new KDF or nonce generation during retry cycle."
+    },
+    {
+      "req_id": "REQ_VERIF_02",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "Maximum three BUSY retries permitted (MAX_BUSY_RETRIES = 3).",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseBusyRetryModel.MAX_BUSY_RETRIES",
+      "test_function": "verification/tests/test_p7_release_evidence.py::test_release_busy_retry_model",
+      "integration_scenario": "INT_14",
+      "rtl_evidence": "dl_rel_i6_retry (24 checks PASS)",
+      "status": "COVERED",
+      "notes": "Bounded retry counter verified."
+    },
+    {
+      "req_id": "REQ_VERIF_03",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "Fourth consecutive BUSY fails closed with REVOKE and reason 9.",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseBusyRetryModel.handle_response_status",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_fourth_busy_fails_closed",
+      "integration_scenario": "INT_15",
+      "rtl_evidence": "dl_rel_i6_retry (mutant i6v_retry_unbounded KILLED)",
+      "status": "COVERED",
+      "notes": "Confirmed via killed mutant control in release evidence."
+    },
+    {
+      "req_id": "REQ_VERIF_04",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "Non-1 / non-3 response status fails closed immediately.",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseBusyRetryModel.handle_response_status",
+      "test_function": "verification/tests/test_p7_release_evidence.py::test_release_busy_retry_model",
+      "integration_scenario": "INT_15",
+      "rtl_evidence": "dl_rel_i6_retry (statuses 2, 5, 10 fail closed)",
+      "status": "COVERED",
+      "notes": "Fails closed with reason 9 without retry."
+    },
+    {
+      "req_id": "REQ_VERIF_05",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "config_len == 16 enforced in hardware (K-3 length binding).",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseK3LengthModel.validate_lengths",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_negative_and_mutation_controls",
+      "integration_scenario": "INT_16",
+      "rtl_evidence": "rel_i7_sec (30 checks PASS) & I6_CONTRACT.md",
+      "status": "COVERED",
+      "notes": "Endpoint built K3_ENFORCE = 1."
+    },
+    {
+      "req_id": "REQ_VERIF_06",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "imem_len == 16 enforced in hardware (K-3 length binding).",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseK3LengthModel.validate_lengths",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_negative_and_mutation_controls",
+      "integration_scenario": "INT_16",
+      "rtl_evidence": "rel_i7_sec (30 checks PASS) & I6_CONTRACT.md",
+      "status": "COVERED",
+      "notes": "Length mismatch answered status 5 before controller starts."
+    },
+    {
+      "req_id": "REQ_VERIF_07",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "K-3 length mismatch returns status 5 (MALFORMED).",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseK3LengthModel.validate_lengths",
+      "test_function": "verification/tests/test_p7_release_evidence.py::test_release_k3_length_model",
+      "integration_scenario": "INT_16",
+      "rtl_evidence": "I6_CONTRACT.md sec 1 & 3",
+      "status": "COVERED",
+      "notes": "Counted in rejected_count at endpoint."
+    },
+    {
+      "req_id": "REQ_VERIF_08",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "K-3 length mismatch pulses fault reason 7 (K3_LENGTH_MISMATCH).",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseK3LengthModel.validate_lengths",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_negative_and_mutation_controls",
+      "integration_scenario": "INT_16",
+      "rtl_evidence": "I6_CONTRACT.md sec 3 & rel_i7_sec",
+      "status": "COVERED",
+      "notes": "Captured into noc_fault_status register."
+    },
+    {
+      "req_id": "REQ_VERIF_09",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "trusted_clear restricted to RoT boundary; untrusted traffic cannot clear.",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseFaultStatusModel.apply_untrusted_traffic",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_negative_and_mutation_controls",
+      "integration_scenario": "INT_01",
+      "rtl_evidence": "rel_i7_sec (SEC_STATUS_CLEAR_MISUSE)",
+      "status": "COVERED",
+      "notes": "Dedicated RoT-only port in pq_noc_subsystem_p7.sv."
+    },
+    {
+      "req_id": "REQ_VERIF_10",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "TB_INJECT is testbench-only and active only when TB_INJECT=1.",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseTBInjectModel.is_hook_active",
+      "test_function": "verification/tests/test_p7_release_evidence.py::test_release_tb_inject_model",
+      "integration_scenario": "INT_13",
+      "rtl_evidence": "tb_i7_sec.sv Line 29 (CONFIG: TOP=tb_i7_sec)",
+      "status": "COVERED",
+      "notes": "Used for fault injection in release testbenches."
+    },
+    {
+      "req_id": "REQ_VERIF_11",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "Synthesis configuration keeps TB_INJECT=0 (direct wires, zero overhead).",
+      "python_impl": "verification/p7_release_evidence.py:ReleaseTBInjectModel.is_hook_active",
+      "test_function": "verification/tests/test_p7_release_evidence.py::test_release_tb_inject_model",
+      "integration_scenario": "INT_01",
+      "rtl_evidence": "I7_GATE_20261103.md (Measured: TB_INJECT=0 wires only)",
+      "status": "COVERED",
+      "notes": "Confirmed via I-6 and I-7 P&R reports (37,666 LUT)."
+    },
+    {
+      "req_id": "REQ-D2-IMEM-64",
+      "group": "E. Verifier and I-6/I-7",
+      "statement": "IMEM bytes 16..63 are included in the measurement (87-byte total input: 7-byte Tile ID + 16-byte Config + 64-byte IMEM).",
+      "python_impl": "verification/p7_d2_measurement.py:compute_d2_measurement",
+      "test_function": "verification/tests/test_p7_d2_measurement.py::test_imem_window_sensitivity_byte16_to_63_exhaustive",
+      "integration_scenario": "INT_16",
+      "rtl_evidence": "vectors/d2_k3_64.json & vectors/d2_k3_64.svh (teammate reference M-F1 R8)",
+      "status": "COVERED",
+      "notes": "D2 64-byte IMEM window extension validated against authoritative teammate reference."
+    },
+    {
+      "req_id": "REQ_NI_01",
+      "group": "F. NI Transactions",
+      "statement": "One-bit transaction tags (tag 0 and tag 1).",
+      "python_impl": "verification/p7_security_model.py:TransactionTracker.NUM_SLOTS",
+      "test_function": "verification/tests/test_p7_security_model.py::test_transaction_tag_allocation",
+      "integration_scenario": "INT_18",
+      "rtl_evidence": "rel_n81p7_ni_t0w16 (126 checks PASS)",
+      "status": "COVERED",
+      "notes": "Tracks 2 transactions simultaneously."
+    },
+    {
+      "req_id": "REQ_NI_02",
+      "group": "F. NI Transactions",
+      "statement": "Two outstanding transaction slots per network interface.",
+      "python_impl": "verification/p7_security_model.py:TransactionTracker.NUM_SLOTS",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_transaction_tag_matching",
+      "integration_scenario": "INT_19",
+      "rtl_evidence": "rel_n81p7_ni_t0w16 (T13 2-slot test)",
+      "status": "COVERED",
+      "notes": "Slot 0 and slot 1."
+    },
+    {
+      "req_id": "REQ_NI_03",
+      "group": "F. NI Transactions",
+      "statement": "Correct response matching (destination coord, response type, tag).",
+      "python_impl": "verification/p7_security_model.py:TransactionTracker.match_and_release",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_transaction_tag_matching",
+      "integration_scenario": "INT_05",
+      "rtl_evidence": "rel_n81p7_ni_t0w16 (T14/T15 retirement)",
+      "status": "COVERED",
+      "notes": "Retires slot upon complete 3-tuple match."
+    },
+    {
+      "req_id": "REQ_NI_04",
+      "group": "F. NI Transactions",
+      "statement": "Wrong tag rejected with RESPONSE_UNMATCHED.",
+      "python_impl": "verification/p7_security_model.py:TransactionTracker.match_and_release",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_transaction_tag_matching",
+      "integration_scenario": "INT_18",
+      "rtl_evidence": "rel_n81p7_ni_t0w16",
+      "status": "COVERED",
+      "notes": "Tag > 1 or inactive slot rejected."
+    },
+    {
+      "req_id": "REQ_NI_05",
+      "group": "F. NI Transactions",
+      "statement": "Wrong source coordinate rejected with RESPONSE_UNMATCHED.",
+      "python_impl": "verification/p7_security_model.py:TransactionTracker.match_and_release",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_transaction_tag_matching",
+      "integration_scenario": "INT_18",
+      "rtl_evidence": "rel_n81p7_ni_t0w16",
+      "status": "COVERED",
+      "notes": "Response source must match request destination."
+    },
+    {
+      "req_id": "REQ_NI_06",
+      "group": "F. NI Transactions",
+      "statement": "Wrong response message type rejected with RESPONSE_UNMATCHED.",
+      "python_impl": "verification/p7_security_model.py:TransactionTracker.match_and_release",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_transaction_tag_matching",
+      "integration_scenario": "INT_18",
+      "rtl_evidence": "rel_n81p7_ni_t0w16",
+      "status": "COVERED",
+      "notes": "e.g. MEM_WR_RESP arriving for MEM_RD_REQ."
+    },
+    {
+      "req_id": "REQ_NI_07",
+      "group": "F. NI Transactions",
+      "statement": "Slot exhaustion backpressures and blocks third concurrent transaction.",
+      "python_impl": "verification/p7_security_model.py:TransactionTracker.allocate_slot",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_transaction_tag_matching",
+      "integration_scenario": "INT_19",
+      "rtl_evidence": "rel_n81p7_ni_t0w16 (T13/T14 backpressure)",
+      "status": "COVERED",
+      "notes": "Third request returns slot tag None."
+    },
+    {
+      "req_id": "REQ_NI_08",
+      "group": "F. NI Transactions",
+      "statement": "Matching response retirement frees slot for subsequent transactions.",
+      "python_impl": "verification/p7_security_model.py:TransactionTracker.match_and_release",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_transaction_tag_matching",
+      "integration_scenario": "INT_05",
+      "rtl_evidence": "rel_n81p7_ni_t0w16 (T14 retirement)",
+      "status": "COVERED",
+      "notes": "Frees slot tag for re-allocation."
+    },
+    {
+      "req_id": "REQ_NI_09",
+      "group": "F. NI Transactions",
+      "statement": "No premature slot release: mismatched responses do not retire slot.",
+      "python_impl": "verification/p7_security_model.py:TransactionTracker.match_and_release",
+      "test_function": "verification/tests/test_p7_integration_scenarios.py::test_transaction_tag_matching",
+      "integration_scenario": "INT_18",
+      "rtl_evidence": "rel_n81p7_ni_t0w16",
+      "status": "COVERED",
+      "notes": "Slot remains valid and occupied."
+    }
+  ]
+}

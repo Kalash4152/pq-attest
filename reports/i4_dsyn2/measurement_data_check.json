@@ -1,0 +1,240 @@
+{
+ "rows": [
+  {
+   "source": "s8_golden (also py_rtl_profile_32)",
+   "tile": "0b30557a9fc4e9",
+   "config_len": 0,
+   "imem_len": 0
+  },
+  {
+   "source": "s8_golden (also py_rtl_profile_32)",
+   "tile": "1e43688db2d7fc",
+   "config_len": 64,
+   "imem_len": 64
+  },
+  {
+   "source": "s8_golden (also py_rtl_profile_32)",
+   "tile": "31567ba0c5ea0f",
+   "config_len": 64,
+   "imem_len": 0
+  },
+  {
+   "source": "s8_golden (also py_rtl_profile_32)",
+   "tile": "44698eb3d8fd22",
+   "config_len": 0,
+   "imem_len": 64
+  },
+  {
+   "source": "s8_golden (also py_rtl_profile_32)",
+   "tile": "577ca1c6eb1035",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "s8_golden (also py_rtl_profile_32)",
+   "tile": "6a8fb4d9fe2348",
+   "config_len": 33,
+   "imem_len": 17
+  },
+  {
+   "source": "s8_golden (also py_rtl_profile_32)",
+   "tile": "7da2c7ec11365b",
+   "config_len": 1,
+   "imem_len": 1
+  },
+  {
+   "source": "s8_golden (also py_rtl_profile_32)",
+   "tile": "90b5daff24496e",
+   "config_len": 64,
+   "imem_len": 64
+  },
+  {
+   "source": "full_chain",
+   "tile": "54494c455f3033",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "full_chain",
+   "tile": "54494c455f3033",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "full_chain",
+   "tile": "54494c455f3033",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "endpoint_golden",
+   "tile": "54494c455f3033",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "endpoint_golden",
+   "tile": "54494c455f3033",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "endpoint_golden",
+   "tile": "54494c455f3033",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "endpoint_golden",
+   "tile": "54494c455f3033",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "endpoint_golden",
+   "tile": "54494c455f3033",
+   "config_len": 64,
+   "imem_len": 64
+  },
+  {
+   "source": "endpoint_golden",
+   "tile": "54494c455f3033",
+   "config_len": 0,
+   "imem_len": 0
+  },
+  {
+   "source": "legacy pq_measurement_tb",
+   "tile": "54494c455f3031",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "legacy pq_measurement_tb",
+   "tile": "54494c455f3032",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "legacy pq_measurement_tb",
+   "tile": "54494c455f3031",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "legacy pq_measurement_tb",
+   "tile": "54494c455f3031",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "legacy pq_measurement_tb",
+   "tile": "54494c455f3031",
+   "config_len": 0,
+   "imem_len": 0
+  },
+  {
+   "source": "legacy pq_measurement_tb",
+   "tile": "54494c455f3031",
+   "config_len": 64,
+   "imem_len": 64
+  },
+  {
+   "source": "ZIP measurement_ref.py",
+   "tile": "54494c455f3031",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "ZIP measurement_ref.py",
+   "tile": "54494c455f3032",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "ZIP measurement_ref.py",
+   "tile": "54494c455f3031",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "ZIP measurement_ref.py",
+   "tile": "54494c455f3031",
+   "config_len": 16,
+   "imem_len": 16
+  },
+  {
+   "source": "ZIP measurement_ref.py",
+   "tile": "54494c455f3031",
+   "config_len": 0,
+   "imem_len": 0
+  },
+  {
+   "source": "ZIP measurement_ref.py",
+   "tile": "54494c455f3031",
+   "config_len": 64,
+   "imem_len": 64
+  }
+ ],
+ "distinct_layouts": [
+  [
+   0,
+   0
+  ],
+  [
+   0,
+   64
+  ],
+  [
+   1,
+   1
+  ],
+  [
+   16,
+   16
+  ],
+  [
+   33,
+   17
+  ],
+  [
+   64,
+   0
+  ],
+  [
+   64,
+   64
+  ]
+ ],
+ "tiles_with_multiple_layouts": {
+  "54494c455f3033": [
+   [
+    0,
+    0
+   ],
+   [
+    16,
+    16
+   ],
+   [
+    64,
+    64
+   ]
+  ],
+  "54494c455f3031": [
+   [
+    0,
+    0
+   ],
+   [
+    16,
+    16
+   ],
+   [
+    64,
+    64
+   ]
+  ]
+ },
+ "single_fixed_layout": false,
+ "per_tile_fixed": false
+}

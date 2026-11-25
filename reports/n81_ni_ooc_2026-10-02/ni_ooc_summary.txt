@@ -1,0 +1,4 @@
+N-8.1 NI OOC synth (NOT integrated timing). budget: in 5 ns / out 5 ns @ 20 ns
+WNS_setup = 4.656 ns
+WHS_hold  = 0.263 ns
+worst in->out combinational datapath delay = 5.309 ns

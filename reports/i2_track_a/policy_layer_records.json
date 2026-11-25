@@ -1,0 +1,79 @@
+{
+  "tile_key_bytes": 32,
+  "reference_sha256": "047bb5a981050f11a572a60e850f7c7511ff5d636f7903c6a8d239891003c6a0",
+  "provisioning": "OFFLINE DEMO ONLY",
+  "whitelist": {
+    "TILE_03": {
+      "digest": "d474f1461ec047e30e9f6e0298eb323a8bc0e10afdf9f07b6ea2021df7e18214",
+      "config_len": 16,
+      "imem_len": 16
+    }
+  },
+  "records": [
+    {
+      "case": "genuine",
+      "tile": "TILE_03",
+      "nonce": "000102030405060708090a0b0c0d0e0f",
+      "measurement": "d474f1461ec047e30e9f6e0298eb323a8bc0e10afdf9f07b6ea2021df7e18214",
+      "reference_verdict": "ACCEPT",
+      "reference_reason": "all checks passed",
+      "policy_verdict": "ACCEPT",
+      "policy_reason": "approved digest, challenge retired"
+    },
+    {
+      "case": "duplicate_response",
+      "tile": "TILE_03",
+      "nonce": "000102030405060708090a0b0c0d0e0f",
+      "measurement": "d474f1461ec047e30e9f6e0298eb323a8bc0e10afdf9f07b6ea2021df7e18214",
+      "reference_verdict": "ACCEPT",
+      "reference_reason": "all checks passed",
+      "policy_verdict": "REJECT",
+      "policy_reason": "no outstanding challenge (duplicate, retired or unsolicited)"
+    },
+    {
+      "case": "unapproved_measurement",
+      "tile": "TILE_03",
+      "nonce": "1112131415161718191a1b1c1d1e1f20",
+      "measurement": "515838088c630b8461d31ea092303ec8223f1774e664e8ee3390582578db753b",
+      "reference_verdict": "ACCEPT",
+      "reference_reason": "all checks passed",
+      "policy_verdict": "REJECT",
+      "policy_reason": "measurement not on whitelist"
+    },
+    {
+      "case": "unsolicited_challenge",
+      "tile": "TILE_03",
+      "nonce": "5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a",
+      "measurement": "d474f1461ec047e30e9f6e0298eb323a8bc0e10afdf9f07b6ea2021df7e18214",
+      "reference_verdict": "ACCEPT",
+      "reference_reason": "all checks passed",
+      "policy_verdict": "REJECT",
+      "policy_reason": "no outstanding challenge (duplicate, retired or unsolicited)"
+    },
+    {
+      "case": "forged_tag",
+      "tile": "TILE_03",
+      "nonce": "22232425262728292a2b2c2d2e2f3031",
+      "measurement": "d474f1461ec047e30e9f6e0298eb323a8bc0e10afdf9f07b6ea2021df7e18214",
+      "reference_verdict": "REJECT",
+      "reference_reason": "KMAC128 tag verification failed",
+      "policy_verdict": "REJECT",
+      "policy_reason": "reference rejected: KMAC128 tag verification failed"
+    },
+    {
+      "case": "genuine_after_forgery",
+      "tile": "TILE_03",
+      "nonce": "22232425262728292a2b2c2d2e2f3031",
+      "measurement": "d474f1461ec047e30e9f6e0298eb323a8bc0e10afdf9f07b6ea2021df7e18214",
+      "reference_verdict": "ACCEPT",
+      "reference_reason": "all checks passed",
+      "policy_verdict": "ACCEPT",
+      "policy_reason": "approved digest, challenge retired"
+    }
+  ],
+  "extra_checks": [
+    "nonce_reuse_refused",
+    "resplit_refused_L1"
+  ],
+  "result": "PASS"
+}

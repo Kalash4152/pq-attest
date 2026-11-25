@@ -1,0 +1,106 @@
+diff --git a/scripts/dual_lane_verify.py b/scripts/dual_lane_verify.py
+index 1c12094..c1efc1b 100644
+--- a/scripts/dual_lane_verify.py
++++ b/scripts/dual_lane_verify.py
+@@ -16,6 +16,68 @@ def unique(text, pattern, label):
+     if len(values)!=1: raise InvalidEvidence(f'{label}: expected exactly one, observed {len(values)}')
+     return values[0]
+ 
++# NOC-2 (I-3): POINT-line accounting and expected-FAIL TB controls (no source mutation).
++POINT_RE=re.compile(r'^POINT case=(?P<case>\w+) pattern=(?P<pattern>\d+) period=(?P<period>\d+) mac=(?P<mac>[01]) '
++    r'offered=(?P<offered>\d+) queued=(?P<queued>\d+) cap_drops=(?P<cap_drops>\d+) accepted=(?P<accepted>\d+) '
++    r'injected=(?P<injected>\d+) delivered=(?P<delivered>\d+) responses=(?P<responses>\d+) mem_accepted=(?P<mem_accepted>\d+) '
++    r'missing=(?P<missing>\d+) unsent=(?P<unsent>\d+) duplicate=(?P<duplicate>\d+) mismatched=(?P<mismatched>\d+) '
++    r'unknown=(?P<unknown>\d+) credits_returned=(?P<credits_returned>[01]) idle_after_drain=(?P<idle_after_drain>[01]) '
++    r'drain_cycles=(?P<drain_cycles>\d+) verdict=(?P<verdict>OK|FAIL) transport=(?P<transport>\S+) w=(?P<w>\d+) '
++    r'wde=(?P<wde>[01]) seed=(?P<seed>0x[0-9a-fA-F]{8}) n_out=(?P<n_out>\d+) tool=(?P<tool>\S+)\s*$')
++POINT_TEXT=('case','verdict','transport','seed','tool')
++
++def parse_points(text):
++    rows=[]
++    for line in text.splitlines():
++        if not line.startswith('POINT '): continue
++        m=POINT_RE.match(line)
++        if not m: raise InvalidEvidence('malformed POINT line: '+line[:200])
++        rows.append({k:(v if k in POINT_TEXT else int(v)) for k,v in m.groupdict().items()})
++    return rows
++
++def judge_points(text, spec):
++    """spec: {mac, tags:{field:value}, points:[{case,pattern,period,exact:{},max:{}}]}. Every listed point must
++    appear exactly once, no other POINT line may appear, and every exact/max field must hold."""
++    rows=parse_points(text); seen={}
++    for r in rows:
++        key=(r['case'],r['pattern'],r['period'])
++        if key in seen: raise InvalidEvidence(f'duplicate POINT {key}')
++        seen[key]=r
++    want={(p['case'],p['pattern'],p['period']):p for p in spec['points']}
++    if set(seen)!=set(want):
++        raise InvalidEvidence(f'POINT set mismatch: missing {sorted(set(want)-set(seen))}, unexpected {sorted(set(seen)-set(want))}')
++    for key,p in want.items():
++        r=seen[key]
++        if r['mac']!=spec['mac']: raise InvalidEvidence(f'POINT {key}: mac={r["mac"]}, expected {spec["mac"]}')
++        for k,v in {**spec.get('tags',{}),**p.get('exact',{})}.items():
++            if str(r[k])!=str(v): raise InvalidEvidence(f'POINT {key}: {k}={r[k]}, expected {v}')
++        for k,v in p.get('max',{}).items():
++            if r[k]>v: raise InvalidEvidence(f'POINT {key}: {k}={r[k]} exceeds {v}')
++        for k,v in p.get('min',{}).items():
++            if r[k]<v: raise InvalidEvidence(f'POINT {key}: {k}={r[k]} below {v}')
++    return dict(points=len(rows),verdicts=sorted({r['verdict'] for r in rows}))
++
++def judge_lines(text, required):
++    for pattern,count in required:
++        got=len(re.findall(pattern,text,re.M))
++        if got!=count: raise InvalidEvidence(f'required line {pattern!r}: expected {count}, observed {got}')
++
++def judge_control(text, job, res, errors, checks):
++    """Expected-FAIL TB control (no RTL mutation): complete check set, exact ERRORS, every targeted oracle
++    line exactly once, every [FAIL] line allow-listed, forbidden lines absent, no timeout/fatal."""
++    c=job['tb_control']
++    if res.upper()!='FAIL' or errors==0: raise InvalidEvidence('ineffective control (RESULT not FAIL)')
++    if checks!=job['checks']: raise InvalidEvidence(f'control incomplete: CHECKS {checks}, expected {job["checks"]}')
++    if errors!=c['errors']: raise InvalidEvidence(f'control ERRORS {errors}, expected {c["errors"]}')
++    for pattern in c['oracle']:
++        got=len(re.findall(pattern,text,re.M))
++        if got!=1: raise InvalidEvidence(f'untargeted control: oracle {pattern!r} observed {got} times')
++    for line in re.findall(r'^\[FAIL\][^\r\n]*',text,re.M):
++        if not any(re.match(a,line) for a in c['allowed_fail']): raise InvalidEvidence('unexpected control failure line: '+line[:200])
++    for pattern in c.get('forbid',[]):
++        if re.search(pattern,text,re.M): raise InvalidEvidence(f'forbidden control observation {pattern!r}')
++    if re.search(r'global timeout|TB_TIMEOUT|FATAL:|\[FATAL\]|STRESS TIMEOUT',text,re.I): raise InvalidEvidence('timeout/crash is not an effective control')
++
+ def judge(text, job, process, before, after, *, fresh=True, cleanup=True):
+     if before != after: raise InvalidEvidence('source identity changed during job')
+     if not cleanup: raise InvalidEvidence('cleanup failed')
+@@ -44,11 +106,17 @@ def judge(text, job, process, before, after, *, fresh=True, cleanup=True):
+             if res.upper()!='FAIL' or errors==0: raise InvalidEvidence('surviving mutant')
+             if not re.search(job['oracle'],text,re.M): raise InvalidEvidence('untargeted mutant failure')
+             if re.search(r'global timeout|TB_TIMEOUT|FATAL:|\[FATAL\]|STRESS TIMEOUT',text,re.I): raise InvalidEvidence('timeout/crash is not a mutation kill')
++        elif job.get('tb_control'):
++            judge_control(text,job,res,errors,checks)
+         elif res.upper()!='PASS' or errors or checks!=job['checks']:
+             raise InvalidEvidence(f'expected {job["checks"]}/0 PASS; observed {checks}/{errors} {res}')
+         for key,val in job.get('extra_counts',{}).items():
+             got=int(unique(text,r'^\s*'+re.escape(key)+r'\s*[:=]\s*(\d+)\s*$',key))
+             if got!=val: raise InvalidEvidence(f'{key}: expected {val}, observed {got}')
++    if job.get('point_accounting'):
++        if not job.get('tb_control') and re.search(r'^LIVENESS_FIRED',text,re.M): raise InvalidEvidence('liveness monitor fired')
++        point_summary=judge_points(text,job['point_accounting'])
++    if job.get('required_lines'): judge_lines(text,job['required_lines'])
+     cleaned=text; diagnostic_observations={}
+     try:
+         if job.get('judge')=='tb1':
+@@ -59,11 +127,12 @@ def judge(text, job, process, before, after, *, fresh=True, cleanup=True):
+     except DiagnosticEvidenceError as exc:
+         raise InvalidEvidence(str(exc)) from exc
+     diag=r'^\s*(ERROR:|Error:|FATAL:|Fatal:)|assertion[^\r\n]*(failed|failure)|TB_TIMEOUT|global timeout|\[FATAL\]|STRESS TIMEOUT'
+-    if not job.get('mutant'): diag += r'|^\[FAIL\]'
++    if not job.get('mutant') and not job.get('tb_control'): diag += r'|^\[FAIL\]'
+     if re.search(diag,cleaned,re.M|re.I): raise InvalidEvidence('unexpected assertion/fatal/error/timeout')
+     return {'checks':None if job.get('judge')=='tb1' else checks,
+             'errors':0 if job.get('judge')=='tb1' else errors,
+-            'result':'KILLED' if job.get('mutant') else 'PASS','config':cfg,**diagnostic_observations}
++            'result':'KILLED' if job.get('mutant') else 'CONTROL_EFFECTIVE' if job.get('tb_control') else 'PASS','config':cfg,
++            **({'point_accounting':point_summary} if job.get('point_accounting') else {}),**diagnostic_observations}
+ 
+ def dependencies_ok(job, records):
+     return all(records.get(d,{}).get('state') in PASS for d in job.get('dependencies',[]))

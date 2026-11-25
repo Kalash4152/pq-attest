@@ -1,0 +1,18 @@
+{
+  "profile": 10,
+  "tile": 3,
+  "build_id": "20261114",
+  "measured_imem_bytes": 16384,
+  "endpoint_field_bytes": 64,
+  "inner_imem_sha3_256": "4effc7efd0b53987f5a6e996bb56304a4df10ffe2a94ffb152eef570382961cf",
+  "config": "03000000141126200a00000000000000",
+  "imem": "4effc7efd0b53987f5a6e996bb56304a4df10ffe2a94ffb152eef570382961cf0040000000000000000000000000000000000000000000000000000000000000",
+  "measurement": "fc227a3e4cb03aebf5df9a9c3366bc1e871b15727c7e46e355fec41a77267a07",
+  "response": "54494c455f303345504f43485f30303031000102030405060708090a0b0c0d0e0ffc227a3e4cb03aebf5df9a9c3366bc1e871b15727c7e46e355fec41a77267a0743ee190d106deedd81a3f216f7f00a394f341e386bc31a6ad902d88cadc397f2",
+  "image_sha256": "6dec0360a44cab59bfe163992602d3836ef27b8709f1dbcd62d2a152f1a10495",
+  "scope": "Whole immutable IMEM at boot/request; successful local instruction fetches restricted to IMEM; demo keys/nonce",
+  "firmware_sha256": "2d634195e485db51edb2dc9ac466390031e3e80eb11915b6018b7d922b6d90b4",
+  "changed_instruction_byte_address": 212,
+  "original_word": "000f4a37",
+  "changed_word": "000f5a37"
+}

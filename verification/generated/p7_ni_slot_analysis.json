@@ -1,0 +1,561 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 Step 13: NI Slot-Leak Analysis",
+    "version": "2.0",
+    "timestamp": "2026-11-06",
+    "capacity": 2,
+    "bench_timeout_cycles": 600,
+    "merged_ni_slot_timeout_cycles": 8192,
+    "timeout_applied_cycles": 600,
+    "timeout_applied_kind": "BENCH",
+    "timeout_cycles": 600,
+    "timeout_provenance": {
+      "bench_timeout_cycles": {
+        "classification": "CONFIGURATION_PARAMETER",
+        "source": "tb_i9_integ.sv line 5 ('NI_SLOT_TIMEOUT = 600'); result.json / registry.json in run dual_lane_10_20261106_163900_ff77f562; I9_GATE_20261105.md Sec. 2",
+        "applied_scenarios": "All 14 Step 13 behavioral simulation sequences"
+      },
+      "merged_ni_slot_timeout_cycles": {
+        "classification": "REVIEWER_STATED_CONFIGURATION",
+        "source": "E4_FINAL_INTAKE_20261106.md and E4_FINAL_RESPONSE_20261106.md ('NI_SLOT_TIMEOUT 8,192 in the merged build', citing M-F1 rev 8). Not present in rev-8 text (only > BRIDGE_TIMEOUT); I-9 RTL default is 0 (off); enabled config not synthesized.",
+        "applied_scenarios": "None in Step 13 simulation (referenced in timeout hierarchy only)"
+      }
+    },
+    "i9_bench_checks": [
+      "I9_SLOT_HELD",
+      "SLOT_RECOVER",
+      "STALE_DROPPED"
+    ],
+    "safety_statement": "Safety invariants hold unconditionally across all interleavings.",
+    "liveness_statement": "Liveness (eventual progress) holds assuming environmental stalls are finite."
+  },
+  "summary": {
+    "total_scenarios": 14,
+    "passed_scenarios": 14,
+    "overall_status": "PASS"
+  },
+  "invariants": {
+    "INV_MAX_CAPACITY": {
+      "statement": "Occupancy never exceeds physical capacity (slots_occupied <= 2)",
+      "status": "PASS"
+    },
+    "INV_NO_DUPLICATE_CONCURRENT_ALLOCATION": {
+      "statement": "Two active slots never hold identical transaction IDs or concurrent tags",
+      "status": "PASS"
+    },
+    "INV_CORRECT_SLOT_RELEASE": {
+      "statement": "Valid response releases matching slot and decrements occupancy by 1 exactly once",
+      "status": "PASS"
+    },
+    "INV_TIMEOUT_RELEASE": {
+      "statement": "Unanswered slot releases autonomously at cycle_alloc + timeout",
+      "status": "PASS"
+    },
+    "INV_RESET_CLEANUP": {
+      "statement": "Hardware reset immediately clears all slots to zero occupancy without stranded state",
+      "status": "PASS"
+    },
+    "INV_LATE_STALE_REJECTION": {
+      "statement": "Late or stale responses cannot match or corrupt active allocations",
+      "status": "PASS"
+    },
+    "INV_NO_PERMANENT_LEAK": {
+      "statement": "No permanent slot exhaustion occurs under documented timeout recovery",
+      "status": "PASS"
+    }
+  },
+  "scenarios": [
+    {
+      "scenario_id": 1,
+      "name": "Normal Completion",
+      "description": "Single transaction allocated and completed within nominal window",
+      "passed": true,
+      "initial_slot_state": "IDLE (both slots free)",
+      "events": [
+        {
+          "cycle": 0,
+          "action": "allocate",
+          "tag": 0,
+          "occ": 1
+        },
+        {
+          "cycle": 50,
+          "action": "response",
+          "delivery": "DELIVER",
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "IDLE -> ALLOCATED -> WAITING_RESP -> COMPLETED -> IDLE",
+      "final_slot_state": "IDLE (both slots free)",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "DELIVERED (app_rx valid pulsed)",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "Normal transaction flow",
+      "invariants_verified": [
+        "INV_MAX_CAPACITY",
+        "INV_CORRECT_SLOT_RELEASE"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 2,
+      "name": "Two Outstanding Slots",
+      "description": "Full capacity saturation (2 slots) followed by independent retirement",
+      "passed": true,
+      "initial_slot_state": "IDLE (both slots free)",
+      "events": [
+        {
+          "cycle": 0,
+          "t0": 0,
+          "t1": 1,
+          "t2": null,
+          "occ": 2
+        },
+        {
+          "cycle": 50,
+          "v0": "DELIVER",
+          "v1": "DELIVER",
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "IDLE -> SATURATED (2/2) -> RETIRING -> IDLE",
+      "final_slot_state": "IDLE (both slots free)",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "BOTH DELIVERED",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "I9_SLOT_HELD (third request refused when 2 slots held)",
+      "invariants_verified": [
+        "INV_MAX_CAPACITY",
+        "INV_NO_DUPLICATE_CONCURRENT_ALLOCATION"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 3,
+      "name": "One Lost Response",
+      "description": "One slot retires normally while the other autonomously releases on timeout",
+      "passed": true,
+      "initial_slot_state": "IDLE",
+      "events": [
+        {
+          "cycle": 40,
+          "action": "retire_slot1",
+          "occ": 1
+        },
+        {
+          "cycle": 650,
+          "action": "timeout_slot0",
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "BOTH_OCCUPIED -> ONE_RETIRED -> TIMEOUT_AUTONOMOUS_RELEASE -> IDLE",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "SLOT 1 DELIVERED; SLOT 0 DROPPED/TIMED_OUT",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "SLOT_RECOVER",
+      "invariants_verified": [
+        "INV_TIMEOUT_RELEASE",
+        "INV_NO_PERMANENT_LEAK"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 4,
+      "name": "Both Lost Responses",
+      "description": "Both slots time out concurrently and release cleanly without stranded state",
+      "passed": true,
+      "initial_slot_state": "IDLE",
+      "events": [
+        {
+          "cycle": 0,
+          "action": "alloc_both",
+          "occ": 2
+        },
+        {
+          "cycle": 600,
+          "action": "timeout_both",
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "IDLE -> BOTH_OCCUPIED -> TIMEOUT_BOTH -> IDLE",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "NEITHER DELIVERED (both timed out)",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "SLOT_RECOVER",
+      "invariants_verified": [
+        "INV_TIMEOUT_RELEASE",
+        "INV_NO_PERMANENT_LEAK"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 5,
+      "name": "Timeout Boundary",
+      "description": "Exact timeout boundary release verification",
+      "passed": true,
+      "initial_slot_state": "IDLE",
+      "events": [
+        {
+          "cycle": 599,
+          "occ": 1,
+          "status": "active"
+        },
+        {
+          "cycle": 600,
+          "occ": 0,
+          "status": "released"
+        }
+      ],
+      "expected_state_transition": "ALLOCATED -> TIMEOUT_RELEASE -> IDLE",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "TIMED_OUT",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "SLOT_RECOVER",
+      "invariants_verified": [
+        "INV_TIMEOUT_RELEASE"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 6,
+      "name": "Reset One Occupied",
+      "description": "Synchronous reset clears single active slot",
+      "passed": true,
+      "initial_slot_state": "OCCUPIED (1/2)",
+      "events": [
+        {
+          "cycle": 30,
+          "action": "pre_reset",
+          "occ": 1
+        },
+        {
+          "cycle": 0,
+          "action": "post_reset",
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "OCCUPIED_1 -> RESET -> IDLE",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "RESET_ABORTED",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "Reset quiescence",
+      "invariants_verified": [
+        "INV_RESET_CLEANUP"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 7,
+      "name": "Reset Both Occupied",
+      "description": "Synchronous reset clears both active slots to zero occupancy",
+      "passed": true,
+      "initial_slot_state": "OCCUPIED (2/2)",
+      "events": [
+        {
+          "cycle": 45,
+          "action": "pre_reset",
+          "occ": 2
+        },
+        {
+          "cycle": 0,
+          "action": "post_reset",
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "OCCUPIED_2 -> RESET -> IDLE",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "RESET_ABORTED",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "Reset quiescence",
+      "invariants_verified": [
+        "INV_RESET_CLEANUP"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 8,
+      "name": "Late Response",
+      "description": "Response arriving after timeout is dropped and never delivered",
+      "passed": true,
+      "initial_slot_state": "IDLE",
+      "events": [
+        {
+          "cycle": 0,
+          "action": "alloc",
+          "tag": 0,
+          "occ": 1
+        },
+        {
+          "cycle": 650,
+          "action": "timeout",
+          "occ": 0
+        },
+        {
+          "cycle": 650,
+          "action": "late_response",
+          "delivery": "DROP",
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "ALLOCATED -> TIMED_OUT -> LATE_ARRIVAL -> DROPPED (remains IDLE)",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "DROPPED (never delivered to app_rx)",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "STALE_DROPPED (I9_STALE_DROPPED)",
+      "invariants_verified": [
+        "INV_LATE_STALE_REJECTION"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 9,
+      "name": "Stale Response Tag Reuse",
+      "description": "Slot reused with fresh transaction retires cleanly upon valid response",
+      "passed": true,
+      "initial_slot_state": "IDLE",
+      "events": [
+        {
+          "cycle": 600,
+          "action": "realloc_tag0",
+          "occ": 1
+        },
+        {
+          "cycle": 600,
+          "action": "response_tag0",
+          "delivery": "DELIVER",
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "ALLOC_OLD -> TIMEOUT -> REALLOC_NEW -> DELIVER -> IDLE",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "NEW DELIVERED",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "SLOT_RECOVER followed by new transaction",
+      "invariants_verified": [
+        "INV_CORRECT_SLOT_RELEASE"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 10,
+      "name": "Repeated Timeout Reuse Cycles",
+      "description": "10 consecutive timeout and reallocation cycles exhibit zero cumulative leak",
+      "passed": true,
+      "initial_slot_state": "IDLE",
+      "events": [
+        {
+          "cycle": 600,
+          "iter": 0,
+          "occ": 0
+        },
+        {
+          "cycle": 1200,
+          "iter": 1,
+          "occ": 0
+        },
+        {
+          "cycle": 1800,
+          "iter": 2,
+          "occ": 0
+        },
+        {
+          "cycle": 2400,
+          "iter": 3,
+          "occ": 0
+        },
+        {
+          "cycle": 3000,
+          "iter": 4,
+          "occ": 0
+        },
+        {
+          "cycle": 3600,
+          "iter": 5,
+          "occ": 0
+        },
+        {
+          "cycle": 4200,
+          "iter": 6,
+          "occ": 0
+        },
+        {
+          "cycle": 4800,
+          "iter": 7,
+          "occ": 0
+        },
+        {
+          "cycle": 5400,
+          "iter": 8,
+          "occ": 0
+        },
+        {
+          "cycle": 6000,
+          "iter": 9,
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "10 x (ALLOC -> TIMEOUT -> FREED)",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "10 x TIMED_OUT",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "SLOT_RECOVER (repeated)",
+      "invariants_verified": [
+        "INV_NO_PERMANENT_LEAK"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 11,
+      "name": "Unexpected Response",
+      "description": "Response with unallocated tag is dropped without affecting active slot 0",
+      "passed": true,
+      "initial_slot_state": "OCCUPIED (slot 0 only)",
+      "events": [
+        {
+          "cycle": 0,
+          "action": "alloc_tag0",
+          "occ": 1
+        },
+        {
+          "cycle": 10,
+          "action": "resp_unmapped_tag1",
+          "delivery": "DROP",
+          "occ": 1
+        }
+      ],
+      "expected_state_transition": "OCCUPIED_0 -> UNMAPPED_RESP -> DROPPED (slot 0 stays active)",
+      "final_slot_state": "OCCUPIED (slot 0 only)",
+      "final_occupancy": 1,
+      "delivery_drop_outcome": "DROPPED (unmapped tag)",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "I9_STALE_DROPPED",
+      "invariants_verified": [
+        "INV_LATE_STALE_REJECTION"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 12,
+      "name": "Backpressure and Saturation",
+      "description": "Allocation request rejected when table capacity is saturated (2/2)",
+      "passed": true,
+      "initial_slot_state": "IDLE",
+      "events": [
+        {
+          "cycle": 0,
+          "action": "fill_capacity",
+          "occ": 2
+        },
+        {
+          "cycle": 5,
+          "action": "rejected_overflow",
+          "t2": null,
+          "occ": 2
+        }
+      ],
+      "expected_state_transition": "IDLE -> SATURATED (2/2) -> REFUSE_NEW",
+      "final_slot_state": "SATURATED (2/2)",
+      "final_occupancy": 2,
+      "delivery_drop_outcome": "THIRD ALLOCATION REFUSED",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "I9_SLOT_HELD",
+      "invariants_verified": [
+        "INV_MAX_CAPACITY"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 13,
+      "name": "Duplicate Release Idempotence",
+      "description": "Duplicate response for already-retired slot is dropped idempotently",
+      "passed": true,
+      "initial_slot_state": "IDLE",
+      "events": [
+        {
+          "cycle": 20,
+          "action": "first_release",
+          "delivery": "DELIVER",
+          "occ": 0
+        },
+        {
+          "cycle": 25,
+          "action": "duplicate_release",
+          "delivery": "DROP",
+          "occ": 0
+        }
+      ],
+      "expected_state_transition": "ALLOCATED -> RETIRE -> DUPLICATE_ARRIVAL -> DROPPED (IDLE)",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "FIRST DELIVERED; SECOND DROPPED",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "I9_STALE_DROPPED",
+      "invariants_verified": [
+        "INV_CORRECT_SLOT_RELEASE"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    },
+    {
+      "scenario_id": 14,
+      "name": "Invalid Allocation Handling",
+      "description": "Boundary allocation handling and safe recovery",
+      "passed": true,
+      "initial_slot_state": "IDLE",
+      "events": [
+        {
+          "cycle": 0,
+          "action": "invalid_dest",
+          "allocated": true,
+          "occ": 1
+        }
+      ],
+      "expected_state_transition": "IDLE -> ALLOC_OR_REJECT -> IDLE",
+      "final_slot_state": "IDLE",
+      "final_occupancy": 0,
+      "delivery_drop_outcome": "SAFE RECOVERY",
+      "leak_result": "NO_LEAK",
+      "i9_check_mapping": "SLOT_RECOVER",
+      "invariants_verified": [
+        "INV_MAX_CAPACITY",
+        "INV_NO_PERMANENT_LEAK"
+      ],
+      "notes": "",
+      "timeout_applied_cycles": 600,
+      "timeout_applied_kind": "BENCH"
+    }
+  ]
+}

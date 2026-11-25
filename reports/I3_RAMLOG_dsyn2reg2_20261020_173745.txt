@@ -1,0 +1,17 @@
+﻿17:37:46 GATE free=2.12GB pagefile=19456MB need free>=1GB pagefile>=8192MB
+17:37:47 STARTED select=dsyn2 scheduler=34488 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261020_173746_fee96788 log=C:\Users\kalas\AppData\Local\Temp\i3_dsyn2reg2_20261020_173745.log
+17:37:48 free=1.99GB
+17:37:48 DONE dsyn2_variant state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[] free=2.01GB
+17:38:20 DONE dsyn2_s8_golden state=PASS_FRESH xsimkernel_peak=13312KB proc_peak[vivado=554MB xelab=120MB xsim=206MB xsimk=11MB] free=2.38GB
+17:38:57 DONE dsyn2_s8_mut_lost_measurement state=PASS_FRESH xsimkernel_peak=13308KB proc_peak[vivado=564MB xelab=108MB xsim=208MB] free=2.47GB
+17:39:34 DONE dsyn2_s8_mut_lost_tag state=PASS_FRESH xsimkernel_peak=13312KB proc_peak[vivado=555MB xelab=107MB xsim=207MB xsimk=11MB] free=2.5GB
+17:40:09 DONE dsyn2_s8_mut_key_length state=PASS_FRESH xsimkernel_peak=13316KB proc_peak[vivado=567MB xelab=108MB xsim=206MB xsimk=11MB] free=2.49GB
+17:40:44 DONE dsyn2_s8_mut_wrong_transcript state=PASS_FRESH xsimkernel_peak=13300KB proc_peak[vivado=558MB xelab=108MB xsim=207MB xsimk=11MB] free=2.49GB
+17:41:19 DONE dsyn2_s8_mut_field_order state=PASS_FRESH xsimkernel_peak=13280KB proc_peak[vivado=565MB xelab=108MB xsim=207MB xsimk=11MB] free=2.29GB
+17:41:53 DONE dsyn2_s8_mut_stale_nonce state=PASS_FRESH xsimkernel_peak=13288KB proc_peak[vivado=565MB xelab=118MB xsim=208MB] free=2.47GB
+17:42:28 DONE dsyn2_s8_mut_wrong_key state=PASS_FRESH xsimkernel_peak=13300KB proc_peak[vivado=573MB xelab=108MB xsim=207MB xsimk=11MB] free=2.46GB
+17:42:49 free=2.07GB
+17:43:02 DONE dsyn2_s8_control_after state=PASS_FRESH xsimkernel_peak=13308KB proc_peak[vivado=566MB xelab=115MB xsim=174MB xvlog=31MB] free=2.68GB
+17:43:38 DONE dsyn2_pq_endpoint_unit state=PASS_FRESH xsimkernel_peak=13960KB proc_peak[vivado=564MB xelab=147MB xsim=227MB] free=2.55GB
+17:44:46 DONE dsyn2_pq_endpoint_sys state=PASS_FRESH xsimkernel_peak=30424KB proc_peak[vivado=580MB xelab=297MB xsim=213MB xsimk=30MB] free=2.31GB
+17:44:48 scheduler exited stopped=False

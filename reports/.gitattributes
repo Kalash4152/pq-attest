@@ -1,0 +1,2 @@
+# Evidence: preserve exact bytes so recorded artifact sha256 values survive a clone.
+* -text

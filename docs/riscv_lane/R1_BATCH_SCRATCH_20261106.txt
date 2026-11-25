@@ -1,0 +1,42 @@
+R-1 batch scratch run (XSim 2024.1, -d RISCV_FORMAL), 2026-11-06. SCRATCH evidence, not harness-registered.
+Tree: 2222fc86 + uncommitted R-1 changes (A3, B4, A6, A7, R-D9). xvlog errors: 0
+
+== tb_mem_bram_dp: ENDED | PASSlines=7 FAILlines=0 ErrorColon=0 | RESULT : PASS 
+== tb_tile_status: ENDED | PASSlines=15 FAILlines=0 ErrorColon=0 | RESULT : PASS 
+== tb_addr_decode_v2: ENDED | PASSlines=13 FAILlines=0 ErrorColon=0 | RESULT : PASS 
+== tb_tile_top: ENDED | PASSlines=2 FAILlines=0 ErrorColon=0 | PASS: A1 tile_top CPU advanced beyond 0x12C to its end loop; core transfers, adapter captures and responses match. RESULT : PASS 
+== tb_two_tiles: ENDED | PASSlines=9 FAILlines=0 ErrorColon=0 | RESULT : PASS 
+== tb_conformance: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 |  CONFORMANCE RESULTS PASS: 1000 TMEM conformance transactions passed. 
+== tb_random_latency: ENDED | PASSlines=2 FAILlines=0 ErrorColon=0 | PASS: 1000/1000 randomized seeds passed. PASS: Adapter survived independent 1-100 cycle latency. 
+== tb_cpu_alu: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: CPU ALU/register architectural test passed. 
+== tb_cpu_branch: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: CPU branch/jump/PC test passed. 
+== tb_cpu_mem: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: CPU load/store/immediate test passed. 
+== tb_cpu_memory_integration: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: CPU/memory integration with stalls passed. 
+== tb_memory_tile: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | RESULT PASS: Memory tile tests passed. 
+== tb_memory_full: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 |  MEMORY VERIFICATION RESULT PASS: Full memory verification passed. 
+== tb_traffic_gen: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: Traffic generator completed successfully. 
+== tb_mutation_checks: ENDED | PASSlines=8 FAILlines=0 ErrorColon=0 |  MUTATION TEST RESULT PASS: All representative mutations were detected. 
+== tb_uart_tx: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | 
+== tb_uart_mmio: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | 
+== tb_gpio: ENDED | PASSlines=5 FAILlines=0 ErrorColon=0 | RESULT : PASS 
+
+== tb_adapter_a3 (new, CHECKS=8 frozen before run; attempt 1 start-stall, attempt 2 ran):
+CONFIG: TOP=tb_adapter_a3 CHECKS=8
+[PASS] A3_OK_NO_FAULT data=12345678 fault=0
+[PASS] A3_REMOTE_ERR_POISON data=badbe004 code=4
+[PASS] A3_REMOTE_CODE0_MAPS_3 data=badbe003 code=3
+[PASS] A3_LOCAL_ERR_POISON data=badbe005 code=5
+[PASS] A3_WRITE_ERR_FAULTS fault=1 code=2
+[PASS] A3_FAULT_ADDR
+[PASS] A3_PULSE_ALIGNED misaligned=0
+[PASS] A3_ONE_PULSE_PER_ERROR pulses=4
+CHECKS : 8
+RESULT : PASS
+
+== tb_adapter_a3 vs mutant (POISON=0, bus_fault never set): KILLED
+[FAIL] A3_REMOTE_ERR_POISON data=00000004 code=4
+[FAIL] A3_REMOTE_CODE0_MAPS_3 data=00000003 code=3
+[FAIL] A3_LOCAL_ERR_POISON data=00000005 code=5
+[FAIL] A3_WRITE_ERR_FAULTS fault=0 code=2
+[FAIL] A3_ONE_PULSE_PER_ERROR pulses=0
+RESULT : FAIL

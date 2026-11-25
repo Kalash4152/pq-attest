@@ -1,0 +1,27 @@
+Scratch runs 2026-11-07 (XSim / Vivado 2024.1). NOT harness evidence.
+
+== tb_bridge_decode_table (A6, CHECKS=18 frozen). Run 1: driver sampled gnt after the edge and missed the one-cycle refusal (17 [FAIL], bench bug, refusals themselves visible: kind=1, app_valid 0). Driver fixed (checks/count unchanged). Run 2:
+CONFIG: TOP=tb_bridge_decode_table CHECKS=18 TILE_ID=3 MEM_TILE=2
+[PASS] DT_T00 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T01 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T02 forwarded err=0 app_valid_cycles=1
+[PASS] DT_T03 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T04 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T05 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T06 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T07 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T08 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T09 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T10 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T11 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T12 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T13 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T14 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_T15 refused err=1 kind=1 app_valid_cycles=0
+[PASS] DT_PREFIX_NOT_2 err=1 kind=1 app_valid_cycles=0
+[PASS] DT_MISALIGNED err=1 kind=1 app_valid_cycles=0
+CHECKS : 18
+RESULT : PASS
+
+== A9 cpu_tile_noc OOC implementation (synth/riscv/a9_cpu_tile_noc_impl.tcl): NOT_RUN (tool environment).
+   attempt 1: synth helper could not read its .Xil realtime script; attempt 2 (maxThreads 1): Vivado could not read scripts/rt/fpga_tcl/rtSynthParallelPrep.tcl, which exists on disk. One relaunch used; no result claimed.

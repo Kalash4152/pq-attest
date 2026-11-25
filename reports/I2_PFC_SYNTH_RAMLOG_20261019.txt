@@ -1,0 +1,6 @@
+﻿2026-10-19 18:07:34 GATE free=3.29GB pagefile_alloc=19456MB (need free>=2.0GB and pagefile>=8192MB)
+2026-10-19 18:07:35 STARTED scheduler pid=13500 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261019_180734_0c8800a9
+2026-10-19 18:07:35 free=3.24GB peaks: 
+2026-10-19 18:12:37 free=2.23GB peaks: pfc_mesh_gate\workspace\mesh_gate.runs\synth_1\runme.log=2030.184; pfc_mesh_gate\vivado.log=2030.184; pfc_ni_ooc\vivado.log=1768.602
+2026-10-19 18:17:38 free=1.98GB peaks: pfc_mesh_gate\workspace\mesh_gate.runs\impl_1\runme.log=2490.477; pfc_mesh_gate\workspace\mesh_gate.runs\synth_1\runme.log=2030.184; pfc_mesh_gate\vivado.log=2490.477; pfc_ni_ooc\vivado.log=1768.602
+2026-10-19 18:19:38 scheduler exited

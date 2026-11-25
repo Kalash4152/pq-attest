@@ -1,0 +1,166 @@
+{
+  "metadata": {
+    "title": "PQ-Attest D2 64-Byte IMEM Measurement Test Vectors",
+    "version": "1.0",
+    "specification": "D2 (64-byte IMEM window) + K-3 (16-byte config) + Tile ID (7 bytes)",
+    "algorithm": "SHA3-256",
+    "reference_package_sha256": "047bb5a981050f11a572a60e850f7c7511ff5d636f7903c6a8d239891003c6a0",
+    "total_vectors": 12,
+    "parameters": {
+      "tile_id_bytes": 7,
+      "config_bytes": 16,
+      "imem_bytes": 64,
+      "total_message_bytes": 87,
+      "single_block_bound_bytes": 135,
+      "rate_bytes": 136,
+      "digest_bytes": 32,
+      "keccak_permutations": 1
+    }
+  },
+  "vectors": [
+    {
+      "id": "V01_STD_TILE01",
+      "description": "Standard D2 vector for TILE_01 with 16B config and 64B IMEM",
+      "category": "standard",
+      "tile_id_ascii": "TILE_01",
+      "tile_id_hex": "54494c455f3031",
+      "config_hex": "000102030405060708090a0b0c0d0e0f",
+      "imem_hex": "101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+      "total_length_bytes": 87,
+      "measurement_hex": "5d44a067029ba92ba45ad0a87b229c4480e8d6cda2756f907afa8715ddc27ccb",
+      "measurement_rtl_hex": "cb7cc2dd1587fa7a906f75a2cdd6e880449c227ba8d05aa42ba99b0267a0445d"
+    },
+    {
+      "id": "V02_SENS_BYTE16",
+      "description": "Sensitivity vector: IMEM byte 16 mutated (0x20 -> 0xDF) proving byte 16 coverage",
+      "category": "sensitivity_byte16",
+      "tile_id_ascii": "TILE_01",
+      "tile_id_hex": "54494c455f3031",
+      "config_hex": "000102030405060708090a0b0c0d0e0f",
+      "imem_hex": "101112131415161718191a1b1c1d1e1fdf2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+      "total_length_bytes": 87,
+      "measurement_hex": "6d90ae6252604c64839e5e32ce85383b477348d93b53e1a815b48f1006349d6c",
+      "measurement_rtl_hex": "6c9d3406108fb415a8e1533bd94873473b3885ce325e9e83644c605262ae906d"
+    },
+    {
+      "id": "V03_SENS_BYTE63",
+      "description": "Sensitivity vector: IMEM byte 63 mutated (0x4F -> 0xB0) proving full 64B window coverage",
+      "category": "sensitivity_byte63",
+      "tile_id_ascii": "TILE_01",
+      "tile_id_hex": "54494c455f3031",
+      "config_hex": "000102030405060708090a0b0c0d0e0f",
+      "imem_hex": "101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4eb0",
+      "total_length_bytes": 87,
+      "measurement_hex": "174631d37e4c8ccf46935622ab9328d22e61f378ec6090d9720e65521f055e8e",
+      "measurement_rtl_hex": "8e5e051f52650e72d99060ec78f3612ed22893ab22569346cf8c4c7ed3314617"
+    },
+    {
+      "id": "V04_ALL_ZEROS_T00",
+      "description": "All-zeros configuration and IMEM measurement for TILE_00",
+      "category": "all_zeros",
+      "tile_id_ascii": "TILE_00",
+      "tile_id_hex": "54494c455f3030",
+      "config_hex": "00000000000000000000000000000000",
+      "imem_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "total_length_bytes": 87,
+      "measurement_hex": "d8c85527028563cf8df9dbacccc37e692c195a11e52dc2438154463fe1aa34a6",
+      "measurement_rtl_hex": "a634aae13f46548143c22de5115a192c697ec3ccacdbf98dcf6385022755c8d8"
+    },
+    {
+      "id": "V05_ALL_ZEROS_T01",
+      "description": "All-zeros configuration and IMEM measurement for TILE_01",
+      "category": "all_zeros",
+      "tile_id_ascii": "TILE_01",
+      "tile_id_hex": "54494c455f3031",
+      "config_hex": "00000000000000000000000000000000",
+      "imem_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "total_length_bytes": 87,
+      "measurement_hex": "2bae00fb5e912aae2390a6f0769bb89b4a01bf7831f0ae62b7fed46f5ddaee7e",
+      "measurement_rtl_hex": "7eeeda5d6fd4feb762aef03178bf014a9bb89b76f0a69023ae2a915efb00ae2b"
+    },
+    {
+      "id": "V06_ALL_ONES_T01",
+      "description": "All-ones (0xFF) configuration and IMEM measurement for TILE_01",
+      "category": "all_ones",
+      "tile_id_ascii": "TILE_01",
+      "tile_id_hex": "54494c455f3031",
+      "config_hex": "ffffffffffffffffffffffffffffffff",
+      "imem_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "total_length_bytes": 87,
+      "measurement_hex": "fe0b13a22f280b67231659ef3634ee0f2310d3a0ed84cfe9e390b3db4c369d48",
+      "measurement_rtl_hex": "489d364cdbb390e3e9cf84eda0d310230fee3436ef591623670b282fa2130bfe"
+    },
+    {
+      "id": "V07_TILE_00",
+      "description": "Multi-tile vector for TILE_00 with standard 16B config and 64B IMEM",
+      "category": "multi_tile",
+      "tile_id_ascii": "TILE_00",
+      "tile_id_hex": "54494c455f3030",
+      "config_hex": "000102030405060708090a0b0c0d0e0f",
+      "imem_hex": "101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+      "total_length_bytes": 87,
+      "measurement_hex": "78e7865ffba63d379e73bd8e34e9dbf82347ec5814365f3e19877fc00df4c6ef",
+      "measurement_rtl_hex": "efc6f40dc07f87193e5f361458ec4723f8dbe9348ebd739e373da6fb5f86e778"
+    },
+    {
+      "id": "V08_TILE_01",
+      "description": "Multi-tile vector for TILE_01 with standard 16B config and 64B IMEM",
+      "category": "multi_tile",
+      "tile_id_ascii": "TILE_01",
+      "tile_id_hex": "54494c455f3031",
+      "config_hex": "000102030405060708090a0b0c0d0e0f",
+      "imem_hex": "101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+      "total_length_bytes": 87,
+      "measurement_hex": "5d44a067029ba92ba45ad0a87b229c4480e8d6cda2756f907afa8715ddc27ccb",
+      "measurement_rtl_hex": "cb7cc2dd1587fa7a906f75a2cdd6e880449c227ba8d05aa42ba99b0267a0445d"
+    },
+    {
+      "id": "V09_TILE_02",
+      "description": "Multi-tile vector for TILE_02 with standard 16B config and 64B IMEM",
+      "category": "multi_tile",
+      "tile_id_ascii": "TILE_02",
+      "tile_id_hex": "54494c455f3032",
+      "config_hex": "000102030405060708090a0b0c0d0e0f",
+      "imem_hex": "101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+      "total_length_bytes": 87,
+      "measurement_hex": "9949649e3764d9d8fff262b86f9b3f9afa6acc1e14e5cfb9caef607c61cf9251",
+      "measurement_rtl_hex": "5192cf617c60efcab9cfe5141ecc6afa9a3f9b6fb862f2ffd8d964379e644999"
+    },
+    {
+      "id": "V10_TILE_03",
+      "description": "Multi-tile vector for TILE_03 with standard 16B config and 64B IMEM",
+      "category": "multi_tile",
+      "tile_id_ascii": "TILE_03",
+      "tile_id_hex": "54494c455f3033",
+      "config_hex": "000102030405060708090a0b0c0d0e0f",
+      "imem_hex": "101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+      "total_length_bytes": 87,
+      "measurement_hex": "4fab4342988a1df1573f5e9db358af2c9a0d29de9dc39630660e5ff33db92e74",
+      "measurement_rtl_hex": "742eb93df35f0e663096c39dde290d9a2caf58b39d5e3f57f11d8a984243ab4f"
+    },
+    {
+      "id": "V11_TILE_04",
+      "description": "Multi-tile vector for TILE_04 with standard 16B config and 64B IMEM",
+      "category": "multi_tile",
+      "tile_id_ascii": "TILE_04",
+      "tile_id_hex": "54494c455f3034",
+      "config_hex": "000102030405060708090a0b0c0d0e0f",
+      "imem_hex": "101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+      "total_length_bytes": 87,
+      "measurement_hex": "fa93548aea3adc4fab4b6cc27df2e4b9b2e6f4cdec50245eb7be4f0fd19c4059",
+      "measurement_rtl_hex": "59409cd10f4fbeb75e2450eccdf4e6b2b9e4f27dc26c4bab4fdc3aea8a5493fa"
+    },
+    {
+      "id": "V12_TILE_05",
+      "description": "Multi-tile vector for TILE_05 with standard 16B config and 64B IMEM",
+      "category": "multi_tile",
+      "tile_id_ascii": "TILE_05",
+      "tile_id_hex": "54494c455f3035",
+      "config_hex": "000102030405060708090a0b0c0d0e0f",
+      "imem_hex": "101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f",
+      "total_length_bytes": 87,
+      "measurement_hex": "728a503e5a6838ade3229e73caf46fae9687e807450acfbee802c9544454a84a",
+      "measurement_rtl_hex": "4aa8544454c902e8becf0a4507e88796ae6ff4ca739e22e3ad38685a3e508a72"
+    }
+  ]
+}

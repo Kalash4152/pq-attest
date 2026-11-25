@@ -1,0 +1,60 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
+| Date         : Thu Nov  5 04:44:03 2026
+| Host         : LAPTOP-N9F2OTPF running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -hierarchical_depth 4 -file C:/vivado_verilog_proj/NOC_PQATTEST/NOC_PQATTEST.runs_s4/p7_soc/utilization_hier.rpt
+| Design       : pq_p7_soc_area_top
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Physopt postRoute
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++------------------------+------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+|        Instance        |                  Module                  | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP Blocks |
++------------------------+------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+| pq_p7_soc_area_top     |                                    (top) |      32118 |      30101 |    2014 |    3 | 29168 |      0 |      1 |          0 |
+|   (pq_p7_soc_area_top) |                                    (top) |          1 |          1 |       0 |    0 |     6 |      0 |      0 |          0 |
+|   u_soc                |                          pq_p7_soc_shell |      32117 |      30100 |    2014 |    3 | 29162 |      0 |      1 |          0 |
+|     (u_soc)            |                          pq_p7_soc_shell |          3 |          0 |       0 |    3 |  2787 |      0 |      0 |          0 |
+|     obs                |                              n13_observe |          4 |          4 |       0 |    0 |    65 |      0 |      0 |          0 |
+|     u_core             |                           pq_p7_soc_core |      32110 |      30096 |    2014 |    0 | 26310 |      0 |      1 |          0 |
+|       dut              |                      pq_noc_subsystem_p7 |      32110 |      30096 |    2014 |    0 | 26310 |      0 |      1 |          0 |
+|         (dut)          |                      pq_noc_subsystem_p7 |         20 |         20 |       0 |    0 |    98 |      0 |      1 |          0 |
+|         GN[0].PLAIN.ni |                 noc_network_interface_p7 |        149 |        127 |      22 |    0 |    77 |      0 |      0 |          0 |
+|         GN[0].gate     |                          noc_attest_gate |          2 |          2 |       0 |    0 |     6 |      0 |      0 |          0 |
+|         GN[1].PLAIN.ni | noc_network_interface_p7__parameterized0 |        142 |        120 |      22 |    0 |    77 |      0 |      0 |          0 |
+|         GN[1].gate     |          noc_attest_gate__parameterized0 |         10 |         10 |       0 |    0 |     7 |      0 |      0 |          0 |
+|         GN[2].PLAIN.ni | noc_network_interface_p7__parameterized1 |        254 |        232 |      22 |    0 |    86 |      0 |      0 |          0 |
+|         GN[2].gate     |          noc_attest_gate__parameterized1 |          4 |          4 |       0 |    0 |     7 |      0 |      0 |          0 |
+|         GN[3].gate     |          noc_attest_gate__parameterized2 |         16 |         16 |       0 |    0 |    12 |      0 |      0 |          0 |
+|         GN[4].gate     |          noc_attest_gate__parameterized3 |          3 |          3 |       0 |    0 |    11 |      0 |      0 |          0 |
+|         GN[5].PLAIN.ni | noc_network_interface_p7__parameterized2 |        156 |        134 |      22 |    0 |    83 |      0 |      0 |          0 |
+|         GN[5].gate     |          noc_attest_gate__parameterized4 |         11 |         11 |       0 |    0 |     9 |      0 |      0 |          0 |
+|         IG[0].parser   |                       noc_ingress_parser |          2 |          2 |       0 |    0 |     3 |      0 |      0 |          0 |
+|         IG[1].parser   |       noc_ingress_parser__parameterized0 |          2 |          2 |       0 |    0 |     3 |      0 |      0 |          0 |
+|         IG[2].parser   |       noc_ingress_parser__parameterized1 |          2 |          2 |       0 |    0 |     3 |      0 |      0 |          0 |
+|         IG[3].parser   |       noc_ingress_parser__parameterized2 |          2 |          2 |       0 |    0 |     3 |      0 |      0 |          0 |
+|         IG[4].parser   |       noc_ingress_parser__parameterized3 |          2 |          2 |       0 |    0 |     3 |      0 |      0 |          0 |
+|         IG[5].parser   |       noc_ingress_parser__parameterized4 |          2 |          2 |       0 |    0 |     3 |      0 |      0 |          0 |
+|         endpoint       |                       pq_attest_endpoint |       7743 |       7743 |       0 |    0 | 10379 |      0 |      0 |          0 |
+|         fstat          |                         noc_fault_status |         69 |         69 |       0 |    0 |   124 |      0 |      0 |          0 |
+|         l2             |                           noc_l2_p7_pair |       7023 |       6839 |     184 |    0 |  6842 |      0 |      0 |          0 |
+|         merge5         |                       noc_ingress_merge2 |          1 |          1 |       0 |    0 |     3 |      0 |      0 |          0 |
+|         mesh           |                             noc_mesh_3x2 |      10383 |       8667 |    1716 |    0 |  1934 |      0 |      0 |          0 |
+|         quarantine     |                   noc_ingress_quarantine |         98 |         72 |      26 |    0 |    34 |      0 |      0 |          0 |
+|         rstb           |                               rst_bridge |          8 |          8 |       0 |    0 |     3 |      0 |      0 |          0 |
+|         verifier       |                          pq_rot_verifier |       6013 |       6013 |       0 |    0 |  6500 |      0 |      0 |          0 |
++------------------------+------------------------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

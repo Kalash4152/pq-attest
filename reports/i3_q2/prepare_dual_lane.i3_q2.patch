@@ -1,0 +1,66 @@
+diff --git a/scripts/prepare_dual_lane.py b/scripts/prepare_dual_lane.py
+index cfd5bf6..c2b8464 100644
+--- a/scripts/prepare_dual_lane.py
++++ b/scripts/prepare_dual_lane.py
+@@ -37,6 +37,12 @@ PFC_FREEZE_REQUIRED=set()
+ # never reference the challenge. Counts therefore equal the I-1 values.
+ PFC_DERIVED={'n81_ni_m0w16','n81_ni_m0w1','n81_ni_m1w16','n81_ni_m1w1','n81_nitb','n81_sys_m0w16','n81_sys_m0w64','n81_sys_m0n0','n81_sys_m1w16','n81_sys_m1n0'}
+ PFC_DEFERRED={'perf_m0','perf_m1'}  # production perf jobs not yet accepted; belongs with NOC-2 (I-3)
++# I-3 / PQ-2 endpoint (Track Q2). Counts frozen 2026-10-19 from TB source BEFORE any run:
++# reports/i3_q2/Q2_COUNT_DERIVATION.md (unit 275, system 37). Mutant anchors: mutation() ep_* kinds.
++EP_UNIT_CHECKS=275
++EP_SYS_CHECKS=37
++EP_MUTANTS=[('tag_swap','^\\[FAIL\\] \\S+_TAG_WORDS$'), ('nonce_offset','^\\[FAIL\\] \\S+_EPOCH_NONCE_FIELDS$'), ('wrong_reply','^\\[FAIL\\] REPLY_TO_LATCHED$'), ('rx_stall','^\\[FAIL\\] RX_READY_ALWAYS$')]
++EP_ORACLE=['scripts/endpoint_golden.py','scripts/s8_golden.py','scripts/full_chain_golden.py']+ADAPTER_REF+['vectors/endpoint_golden.json','vectors/endpoint_golden.svh','vectors/full_chain.json','vectors/full_chain.svh']
+ 
+ def variant_pkg_job(j):
+     v=json.loads(json.dumps(j)); pkg=S+'NOC_PKG.sv'
+@@ -116,6 +122,21 @@ def build_registry(check_files=True):
+     chain=job('full_chain','tb_pq_full_chain',secure+[T+'tb_pq_full_chain.sv'],16,selection='chain',config=dict(TOP='tb_pq_full_chain',DEMO=1,CLOCK_NS=20),include_dirs=['vectors'],oracle_files=['scripts/full_chain_golden.py','scripts/s8_golden.py','software/kmac128_ref.py','vectors/full_chain.json','vectors/full_chain.svh'])
+     chain['defines']=['PQ_MAC_ON'];chain['dependencies']=['chain_python'];chain['independent']=False;jobs.append(chain)
+     jobs.append(dict(id='endpoint_ooc',kind='ooc',top='pq_attest_endpoint',sources=secure_noc[:1]+CRYPTO+['rtl/dual_lane/pq_attest_endpoint.sv'],dependencies=[],independent=True,selection='ooc',build_timeout=3600))
++    # I-3 PQ-2: endpoint oracle, unit bench (P6 PKG + crypto + endpoint variant only), system bench
++    # (P6 secure list, PQ_MAC_ON), 4 targeted mutants on the unit bench, control after the mutants.
++    jobs.append(dict(id='endpoint_python',kind='python',script='scripts/endpoint_golden.py',positive_marker=r'^ENDPOINT_ORACLE: PASS',sources=EP_ORACLE,dependencies=[],independent=True,selection='I-3',sim_timeout=300,tile_key_bytes=32))
++    ep_unit=job('pq_endpoint_unit','tb_pq_endpoint_unit',secure_noc[:1]+CRYPTO+['rtl/dual_lane/pq_attest_endpoint.sv',T+'tb_pq_endpoint_unit.sv'],EP_UNIT_CHECKS,selection='I-3',
++                config=dict(TOP='tb_pq_endpoint_unit',MAC_FLITS=0,CHALLENGE_LEN=8,VECTORS=6,TILE_KEY_BYTES=32),include_dirs=['vectors'],oracle_files=EP_ORACLE,
++                checks_basis='derived from TB source 2026-10-19 before first run (reports/i3_q2/Q2_COUNT_DERIVATION.md)')
++    ep_unit['dependencies']=['endpoint_python']; ep_unit['independent']=False; jobs.append(ep_unit)
++    ep_sys=job('pq_endpoint_sys','tb_pq_endpoint_sys',secure+[T+'tb_pq_endpoint_sys.sv'],EP_SYS_CHECKS,selection='I-3',
++               config=dict(TOP='tb_pq_endpoint_sys',MAC_FLITS=4,CHALLENGE_WIRE_LEN=17,CLOCK_NS=20,TILE_KEY_BYTES=32),include_dirs=['vectors'],oracle_files=EP_ORACLE,
++               checks_basis='derived from TB source 2026-10-19 before first run (reports/i3_q2/Q2_COUNT_DERIVATION.md)')
++    ep_sys['defines']=['PQ_MAC_ON']; ep_sys['sim_timeout']=1800; ep_sys['dependencies']=['endpoint_python']; ep_sys['independent']=False; jobs.append(ep_sys)
++    for m,oracle in EP_MUTANTS:
++        j=dict(ep_unit,id='pq_endpoint_mut_'+m,mutant='ep_'+m,oracle=oracle); j['dependencies']=['pq_endpoint_unit']; jobs.append(j)
++    ep_after=dict(ep_unit,id='pq_endpoint_control_after'); ep_after['dependencies']=['pq_endpoint_unit']+['pq_endpoint_mut_'+m for m,_ in EP_MUTANTS]; jobs.append(ep_after)
++    ep_jobs=['endpoint_python','pq_endpoint_unit','pq_endpoint_sys']+['pq_endpoint_mut_'+m for m,_ in EP_MUTANTS]+['pq_endpoint_control_after']
+     for mac in [0,1]:
+         j=job('perf_m'+str(mac),'tb_noc_perf',NOC+[T+'tb_noc_perf.sv'],84,selection='perf',config=dict(TOP='tb_noc_perf',POINTS=28,MAC_FLITS=4*mac,SEED=305419896,CLOCK_NS=20),tb_time_limit='200ms')
+         j['defines']=['PQ_MAC_ON'] if mac else []; jobs.append(j)
+@@ -124,11 +145,11 @@ def build_registry(check_files=True):
+     jobs.extend(pfc)
+     pfc_i2=[j['id'] for j in pfc if j['variant_of'] not in PFC_DEFERRED]
+     # Missing required subgates stay explicit until prepared and executed.
+-    blockers={'perf_matrix':'consume both 28-point runs plus effective scoreboard/liveness controls and isolated-hop probes','pq_endpoint':'endpoint unit/system controls required in addition to full-chain test','l2_auth':'independent transcript and all targeted security controls required','l3_enforce':'trusted gate controls and fault-register cases required','security_sec_1_4':'SEC-1 to SEC-4 new contract; positive cases and effective targeted bypasses required','N-11':'consume matching PQ-4 security matrix','N-12':'final integrated/reset/stress regression required','N-13':'integrated synthesis/route required'}
++    blockers={'perf_matrix':'consume both 28-point runs plus effective scoreboard/liveness controls and isolated-hop probes','l2_auth':'independent transcript and all targeted security controls required','l3_enforce':'trusted gate controls and fault-register cases required','security_sec_1_4':'SEC-1 to SEC-4 new contract; positive cases and effective targeted bypasses required','N-11':'consume matching PQ-4 security matrix','N-12':'final integrated/reset/stress regression required','N-13':'integrated synthesis/route required'}
+     for jid,reason in blockers.items(): jobs.append(dict(id=jid,kind='gate',sources=[],dependencies=[],unimplemented=reason))
+     stages=[('NOC-1',[],[j['id'] for j in jobs if j['id'].startswith(('n81_','wp0_','d7_'))]+['ni_ooc','mesh_gate']),
+             ('PQ-1',['NOC-1'],['python_ref','py_teammate_examples','py_rtl_profile_32']+[j['id'] for j in jobs if j['id'].startswith('s8_')]+['policy_layer']+pfc_i2),
+-            ('NOC-2',['NOC-1','PQ-1'],['perf_matrix']),('PQ-2',['NOC-1','PQ-1'],['pq_endpoint']),
++            ('NOC-2',['NOC-1','PQ-1'],['perf_matrix']),('PQ-2',['NOC-1','PQ-1'],ep_jobs),
+             ('PQ-3',['PQ-2'],[j['id'] for j in jobs if j['id'].startswith('ooc_')]+['endpoint_ooc']),
+             ('NOC-3',['NOC-2','PQ-1','PQ-2'],['l2_auth']),('NOC-4',['NOC-3','PQ-2'],['l3_enforce']),
+             ('PQ-4',['NOC-4','PQ-2'],['security_sec_1_4']),('PQ-5',['PQ-1','PQ-2','PQ-3','PQ-4','NOC-4'],['full_chain']),
+@@ -142,7 +163,11 @@ def build_registry(check_files=True):
+     i2=['py_teammate_examples','py_rtl_profile_32','s8_python','s8_golden']+['s8_mut_'+m for m,_ in S8_MUTANTS]+['s8_control_after']+pfc_i2+['policy_layer']
+     ids=[j['id'] for j in jobs]
+     if len(ids)!=len(set(ids)) or len(i2)!=len(set(i2)) or any(i not in ids for i in i2):raise ValueError('I-2 job list inconsistent')
+-    return dict(schema=2,active_increment='I-2',jobs=jobs,increments={'I-1':i1,'I-2':i2},stages=[dict(id=i,dependencies=d,jobs=j) for i,d,j in stages])
++    i3=list(ep_jobs)  # PQ-2 half of I-3; the NOC-2 track appends its jobs here
++    if len(i3)!=len(set(i3)) or any(i not in ids for i in i3):raise ValueError('I-3 job list inconsistent')
++    for j in jobs:
++        if j['id'] in i3 and j.get('sources') and VARIANT_PKG in j['sources'] and S+'NOC_PKG.sv' in j['sources']:raise ValueError('variant and production NOC_PKG in one list '+j['id'])
++    return dict(schema=2,active_increment='I-2',jobs=jobs,increments={'I-1':i1,'I-2':i2,'I-3':i3},stages=[dict(id=i,dependencies=d,jobs=j) for i,d,j in stages])
+ 
+ def main():
+     generate_credit_window(ROOT)

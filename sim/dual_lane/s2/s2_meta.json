@@ -1,0 +1,169 @@
+{
+ "vectors": 25,
+ "names": [
+  "Z_SEQ0",
+  "SETUP_GRANT1",
+  "SETUP_REVOKE2",
+  "M_TAG_BIT",
+  "M_EPOCH_BIT",
+  "M_WRONG_KEY",
+  "M_PAYLOAD_BIT",
+  "B_REVOKE_AS_GRANT",
+  "B_CTL_UNBOUND",
+  "I_SRC5_K43",
+  "I_SRC0_K43",
+  "I_SRC2_OWNKEY",
+  "S_DEST0",
+  "S_VC0",
+  "R_GRANT3",
+  "R_REVOKE4",
+  "R_REPLAY_GRANT3",
+  "R_OLD_GRANT2",
+  "E_OLD_EPOCH",
+  "L_LONG11",
+  "L_SHORT9",
+  "W_CHALLENGE6",
+  "W_GRANT7",
+  "W_REVOKE_MAX",
+  "W_GRANT1_AFTER_MAX"
+ ],
+ "rows": [
+  "Z",
+  "SETUP",
+  "M",
+  "B",
+  "I",
+  "S",
+  "R",
+  "E",
+  "L",
+  "W"
+ ],
+ "expected": [
+  {
+   "name": "Z_SEQ0",
+   "reason": 4,
+   "auth": 0
+  },
+  {
+   "name": "SETUP_GRANT1",
+   "reason": 0,
+   "auth": 1
+  },
+  {
+   "name": "SETUP_REVOKE2",
+   "reason": 0,
+   "auth": 0
+  },
+  {
+   "name": "M_TAG_BIT",
+   "reason": 2,
+   "auth": 0
+  },
+  {
+   "name": "M_EPOCH_BIT",
+   "reason": 2,
+   "auth": 0
+  },
+  {
+   "name": "M_WRONG_KEY",
+   "reason": 2,
+   "auth": 0
+  },
+  {
+   "name": "M_PAYLOAD_BIT",
+   "reason": 2,
+   "auth": 0
+  },
+  {
+   "name": "B_REVOKE_AS_GRANT",
+   "reason": 2,
+   "auth": 0
+  },
+  {
+   "name": "B_CTL_UNBOUND",
+   "reason": 2,
+   "auth": 0
+  },
+  {
+   "name": "I_SRC5_K43",
+   "reason": 5,
+   "auth": 0
+  },
+  {
+   "name": "I_SRC0_K43",
+   "reason": 5,
+   "auth": 0
+  },
+  {
+   "name": "I_SRC2_OWNKEY",
+   "reason": 5,
+   "auth": 0
+  },
+  {
+   "name": "S_DEST0",
+   "reason": 1,
+   "auth": 0
+  },
+  {
+   "name": "S_VC0",
+   "reason": 1,
+   "auth": 0
+  },
+  {
+   "name": "R_GRANT3",
+   "reason": 0,
+   "auth": 1
+  },
+  {
+   "name": "R_REVOKE4",
+   "reason": 0,
+   "auth": 0
+  },
+  {
+   "name": "R_REPLAY_GRANT3",
+   "reason": 4,
+   "auth": 0
+  },
+  {
+   "name": "R_OLD_GRANT2",
+   "reason": 4,
+   "auth": 0
+  },
+  {
+   "name": "E_OLD_EPOCH",
+   "reason": 3,
+   "auth": 0
+  },
+  {
+   "name": "L_LONG11",
+   "reason": 1,
+   "auth": 0
+  },
+  {
+   "name": "L_SHORT9",
+   "reason": 1,
+   "auth": 0
+  },
+  {
+   "name": "W_CHALLENGE6",
+   "reason": 0,
+   "auth": 0
+  },
+  {
+   "name": "W_GRANT7",
+   "reason": 0,
+   "auth": 1
+  },
+  {
+   "name": "W_REVOKE_MAX",
+   "reason": 0,
+   "auth": 0
+  },
+  {
+   "name": "W_GRANT1_AFTER_MAX",
+   "reason": 4,
+   "auth": 0
+  }
+ ]
+}

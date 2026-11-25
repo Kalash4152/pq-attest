@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Verification Lane Work Brief</title>
+<style>
+@page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.2pt; line-height: 1.42; color: #1a1a1a; }
+h1 { font-size: 19pt; margin: 0 0 4px 0; color: #2b4a1c; }
+h2 { font-size: 13.5pt; color: #2b4a1c; border-bottom: 2px solid #2b4a1c; padding-bottom: 2px; margin-top: 22px; page-break-after: avoid; }
+h3 { font-size: 11.2pt; color: #3d6b27; margin: 14px 0 4px 0; page-break-after: avoid; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px 0; }
+tr { page-break-inside: avoid; }
+th, td { border: 1px solid #a9bf9c; padding: 4px 6px; vertical-align: top; text-align: left; }
+th { background: #e8f1e1; }
+code, pre { font-family: Consolas, "Courier New", monospace; font-size: 9.2pt; }
+pre { background: #f4f7f2; border: 1px solid #cddbc3; padding: 6px 8px; white-space: pre-wrap; page-break-inside: avoid; }
+.meta { color: #444; font-size: 9.5pt; }
+.box { border: 1px solid #c98a00; background: #fff7e0; padding: 6px 10px; margin: 8px 0; page-break-inside: avoid; }
+.ok { border: 1px solid #2e7d32; background: #eef7ee; padding: 6px 10px; margin: 8px 0; page-break-inside: avoid; }
+.step { border: 1px solid #a9bf9c; border-left: 5px solid #2b4a1c; padding: 6px 10px; margin: 10px 0; page-break-inside: avoid; }
+.step h3 { margin-top: 2px; }
+.lbl { font-weight: 600; color: #2b4a1c; }
+.wait { color: #a15c00; font-weight: 600; }
+</style></head><body>
+
+<h1>Verification Lane (Engineer 4): Work Brief and Next 10 Steps</h1>
+<div class="meta">
+  <b>Project:</b> PQ-Attest (post-quantum attestation on a network-on-chip, Artix-7 FPGA).<br>
+  <b>Issued by:</b> Kalash Bheda, Lane 1 owner (NoC + PQ attestation).<br>
+  <b>Date:</b> 31 Oct 2026.<br>
+  <b>Applies to:</b> the Python verification infrastructure, after the re-check of <code>pqattest1.zip</code> on 29 Oct 2026.
+</div>
+
+<div class="box">
+  <b>How to use this document.</b> It can be pasted or uploaded, unchanged, to the AI assistant that helps you. It is
+  self-contained. It tells you:
+  <ul>
+    <li>which version of the design your tools must now model (the <b>P7 profile</b>, not rev 5);</li>
+    <li>every constant and rule you need, copied from the live RTL;</li>
+    <li>the next 10 steps, with what "done" means for each.</li>
+  </ul>
+  Steps 1-7 can start today. Steps 8 and 9 have parts that wait for the Lane 1 integration contract, marked
+  <span class="wait">WAIT</span>.
+</div>
+
+<h2>1. Where your work stands</h2>
+<p><b>Package:</b> <code>pqattest1.zip</code>, 40,095,009 bytes, SHA-256
+<code>7cb4a3f3977247eff791aa7346e3c8fb733188dd606ae1bcdded145b0fe8eaab</code>, git commit
+<code>b62b78d</code>.</p>
+<div class="ok"><b>Reproduced by Lane 1:</b>
+  <ul>
+    <li><code>python -m verification.p4_regression</code> gives Cross-module consistency: PASS;</li>
+    <li>the 10 test files give 103 tests, 0 failures (run with a minimal pytest-free runner, since pytest was not
+      installed);</li>
+    <li>your <code>software/</code> crypto references are byte-identical to the frozen teammate reference;</li>
+    <li>your SHA3 RTL passes its 3 vectors.</li>
+  </ul>
+  <b>Accepted</b> as verification infrastructure for the <b>old rev-5 transport</b>.</div>
+<p><b>Not valid for the current design</b>, for four reasons:</p>
+<table>
+<tr><th>#</th><th>Gap</th><th>Evidence</th></tr>
+<tr><td>G1</td><td>Message lengths are hard-coded, not read from the package.</td><td><code>sv_vector_bridge.py</code> has ATTEST_CHALLENGE = 5. The cross-module check printed PASS against <i>both</i> the rev-5 package (CHALLENGE 5) and the P7 package (CHALLENGE 7), so a length change goes undetected.</td></tr>
+<tr><td>G2</td><td>MAC framing is fixed at MAC_FLITS = 0.</td><td><code>ni_transaction_contract.py</code>, <code>sv_vector_bridge.py</code>. P7 control messages carry 4 MAC words.</td></tr>
+<tr><td>G3</td><td>36 pairs include 6 LOCAL -&gt; LOCAL self-pairs (hop 0).</td><td>The router forbids LOCAL -&gt; LOCAL; there are 30 legal ordered pairs.</td></tr>
+<tr><td>G4</td><td>No P7 authorization rules.</td><td>Attestation between arbitrary tiles, and data from any tile, are generated as valid.</td></tr>
+</table>
+<p>Also open: <code>rtl/keccak_f1600.sv</code> and <code>rtl/tb_keccak_f1600.sv</code> are 0-byte files.</p>
+
+<h2>2. The design you must model (P7 profile, M-F1 rev 7)</h2>
+
+<h3>2.1 Source of truth</h3>
+<p>Your tools must <b>parse</b> these two files. Never copy their numbers by hand. Lane 1 sends them with this brief:</p>
+<table>
+<tr><th>File (path in the Lane 1 repo)</th><th>SHA-256</th></tr>
+<tr><td><code>rtl/dual_lane/NOC_PKG.sv</code></td><td><code>e428af103c9a0096f47f9ad97215a33b919dc9035c2a5e9d1255ff9fdd33a7be</code></td></tr>
+<tr><td><code>rtl/dual_lane/noc_p7_pkg.sv</code></td><td><code>8a10decc6d39c5b1dcb097f2aa638e8fb348e88d7a2fb85a696083d3a5ffe4f0</code></td></tr>
+</table>
+<p>The <code>NOC_PKG.sv</code> inside your snapshot (<code>NOC_PQATTEST.srcs/sources_1/new/</code>) is the rev-5
+production package. It stays as the rev-5 baseline only.</p>
+
+<h3>2.2 Network constants (from NOC_PKG.sv)</h3>
+<ul>
+  <li><b>Mesh and tiles:</b> 3 x 2 mesh (MESH_X 3, MESH_Y 2), 6 tiles; tile number = y x 3 + x.</li>
+  <li><b>Flits and buffers:</b> 32-bit flits; 3 virtual channels, each FIFO 4 flits deep; 5 router ports.</li>
+  <li><b>Routing:</b> XY.</li>
+</ul>
+<p>Tiles:</p>
+<ul>
+  <li>0 CPU0 (0,0)</li>
+  <li>1 CPU1 (1,0)</li>
+  <li>2 MEMORY (2,0)</li>
+  <li>3 CRYPTO (0,1), the attested tile</li>
+  <li>4 ROT (1,1), the Root of Trust and verifier</li>
+  <li>5 SPOOF (2,1), the untrusted injection port</li>
+</ul>
+<p><b>HEAD flit</b> (32 bits, MSB first):</p>
+<ul>
+  <li><b>Coordinates:</b> dest_x[3], dest_y[3], src_x[3], src_y[3];</li>
+  <li><b>Type and length:</b> msg_type[4], length[5];</li>
+  <li><b>control[11], meaning by type:</b>
+    <ul>
+      <li>memory write: wstrb = control[10:7];</li>
+      <li>memory response: err = control[10];</li>
+      <li>attestation: status = control[10:7].</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>2.3 Message types and wire lengths (P7)</h3>
+<p>Length = the HEAD length field = 1 HEAD + payload flits + MAC flits. Only the control types 4-7 carry MAC; it is 4
+words (128-bit tag).</p>
+<table>
+<tr><th>Type</th><th>Name</th><th>Payload flits</th><th>MAC flits</th><th>Length</th><th>Allowed sender -&gt; receiver</th></tr>
+<tr><td>0</td><td>MEM_RD_REQ</td><td>1 (address)</td><td>0</td><td>2</td><td>authorized tile or RoT -&gt; memory (tile 2)</td></tr>
+<tr><td>1</td><td>MEM_RD_RESP</td><td>1 (data)</td><td>0</td><td>2</td><td>memory -&gt; requester</td></tr>
+<tr><td>2</td><td>MEM_WR_REQ</td><td>2 (address, data)</td><td>0</td><td>3</td><td>authorized tile or RoT -&gt; memory</td></tr>
+<tr><td>3</td><td>MEM_WR_RESP</td><td>0</td><td>0</td><td>1</td><td>memory -&gt; requester</td></tr>
+<tr><td>4</td><td>ATTEST_CHALLENGE</td><td>7 (224-bit challenge)</td><td>4</td><td>12</td><td>4 -&gt; 3 only</td></tr>
+<tr><td>5</td><td>ATTEST_RESPONSE</td><td>16 (512 bits)</td><td>4</td><td>21</td><td>3 -&gt; 4 only</td></tr>
+<tr><td>6</td><td>ATTEST_GRANT</td><td>0</td><td>4</td><td>5</td><td>4 -&gt; 3 only</td></tr>
+<tr><td>7</td><td>ATTEST_REVOKE</td><td>0</td><td>4</td><td>5</td><td>4 -&gt; 3 only</td></tr>
+</table>
+<p>Old V1 (6 flits) becomes 12, and old V2 (17 flits) becomes 21.</p>
+
+<h3>2.4 Authorization rules (R7.4, contract Q2 / F4)</h3>
+<ol>
+  <li><b>Attested tiles.</b> Only tiles 3 and 4 are attested.
+    <ul>
+      <li>Tiles 0, 1, 2 and 5 cannot send control types. Their network interface raises <code>tx_error</code>.</li>
+      <li>A control packet that reaches tiles 0, 1, 2 or 5 is dropped (reason 8).</li>
+    </ul>
+  </li>
+  <li><b>Data sending.</b> A tile may send data types (0-3) only while it is <b>authorized</b>:
+    <ul>
+      <li>tile 3 becomes authorized after a GRANT with status 1 from the RoT, and loses it on REVOKE, failure or timeout;</li>
+      <li>tiles 0, 1, 2 and 5 are never authorized; their gates refuse their data;</li>
+      <li>the RoT (tile 4) is always allowed.</li>
+    </ul>
+  </li>
+  <li><b>Memory write.</b> Committed only if the source is authorized <b>in the cycle of the final data word</b>.
+    Otherwise there is no commit, the fault counter increments, and the response is suppressed (the requester times out).</li>
+  <li><b>Memory read.</b> The response is offered only if the source is still authorized when the response HEAD is first
+    offered. Otherwise it is suppressed, never zero-filled.</li>
+  <li><b>Self-pairs.</b> LOCAL -&gt; LOCAL (a tile sending to itself) is illegal: 30 legal ordered pairs.</li>
+  <li><b>Address map.</b> Remote address <code>0x2T00_0000</code>, with T = address[27:24]. The shared memory is
+    <code>0x2200_0000</code> + offset (decision C-5). The RTL stand-in still checks the old <code>0x8</code> prefix until
+    Lane 1 increment I-6, so take the legal window from a configuration value, not a constant.</li>
+  <li><b>Revocation latency.</b> REVOKE must de-authorize tile 3 within 1,500 cycles (the signed bound); 486 cycles are
+    measured today.</li>
+</ol>
+
+<h2>3. Ground rules</h2>
+<ol>
+  <li><b>The frozen teammate reference is never edited:</b> <code>Pq_Attest_final.zip</code>, SHA-256
+    <code>047bb5a981050f11a572a60e850f7c7511ff5d636f7903c6a8d239891003c6a0</code>. Wrap it; never change it.</li>
+  <li><b>Never edit an existing vector or result file.</b> P7 artifacts are <b>new files</b>; the rev-5 set stays as
+    history.</li>
+  <li><b>Every checker needs a negative test</b> that proves it can fail. Examples: a wrong length, a self-pair, an
+    unauthorized commit, a log with an <code>Error:</code> line.</li>
+  <li><b>Never relabel a historical result.</b> Re-evaluation writes a new record next to the old one.</li>
+  <li><b>No hard-coded absolute paths;</b> pin dependencies in <code>requirements.txt</code> (pytest version included).</li>
+  <li><b>Claim only what you ran.</b> State what your tools do <i>not</i> establish (RTL correctness, timing, hardware).</li>
+</ol>
+
+<h2>4. The next 10 steps</h2>
+
+<div class="step"><h3>Step 1: Read lengths and types from the P7 packages (fixes G1)</h3>
+<p><span class="lbl">Do:</span></p>
+<ul>
+  <li>Extend <code>extract_sv_interfaces</code> (or a new <code>p7_contract.py</code>) to parse <code>msg_type_e</code>,
+    <code>message_payload_flits()</code>, <code>MAC_FLITS_FULL</code> and <code>is_control()</code>/<code>p7_mac_flits()</code>
+    from the two files in 2.1.</li>
+  <li>Remove every hard-coded length from <code>sv_vector_bridge.py</code> and <code>p4_regression</code>; import them from
+    the parser.</li>
+</ul>
+<p><span class="lbl">Negative test:</span> run the cross-module check against a copy of the package with CHALLENGE payload
+= 5; it must FAIL.</p>
+<p><span class="lbl">Done when:</span> the check PASSes on the P7 files and FAILs on the altered copy; the table in 2.3 is
+reproduced exactly by the parser.</p>
+</div>
+
+<div class="step"><h3>Step 2: Per-type MAC framing (fixes G2)</h3>
+<p><span class="lbl">Do:</span> model length = 1 + payload + (4 if type in 4..7 else 0) in
+<code>ni_transaction_contract.py</code> and the vector bridge. Regenerate the V1 / V2 vectors as new files.</p>
+<p><span class="lbl">Done when:</span> CHALLENGE 12, RESPONSE 21, GRANT 5, REVOKE 5, and data 2 / 2 / 3 / 1 flits. A test
+fails if any data type is given MAC words, or any control type is not.</p>
+</div>
+
+<div class="step"><h3>Step 3: Legal pair matrix (fixes G3)</h3>
+<p><span class="lbl">Do:</span> generate 30 ordered pairs (src != dst) with XY hop counts; mark LOCAL -&gt; LOCAL as
+illegal.</p>
+<p><span class="lbl">Done when:</span> 30 legal pairs. A negative test shows a self-pair is rejected. Hop counts match XY
+routing on the coordinates in 2.2 (e.g. tile 0 -&gt; 5 = 3 hops).</p>
+</div>
+
+<div class="step"><h3>Step 4: P7 authorization model (fixes G4)</h3>
+<p><span class="lbl">Do:</span> encode rules 1-5 of section 2.4 as a pure Python model with an explicit state: authorized
+tiles, GRANT / REVOKE events, and the cycle of the final write word or the read-response offer. Every generated scenario
+carries its expected outcome:</p>
+<ul>
+  <li>delivered;</li>
+  <li>refused at the source gate;</li>
+  <li>dropped at the receiver (reason 8);</li>
+  <li>write suppressed;</li>
+  <li>read suppressed.</li>
+</ul>
+<p><span class="lbl">Done when:</span> unit tests cover each of the following, including its negative case:</p>
+<ul>
+  <li>control 4 -&gt; 3 OK, and control from 0 / 1 / 2 / 5 refused;</li>
+  <li>data from tile 3 before GRANT refused, and after GRANT delivered;</li>
+  <li>REVOKE between request and final data word means no commit;</li>
+  <li>REVOKE before the read response offer means suppressed;</li>
+  <li>RoT always allowed.</li>
+</ul>
+</div>
+
+<div class="step"><h3>Step 5: Regenerate all generated artifacts for P7</h3>
+<p><span class="lbl">Do:</span> produce new P7 versions of <code>noc_pair_matrix.json</code>,
+<code>noc_traffic_vectors.json</code>, <code>integration_scenarios.json</code>, <code>sv_vector_input.json</code> and
+<code>generated_sv_vector.sv</code>, with a <code>P7_MANIFEST.json</code> listing the SHA-256 of each file and of the
+two input packages.</p>
+<p><span class="lbl">Done when:</span> regeneration is one command and reproducible (the same hashes on a second run); the
+rev-5 files are untouched.</p>
+</div>
+
+<div class="step"><h3>Step 6: Independent reader for Lane 1 run evidence</h3>
+<p><span class="lbl">Do:</span> extend <code>xsim_parser</code> to read Lane 1 run folders:</p>
+<ul>
+  <li>each job's simulation log (<code>CHECKS=</code>, <code>RESULT</code> lines, <code>Error:</code> / <code>FATAL</code>
+    lines);</li>
+  <li>the run's <code>status.json</code>.</li>
+</ul>
+<p>Output a new record per run. It never edits the run.</p>
+<p><span class="lbl">Rules:</span> a job counts as PASS only if all of these hold:</p>
+<ul>
+  <li>the frozen check count was reached;</li>
+  <li>there are 0 errors;</li>
+  <li>the run ended normally (not on a timeout);</li>
+  <li>no unlisted <code>Error:</code> line appears.</li>
+</ul>
+<p><span class="lbl">Negative tests:</span> logs with an <code>Error:</code> line, a timeout, a missing RESULT line, and a
+count mismatch, each must be rejected.</p>
+<p><span class="lbl">Done when:</span> applied to the Lane 1 I-5 runs (which Lane 1 provides), it reports 30 / 30 accepted,
+in agreement with the Lane 1 gate report.</p>
+</div>
+
+<div class="step"><h3>Step 7: Expected outcomes for the security matrix (feeds Lane 1 increment I-7)</h3>
+<p><span class="lbl">Do:</span> using only the frozen reference (<code>kmac128</code>, <code>measure_tile</code>,
+<code>generate_attestation_tag</code>, <code>verifier_check</code>, key size 32 bytes) plus the policy rules (whitelist,
+outstanding-challenge retirement, duplicate rejection), compute expected verdicts for these attacks:</p>
+<ul>
+  <li>a genuine tile;</li>
+  <li>a wrong tag at the verifier;</li>
+  <li>a wrong measurement;</li>
+  <li>attestation replay;</li>
+  <li>nonce substitution;</li>
+  <li>config / imem substitution at re-attestation;</li>
+  <li>an error response;</li>
+  <li>a stale epoch;</li>
+  <li>a wrong grant issuer.</li>
+</ul>
+<p>For each attack, record the expected verdict and the expected reason code. Error codes (K-2):</p>
+<ul>
+  <li>1 success; 2 reject; 3 busy; 4 stale; 5 malformed;</li>
+  <li>6 tag; 7 measurement; 8 identity; 9 epoch; 10 internal.</li>
+</ul>
+<p><span class="lbl">Done when:</span> the vectors are delivered as new JSON files (input bytes, expected response,
+expected verdict and reason), and every vector is reproduced by the reference when re-run.</p>
+</div>
+
+<div class="step"><h3>Step 8: Bridge oracle (TMEM bus &lt;-&gt; network)</h3>
+<p><span class="lbl">Do:</span> a Python model of the Lane 1 bridge that turns the RISC-V tile bus (TMEM: request,
+address, write data, byte enables, read data, error) into network packets and back:</p>
+<ul>
+  <li>address <code>0x2T00_0000</code> -&gt; destination tile T;</li>
+  <li>byte enables -&gt; <code>control[10:7]</code>;</li>
+  <li>a write -&gt; MEM_WR_REQ (3 flits); a read -&gt; MEM_RD_REQ (2 flits);</li>
+  <li>a response with err, a refusal (tile not authorized), or a timeout -&gt; <code>tmem_err</code>.</li>
+</ul>
+<p>Its key check: <b>exactly one network request per bus request</b>. The RISC-V lane had a bug that issued every request
+twice.</p>
+<p><span class="wait">WAIT:</span> the exact signal names, the timeout value and the refusal behaviour come from the Lane 1
+integration contract, expected 2-8 Nov. Build the model now with these as parameters.</p>
+<p><span class="lbl">Done when:</span> the model and its tests exist; it flags a duplicated request; it is parameterised by
+the contract values.</p>
+</div>
+
+<div class="step"><h3>Step 9: Integration-demo oracle</h3>
+<p><span class="lbl">Do:</span> the expected event trace and accounting for the demo:</p>
+<ol>
+  <li>the CPU at tile 3 requests attestation;</li>
+  <li>CHALLENGE 4 -&gt; 3, RESPONSE 3 -&gt; 4, GRANT 4 -&gt; 3;</li>
+  <li>a write and read-back at <code>0x2200_0100</code> succeed;</li>
+  <li>the CPU at tile 0 tries the same write and gets a bus error, with no commit;</li>
+  <li>REVOKE: tile 3 is de-authorized within 1,500 cycles, and its next access gets a bus error.</li>
+</ol>
+<p>Output the expected counters: memory commits, memory faults, gate faults per tile, and grants and revokes.</p>
+<p><span class="wait">WAIT:</span> the final tile placement (proposed: CPUs at tiles 3 and 0) is a pending Lane 1
+decision; keep it a parameter.</p>
+<p><span class="lbl">Done when:</span> the trace and counters are generated from the step 4 model, with a test per
+phase.</p>
+</div>
+
+<div class="step"><h3>Step 10: Packaging and re-submission</h3>
+<p><span class="lbl">Do:</span></p>
+<ul>
+  <li>One command, <code>python -m verification.p7_regression --run-tests</code>, runs everything.</li>
+  <li><code>requirements.txt</code> with a pinned pytest.</li>
+  <li>No <code>__pycache__</code> and no stray outputs in the package.</li>
+  <li>Either fill in or delete the two 0-byte SHA3 RTL files. If the SHA3 RTL stays, add tests (empty message, "abc",
+    back-to-back, reset) or label it reference-only.</li>
+  <li>A README with exact commands and a "what this does not establish" section.</li>
+  <li>Zip the repository; report its SHA-256 and git commit ID.</li>
+</ul>
+<p><span class="lbl">Done when:</span> Lane 1 can extract, run the one command, and reproduce your test counts.</p>
+</div>
+
+<h2>5. Handoff package checklist</h2>
+<table>
+<tr><th>Item</th><th>Content</th></tr>
+<tr><td>Code</td><td>The <code>verification/</code> tree with the P7 parser, model, generators, oracles and evidence reader, committed in git.</td></tr>
+<tr><td>Tests</td><td>Every test file, including the negative tests from steps 1, 2, 3, 4 and 6; the counts printed by the one-command run.</td></tr>
+<tr><td>Artifacts</td><td>The new P7 JSON / SV files and <code>P7_MANIFEST.json</code>; the rev-5 files unchanged.</td></tr>
+<tr><td>Vectors</td><td>Step 7 security-matrix vectors (new files).</td></tr>
+<tr><td>Docs</td><td>README (commands, inputs with hashes, limits); a change log against <code>b62b78d</code>.</td></tr>
+<tr><td>Identity</td><td>Zip SHA-256 and git commit ID in the message that sends the package.</td></tr>
+</table>
+
+<h2>6. Prompt you can give your AI assistant</h2>
+<pre>You are helping the verification lane (Engineer 4) of the PQ-Attest project. Read the attached
+brief completely. The design to model is the P7 profile in section 2; every length and type must
+be parsed from rtl/dual_lane/NOC_PKG.sv and rtl/dual_lane/noc_p7_pkg.sv, never hard-coded.
+Work through section 4, steps 1 to 10, in order. Never edit the frozen teammate reference or any
+existing vector/result file; write new files instead. Every checker you add needs a negative
+test that proves it can fail. For each step: show the code, the tests, the command you ran and
+its output, and the exact "done when" condition you met. Stop and ask before anything marked WAIT.
+Never report a result you did not actually run.</pre>
+
+<p class="meta">Sources: Lane 1 report <code>E4_HANDOFF_CHECK_20261029.md</code>; live RTL
+(<code>NOC_PKG.sv</code>, <code>noc_p7_pkg.sv</code>, <code>pq_noc_subsystem_p7.sv</code>,
+<code>noc_attest_gate.sv</code>); plan <code>PLAN_NEXT10_ALL_LANES_20261030.md</code> (proposal).</p>
+</body></html>

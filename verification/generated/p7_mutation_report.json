@@ -1,0 +1,162 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 Step 6: Targeted Mutation Analysis Report",
+    "version": "6.0",
+    "total_mutations": 16,
+    "killed": 16,
+    "survived": 0,
+    "not_implemented": 0,
+    "mutation_score_percentage": 100.0,
+    "status_claims": {
+      "HARDWARE_VALIDATED": false,
+      "FORMAL_PROOF": false,
+      "SOC_INTEGRATION_COMPLETE": false
+    }
+  },
+  "mutations": [
+    {
+      "mutation_id": "MUT-01",
+      "mutation_name": "Accept invalid MAC",
+      "target_component": "ReplayState.check_and_update",
+      "mutated_behavior": "Accepted packet with mac_verified=False",
+      "expected_detection": "Targeted test expects ok=False; mutant returned ok=True",
+      "outcome": "KILLED",
+      "detection_details": "Detected: invalid MAC accepted when it must be rejected with MAC_MISMATCH."
+    },
+    {
+      "mutation_id": "MUT-02",
+      "mutation_name": "Ignore boot epoch",
+      "target_component": "ReplayState.check_and_update",
+      "mutated_behavior": "Ignored epoch mismatch (0x999 != 0x100)",
+      "expected_detection": "Targeted test expects ok=False; mutant returned ok=True",
+      "outcome": "KILLED",
+      "detection_details": "Detected: stale epoch 0x999 accepted without rejection."
+    },
+    {
+      "mutation_id": "MUT-03",
+      "mutation_name": "Allow sequence zero",
+      "target_component": "ReplayState.check_and_update",
+      "mutated_behavior": "Permitted sequence number 0",
+      "expected_detection": "Targeted test expects ok=False; mutant returned ok=True",
+      "outcome": "KILLED",
+      "detection_details": "Detected: illegal sequence 0 accepted instead of SEQUENCE_VIOLATION."
+    },
+    {
+      "mutation_id": "MUT-04",
+      "mutation_name": "Accept replayed sequence",
+      "target_component": "ReplayState.check_and_update",
+      "mutated_behavior": "Accepted stale sequence 3 <= last_accepted 5",
+      "expected_detection": "Targeted test expects ok=False; mutant returned ok=True",
+      "outcome": "KILLED",
+      "detection_details": "Detected: replayed sequence accepted instead of SEQUENCE_VIOLATION."
+    },
+    {
+      "mutation_id": "MUT-05",
+      "mutation_name": "Advance replay state before authentication",
+      "target_component": "ReplayState.check_and_update",
+      "mutated_behavior": "Prematurely advanced last_accepted_seq to 10 on invalid MAC",
+      "expected_detection": "Targeted test expects last_accepted_seq=0; mutant advanced to 10",
+      "outcome": "KILLED",
+      "detection_details": "Detected: sequence state advanced despite failed authentication."
+    },
+    {
+      "mutation_id": "MUT-06",
+      "mutation_name": "Allow Tile 5 authorization",
+      "target_component": "TileAuthorizationState.process_grant",
+      "mutated_behavior": "Granted authorization to plain Tile 5 (SPOOF)",
+      "expected_detection": "Targeted test expects ok=False, NON_ATTESTABLE_TILE; mutant authorized Tile 5",
+      "outcome": "KILLED",
+      "detection_details": "Detected: non-attestable Tile 5 erroneously authorized."
+    },
+    {
+      "mutation_id": "MUT-07",
+      "mutation_name": "Ignore REVOKE",
+      "target_component": "TileAuthorizationState.process_revoke",
+      "mutated_behavior": "Ignored REVOKE command; Tile 3 remained authorized",
+      "expected_detection": "Targeted test expects is_tile_authorized(3)=False; mutant kept True",
+      "outcome": "KILLED",
+      "detection_details": "Detected: post-revoke access allowed due to ignored REVOKE."
+    },
+    {
+      "mutation_id": "MUT-08",
+      "mutation_name": "Allow unauthorized write commit",
+      "target_component": "MemoryEndpoint.handle_write_request",
+      "mutated_behavior": "Committed write from unauthorized Tile 3",
+      "expected_detection": "Targeted test expects commits=0; mutant committed 1",
+      "outcome": "KILLED",
+      "detection_details": "Detected: memory commit permitted without tile authorization."
+    },
+    {
+      "mutation_id": "MUT-09",
+      "mutation_name": "Skip read-response authorization recheck",
+      "target_component": "MemoryEndpoint.handle_read_request",
+      "mutated_behavior": "Delivered read response after in-flight revocation",
+      "expected_detection": "Targeted test expects ok=False; mutant returned ok=True",
+      "outcome": "KILLED",
+      "detection_details": "Detected: response not suppressed upon mid-read revocation."
+    },
+    {
+      "mutation_id": "MUT-10",
+      "mutation_name": "Accept old memory window",
+      "target_component": "ReleaseMemoryWindowModel.check_address",
+      "mutated_behavior": "Accepted historical 0x8200_0100 address",
+      "expected_detection": "Targeted test expects ok=False, OUT_OF_WINDOW_ADDRESS; mutant returned ok=True",
+      "outcome": "KILLED",
+      "detection_details": "Detected: old 0x8 window accepted instead of being rejected with fault 13."
+    },
+    {
+      "mutation_id": "MUT-11",
+      "mutation_name": "Allow fourth BUSY to continue",
+      "target_component": "ReleaseBusyRetryModel.handle_response_status",
+      "mutated_behavior": "Permitted 4th BUSY retry without failing closed",
+      "expected_detection": "Targeted test expects REVOKE_FAILED; mutant returned RETRY",
+      "outcome": "KILLED",
+      "detection_details": "Detected: fourth BUSY did not fail closed."
+    },
+    {
+      "mutation_id": "MUT-12",
+      "mutation_name": "Change challenge across retries",
+      "target_component": "P7IntegrationEngine.generate_challenge",
+      "mutated_behavior": "Altered challenge nonce across retries (0xCCCC... != 0xAAAA...)",
+      "expected_detection": "Targeted test expects nonce equality; mutant changed nonce",
+      "outcome": "KILLED",
+      "detection_details": "Detected: challenge identity was not preserved across retries."
+    },
+    {
+      "mutation_id": "MUT-13",
+      "mutation_name": "Ignore K-3 length mismatch",
+      "target_component": "ReleaseK3LengthModel.validate_lengths",
+      "mutated_behavior": "Accepted invalid config_len=15",
+      "expected_detection": "Targeted test expects ok=False, status=5, fault=7; mutant returned ok=True",
+      "outcome": "KILLED",
+      "detection_details": "Detected: K-3 length binding mismatch was ignored."
+    },
+    {
+      "mutation_id": "MUT-14",
+      "mutation_name": "Allow non-RoT trusted_clear",
+      "target_component": "ReleaseFaultStatusModel.apply_untrusted_traffic",
+      "mutated_behavior": "Untrusted app traffic cleared sticky fault registers",
+      "expected_detection": "Targeted test expects sticky=True, count=1; mutant cleared to 0",
+      "outcome": "KILLED",
+      "detection_details": "Detected: untrusted traffic was able to clear fault status."
+    },
+    {
+      "mutation_id": "MUT-15",
+      "mutation_name": "Release NI slot on mismatched response",
+      "target_component": "TransactionTracker.match_and_release",
+      "mutated_behavior": "Retired slot 0 despite mismatched source coordinate Coord(1,1)",
+      "expected_detection": "Targeted test expects ok=False, RESPONSE_UNMATCHED; mutant released slot",
+      "outcome": "KILLED",
+      "detection_details": "Detected: transaction slot released prematurely on mismatched response."
+    },
+    {
+      "mutation_id": "MUT-16",
+      "mutation_name": "Permit third outstanding transaction",
+      "target_component": "TransactionTracker.allocate_slot",
+      "mutated_behavior": "Allocated 3rd concurrent transaction slot (tag 2)",
+      "expected_detection": "Targeted test expects None (slot exhaustion); mutant returned tag 2",
+      "outcome": "KILLED",
+      "detection_details": "Detected: 2-slot capacity exceeded without backpressure."
+    }
+  ]
+}

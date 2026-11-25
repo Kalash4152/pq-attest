@@ -1,0 +1,14 @@
+{
+  "hash": "hashlib.sha3_256",
+  "bytes": 16384,
+  "images": [
+    "padded firmware v3",
+    "all zero",
+    "seeded random"
+  ],
+  "digest_sv_le": [
+    "6566bad6445c7009bc1886e103f45a55a1491c638ad997e746884184dce03d67",
+    "1804c2db8a73b2827411f10db638e5dbc3ab53fe0df13a4d8a9080d3e17a5ee9",
+    "361e71ab120810c8a6f579d032d41f5067ca3b1933c41d9e7c99defd1b37e9f9"
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 Step 11: Link Monitor Results",
+    "version": "1.0",
+    "provenance": "SYNTHETIC_TEST_INPUT",
+    "disclaimer": "Deterministic synthetic fixtures labeled SYNTHETIC_TEST_INPUT. Distinguished from registered RTL simulation evidence."
+  },
+  "scenarios": {
+    "clean_multi_packet": {
+      "port_name": "mon_clean",
+      "status": "PASS",
+      "statistics": {
+        "total_cycles": 12,
+        "reset_cycles": 3,
+        "active_cycles": 9,
+        "handshake_transfers": 4,
+        "backpressure_cycles": 2,
+        "packets_completed": 2,
+        "packets_started": 2,
+        "flits_head": 1,
+        "flits_body": 1,
+        "flits_tail": 1,
+        "flits_head_tail": 1,
+        "credits_returned": 2,
+        "credits_consumed": 4,
+        "total_violations": 0,
+        "first_failure_cycle": null
+      },
+      "violations": []
+    },
+    "reset_valid": {
+      "port_name": "mon_reset_valid",
+      "status": "FAIL",
+      "statistics": {
+        "total_cycles": 3,
+        "reset_cycles": 3,
+        "active_cycles": 0,
+        "handshake_transfers": 0,
+        "backpressure_cycles": 0,
+        "packets_completed": 0,
+        "packets_started": 0,
+        "flits_head": 0,
+        "flits_body": 0,
+        "flits_tail": 0,
+        "flits_head_tail": 0,
+        "credits_returned": 0,
+        "credits_consumed": 0,
+        "total_violations": 1,
+        "first_failure_cycle": 2
+      },
+      "violations": [
+        {
+          "cycle": 2,
+          "rule_id": "RULE_RESET_VALID",
+          "message": "Link valid signal asserted while reset is active (rst_n == 0)",
+          "details": {
+            "valid": 1
+          }
+        }
+      ]
+    },
+    "backpressure_mutation": {
+      "port_name": "mon_backpressure_mutation",
+      "status": "FAIL",
+      "statistics": {
+        "total_cycles": 4,
+        "reset_cycles": 2,
+        "active_cycles": 2,
+        "handshake_transfers": 1,
+        "backpressure_cycles": 1,
+        "packets_completed": 0,
+        "packets_started": 1,
+        "flits_head": 1,
+        "flits_body": 0,
+        "flits_tail": 0,
+        "flits_head_tail": 0,
+        "credits_returned": 0,
+        "credits_consumed": 1,
+        "total_violations": 2,
+        "first_failure_cycle": 3
+      },
+      "violations": [
+        {
+          "cycle": 3,
+          "rule_id": "RULE_BACKPRESSURE_DATA_MUTATION",
+          "message": "Flit contents changed under backpressure before ready handshake",
+          "details": {
+            "prev": {
+              "type": 0,
+              "vc": 0,
+              "data": 4369
+            },
+            "curr": {
+              "type": 0,
+              "vc": 0,
+              "data": 8738
+            }
+          }
+        },
+        {
+          "cycle": 4,
+          "rule_id": "RULE_UNTERMINATED_PACKET",
+          "message": "Trace terminated with an incomplete packet in flight (missing TAIL)",
+          "details": {
+            "active_vc": 0,
+            "flits_received": 1
+          }
+        }
+      ]
+    },
+    "orphan_body": {
+      "port_name": "mon_orphan_body",
+      "status": "FAIL",
+      "statistics": {
+        "total_cycles": 3,
+        "reset_cycles": 2,
+        "active_cycles": 1,
+        "handshake_transfers": 1,
+        "backpressure_cycles": 0,
+        "packets_completed": 0,
+        "packets_started": 0,
+        "flits_head": 0,
+        "flits_body": 1,
+        "flits_tail": 0,
+        "flits_head_tail": 0,
+        "credits_returned": 0,
+        "credits_consumed": 1,
+        "total_violations": 1,
+        "first_failure_cycle": 2
+      },
+      "violations": [
+        {
+          "cycle": 2,
+          "rule_id": "RULE_ORPHAN_BODY",
+          "message": "BODY flit received while link is idle (no preceding HEAD)",
+          "details": {
+            "vc": 0
+          }
+        }
+      ]
+    },
+    "vc_switch": {
+      "port_name": "mon_vc_switch",
+      "status": "FAIL",
+      "statistics": {
+        "total_cycles": 4,
+        "reset_cycles": 2,
+        "active_cycles": 2,
+        "handshake_transfers": 2,
+        "backpressure_cycles": 0,
+        "packets_completed": 0,
+        "packets_started": 1,
+        "flits_head": 1,
+        "flits_body": 1,
+        "flits_tail": 0,
+        "flits_head_tail": 0,
+        "credits_returned": 0,
+        "credits_consumed": 2,
+        "total_violations": 2,
+        "first_failure_cycle": 3
+      },
+      "violations": [
+        {
+          "cycle": 3,
+          "rule_id": "RULE_VC_SWITCH_MID_PACKET",
+          "message": "VC ID changed mid-packet from 0 to 1",
+          "details": {
+            "expected_vc": 0,
+            "got_vc": 1
+          }
+        },
+        {
+          "cycle": 4,
+          "rule_id": "RULE_UNTERMINATED_PACKET",
+          "message": "Trace terminated with an incomplete packet in flight (missing TAIL)",
+          "details": {
+            "active_vc": 0,
+            "flits_received": 2
+          }
+        }
+      ]
+    },
+    "credit_overflow": {
+      "port_name": "mon_credit_overflow",
+      "status": "FAIL",
+      "statistics": {
+        "total_cycles": 3,
+        "reset_cycles": 2,
+        "active_cycles": 1,
+        "handshake_transfers": 0,
+        "backpressure_cycles": 0,
+        "packets_completed": 0,
+        "packets_started": 0,
+        "flits_head": 0,
+        "flits_body": 0,
+        "flits_tail": 0,
+        "flits_head_tail": 0,
+        "credits_returned": 1,
+        "credits_consumed": 0,
+        "total_violations": 1,
+        "first_failure_cycle": 2
+      },
+      "violations": [
+        {
+          "cycle": 2,
+          "rule_id": "RULE_CREDIT_OVERFLOW",
+          "message": "Credit returned for VC 0 exceeds buffer depth 4",
+          "details": {
+            "vc": 0,
+            "balance": 5
+          }
+        }
+      ]
+    },
+    "unterminated_packet": {
+      "port_name": "mon_unterminated_packet",
+      "status": "FAIL",
+      "statistics": {
+        "total_cycles": 3,
+        "reset_cycles": 2,
+        "active_cycles": 1,
+        "handshake_transfers": 1,
+        "backpressure_cycles": 0,
+        "packets_completed": 0,
+        "packets_started": 1,
+        "flits_head": 1,
+        "flits_body": 0,
+        "flits_tail": 0,
+        "flits_head_tail": 0,
+        "credits_returned": 0,
+        "credits_consumed": 1,
+        "total_violations": 1,
+        "first_failure_cycle": 3
+      },
+      "violations": [
+        {
+          "cycle": 3,
+          "rule_id": "RULE_UNTERMINATED_PACKET",
+          "message": "Trace terminated with an incomplete packet in flight (missing TAIL)",
+          "details": {
+            "active_vc": 0,
+            "flits_received": 1
+          }
+        }
+      ]
+    }
+  }
+}

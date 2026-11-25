@@ -1,0 +1,32 @@
+# Prepared only: run after the full I-27-R2 gate is accepted and committed.
+import sys,json,subprocess,time,datetime,shutil
+from pathlib import Path
+root=Path('C:/vivado_verilog_proj/NOC_PQATTEST');sys.path.insert(0,str(root/'scripts'))
+from seed_campaign import system_awake
+from merged_release import alive
+state=json.loads((root/'reports/dual_lane_10_20261114_114143_ce2c2eba/status.json').read_text())
+jobs=[j for n,j in state['jobs'].items() if n.startswith('i27r2_')]
+assert len(jobs)==31 and all(j['state']=='PASS_FRESH' for j in jobs),'I-27-R2 not fully fresh accepted'
+assert (root/'reports/I27_R2_GATE_20261114.md').is_file(),'committed gate report required'
+lock=root/'NOC_PQATTEST.runs_merged/merged_release.lock';out=root/'NOC_PQATTEST.runs_merged/merged_board'
+records=[]
+with system_awake():
+    for index in [1,2]:
+        assert not lock.exists(),'other release worker active/interrupted'
+        subprocess.run([sys.executable,'-E',str(root/'scripts/merged_release.py'),'start'],cwd=root,check=True)
+        began=time.monotonic()
+        while lock.exists():
+            time.sleep(5)
+            if lock.exists():
+                owner=json.loads(lock.read_text())
+                if time.monotonic()-began>60 and not alive(owner.get('pid')):
+                    raise RuntimeError('release worker ended with a stale lock; inspect logs')
+                if time.monotonic()-began>7500:
+                    raise RuntimeError('release wait exceeded infrastructure deadline; inspect live worker')
+        subprocess.run([sys.executable,'-E',str(root/'scripts/merged_release.py'),'result'],cwd=root,check=True)
+        rec=json.loads((out/'release_result.json').read_text());rec['recorded_at']=datetime.datetime.now().astimezone().isoformat()
+        (root/f'reports/r10_release_{index}_result_20261114.json').write_text(json.dumps(rec,indent=2)+'\n')
+        records.append(rec)
+    assert records[0]['source_manifest']==records[1]['source_manifest'],'source closure changed between builds'
+    (root/'reports/R10_RELEASE_REPRODUCTION_20261114.json').write_text(json.dumps({'runs':records,'same_sources':True,'hardware_validated':False},indent=2)+'\n')
+print('R10_RELEASE_REPRODUCTION: PASS builds=2 hardware=NO')

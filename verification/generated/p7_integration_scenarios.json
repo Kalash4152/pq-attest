@@ -1,0 +1,934 @@
+{
+  "metadata": {
+    "title": "PQ-Attest P7 Step 5: Release-Aware End-to-End Integration Regression",
+    "suite_version": "5.0",
+    "architecture": "P7 (Dual-Lane NoC, I-6 / I-7 Contracts)",
+    "memory_window": "A[31:28] == 4'h2 (0x2200_0100 standard test address)",
+    "busy_retry_rule": "Up to 3 retries using identical challenge; 4th fails closed",
+    "k3_enforcement": "config_len == 16 and imem_len == 16 enforced",
+    "evidence_package": "E4_P7_XSIM_20261103",
+    "status_claims": {
+      "HARDWARE_VALIDATED": false,
+      "FORMAL_PROOF": false,
+      "SOC_INTEGRATION_COMPLETE": false
+    }
+  },
+  "summary": {
+    "total_scenarios": 20,
+    "python_passed": 20,
+    "python_failed": 0,
+    "rtl_pass": 20,
+    "rtl_fail": 0,
+    "not_observed": 0
+  },
+  "scenarios": [
+    {
+      "scenario_id": "INT_01",
+      "scenario_name": "INITIAL_BOOT",
+      "flow_step": 1,
+      "description": "Subsystem cold boot initializes RoT authorized, Tile 3 unauthorized, zero faults, clean memory.",
+      "initial_state": {
+        "power": "OFF"
+      },
+      "input_events": [
+        {
+          "action": "COLD_BOOT",
+          "epoch": 85968058283706962416180
+        }
+      ],
+      "expected_output": {
+        "boot_status": "OK",
+        "rot_authorized": true,
+        "crypto_authorized": false
+      },
+      "expected_auth_state": {
+        "0": false,
+        "1": false,
+        "2": false,
+        "3": false,
+        "4": true,
+        "5": false
+      },
+      "expected_memory_state": {
+        "commits": 0,
+        "last_data": 0
+      },
+      "expected_rejection_reason": null,
+      "related_rtl_evidence": {
+        "testbench": "tb_pq_full_chain_p7",
+        "job_id": "rel_i7_full_chain",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_full_chain/simulate.log",
+        "checks": 21,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "Initial cold-boot state verified across all release testbenches."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Boot clean. RoT authorized, Tile 3 unauthorized."
+    },
+    {
+      "scenario_id": "INT_02",
+      "scenario_name": "CHALLENGE_GENERATION",
+      "flow_step": 2,
+      "description": "RoT generates authenticated challenge to Tile 3 with 64-bit nonce and 16/16 length bindings.",
+      "initial_state": {
+        "booted": true,
+        "verifier_state": "IDLE"
+      },
+      "input_events": [
+        {
+          "action": "GENERATE_CHALLENGE",
+          "dest": 3,
+          "nonce": 11651590505119483672,
+          "cfg_len": 16,
+          "imem_len": 16
+        }
+      ],
+      "expected_output": {
+        "challenge_issued": true,
+        "dest": 3,
+        "cfg_len": 16,
+        "imem_len": 16
+      },
+      "expected_auth_state": {
+        "3": false,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 0
+      },
+      "expected_rejection_reason": null,
+      "related_rtl_evidence": {
+        "testbench": "tb_pq_full_chain_p7",
+        "job_id": "rel_i7_full_chain",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_full_chain/simulate.log",
+        "checks": 21,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "Deterministic demo challenge generation verified in tb_pq_full_chain_p7 and tb_i7_sec."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Challenge generated with correct 16/16 length bindings."
+    },
+    {
+      "scenario_id": "INT_03",
+      "scenario_name": "ATTESTATION_RESPONSE_SUCCESS",
+      "flow_step": 3,
+      "description": "Tile 3 returns valid attestation response with status 1, matching measurement, and correct KMAC tag.",
+      "initial_state": {
+        "challenge_outstanding": true
+      },
+      "input_events": [
+        {
+          "action": "SUBMIT_RESPONSE",
+          "status": 1,
+          "meas_match": true,
+          "tag_match": true
+        }
+      ],
+      "expected_output": {
+        "verifier_outcome": "GRANT",
+        "authorized_pulse": true
+      },
+      "expected_auth_state": {
+        "3": false,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 0
+      },
+      "expected_rejection_reason": null,
+      "related_rtl_evidence": {
+        "testbench": "tb_pq_full_chain_p7",
+        "job_id": "rel_i7_full_chain",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_full_chain/simulate.log",
+        "checks": 21,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "FC_TXN0_RESPONSE match=1 observed in rel_i7_full_chain log line 30."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Verifier confirmed measurement and tag match; issued GRANT trigger."
+    },
+    {
+      "scenario_id": "INT_04",
+      "scenario_name": "VALID_GRANT",
+      "flow_step": 4,
+      "description": "RoT delivers authenticated GRANT packet with status 1; Tile 3 gate transitions to authorized.",
+      "initial_state": {
+        "verifier_outcome": "GRANT"
+      },
+      "input_events": [
+        {
+          "action": "ISSUE_GRANT",
+          "dest": 3,
+          "issuer": 4,
+          "status": 1,
+          "mac_ok": true,
+          "seq": 1
+        }
+      ],
+      "expected_output": {
+        "grant_accepted": true,
+        "tile_3_authorized": true
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 0
+      },
+      "expected_rejection_reason": null,
+      "related_rtl_evidence": {
+        "testbench": "tb_p7_c4",
+        "job_id": "rel_s3_p7_c4",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_p7_c4/simulate.log",
+        "checks": 18,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "C4 grant latency and FC_TXN0_GRANT verified in rel_s3_p7_c4 and rel_i7_full_chain."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Gate at Tile 3 accepted GRANT; Tile 3 authorized."
+    },
+    {
+      "scenario_id": "INT_05",
+      "scenario_name": "AUTHORIZED_MEM_READ",
+      "flow_step": 5,
+      "description": "Authorized Tile 3 performs memory read at 0x2200_0100; request passes gate and returns data word.",
+      "initial_state": {
+        "tile_3_authorized": true
+      },
+      "input_events": [
+        {
+          "action": "MEM_READ",
+          "src": 3,
+          "address": 570425600
+        }
+      ],
+      "expected_output": {
+        "read_success": true,
+        "data": 0
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 0
+      },
+      "expected_rejection_reason": null,
+      "related_rtl_evidence": {
+        "testbench": "tb_pq_full_chain_p7",
+        "job_id": "rel_i7_full_chain",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_full_chain/simulate.log",
+        "checks": 21,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "FC_TXN0_DATA ok=1 verified in rel_i7_full_chain log line 32."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Memory read at 0x2200_0100 succeeded."
+    },
+    {
+      "scenario_id": "INT_06",
+      "scenario_name": "AUTHORIZED_MEM_WRITE",
+      "flow_step": 6,
+      "description": "Authorized Tile 3 writes 0xCAFE_BABE to memory at 0x2200_0100; commits increments and data persists.",
+      "initial_state": {
+        "tile_3_authorized": true
+      },
+      "input_events": [
+        {
+          "action": "MEM_WRITE",
+          "src": 3,
+          "address": 570425600,
+          "data": 3405691582
+        }
+      ],
+      "expected_output": {
+        "write_success": true,
+        "committed": true
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1,
+        "last_data": 3405691582
+      },
+      "expected_rejection_reason": null,
+      "related_rtl_evidence": {
+        "testbench": "tb_i7_sec",
+        "job_id": "rel_i7_sec",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_sec/simulate.log",
+        "checks": 30,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "SEC1_AUTH_WRITE committed=1 verified in rel_i7_sec log line 31."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Memory write committed; data word 0xCAFE_BABE stored."
+    },
+    {
+      "scenario_id": "INT_07",
+      "scenario_name": "INVALID_MAC",
+      "flow_step": 7,
+      "description": "Control packet with corrupted/invalid MAC rejected by L2; sequence does not advance.",
+      "initial_state": {
+        "tile_3_authorized": true
+      },
+      "input_events": [
+        {
+          "action": "ISSUE_GRANT",
+          "dest": 3,
+          "issuer": 4,
+          "status": 1,
+          "mac_ok": false,
+          "seq": 2
+        }
+      ],
+      "expected_output": {
+        "accepted": false,
+        "l2_reject": true
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "L2_MAC_MISMATCH",
+      "related_rtl_evidence": {
+        "testbench": "tb_l2p7_equiv",
+        "job_id": "rel_s3_l2p7_equiv",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_l2p7_equiv/simulate.log",
+        "checks": 2425,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "Rejection code r2=20 verified in rel_s3_l2p7_equiv; SEC_WRONG_TAG_VERDICT in rel_i7_sec."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Rejected by L2 due to MAC mismatch; sequence not advanced."
+    },
+    {
+      "scenario_id": "INT_08",
+      "scenario_name": "INCORRECT_EPOCH",
+      "flow_step": 8,
+      "description": "Control packet presenting stale boot epoch rejected by L2; sequence does not advance.",
+      "initial_state": {
+        "boot_epoch": 85968058283706962416180
+      },
+      "input_events": [
+        {
+          "action": "ISSUE_GRANT",
+          "dest": 3,
+          "issuer": 4,
+          "status": 1,
+          "mac_ok": true,
+          "epoch": 3735928559,
+          "seq": 2
+        }
+      ],
+      "expected_output": {
+        "accepted": false,
+        "l2_reject": true
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "L2_EPOCH_MISMATCH",
+      "related_rtl_evidence": {
+        "testbench": "tb_l2p7_equiv",
+        "job_id": "rel_s3_l2p7_equiv",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_l2p7_equiv/simulate.log",
+        "checks": 2425,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "Rejection code r3=70 in rel_s3_l2p7_equiv; SEC3_RESET_REPLAY in rel_i7_sec log line 54."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Rejected by L2 due to epoch mismatch; sequence not advanced."
+    },
+    {
+      "scenario_id": "INT_09",
+      "scenario_name": "SEQUENCE_REPLAY",
+      "flow_step": 9,
+      "description": "Replayed control packet with previous sequence number (seq <= rx_seq) rejected by L2.",
+      "initial_state": {
+        "last_accepted_seq": 1
+      },
+      "input_events": [
+        {
+          "action": "ISSUE_GRANT",
+          "dest": 3,
+          "issuer": 4,
+          "status": 1,
+          "mac_ok": true,
+          "seq": 1
+        }
+      ],
+      "expected_output": {
+        "accepted": false,
+        "l2_reject": true
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "L2_SEQUENCE_VIOLATION",
+      "related_rtl_evidence": {
+        "testbench": "tb_l2p7_equiv",
+        "job_id": "rel_s3_l2p7_equiv",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_l2p7_equiv/simulate.log",
+        "checks": 2425,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "Rejection code r4=66 in rel_s3_l2p7_equiv; SEC3_L2_REPLAY (reason 4) in rel_i7_sec log line 53."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Rejected by L2 due to stale/replayed sequence number 1."
+    },
+    {
+      "scenario_id": "INT_10",
+      "scenario_name": "INVALID_GRANT",
+      "flow_step": 10,
+      "description": "GRANT packet with status != 1 or directed to non-attestable tile rejected by gate.",
+      "initial_state": {
+        "tile_0_attestable": false
+      },
+      "input_events": [
+        {
+          "action": "ISSUE_GRANT",
+          "dest": 0,
+          "issuer": 4,
+          "status": 1,
+          "mac_ok": true,
+          "seq": 2
+        }
+      ],
+      "expected_output": {
+        "accepted": false,
+        "gate_reject": true
+      },
+      "expected_auth_state": {
+        "0": false,
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "GATE_NON_ATTESTABLE_TILE",
+      "related_rtl_evidence": {
+        "testbench": "tb_p7_refuse_grant_i6",
+        "job_id": "rel_i6_p7_refuse_grant",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i6_p7_refuse_grant/simulate.log",
+        "checks": 12,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "P7R_REFUSE_0_GRANT rej=+1 reason=8 verified in rel_i6_p7_refuse_grant log line 30."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Gate rejected GRANT directed to plain, non-attestable tile 0."
+    },
+    {
+      "scenario_id": "INT_11",
+      "scenario_name": "REVOKE",
+      "flow_step": 11,
+      "description": "RoT delivers authenticated REVOKE to Tile 3; gate revokes authorization.",
+      "initial_state": {
+        "tile_3_authorized": true
+      },
+      "input_events": [
+        {
+          "action": "ISSUE_REVOKE",
+          "dest": 3,
+          "issuer": 4,
+          "mac_ok": true,
+          "seq": 2
+        }
+      ],
+      "expected_output": {
+        "revoke_accepted": true,
+        "tile_3_authorized": false
+      },
+      "expected_auth_state": {
+        "3": false,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": null,
+      "related_rtl_evidence": {
+        "testbench": "tb_p7_c4",
+        "job_id": "rel_s3_p7_c4",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_s3_p7_c4/simulate.log",
+        "checks": 18,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "C4 revoke latency verified in rel_s3_p7_c4; dl_rel_s3_verifier_revoke checks 48/48."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "REVOKE delivered and accepted; Tile 3 authorization cleared."
+    },
+    {
+      "scenario_id": "INT_12",
+      "scenario_name": "UNAUTHORIZED_MEM_ACCESS_AFTER_REVOKE",
+      "flow_step": 12,
+      "description": "Tile 3 attempts memory write after revocation; rejected at gate, memory commits unmodified.",
+      "initial_state": {
+        "tile_3_authorized": false
+      },
+      "input_events": [
+        {
+          "action": "MEM_WRITE",
+          "src": 3,
+          "address": 570425600,
+          "data": 3134241488
+        }
+      ],
+      "expected_output": {
+        "write_success": false,
+        "committed": false
+      },
+      "expected_auth_state": {
+        "3": false,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1,
+        "last_data": 3405691582
+      },
+      "expected_rejection_reason": "UNAUTHORIZED_AT_GATE",
+      "related_rtl_evidence": {
+        "testbench": "tb_p7_gate_data",
+        "job_id": "rel_p7_gate_data",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_p7_gate_data/simulate.log",
+        "checks": 4,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "GATE_DATA_REFUSED verified in rel_p7_gate_data; SEC_NO_UNAUTH_COMMIT in rel_i7_sec."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Blocked at gate; commits count strictly preserved at 1."
+    },
+    {
+      "scenario_id": "INT_13",
+      "scenario_name": "SPOOFED_TILE_CONTROL_ATTEMPT",
+      "flow_step": 13,
+      "description": "Tile 5 (SPOOF) attempts to inject control packet as Tile 4; ingress quarantine drops packet (reason 9).",
+      "initial_state": {
+        "tile_5_is_spoof": true
+      },
+      "input_events": [
+        {
+          "action": "SPOOF_INJECT",
+          "claimed_src": 4,
+          "actual_src": 5
+        }
+      ],
+      "expected_output": {
+        "forwarded": false,
+        "quarantined": true
+      },
+      "expected_auth_state": {
+        "3": false,
+        "4": true,
+        "5": false
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "INGRESS_SOURCE_SPOOFING",
+      "related_rtl_evidence": {
+        "testbench": "tb_p7_ingress_i6",
+        "job_id": "rel_i6_p7_ingress",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i6_p7_ingress/simulate.log",
+        "checks": 39,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "Q9_CHALLENGE_SRC4 rej=+1 reason=9 verified in rel_i6_p7_ingress log line 30."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Ingress parser quarantined spoofed packet (reason 9)."
+    },
+    {
+      "scenario_id": "INT_14",
+      "scenario_name": "BUSY_RETRY_EVENTUAL_SUCCESS",
+      "flow_step": 14,
+      "description": "Endpoint returns status 3 (BUSY) twice; re-issues same challenge; 3rd attempt returns status 1 (GRANT).",
+      "initial_state": {
+        "tile_3_authorized": false,
+        "retries": 0
+      },
+      "input_events": [
+        {
+          "action": "SUBMIT_RESPONSE",
+          "status": 3
+        },
+        {
+          "action": "SUBMIT_RESPONSE",
+          "status": 3
+        },
+        {
+          "action": "SUBMIT_RESPONSE",
+          "status": 1
+        }
+      ],
+      "expected_output": {
+        "retries_exhausted": false,
+        "final_outcome": "GRANT"
+      },
+      "expected_auth_state": {
+        "3": false,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": null,
+      "related_rtl_evidence": {
+        "testbench": "tb_i6_retry",
+        "job_id": "dl_rel_i6_retry",
+        "log_file": "E4_P7_XSIM_20261103/project_run/release_project_sims.txt",
+        "checks": 24,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "tb_i6_retry verifies 0..3 busy retries using identical challenge with zero error across 24 checks."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Retried twice with identical challenge; 3rd attempt granted."
+    },
+    {
+      "scenario_id": "INT_15",
+      "scenario_name": "FOURTH_BUSY_FAIL_CLOSED",
+      "flow_step": 15,
+      "description": "Endpoint returns status 3 (BUSY) 4 consecutive times; verifier fails closed (reason 9, REVOKE).",
+      "initial_state": {
+        "tile_3_authorized": false,
+        "retries": 0
+      },
+      "input_events": [
+        {
+          "action": "SUBMIT_RESPONSE",
+          "status": 3
+        },
+        {
+          "action": "SUBMIT_RESPONSE",
+          "status": 3
+        },
+        {
+          "action": "SUBMIT_RESPONSE",
+          "status": 3
+        },
+        {
+          "action": "SUBMIT_RESPONSE",
+          "status": 3
+        }
+      ],
+      "expected_output": {
+        "final_outcome": "REVOKE_FAILED",
+        "failed": true,
+        "fail_reason": 9
+      },
+      "expected_auth_state": {
+        "3": false,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "VERIFIER_STATUS_NOT_ONE",
+      "related_rtl_evidence": {
+        "testbench": "tb_i6_retry",
+        "job_id": "dl_rel_i6_retry",
+        "log_file": "E4_P7_XSIM_20261103/project_run/release_project_sims.txt",
+        "checks": 24,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "i6v_retry_unbounded mutant killed; confirms 4th consecutive BUSY fails closed."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "4th consecutive BUSY failed closed with REVOKE and reason 9."
+    },
+    {
+      "scenario_id": "INT_16",
+      "scenario_name": "K3_CONFIG_LENGTH_MISMATCH",
+      "flow_step": 16,
+      "description": "Attestation challenge presenting config_len != 16 rejected with status 5 MALFORMED (fault 7).",
+      "initial_state": {
+        "k3_enforced": true
+      },
+      "input_events": [
+        {
+          "action": "SUBMIT_RESPONSE",
+          "config_len": 15,
+          "imem_len": 16
+        }
+      ],
+      "expected_output": {
+        "accepted": false,
+        "status": 5,
+        "k3_fault": true
+      },
+      "expected_auth_state": {
+        "3": false,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "K3_LENGTH_MISMATCH",
+      "related_rtl_evidence": {
+        "testbench": "tb_i7_sec",
+        "job_id": "rel_i7_sec",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_sec/simulate.log",
+        "checks": 30,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "K-3 length binding enforcement (16/16) verified in I-6 contract and rel_i7_sec."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Length binding mismatch answered status 5 MALFORMED, fault reason 7."
+    },
+    {
+      "scenario_id": "INT_17",
+      "scenario_name": "MEMORY_WINDOW_REJECTION",
+      "flow_step": 17,
+      "description": "Memory request targeting historical address 0x8200_0100 rejected with fault reason 13.",
+      "initial_state": {
+        "tile_3_authorized": true
+      },
+      "input_events": [
+        {
+          "action": "MEM_WRITE",
+          "src": 3,
+          "address": 2181038336,
+          "data": 287454020
+        }
+      ],
+      "expected_output": {
+        "accepted": false,
+        "fault_reason": 13,
+        "error_reply": 1024
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "OUT_OF_WINDOW_ADDRESS",
+      "related_rtl_evidence": {
+        "testbench": "tb_i7_sec",
+        "job_id": "rel_i7_sec",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_sec/simulate.log",
+        "checks": 30,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "Memory window strictly A[31:28] == 4'h2; 0x8200_0100 triggers fault 13 per I6_CONTRACT.md."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "0x8200_0100 rejected with fault reason 13; memory commits unchanged."
+    },
+    {
+      "scenario_id": "INT_18",
+      "scenario_name": "TRANSACTION_TAG_MISMATCH",
+      "flow_step": 18,
+      "description": "Response presenting mismatched tag or unexpected type rejected; transaction slot remains active.",
+      "initial_state": {
+        "slot_allocated": true
+      },
+      "input_events": [
+        {
+          "action": "MATCH_RESPONSE",
+          "tag": 0,
+          "src": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "MEM_WR_RESP"
+        }
+      ],
+      "expected_output": {
+        "matched": false,
+        "slot_retired": false
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "RESPONSE_UNMATCHED",
+      "related_rtl_evidence": {
+        "testbench": "tb_ni_n81_p7",
+        "job_id": "rel_n81p7_ni_t0w16",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_n81p7_ni_t0w16/simulate.log",
+        "checks": 126,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "T14/T15 matched response retirement verified in rel_n81p7_ni_t0w16 / t3w16."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Mismatched destination/type rejected; slot retained."
+    },
+    {
+      "scenario_id": "INT_19",
+      "scenario_name": "SLOT_EXHAUSTION",
+      "flow_step": 19,
+      "description": "Attempt to issue 3rd concurrent transaction when both slots are occupied; backpressured with error.",
+      "initial_state": {
+        "slots_occupied": 2
+      },
+      "input_events": [
+        {
+          "action": "ALLOCATE_SLOT",
+          "dest": {
+            "x": 0,
+            "y": 1
+          },
+          "req_type": "MEM_RD_REQ"
+        }
+      ],
+      "expected_output": {
+        "allocated": false,
+        "slot_tag": null
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 1
+      },
+      "expected_rejection_reason": "SLOT_EXHAUSTION",
+      "related_rtl_evidence": {
+        "testbench": "tb_ni_n81_p7",
+        "job_id": "rel_n81p7_ni_t0w16",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_n81p7_ni_t0w16/simulate.log",
+        "checks": 126,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "T13/T14 2-slot exhaustion verified in rel_n81p7_ni_t0w16 / t3w16."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "2 slots exhausted; 3rd request rejected with backpressure."
+    },
+    {
+      "scenario_id": "INT_20",
+      "scenario_name": "RECOVERY_AFTER_NEW_ATTESTATION",
+      "flow_step": 20,
+      "description": "After revocation, a new challenge/response handshake succeeds; Tile 3 is re-granted and memory writes resume.",
+      "initial_state": {
+        "tile_3_authorized": false
+      },
+      "input_events": [
+        {
+          "action": "GENERATE_CHALLENGE",
+          "dest": 3,
+          "nonce": 6172840429334713770
+        },
+        {
+          "action": "SUBMIT_RESPONSE",
+          "status": 1,
+          "meas_match": true,
+          "tag_match": true
+        },
+        {
+          "action": "ISSUE_GRANT",
+          "dest": 3,
+          "issuer": 4,
+          "status": 1,
+          "mac_ok": true,
+          "seq": 3
+        },
+        {
+          "action": "MEM_WRITE",
+          "src": 3,
+          "address": 570425600,
+          "data": 1592642302
+        }
+      ],
+      "expected_output": {
+        "re_attested": true,
+        "tile_3_authorized": true,
+        "write_success": true
+      },
+      "expected_auth_state": {
+        "3": true,
+        "4": true
+      },
+      "expected_memory_state": {
+        "commits": 2,
+        "last_data": 1592642302
+      },
+      "expected_rejection_reason": null,
+      "related_rtl_evidence": {
+        "testbench": "tb_i7_sec",
+        "job_id": "rel_i7_sec",
+        "log_file": "E4_P7_XSIM_20261103/logs/rel_i7_sec/simulate.log",
+        "checks": 30,
+        "errors": 0,
+        "result": "PASS",
+        "classification": "RTL PASS",
+        "notes": "SEC4_RESTORED_GRANT granted=1 and FC_RESET_*_CLEAN clean re-grant verified."
+      },
+      "python_execution_result": "PASS",
+      "rtl_verification_status": "RTL PASS",
+      "execution_notes": "Re-attestation and re-grant succeeded; commits advanced to 2."
+    }
+  ]
+}

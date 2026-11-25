@@ -1,0 +1,5 @@
+NEG BASE verdict=PASS expected=PASS OK
+NEG FW_ZEROED verdict=FAIL expected=FAIL OK
+NEG EXTRA_CLOCK verdict=FAIL expected=FAIL OK
+NEG FAST_BOARD verdict=FAIL expected=FAIL OK
+GATE_NEGATIVE_TESTS: PASS (4/4)

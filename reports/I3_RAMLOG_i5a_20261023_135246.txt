@@ -1,0 +1,17 @@
+﻿13:52:47 GATE free=3.92GB pagefile=20480MB need free>=1GB pagefile>=8192MB
+13:52:48 STARTED select=i5 scheduler=33584 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261023_135247_e283de15 log=C:\Users\kalas\AppData\Local\Temp\i3_i5a_20261023_135246.log
+13:52:48 free=3.77GB
+13:52:49 DONE s2_vectors_check state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[] free=3.79GB
+13:53:32 DONE s2_attacks state=PASS_FRESH xsimkernel_peak=13972KB proc_peak[vivado=565MB xelab=198MB xsim=207MB xsimk=11MB xvlog=31MB] free=3.87GB
+13:54:15 DONE s2_mut_mac_off state=PASS_FRESH xsimkernel_peak=13932KB proc_peak[vivado=565MB xelab=194MB xsim=208MB] free=3.86GB
+13:54:58 DONE s2_mut_bind_ctl state=PASS_FRESH xsimkernel_peak=13968KB proc_peak[vivado=567MB xelab=196MB xsim=207MB] free=3.77GB
+13:55:39 DONE s2_mut_id_off state=PASS_FRESH xsimkernel_peak=13984KB proc_peak[vivado=571MB xelab=195MB xsim=206MB xsimk=11MB] free=4.06GB
+13:56:24 DONE s2_mut_st_dest state=PASS_FRESH xsimkernel_peak=13980KB proc_peak[vivado=564MB xelab=189MB xsim=207MB xsimk=14MB] free=3.98GB
+13:57:08 DONE s2_mut_st_vc state=PASS_FRESH xsimkernel_peak=13996KB proc_peak[vivado=566MB xelab=187MB xsim=207MB xsimk=13MB xvlog=52MB] free=3.98GB
+13:57:51 free=3.95GB
+13:57:51 DONE s2_mut_seq_off state=PASS_FRESH xsimkernel_peak=13964KB proc_peak[vivado=565MB xelab=190MB xsim=207MB] free=3.95GB
+13:58:34 DONE s2_mut_epoch_off state=PASS_FRESH xsimkernel_peak=13972KB proc_peak[vivado=565MB xelab=194MB xsim=207MB] free=3.9GB
+13:59:15 DONE s2_mut_seq_wrap state=PASS_FRESH xsimkernel_peak=13952KB proc_peak[vivado=566MB xelab=196MB xsim=206MB xsimk=11MB xvlog=31MB] free=3.96GB
+13:59:58 DONE s2_mut_len_off state=PASS_FRESH xsimkernel_peak=13996KB proc_peak[vivado=565MB xelab=195MB xsim=206MB xsimk=11MB xvlog=31MB] free=3.99GB
+14:00:41 DONE s2_sf1_flood state=PASS_FRESH xsimkernel_peak=17712KB proc_peak[vivado=564MB xelab=189MB xsim=207MB xsimk=16MB] free=4.01GB
+14:01:23 scheduler exited stopped=False

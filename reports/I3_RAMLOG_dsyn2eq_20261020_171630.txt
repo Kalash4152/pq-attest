@@ -1,0 +1,6 @@
+﻿17:16:31 GATE free=1.19GB pagefile=19456MB need free>=1GB pagefile>=8192MB
+17:16:32 STARTED select=dsyn2eq scheduler=26800 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261020_171631_ca0bba93 log=C:\Users\kalas\AppData\Local\Temp\i3_dsyn2eq_20261020_171630.log
+17:16:33 free=1.13GB
+17:16:33 DONE dsyn2_variant state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[] free=1.12GB
+17:17:35 DONE dsyn2_measurement_equiv state=PASS_FRESH xsimkernel_peak=15224KB proc_peak[vivado=566MB xelab=84MB xsim=240MB xsimk=15MB] free=0.56GB
+17:19:20 scheduler exited stopped=False

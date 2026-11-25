@@ -1,0 +1,1187 @@
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Sat Nov 14 21:40:09 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source C:/vivado_verilog_proj/_r10g2/test.tcl
+# set root C:/vivado_verilog_proj/NOC_PQATTEST
+# set out C:/vivado_verilog_proj/_r10g2
+# open_project [file join $out NOC_PQATTEST.xpr]
+INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.gen/dl_merged_src'.
+WARNING: [filemgmt 56-3] IPUserFilesDir: Could not find the directory 'C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.ip_user_files'.
+Scanning sources...
+Finished scanning sources
+WARNING: [Project 1-509] GeneratedRun file for 'synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'synth_merged' not found
+WARNING: [Project 1-509] GeneratedRun file for 'impl_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'impl_merged' not found
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/xilinx_vivado/Vivado/2024.1/data/ip'.
+open_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 559.410 ; gain = 227.914
+# set ::env(MG_ROOT) $root
+# source [file join $root scripts merged_gui_runs.tcl]
+## set gui_here [file normalize [file dirname [info script]]]
+## source [file join $gui_here merged_project_update.tcl]
+### set P [current_project -quiet]
+### if {$P eq ""} { error "Open NOC_PQATTEST.xpr first, then source this file." }
+### if {[get_property NAME $P] ne "NOC_PQATTEST"} { error "Current project is [get_property NAME $P], not NOC_PQATTEST." }
+### set ::mg_root [get_property DIRECTORY $P]
+### if {[info exists ::env(MG_ROOT)]} { set ::mg_root $::env(MG_ROOT) }   
+### set gen [file join $::mg_root scripts merged_bitstream_sources.tcl]
+### if {![file isfile $gen]} { error "run: python scripts/make_merged_sources.py (creates $gen)" }
+### source $gen
+#### set ::merged_bit [dict create]
+#### dict set ::merged_bit merged_board [dict create top pq_merged_board_top xdc synth/merged/pq_merged_board_arty.xdc defines {PQ_MAC_ON CPU_TILE_MODULE=cpu_tile_noc REAL_CPU_TILE} mem_init {sw/riscv/demo_fw_v3.hex} sources {rtl/dual_lane/NOC_PKG.sv rtl/dual_lane/noc_p7_pkg.sv NOC_PQATTEST.srcs/sources_1/new/NOC_FIFO.sv NOC_PQATTEST.srcs/sources_1/new/NOC_CROSSBAR.sv NOC_PQATTEST.srcs/sources_1/new/NOC_XY_ROUTING.sv NOC_PQATTEST.srcs/sources_1/new/NOC_arbiter.sv NOC_PQATTEST.srcs/sources_1/new/allocator.sv NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv NOC_PQATTEST.srcs/sources_1/new/NOC_DATAPTAH.sv NOC_PQATTEST.srcs/sources_1/new/noc_router.sv NOC_PQATTEST.srcs/sources_1/new/noc_mesh_3x2.sv NOC_PQATTEST.srcs/sources_1/new/noc_addr_decoder.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pkg.sv NOC_PQATTEST.srcs/sources_1/new/SHA3_PKG.sv NOC_PQATTEST.srcs/sources_1/new/kmac_pkg.sv NOC_PQATTEST.srcs/sources_1/new/pq_kdf_pkg.sv NOC_PQATTEST.srcs/sources_1/new/pq_measurement_pkg.sv NOC_PQATTEST.srcs/sources_1/new/pqattest_stg7_pkg.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_theta.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_rho.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pi.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_chi.sv rtl/dual_lane/pq_keccak_iota.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_round.sv rtl/dual_lane/pq_keccak_f1600.sv rtl/dual_lane/SHA3_PAD.sv NOC_PQATTEST.srcs/sources_1/new/SHA3_ABSORB.sv NOC_PQATTEST.srcs/sources_1/new/SHA3_256.sv NOC_PQATTEST.srcs/sources_1/new/kmac_encode.sv NOC_PQATTEST.srcs/sources_1/new/kmac_absorb.sv rtl/dual_lane/kmac_128_a5.sv NOC_PQATTEST.srcs/sources_1/new/pq_kdf.sv rtl/dual_lane/pq_measurement.sv NOC_PQATTEST.srcs/sources_1/new/pqattest_stg7.sv rtl/dual_lane/SHA3_256_xp.sv rtl/dual_lane/kmac_128_xp_a5.sv rtl/dual_lane/pq_kmac_share_xp.sv rtl/dual_lane/pq_measurement_xp.sv rtl/dual_lane/pq_attest_protocol_s3.sv rtl/dual_lane/pq_kmac_share.sv rtl/dual_lane/pq_kdf_xk.sv rtl/dual_lane/pq_attestation_tag_xk.sv rtl/dual_lane/noc_network_interface_p7_i9.sv rtl/dual_lane/l2_arbiter.sv rtl/dual_lane/l2_kmac_engine.sv rtl/dual_lane/noc_l2_auth_p7_i9.sv rtl/dual_lane/noc_l2_p7_pair_i9.sv rtl/dual_lane/noc_ingress_quarantine.sv rtl/dual_lane/noc_ingress_parser.sv rtl/dual_lane/pq_attest_endpoint.sv rtl/dual_lane/noc_attest_gate.sv rtl/dual_lane/noc_fault_status.sv rtl/dual_lane/pq_rot_verifier.sv rtl/dual_lane/rst_bridge.sv rtl/dual_lane/pq_noc_subsystem_p7_i9.sv rtl/riscv/picorv32.v rtl/riscv/picorv32_adapter.sv rtl/riscv/addr_decode.sv rtl/riscv/uart_tx.sv rtl/riscv/uart_mmio.sv rtl/riscv/gpio.sv rtl/riscv/tile_status.sv rtl/riscv/tile_top.sv rtl/riscv/mem_bram.sv rtl/riscv/tile_mem_wrapper.sv rtl/riscv/tmem_app_bridge.sv rtl/riscv/meas_window_reader.sv rtl/riscv/meas_imem_hasher.sv rtl/riscv/cpu_tile_noc.sv rtl/dual_lane/merged/pq_soc_merged_core.sv synth/merged/pq_merged_board_top.sv}]
+### set b [dict get $::merged_bit merged_board]
+### set xpr [file join [get_property DIRECTORY $P] NOC_PQATTEST.xpr]   
+### set bak "$xpr.bak_merged_[clock format [clock seconds] -format %Y%m%d_%H%M%S]"
+### file copy -force $xpr $bak
+### puts "backup: $bak"
+backup: C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.xpr.bak_merged_20261114_214022
+### proc mg_fileset {kind name} {
+###   set fs [get_filesets -quiet $name]
+###   if {$fs eq ""} { set fs [create_fileset $kind $name] }
+###   return $fs
+### }
+### proc mg_norm {f} { return [string tolower [file normalize $f]] }
+### proc mg_sync_files {fs want} {
+###   # add the missing files, remove the files of this set that are no longer wanted (own files only, never a whole set)
+###   set have [get_files -quiet -norecurse -of_objects $fs]
+###   set hn [lmap f $have {mg_norm $f}]
+###   set wn [lmap f $want {mg_norm $f}]
+###   set add {}; foreach f $want n $wn { if {[lsearch -exact $hn $n] < 0} { lappend add $f } }
+###   set rm  {}; foreach f $have n $hn { if {[lsearch -exact $wn $n] < 0} { lappend rm $f } }
+###   if {[llength $add]} { add_files -norecurse -fileset $fs $add }
+###   if {[llength $rm]}  { remove_files -fileset $fs $rm }
+###   return [list [llength $add] [llength $rm]]
+### }
+### set srcs [lmap s [dict get $b sources] {file join $::mg_root $s}]
+### foreach s $srcs { if {![file isfile $s]} { error "missing source $s (re-run make_merged_sources.py)" } }
+### set mems [lmap m [dict get $b mem_init] {file join $::mg_root $m}]
+### set defs [dict get $b defines]
+### set inc  [list [file join $::mg_root vectors] [file join $::mg_root sim_riscv include]]
+### set ss [mg_fileset -srcset dl_merged_src]
+### set d_src [mg_sync_files $ss [concat $srcs $mems]]
+### set_property verilog_define $defs $ss
+### set_property include_dirs $inc $ss
+### set_property top [dict get $b top] $ss
+### set cs [mg_fileset -constrset dl_merged_xdc]
+### mg_sync_files $cs [list [file join $::mg_root [dict get $b xdc]]]
+### foreach {fs tb} [list dl_merged_real [file join $::mg_root rtl dual_lane merged tb_merged_closure_v10.sv] \
+###                      dl_i9_integ    [file join $::mg_root NOC_PQATTEST.srcs sim_1 new tb_i9_integ.sv] \
+###                      dl_i10_d2      [file join $::mg_root NOC_PQATTEST.srcs sim_1 new tb_i10_d2.sv]] {
+###   set s [mg_fileset -simset $fs]
+###   set_property SOURCE_SET dl_merged_src $s
+###   mg_sync_files $s [list $tb]
+###   set_property top [file rootname [file tail $tb]] $s
+###   set_property top_lib xil_defaultlib $s
+###   set_property verilog_define $defs $s
+###   set_property include_dirs $inc $s
+###   set_property -name {xsim.simulate.runtime} -value {all} -objects $s
+### }
+### puts "merged sets ready: dl_merged_src ([llength $srcs] sources + [llength $mems] firmware image; files added/removed now: $d_src), top [dict get $b top]; dl_merged_xdc; dl_merged_real, dl_i9_integ, dl_i10_d2"
+merged sets ready: dl_merged_src (71 sources + 1 firmware image; files added/removed now: 2 1), top pq_merged_board_top; dl_merged_xdc; dl_merged_real, dl_i9_integ, dl_i10_d2
+### proc merged_sim {{set dl_merged_real}} {
+###   # set: dl_merged_real (14 checks), dl_i9_integ (13), dl_i10_d2 (12). Makes the set ACTIVE first (include dirs / defines).
+###   current_fileset -simset [get_filesets $set]
+###   # xsim.simulate.runtime = all: launch_simulation itself runs the bench to its $finish (RESULT line). No extra "run all":
+###   # in the GUI simulator a second run after $finish restarts the free-running clock / UART receivers and sim time keeps
+###   # growing until the 80 ms watchdog (seen 2026-11-07: 10/10 PASS at 1.13 ms, then the extra run had to be interrupted).
+###   launch_simulation -simset $set
+###   puts "merged_sim: $set finished (see the RESULT line above; expected RESULT : PASS)"
+### }
+### proc merged_build {} {
+###   set py C:/Users/kalas/AppData/Local/Programs/Python/Python313/python.exe
+###   puts [exec $py -E [file join $::mg_root scripts merged_release.py] start 2>@1]
+### }
+### proc merged_result {} {
+###   set py C:/Users/kalas/AppData/Local/Programs/Python/Python313/python.exe
+###   puts [exec $py -E [file join $::mg_root scripts merged_release.py] result 2>@1]
+### }
+## set gui_dir  [file join $::mg_root NOC_PQATTEST.gui_merged]
+## set gui_dcp  [file join $gui_dir noc_mesh_3x2.dcp]
+## set rel_dir  [file join $::mg_root NOC_PQATTEST.runs_merged merged_board]
+## set rel_dcp  [file join $rel_dir s4f3_mesh.dcp]
+## set py C:/Users/kalas/AppData/Local/Programs/Python/Python313/python.exe
+## set rel [exec $py -E [file join $::mg_root scripts merged_release.py] result 2>@1]
+## if {![string match "MERGED RELEASE PASS*" $rel]} { error "No accepted release build to take the mesh netlist from: $rel" }
+## if {![file isfile $rel_dcp]} { error "Mesh checkpoint missing: $rel_dcp (run final_project_update.tcl / merged_result first)" }
+## file mkdir $gui_dir
+## if {![file isfile $gui_dcp] || [file size $gui_dcp] != [file size $rel_dcp] || [file mtime $gui_dcp] < [file mtime $rel_dcp]} {
+##   file copy -force $rel_dcp $gui_dcp
+## }
+## set b [dict get $::merged_bit merged_board]
+## set mesh_sv {}
+## set gsrcs {}
+## foreach s [dict get $b sources] {
+##   if {[regexp {(^|/)noc_mesh_3x2\.sv$} $s]} { lappend mesh_sv $s } else { lappend gsrcs [file join $::mg_root $s] }
+## }
+## if {[llength $mesh_sv] != 1} { error "expected exactly one noc_mesh_3x2.sv in the combined list" }
+## set gbb [file join $::mg_root synth s4 noc_mesh_3x2_bb.sv]
+## set gmems [lmap m [dict get $b mem_init] {file join $::mg_root $m}]
+## set gs [mg_fileset -srcset dl_gui_src]
+## set d_gui [mg_sync_files $gs [concat $gsrcs [list $gbb $gui_dcp] $gmems]]
+## set_property verilog_define [dict get $b defines] $gs
+## set_property include_dirs [list [file join $::mg_root vectors] [file join $::mg_root sim_riscv include]] $gs
+## set_property top [dict get $b top] $gs
+## set_property USED_IN_SYNTHESIS false [get_files -of_objects $gs [file tail $gui_dcp]]   
+## set part [get_property PART [current_project]]
+## if {[get_runs -quiet synth_merged] eq ""} {
+##   create_run synth_merged -flow [get_property FLOW [get_runs synth_1]] -srcset dl_gui_src -constrset dl_merged_xdc -part $part
+## }
+## if {[get_runs -quiet impl_merged] eq ""} {
+##   create_run impl_merged -parent_run synth_merged -flow [get_property FLOW [get_runs impl_1]] -constrset dl_merged_xdc -part $part
+## }
+## set sr [get_runs synth_merged]
+## set ir [get_runs impl_merged]
+## set_property AUTO_INCREMENTAL_CHECKPOINT 0 $sr
+## set_property -name {STEPS.SYNTH_DESIGN.ARGS.FLATTEN_HIERARCHY} -value rebuilt -objects $sr
+## set_property -name {STEPS.SYNTH_DESIGN.ARGS.DIRECTIVE} -value AreaOptimized_high -objects $sr
+## set_property STEPS.SYNTH_DESIGN.TCL.PRE [file join $gui_here gui_synth_pre.tcl] $sr
+## set_property STEPS.SYNTH_DESIGN.TCL.POST [file join $gui_here gui_synth_post.tcl] $sr   
+## set_property STEPS.INIT_DESIGN.TCL.PRE  [file join $gui_here gui_impl_pre.tcl] $ir
+## set_property STEPS.OPT_DESIGN.ARGS.DIRECTIVE Explore $ir
+## set_property STEPS.PLACE_DESIGN.ARGS.DIRECTIVE ExtraTimingOpt $ir
+## set_property STEPS.PHYS_OPT_DESIGN.IS_ENABLED true $ir
+## set_property STEPS.PHYS_OPT_DESIGN.ARGS.DIRECTIVE AggressiveExplore $ir
+## set_property STEPS.ROUTE_DESIGN.ARGS.DIRECTIVE AggressiveExplore $ir
+## set_property STEPS.POST_ROUTE_PHYS_OPT_DESIGN.IS_ENABLED true $ir
+## set_property STEPS.POST_ROUTE_PHYS_OPT_DESIGN.ARGS.DIRECTIVE AggressiveExplore $ir
+## set_property STEPS.WRITE_BITSTREAM.TCL.PRE [file join $gui_here gui_bitstream_pre.tcl] $ir
+## current_run -synthesis $sr
+## current_run -implementation $ir
+## puts "GUI runs ready: synth_merged / impl_merged are ACTIVE (source set dl_gui_src: [llength [get_files -of_objects $gs]] files, changed now: $d_gui; top [dict get $b top])."
+GUI runs ready: synth_merged / impl_merged are ACTIVE (source set dl_gui_src: 73 files, changed now: 2 1; top pq_merged_board_top).
+## puts "Press Generate Bitstream (or type: gui_merged_build). The gate runs before the bitstream is written; a gate FAIL stops the run."
+Press Generate Bitstream (or type: gui_merged_build). The gate runs before the bitstream is written; a gate FAIL stops the run.
+## proc gui_merged_build {} {
+##   reset_run synth_merged
+##   launch_runs impl_merged -to_step write_bitstream -jobs 1
+##   puts "Building in the Design Runs tab (about 30 to 40 min). Bitstream: <project>.runs/impl_merged/pq_merged_board_top.bit"
+## }
+# source [file join $root scripts merged_gui_runs.tcl]
+## set gui_here [file normalize [file dirname [info script]]]
+## source [file join $gui_here merged_project_update.tcl]
+### set P [current_project -quiet]
+### if {$P eq ""} { error "Open NOC_PQATTEST.xpr first, then source this file." }
+### if {[get_property NAME $P] ne "NOC_PQATTEST"} { error "Current project is [get_property NAME $P], not NOC_PQATTEST." }
+### set ::mg_root [get_property DIRECTORY $P]
+### if {[info exists ::env(MG_ROOT)]} { set ::mg_root $::env(MG_ROOT) }   
+### set gen [file join $::mg_root scripts merged_bitstream_sources.tcl]
+### if {![file isfile $gen]} { error "run: python scripts/make_merged_sources.py (creates $gen)" }
+### source $gen
+#### set ::merged_bit [dict create]
+#### dict set ::merged_bit merged_board [dict create top pq_merged_board_top xdc synth/merged/pq_merged_board_arty.xdc defines {PQ_MAC_ON CPU_TILE_MODULE=cpu_tile_noc REAL_CPU_TILE} mem_init {sw/riscv/demo_fw_v3.hex} sources {rtl/dual_lane/NOC_PKG.sv rtl/dual_lane/noc_p7_pkg.sv NOC_PQATTEST.srcs/sources_1/new/NOC_FIFO.sv NOC_PQATTEST.srcs/sources_1/new/NOC_CROSSBAR.sv NOC_PQATTEST.srcs/sources_1/new/NOC_XY_ROUTING.sv NOC_PQATTEST.srcs/sources_1/new/NOC_arbiter.sv NOC_PQATTEST.srcs/sources_1/new/allocator.sv NOC_PQATTEST.srcs/sources_1/new/noc_credit_counter.sv NOC_PQATTEST.srcs/sources_1/new/NOC_DATAPTAH.sv NOC_PQATTEST.srcs/sources_1/new/noc_router.sv NOC_PQATTEST.srcs/sources_1/new/noc_mesh_3x2.sv NOC_PQATTEST.srcs/sources_1/new/noc_addr_decoder.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pkg.sv NOC_PQATTEST.srcs/sources_1/new/SHA3_PKG.sv NOC_PQATTEST.srcs/sources_1/new/kmac_pkg.sv NOC_PQATTEST.srcs/sources_1/new/pq_kdf_pkg.sv NOC_PQATTEST.srcs/sources_1/new/pq_measurement_pkg.sv NOC_PQATTEST.srcs/sources_1/new/pqattest_stg7_pkg.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_theta.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_rho.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_pi.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_chi.sv rtl/dual_lane/pq_keccak_iota.sv NOC_PQATTEST.srcs/sources_1/new/pq_keccak_round.sv rtl/dual_lane/pq_keccak_f1600.sv rtl/dual_lane/SHA3_PAD.sv NOC_PQATTEST.srcs/sources_1/new/SHA3_ABSORB.sv NOC_PQATTEST.srcs/sources_1/new/SHA3_256.sv NOC_PQATTEST.srcs/sources_1/new/kmac_encode.sv NOC_PQATTEST.srcs/sources_1/new/kmac_absorb.sv rtl/dual_lane/kmac_128_a5.sv NOC_PQATTEST.srcs/sources_1/new/pq_kdf.sv rtl/dual_lane/pq_measurement.sv NOC_PQATTEST.srcs/sources_1/new/pqattest_stg7.sv rtl/dual_lane/SHA3_256_xp.sv rtl/dual_lane/kmac_128_xp_a5.sv rtl/dual_lane/pq_kmac_share_xp.sv rtl/dual_lane/pq_measurement_xp.sv rtl/dual_lane/pq_attest_protocol_s3.sv rtl/dual_lane/pq_kmac_share.sv rtl/dual_lane/pq_kdf_xk.sv rtl/dual_lane/pq_attestation_tag_xk.sv rtl/dual_lane/noc_network_interface_p7_i9.sv rtl/dual_lane/l2_arbiter.sv rtl/dual_lane/l2_kmac_engine.sv rtl/dual_lane/noc_l2_auth_p7_i9.sv rtl/dual_lane/noc_l2_p7_pair_i9.sv rtl/dual_lane/noc_ingress_quarantine.sv rtl/dual_lane/noc_ingress_parser.sv rtl/dual_lane/pq_attest_endpoint.sv rtl/dual_lane/noc_attest_gate.sv rtl/dual_lane/noc_fault_status.sv rtl/dual_lane/pq_rot_verifier.sv rtl/dual_lane/rst_bridge.sv rtl/dual_lane/pq_noc_subsystem_p7_i9.sv rtl/riscv/picorv32.v rtl/riscv/picorv32_adapter.sv rtl/riscv/addr_decode.sv rtl/riscv/uart_tx.sv rtl/riscv/uart_mmio.sv rtl/riscv/gpio.sv rtl/riscv/tile_status.sv rtl/riscv/tile_top.sv rtl/riscv/mem_bram.sv rtl/riscv/tile_mem_wrapper.sv rtl/riscv/tmem_app_bridge.sv rtl/riscv/meas_window_reader.sv rtl/riscv/meas_imem_hasher.sv rtl/riscv/cpu_tile_noc.sv rtl/dual_lane/merged/pq_soc_merged_core.sv synth/merged/pq_merged_board_top.sv}]
+### set b [dict get $::merged_bit merged_board]
+### set xpr [file join [get_property DIRECTORY $P] NOC_PQATTEST.xpr]   
+### set bak "$xpr.bak_merged_[clock format [clock seconds] -format %Y%m%d_%H%M%S]"
+### file copy -force $xpr $bak
+### puts "backup: $bak"
+backup: C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.xpr.bak_merged_20261114_214023
+### proc mg_fileset {kind name} {
+###   set fs [get_filesets -quiet $name]
+###   if {$fs eq ""} { set fs [create_fileset $kind $name] }
+###   return $fs
+### }
+### proc mg_norm {f} { return [string tolower [file normalize $f]] }
+### proc mg_sync_files {fs want} {
+###   # add the missing files, remove the files of this set that are no longer wanted (own files only, never a whole set)
+###   set have [get_files -quiet -norecurse -of_objects $fs]
+###   set hn [lmap f $have {mg_norm $f}]
+###   set wn [lmap f $want {mg_norm $f}]
+###   set add {}; foreach f $want n $wn { if {[lsearch -exact $hn $n] < 0} { lappend add $f } }
+###   set rm  {}; foreach f $have n $hn { if {[lsearch -exact $wn $n] < 0} { lappend rm $f } }
+###   if {[llength $add]} { add_files -norecurse -fileset $fs $add }
+###   if {[llength $rm]}  { remove_files -fileset $fs $rm }
+###   return [list [llength $add] [llength $rm]]
+### }
+### set srcs [lmap s [dict get $b sources] {file join $::mg_root $s}]
+### foreach s $srcs { if {![file isfile $s]} { error "missing source $s (re-run make_merged_sources.py)" } }
+### set mems [lmap m [dict get $b mem_init] {file join $::mg_root $m}]
+### set defs [dict get $b defines]
+### set inc  [list [file join $::mg_root vectors] [file join $::mg_root sim_riscv include]]
+### set ss [mg_fileset -srcset dl_merged_src]
+### set d_src [mg_sync_files $ss [concat $srcs $mems]]
+### set_property verilog_define $defs $ss
+### set_property include_dirs $inc $ss
+### set_property top [dict get $b top] $ss
+### set cs [mg_fileset -constrset dl_merged_xdc]
+### mg_sync_files $cs [list [file join $::mg_root [dict get $b xdc]]]
+### foreach {fs tb} [list dl_merged_real [file join $::mg_root rtl dual_lane merged tb_merged_closure_v10.sv] \
+###                      dl_i9_integ    [file join $::mg_root NOC_PQATTEST.srcs sim_1 new tb_i9_integ.sv] \
+###                      dl_i10_d2      [file join $::mg_root NOC_PQATTEST.srcs sim_1 new tb_i10_d2.sv]] {
+###   set s [mg_fileset -simset $fs]
+###   set_property SOURCE_SET dl_merged_src $s
+###   mg_sync_files $s [list $tb]
+###   set_property top [file rootname [file tail $tb]] $s
+###   set_property top_lib xil_defaultlib $s
+###   set_property verilog_define $defs $s
+###   set_property include_dirs $inc $s
+###   set_property -name {xsim.simulate.runtime} -value {all} -objects $s
+### }
+### puts "merged sets ready: dl_merged_src ([llength $srcs] sources + [llength $mems] firmware image; files added/removed now: $d_src), top [dict get $b top]; dl_merged_xdc; dl_merged_real, dl_i9_integ, dl_i10_d2"
+merged sets ready: dl_merged_src (71 sources + 1 firmware image; files added/removed now: 0 0), top pq_merged_board_top; dl_merged_xdc; dl_merged_real, dl_i9_integ, dl_i10_d2
+### proc merged_sim {{set dl_merged_real}} {
+###   # set: dl_merged_real (14 checks), dl_i9_integ (13), dl_i10_d2 (12). Makes the set ACTIVE first (include dirs / defines).
+###   current_fileset -simset [get_filesets $set]
+###   # xsim.simulate.runtime = all: launch_simulation itself runs the bench to its $finish (RESULT line). No extra "run all":
+###   # in the GUI simulator a second run after $finish restarts the free-running clock / UART receivers and sim time keeps
+###   # growing until the 80 ms watchdog (seen 2026-11-07: 10/10 PASS at 1.13 ms, then the extra run had to be interrupted).
+###   launch_simulation -simset $set
+###   puts "merged_sim: $set finished (see the RESULT line above; expected RESULT : PASS)"
+### }
+### proc merged_build {} {
+###   set py C:/Users/kalas/AppData/Local/Programs/Python/Python313/python.exe
+###   puts [exec $py -E [file join $::mg_root scripts merged_release.py] start 2>@1]
+### }
+### proc merged_result {} {
+###   set py C:/Users/kalas/AppData/Local/Programs/Python/Python313/python.exe
+###   puts [exec $py -E [file join $::mg_root scripts merged_release.py] result 2>@1]
+### }
+## set gui_dir  [file join $::mg_root NOC_PQATTEST.gui_merged]
+## set gui_dcp  [file join $gui_dir noc_mesh_3x2.dcp]
+## set rel_dir  [file join $::mg_root NOC_PQATTEST.runs_merged merged_board]
+## set rel_dcp  [file join $rel_dir s4f3_mesh.dcp]
+## set py C:/Users/kalas/AppData/Local/Programs/Python/Python313/python.exe
+## set rel [exec $py -E [file join $::mg_root scripts merged_release.py] result 2>@1]
+## if {![string match "MERGED RELEASE PASS*" $rel]} { error "No accepted release build to take the mesh netlist from: $rel" }
+## if {![file isfile $rel_dcp]} { error "Mesh checkpoint missing: $rel_dcp (run final_project_update.tcl / merged_result first)" }
+## file mkdir $gui_dir
+## if {![file isfile $gui_dcp] || [file size $gui_dcp] != [file size $rel_dcp] || [file mtime $gui_dcp] < [file mtime $rel_dcp]} {
+##   file copy -force $rel_dcp $gui_dcp
+## }
+## set b [dict get $::merged_bit merged_board]
+## set mesh_sv {}
+## set gsrcs {}
+## foreach s [dict get $b sources] {
+##   if {[regexp {(^|/)noc_mesh_3x2\.sv$} $s]} { lappend mesh_sv $s } else { lappend gsrcs [file join $::mg_root $s] }
+## }
+## if {[llength $mesh_sv] != 1} { error "expected exactly one noc_mesh_3x2.sv in the combined list" }
+## set gbb [file join $::mg_root synth s4 noc_mesh_3x2_bb.sv]
+## set gmems [lmap m [dict get $b mem_init] {file join $::mg_root $m}]
+## set gs [mg_fileset -srcset dl_gui_src]
+## set d_gui [mg_sync_files $gs [concat $gsrcs [list $gbb $gui_dcp] $gmems]]
+## set_property verilog_define [dict get $b defines] $gs
+## set_property include_dirs [list [file join $::mg_root vectors] [file join $::mg_root sim_riscv include]] $gs
+## set_property top [dict get $b top] $gs
+## set_property USED_IN_SYNTHESIS false [get_files -of_objects $gs [file tail $gui_dcp]]   
+## set part [get_property PART [current_project]]
+## if {[get_runs -quiet synth_merged] eq ""} {
+##   create_run synth_merged -flow [get_property FLOW [get_runs synth_1]] -srcset dl_gui_src -constrset dl_merged_xdc -part $part
+## }
+## if {[get_runs -quiet impl_merged] eq ""} {
+##   create_run impl_merged -parent_run synth_merged -flow [get_property FLOW [get_runs impl_1]] -constrset dl_merged_xdc -part $part
+## }
+## set sr [get_runs synth_merged]
+## set ir [get_runs impl_merged]
+## set_property AUTO_INCREMENTAL_CHECKPOINT 0 $sr
+## set_property -name {STEPS.SYNTH_DESIGN.ARGS.FLATTEN_HIERARCHY} -value rebuilt -objects $sr
+## set_property -name {STEPS.SYNTH_DESIGN.ARGS.DIRECTIVE} -value AreaOptimized_high -objects $sr
+## set_property STEPS.SYNTH_DESIGN.TCL.PRE [file join $gui_here gui_synth_pre.tcl] $sr
+## set_property STEPS.SYNTH_DESIGN.TCL.POST [file join $gui_here gui_synth_post.tcl] $sr   
+## set_property STEPS.INIT_DESIGN.TCL.PRE  [file join $gui_here gui_impl_pre.tcl] $ir
+## set_property STEPS.OPT_DESIGN.ARGS.DIRECTIVE Explore $ir
+## set_property STEPS.PLACE_DESIGN.ARGS.DIRECTIVE ExtraTimingOpt $ir
+## set_property STEPS.PHYS_OPT_DESIGN.IS_ENABLED true $ir
+## set_property STEPS.PHYS_OPT_DESIGN.ARGS.DIRECTIVE AggressiveExplore $ir
+## set_property STEPS.ROUTE_DESIGN.ARGS.DIRECTIVE AggressiveExplore $ir
+## set_property STEPS.POST_ROUTE_PHYS_OPT_DESIGN.IS_ENABLED true $ir
+## set_property STEPS.POST_ROUTE_PHYS_OPT_DESIGN.ARGS.DIRECTIVE AggressiveExplore $ir
+## set_property STEPS.WRITE_BITSTREAM.TCL.PRE [file join $gui_here gui_bitstream_pre.tcl] $ir
+## current_run -synthesis $sr
+## current_run -implementation $ir
+## puts "GUI runs ready: synth_merged / impl_merged are ACTIVE (source set dl_gui_src: [llength [get_files -of_objects $gs]] files, changed now: $d_gui; top [dict get $b top])."
+GUI runs ready: synth_merged / impl_merged are ACTIVE (source set dl_gui_src: 73 files, changed now: 0 0; top pq_merged_board_top).
+## puts "Press Generate Bitstream (or type: gui_merged_build). The gate runs before the bitstream is written; a gate FAIL stops the run."
+Press Generate Bitstream (or type: gui_merged_build). The gate runs before the bitstream is written; a gate FAIL stops the run.
+## proc gui_merged_build {} {
+##   reset_run synth_merged
+##   launch_runs impl_merged -to_step write_bitstream -jobs 1
+##   puts "Building in the Design Runs tab (about 30 to 40 min). Bitstream: <project>.runs/impl_merged/pq_merged_board_top.bit"
+## }
+# if {$d_gui ne {0 0}} { error "second GUI source sync not idempotent" }
+# if {[get_property NAME [current_run -synthesis]] ne "synth_merged"} { error "wrong active synthesis" }
+# if {[get_property NAME [current_run -implementation]] ne "impl_merged"} { error "wrong active implementation" }
+# if {[llength [get_files -of_objects [get_filesets dl_gui_src]]] != 73} { error "wrong GUI source count" }
+# if {[dict get $b mem_init] ne {sw/riscv/demo_fw_v3.hex}} { error "wrong GUI firmware" }
+# if {[dict get $b mem_init] ne {sw/riscv/demo_fw_v3.hex}} { error "wrong GUI firmware" }
+# gui_merged_build
+
+[Sat Nov 14 21:40:27 2026] Launched synth_merged...
+Run output will be captured here: C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/synth_merged/runme.log
+[Sat Nov 14 21:40:27 2026] Launched impl_merged...
+Run output will be captured here: C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/runme.log
+Building in the Design Runs tab (about 30 to 40 min). Bitstream: <project>.runs/impl_merged/pq_merged_board_top.bit
+# wait_on_run impl_merged
+[Sat Nov 14 21:40:27 2026] Waiting for impl_merged to finish...
+
+*** Running vivado
+    with args -log pq_merged_board_top.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source pq_merged_board_top.tcl -notrace
+
+
+
+****** Vivado v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Sat Nov 14 21:48:36 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source pq_merged_board_top.tcl -notrace
+source C:/vivado_verilog_proj/NOC_PQATTEST/scripts/gui_impl_pre.tcl
+GUI_IMPL_PRE maxThreads=1
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 540.422 ; gain = 206.086
+Command: link_design -top pq_merged_board_top -part xc7a100tcsg324-1
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Device 21-9227] Part: xc7a100tcsg324-1 does not have CEAM library.
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.443 . Memory (MB): peak = 1062.094 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1822 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2024.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/vivado_verilog_proj/NOC_PQATTEST/synth/merged/pq_merged_board_arty.xdc]
+INFO: [Timing 38-35] Done setting XDC timing constraints. [C:/vivado_verilog_proj/NOC_PQATTEST/synth/merged/pq_merged_board_arty.xdc:31]
+INFO: [Timing 38-2] Deriving generated clocks [C:/vivado_verilog_proj/NOC_PQATTEST/synth/merged/pq_merged_board_arty.xdc:31]
+get_clocks: Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1904.648 ; gain = 648.902
+Finished Parsing XDC File [C:/vivado_verilog_proj/NOC_PQATTEST/synth/merged/pq_merged_board_arty.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1905.266 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 847 instances were transformed.
+  RAM16X1D => RAM32X1D (RAMD32(x2)): 264 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 377 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 162 instances
+  RAM64M => RAM64M (RAMD64E(x4)): 44 instances
+
+10 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 1905.266 ; gain = 1364.844
+Command: opt_design -directive Explore
+INFO: [Vivado_Tcl 4-136] Directive used for opt_design is: Explore
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.623 . Memory (MB): peak = 1905.266 ; gain = 0.000
+
+Starting Logic Optimization Task
+
+Phase 1 Initialization
+
+Phase 1.1 Core Generation And Design Setup
+Phase 1.1 Core Generation And Design Setup | Checksum: 3025743f4
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 2145.637 ; gain = 0.000
+
+Phase 1.2 Setup Constraints And Sort Netlist
+Phase 1.2 Setup Constraints And Sort Netlist | Checksum: 3025743f4
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.030 . Memory (MB): peak = 2145.637 ; gain = 0.000
+Phase 1 Initialization | Checksum: 3025743f4
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.034 . Memory (MB): peak = 2145.637 ; gain = 0.000
+
+Phase 2 Timer Update And Timing Data Collection
+
+Phase 2.1 Timer Update
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Phase 2.1 Timer Update | Checksum: 3025743f4
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2276.520 ; gain = 130.883
+
+Phase 2.2 Timing Data Collection
+Phase 2.2 Timing Data Collection | Checksum: 3025743f4
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2276.520 ; gain = 130.883
+Phase 2 Timer Update And Timing Data Collection | Checksum: 3025743f4
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2276.520 ; gain = 130.883
+
+Phase 3 Retarget
+INFO: [Opt 31-1834] Total Chains To Be Transformed Were: 0 AND Number of Transformed insts Created are: 0
+INFO: [Opt 31-1566] Pulled 20 inverters resulting in an inversion of 211 pins
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 3 Retarget | Checksum: 2397bcbd4
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2276.520 ; gain = 130.883
+Retarget | Checksum: 2397bcbd4
+INFO: [Opt 31-389] Phase Retarget created 35 cells and removed 64 cells
+INFO: [Opt 31-1021] In phase Retarget, 1 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 4 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 4 Constant propagation | Checksum: 1bc80d00a
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2276.520 ; gain = 130.883
+Constant propagation | Checksum: 1bc80d00a
+INFO: [Opt 31-389] Phase Constant propagation created 27 cells and removed 63 cells
+
+Phase 5 Sweep
+Phase 5 Sweep | Checksum: 267636958
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2276.520 ; gain = 130.883
+Sweep | Checksum: 267636958
+INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 105 cells
+
+Phase 6 BUFG optimization
+Phase 6 BUFG optimization | Checksum: 267636958
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2276.520 ; gain = 130.883
+BUFG optimization | Checksum: 267636958
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 7 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 7 Shift Register Optimization | Checksum: 267636958
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2276.520 ; gain = 130.883
+Shift Register Optimization | Checksum: 267636958
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+INFO: [Opt 31-1555] control_set_opt supports Versal devices only, and device 7a100t is unsupported
+
+Phase 8 Post Processing Netlist
+Phase 8 Post Processing Netlist | Checksum: 267636958
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2276.520 ; gain = 130.883
+Post Processing Netlist | Checksum: 267636958
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+
+Phase 9 Finalization
+
+Phase 9.1 Finalizing Design Cores and Updating Shapes
+Phase 9.1 Finalizing Design Cores and Updating Shapes | Checksum: 2635d9354
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2276.520 ; gain = 130.883
+
+Phase 9.2 Verifying Netlist Connectivity
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.089 . Memory (MB): peak = 2276.520 ; gain = 0.000
+Phase 9.2 Verifying Netlist Connectivity | Checksum: 2635d9354
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2276.520 ; gain = 130.883
+Phase 9 Finalization | Checksum: 2635d9354
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2276.520 ; gain = 130.883
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |              35  |              64  |                                              1  |
+|  Constant propagation         |              27  |              63  |                                              0  |
+|  Sweep                        |               0  |             105  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+Ending Logic Optimization Task | Checksum: 2635d9354
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2276.520 ; gain = 130.883
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 2276.520 ; gain = 0.000
+Ending Netlist Obfuscation Task | Checksum: 2635d9354
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.020 . Memory (MB): peak = 2276.520 ; gain = 0.000
+INFO: [Common 17-83] Releasing license: Implementation
+30 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 2276.520 ; gain = 371.254
+INFO: [Vivado 12-24828] Executing command : report_drc -file pq_merged_board_top_drc_opted.rpt -pb pq_merged_board_top_drc_opted.pb -rpx pq_merged_board_top_drc_opted.rpx
+Command: report_drc -file pq_merged_board_top_drc_opted.rpt -pb pq_merged_board_top_drc_opted.pb -rpx pq_merged_board_top_drc_opted.rpx
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/xilinx_vivado/Vivado/2024.1/data/ip'.
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/pq_merged_board_top_drc_opted.rpt.
+report_drc completed successfully
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.066 . Memory (MB): peak = 2324.484 ; gain = 0.000
+Wrote PlaceDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2324.484 ; gain = 0.000
+Wrote PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2324.484 ; gain = 0.000
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Wrote RouteStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.047 . Memory (MB): peak = 2324.484 ; gain = 0.000
+Wrote Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2324.484 ; gain = 0.000
+Wrote Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 2324.484 ; gain = 0.000
+Write Physdb Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.055 . Memory (MB): peak = 2324.484 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/pq_merged_board_top_opt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2324.484 ; gain = 47.965
+Command: place_design -directive ExtraTimingOpt
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-83] Releasing license: Implementation
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+INFO: [Vivado_Tcl 4-2302] The placer was invoked with the 'ExtraTimingOpt' directive.
+Running DRC as a precondition to command place_design
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 2331.043 ; gain = 0.000
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 1dad3c405
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 2331.043 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 2331.043 ; gain = 0.000
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 15d87780b
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2338.539 ; gain = 7.496
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 232a34187
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2734.926 ; gain = 403.883
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 232a34187
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 2734.926 ; gain = 403.883
+Phase 1 Placer Initialization | Checksum: 232a34187
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 2734.926 ; gain = 403.883
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+Phase 2.1 Floorplanning | Checksum: 1e159811f
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 2734.926 ; gain = 403.883
+
+Phase 2.2 Update Timing before SLR Path Opt
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 2550f1beb
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2734.926 ; gain = 403.883
+
+Phase 2.3 Post-Processing in Floorplanning
+Phase 2.3 Post-Processing in Floorplanning | Checksum: 2550f1beb
+
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 2734.926 ; gain = 403.883
+
+Phase 2.4 Global Placement Core
+
+Phase 2.4.1 UpdateTiming Before Physical Synthesis
+Phase 2.4.1 UpdateTiming Before Physical Synthesis | Checksum: 295e210c1
+
+Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 2.4.2 Physical Synthesis In Placer
+INFO: [Physopt 32-1035] Found 490 LUTNM shape to break, 838 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 281, two critical 209, total 490, new lutff created 4
+INFO: [Physopt 32-1138] End 1 Pass. Optimized 821 nets or LUTs. Breaked 490 LUTs, combined 331 existing LUTs and moved 0 existing LUT
+INFO: [Physopt 32-65] No nets found for high-fanout optimization.
+INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-456] No candidate cells for DSP register optimization found in the design.
+INFO: [Physopt 32-775] End 2 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-1123] No candidate cells found for Shift Register to Pipeline optimization
+INFO: [Physopt 32-775] End 2 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-1401] No candidate cells found for Shift Register optimization.
+INFO: [Physopt 32-677] No candidate cells for Shift Register optimization found in the design
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-526] No candidate cells for BRAM register optimization found in the design
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-846] No candidate cells for URAM register optimization found in the design
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-846] No candidate cells for URAM register optimization found in the design
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-949] No candidate nets found for dynamic/static region interface net replication
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 2745.941 ; gain = 0.000
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  LUT Combining                                    |          490  |            331  |                   821  |           0  |           1  |  00:00:01  |
+|  Retime                                           |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  DSP Register                                     |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Shift Register                                   |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  BRAM Register                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  URAM Register                                    |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Total                                            |          490  |            331  |                   821  |           0  |           9  |  00:00:01  |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Phase 2.4.2 Physical Synthesis In Placer | Checksum: 2a9d41058
+
+Time (s): cpu = 00:01:01 ; elapsed = 00:01:02 . Memory (MB): peak = 2745.941 ; gain = 414.898
+Phase 2.4 Global Placement Core | Checksum: 269738d1c
+
+Time (s): cpu = 00:01:02 ; elapsed = 00:01:04 . Memory (MB): peak = 2745.941 ; gain = 414.898
+Phase 2 Global Placement | Checksum: 269738d1c
+
+Time (s): cpu = 00:01:02 ; elapsed = 00:01:04 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 2e4e18916
+
+Time (s): cpu = 00:01:07 ; elapsed = 00:01:09 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 231d7d0d8
+
+Time (s): cpu = 00:01:15 ; elapsed = 00:01:17 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 3.3 Area Swap Optimization
+Phase 3.3 Area Swap Optimization | Checksum: 1775e1df6
+
+Time (s): cpu = 00:01:15 ; elapsed = 00:01:18 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 3.4 Pipeline Register Optimization
+Phase 3.4 Pipeline Register Optimization | Checksum: 1e876be4c
+
+Time (s): cpu = 00:01:16 ; elapsed = 00:01:18 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 3.5 Fast Optimization
+Phase 3.5 Fast Optimization | Checksum: 23cd8f220
+
+Time (s): cpu = 00:01:24 ; elapsed = 00:01:26 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 3.6 Small Shape Detail Placement
+Phase 3.6 Small Shape Detail Placement | Checksum: 2ddebbe01
+
+Time (s): cpu = 00:01:40 ; elapsed = 00:01:43 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 3.7 Re-assign LUT pins
+Phase 3.7 Re-assign LUT pins | Checksum: 2eb2860b5
+
+Time (s): cpu = 00:01:42 ; elapsed = 00:01:45 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 3.8 Pipeline Register Optimization
+Phase 3.8 Pipeline Register Optimization | Checksum: 2e3bc45f0
+
+Time (s): cpu = 00:01:42 ; elapsed = 00:01:45 . Memory (MB): peak = 2745.941 ; gain = 414.898
+Phase 3 Detail Placement | Checksum: 2e3bc45f0
+
+Time (s): cpu = 00:01:43 ; elapsed = 00:01:45 . Memory (MB): peak = 2745.941 ; gain = 414.898
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Phase 4.1.1 Post Placement Optimization
+Post Placement Optimization Initialization | Checksum: 35245b3a0
+
+Phase 4.1.1.1 BUFG Insertion
+
+Starting Physical Synthesis Task
+
+Phase 1 Physical Synthesis Initialization
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 1 CPUs
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=-1.132 | TNS=-44.485 |
+Phase 1 Physical Synthesis Initialization | Checksum: 263778450
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2907.586 ; gain = 110.734
+INFO: [Place 46-33] Processed net u_core/u_p7/rstb/rst, BUFG insertion was skipped due to placement/routing conflicts.
+INFO: [Place 46-33] Processed net u_core/u_cpu_a/g_full.u_meas/u_sha3/u_keccak_f1600/sha_rst_n, BUFG insertion was skipped due to placement/routing conflicts.
+INFO: [Place 46-33] Processed net u_core/u_cpu_a/rst_s, BUFG insertion was skipped due to placement/routing conflicts.
+INFO: [Place 46-33] Processed net u_core/u_cpu_a/g_full.u_meas/u_sha3/u_keccak_f1600/E[0], BUFG insertion was skipped due to placement/routing conflicts.
+INFO: [Place 46-33] Processed net u_core/u_cpu_a/u_tile/tile_status_inst/SR[0], BUFG insertion was skipped due to placement/routing conflicts.
+INFO: [Place 46-33] Processed net u_core/u_cpu_a/g_full.u_meas/u_sha3/state_reg[0][0], BUFG insertion was skipped due to placement/routing conflicts.
+INFO: [Place 46-56] BUFG insertion identified 6 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 6, Skipped due to Timing Degradation: 0, Skipped due to netlist editing failed: 0.
+Ending Physical Synthesis Task | Checksum: 2e4924407
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2933.113 ; gain = 136.262
+Phase 4.1.1.1 BUFG Insertion | Checksum: 35245b3a0
+
+Time (s): cpu = 00:01:59 ; elapsed = 00:02:02 . Memory (MB): peak = 2933.113 ; gain = 602.070
+
+Phase 4.1.1.2 Post Placement Timing Optimization
+INFO: [Place 30-746] Post Placement Timing Summary WNS=0.507. For the most accurate timing information please run report_timing.
+Phase 4.1.1.2 Post Placement Timing Optimization | Checksum: 2e5f5b5b0
+
+Time (s): cpu = 00:02:11 ; elapsed = 00:02:15 . Memory (MB): peak = 2958.613 ; gain = 627.570
+
+Time (s): cpu = 00:02:11 ; elapsed = 00:02:15 . Memory (MB): peak = 2958.613 ; gain = 627.570
+Phase 4.1 Post Commit Optimization | Checksum: 2e5f5b5b0
+
+Time (s): cpu = 00:02:11 ; elapsed = 00:02:16 . Memory (MB): peak = 2958.613 ; gain = 627.570
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: 2e5f5b5b0
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:02:16 . Memory (MB): peak = 2958.613 ; gain = 627.570
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ____________________________________________________
+|           | Global Congestion | Short Congestion  |
+| Direction | Region Size       | Region Size       |
+|___________|___________________|___________________|
+|      North|                1x1|                4x4|
+|___________|___________________|___________________|
+|      South|                1x1|                2x2|
+|___________|___________________|___________________|
+|       East|                4x4|                8x8|
+|___________|___________________|___________________|
+|       West|                1x1|                2x2|
+|___________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: 2e5f5b5b0
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:02:17 . Memory (MB): peak = 2958.613 ; gain = 627.570
+Phase 4.3 Placer Reporting | Checksum: 2e5f5b5b0
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:02:17 . Memory (MB): peak = 2958.613 ; gain = 627.570
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.023 . Memory (MB): peak = 2958.613 ; gain = 0.000
+
+Time (s): cpu = 00:02:12 ; elapsed = 00:02:17 . Memory (MB): peak = 2958.613 ; gain = 627.570
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 2a21aca61
+
+Time (s): cpu = 00:02:13 ; elapsed = 00:02:17 . Memory (MB): peak = 2958.613 ; gain = 627.570
+Ending Placer Task | Checksum: 1ee496a4c
+
+Time (s): cpu = 00:02:13 ; elapsed = 00:02:17 . Memory (MB): peak = 2958.613 ; gain = 627.570
+78 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:02:14 ; elapsed = 00:02:19 . Memory (MB): peak = 2958.613 ; gain = 634.129
+INFO: [Vivado 12-24838] Running report commands "report_control_sets, report_io, report_utilization" in parallel.
+Running report generation with 1 threads.
+INFO: [Vivado 12-24828] Executing command : report_io -file pq_merged_board_top_io_placed.rpt
+report_io: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.030 . Memory (MB): peak = 2958.613 ; gain = 0.000
+INFO: [Vivado 12-24828] Executing command : report_utilization -file pq_merged_board_top_utilization_placed.rpt -pb pq_merged_board_top_utilization_placed.pb
+INFO: [Vivado 12-24828] Executing command : report_control_sets -verbose -file pq_merged_board_top_control_sets_placed.rpt
+report_control_sets: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.093 . Memory (MB): peak = 2958.613 ; gain = 0.000
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.111 . Memory (MB): peak = 2958.613 ; gain = 0.000
+Wrote PlaceDB: Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2958.613 ; gain = 0.000
+Wrote PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2958.613 ; gain = 0.000
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Wrote RouteStorage: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.048 . Memory (MB): peak = 2958.613 ; gain = 0.000
+Wrote Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.075 . Memory (MB): peak = 2958.613 ; gain = 0.000
+Wrote Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2958.613 ; gain = 0.000
+Write Physdb Complete: Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2958.613 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/pq_merged_board_top_placed.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2958.613 ; gain = 0.000
+Command: phys_opt_design -directive AggressiveExplore
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Vivado_Tcl 4-137] Directive used for phys_opt_design is: AggressiveExplore
+
+Starting Initial Update Timing Task
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 3017.863 ; gain = 59.250
+INFO: [Vivado_Tcl 4-2280] Estimated Timing Summary | WNS= 0.507 | TNS= 0.000 | WHS= -0.095 |
+INFO: [Vivado_Tcl 4-383] Design worst setup slack (WNS) is greater than or equal to 0.000 ns. All physical synthesis setup optimizations will be skipped.
+INFO: [Vivado_Tcl 4-2291] Design worst hold slack (WHS) is greater than or equal to -0.250 ns. Hold fix optimization will be skipped.
+ 
+INFO: [Vivado_Tcl 4-232] No setup violation found. The netlist was not modified.
+INFO: [Common 17-83] Releasing license: Implementation
+91 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+phys_opt_design completed successfully
+phys_opt_design: Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 3017.863 ; gain = 59.250
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.108 . Memory (MB): peak = 3044.668 ; gain = 0.000
+Wrote PlaceDB: Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 3044.668 ; gain = 0.000
+Wrote PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3044.668 ; gain = 0.000
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Wrote RouteStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.048 . Memory (MB): peak = 3044.668 ; gain = 0.000
+Wrote Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.073 . Memory (MB): peak = 3044.668 ; gain = 0.000
+Wrote Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 3044.668 ; gain = 0.000
+Write Physdb Complete: Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 3044.668 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/pq_merged_board_top_physopt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 3044.668 ; gain = 26.805
+Command: route_design -directive AggressiveExplore
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+Running DRC as a precondition to command route_design
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-270] Using Router directive 'AggressiveExplore'.
+
+Phase 1 Build RT Design
+Checksum: PlaceDB: 9ba17fec ConstDB: 0 ShapeSum: a0d58aca RouteDB: b1d25f96
+Post Restoration Checksum: NetGraph: 3f59b56 | NumContArr: b61efa80 | Constraints: c2a8fa9d | Timing: c2a8fa9d
+Phase 1 Build RT Design | Checksum: 23f668b10
+
+Time (s): cpu = 00:00:30 ; elapsed = 00:00:31 . Memory (MB): peak = 3198.133 ; gain = 79.297
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 23f668b10
+
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 3198.133 ; gain = 79.297
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 23f668b10
+
+Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 3198.133 ; gain = 79.297
+ Number of Nodes with overlaps = 0
+
+Phase 2.3 Update Timing
+Phase 2.3 Update Timing | Checksum: 31fc955bd
+
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:48 . Memory (MB): peak = 3266.605 ; gain = 147.770
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.912  | TNS=0.000  | WHS=-0.204 | THS=-796.810|
+
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 62952
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 62952
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 2 Router Initialization | Checksum: 2ca7cbe93
+
+Time (s): cpu = 00:00:53 ; elapsed = 00:00:55 . Memory (MB): peak = 3328.363 ; gain = 209.527
+
+Phase 3 Global Routing
+Phase 3 Global Routing | Checksum: 2ca7cbe93
+
+Time (s): cpu = 00:00:53 ; elapsed = 00:00:55 . Memory (MB): peak = 3328.363 ; gain = 209.527
+
+Phase 4 Initial Routing
+
+Phase 4.1 Initial Net Routing Pass
+Phase 4.1 Initial Net Routing Pass | Checksum: 1dd3018ca
+
+Time (s): cpu = 00:01:07 ; elapsed = 00:01:08 . Memory (MB): peak = 3335.180 ; gain = 216.344
+Phase 4 Initial Routing | Checksum: 1dd3018ca
+
+Time (s): cpu = 00:01:07 ; elapsed = 00:01:09 . Memory (MB): peak = 3335.180 ; gain = 216.344
+
+Phase 5 Rip-up And Reroute
+
+Phase 5.1 Global Iteration 0
+ Number of Nodes with overlaps = 16139
+ Number of Nodes with overlaps = 5121
+ Number of Nodes with overlaps = 2244
+ Number of Nodes with overlaps = 412
+ Number of Nodes with overlaps = 93
+ Number of Nodes with overlaps = 30
+ Number of Nodes with overlaps = 9
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.626 | TNS=-14.593| WHS=N/A    | THS=N/A    |
+
+Phase 5.1 Global Iteration 0 | Checksum: 231a964ee
+
+Time (s): cpu = 00:02:26 ; elapsed = 00:02:31 . Memory (MB): peak = 3493.426 ; gain = 374.590
+
+Phase 5.2 Global Iteration 1
+ Number of Nodes with overlaps = 7174
+ Number of Nodes with overlaps = 2013
+ Number of Nodes with overlaps = 507
+ Number of Nodes with overlaps = 129
+ Number of Nodes with overlaps = 62
+ Number of Nodes with overlaps = 22
+ Number of Nodes with overlaps = 11
+ Number of Nodes with overlaps = 7
+ Number of Nodes with overlaps = 8
+ Number of Nodes with overlaps = 13
+ Number of Nodes with overlaps = 11
+ Number of Nodes with overlaps = 9
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 5
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-0.267 | TNS=-1.481 | WHS=N/A    | THS=N/A    |
+
+Phase 5.2 Global Iteration 1 | Checksum: 22635786d
+
+Time (s): cpu = 00:03:46 ; elapsed = 00:03:53 . Memory (MB): peak = 3505.047 ; gain = 386.211
+
+Phase 5.3 Global Iteration 2
+ Number of Nodes with overlaps = 7104
+ Number of Nodes with overlaps = 2082
+ Number of Nodes with overlaps = 382
+ Number of Nodes with overlaps = 164
+ Number of Nodes with overlaps = 115
+ Number of Nodes with overlaps = 34
+ Number of Nodes with overlaps = 16
+ Number of Nodes with overlaps = 11
+ Number of Nodes with overlaps = 5
+ Number of Nodes with overlaps = 6
+ Number of Nodes with overlaps = 7
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.133  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 5.3 Global Iteration 2 | Checksum: 1f18dd710
+
+Time (s): cpu = 00:05:07 ; elapsed = 00:05:15 . Memory (MB): peak = 3505.047 ; gain = 386.211
+Phase 5 Rip-up And Reroute | Checksum: 1f18dd710
+
+Time (s): cpu = 00:05:07 ; elapsed = 00:05:15 . Memory (MB): peak = 3505.047 ; gain = 386.211
+
+Phase 6 Delay and Skew Optimization
+
+Phase 6.1 Delay CleanUp
+Phase 6.1 Delay CleanUp | Checksum: 1f18dd710
+
+Time (s): cpu = 00:05:08 ; elapsed = 00:05:15 . Memory (MB): peak = 3505.047 ; gain = 386.211
+
+Phase 6.2 Clock Skew Optimization
+Phase 6.2 Clock Skew Optimization | Checksum: 1f18dd710
+
+Time (s): cpu = 00:05:08 ; elapsed = 00:05:15 . Memory (MB): peak = 3505.047 ; gain = 386.211
+Phase 6 Delay and Skew Optimization | Checksum: 1f18dd710
+
+Time (s): cpu = 00:05:08 ; elapsed = 00:05:15 . Memory (MB): peak = 3505.047 ; gain = 386.211
+
+Phase 7 Post Hold Fix
+
+Phase 7.1 Hold Fix Iter
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.172  | TNS=0.000  | WHS=0.006  | THS=0.000  |
+
+Phase 7.1 Hold Fix Iter | Checksum: 1f8f90f16
+
+Time (s): cpu = 00:05:12 ; elapsed = 00:05:20 . Memory (MB): peak = 3629.289 ; gain = 510.453
+Phase 7 Post Hold Fix | Checksum: 1f8f90f16
+
+Time (s): cpu = 00:05:12 ; elapsed = 00:05:20 . Memory (MB): peak = 3629.289 ; gain = 510.453
+
+Phase 8 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 18.772 %
+  Global Horizontal Routing Utilization  = 24.7056 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 8 Route finalize | Checksum: 1f8f90f16
+
+Time (s): cpu = 00:05:13 ; elapsed = 00:05:20 . Memory (MB): peak = 3630.285 ; gain = 511.449
+
+Phase 9 Verifying routed nets
+
+ Verification completed successfully
+Phase 9 Verifying routed nets | Checksum: 1f8f90f16
+
+Time (s): cpu = 00:05:13 ; elapsed = 00:05:20 . Memory (MB): peak = 3635.395 ; gain = 516.559
+
+Phase 10 Depositing Routes
+Phase 10 Depositing Routes | Checksum: 247fd177a
+
+Time (s): cpu = 00:05:17 ; elapsed = 00:05:25 . Memory (MB): peak = 3639.020 ; gain = 520.184
+INFO: [Route 72-16] Aggressive Explore Summary
++======+=======+=====+=======+=====+========+==============+===================+
+| Pass |  WNS  | TNS |  WHS  | THS | Status | Elapsed Time | Solution Selected |
++======+=======+=====+=======+=====+========+==============+===================+
+|  1   | 0.172 |  -  | 0.006 |  -  |  Pass  |   00:04:53   |         x         |
+|  2   |   -   |  -  |   -   |  -  |  Fail  |   00:00:00   |                   |
++------+-------+-----+-------+-----+--------+--------------+-------------------+
+
+
+Phase 11 Post Process Routing
+Phase 11 Post Process Routing | Checksum: 247fd177a
+
+Time (s): cpu = 00:05:17 ; elapsed = 00:05:25 . Memory (MB): peak = 3639.020 ; gain = 520.184
+
+Phase 12 Post Router Timing
+INFO: [Route 35-20] Post Routing Timing Summary | WNS=0.182  | TNS=0.000  | WHS=0.007  | THS=0.000  |
+
+Phase 12 Post Router Timing | Checksum: 220187b48
+
+Time (s): cpu = 00:05:34 ; elapsed = 00:05:42 . Memory (MB): peak = 4034.848 ; gain = 916.012
+INFO: [Route 35-61] The design met the timing requirement.
+Total Elapsed time in route_design: 341.622 secs
+
+Phase 13 Post-Route Event Processing
+Phase 13 Post-Route Event Processing | Checksum: 218760ec2
+
+Time (s): cpu = 00:05:34 ; elapsed = 00:05:42 . Memory (MB): peak = 4034.883 ; gain = 916.047
+INFO: [Route 35-16] Router Completed Successfully
+Ending Routing Task | Checksum: 218760ec2
+
+Time (s): cpu = 00:05:35 ; elapsed = 00:05:43 . Memory (MB): peak = 4034.883 ; gain = 916.047
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+107 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:05:38 ; elapsed = 00:05:46 . Memory (MB): peak = 4034.883 ; gain = 990.215
+INFO: [Vivado 12-24828] Executing command : report_drc -file pq_merged_board_top_drc_routed.rpt -pb pq_merged_board_top_drc_routed.pb -rpx pq_merged_board_top_drc_routed.rpx
+Command: report_drc -file pq_merged_board_top_drc_routed.rpt -pb pq_merged_board_top_drc_routed.pb -rpx pq_merged_board_top_drc_routed.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/pq_merged_board_top_drc_routed.rpt.
+report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 4034.883 ; gain = 0.000
+INFO: [Vivado 12-24828] Executing command : report_methodology -file pq_merged_board_top_methodology_drc_routed.rpt -pb pq_merged_board_top_methodology_drc_routed.pb -rpx pq_merged_board_top_methodology_drc_routed.rpx
+Command: report_methodology -file pq_merged_board_top_methodology_drc_routed.rpt -pb pq_merged_board_top_methodology_drc_routed.pb -rpx pq_merged_board_top_methodology_drc_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Vivado_Tcl 2-1520] The results of Report Methodology are in file C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/pq_merged_board_top_methodology_drc_routed.rpt.
+report_methodology completed successfully
+report_methodology: Time (s): cpu = 00:00:48 ; elapsed = 00:00:52 . Memory (MB): peak = 4300.867 ; gain = 265.984
+INFO: [Vivado 12-24828] Executing command : report_timing_summary -max_paths 10 -report_unconstrained -file pq_merged_board_top_timing_summary_routed.rpt -pb pq_merged_board_top_timing_summary_routed.pb -rpx pq_merged_board_top_timing_summary_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+report_timing_summary: Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 4668.914 ; gain = 368.047
+INFO: [Vivado 12-24838] Running report commands "report_incremental_reuse, report_route_status" in parallel.
+Running report generation with 1 threads.
+INFO: [Vivado 12-24828] Executing command : report_route_status -file pq_merged_board_top_route_status.rpt -pb pq_merged_board_top_route_status.pb
+INFO: [Vivado 12-24828] Executing command : report_incremental_reuse -file pq_merged_board_top_incremental_reuse_routed.rpt
+INFO: [Vivado_Tcl 4-1062] Incremental flow is disabled. No incremental reuse Info to report.
+INFO: [Vivado 12-24828] Executing command : report_power -file pq_merged_board_top_power_routed.rpt -pb pq_merged_board_top_power_summary_routed.pb -rpx pq_merged_board_top_power_routed.rpx
+Command: report_power -file pq_merged_board_top_power_routed.rpt -pb pq_merged_board_top_power_summary_routed.pb -rpx pq_merged_board_top_power_routed.rpx
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+WARNING: [Power 33-332] Found switching activity that implies high-fanout reset nets being asserted for excessive periods of time which may result in inaccurate power analysis.
+Resolution: To review and fix problems, please run Power Constraints Advisor in the GUI from Tools > Power Constraints Advisor or run report_power with the -advisory option to generate a text report.
+121 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+report_power: Time (s): cpu = 00:00:41 ; elapsed = 00:00:40 . Memory (MB): peak = 4728.902 ; gain = 54.922
+INFO: [Vivado 12-24828] Executing command : report_clock_utilization -file pq_merged_board_top_clock_utilization_routed.rpt
+WARNING: [Device 21-9320] Failed to find the Oracle tile group with name 'HSR_BOUNDARY_TOP'. This is required for Clock regions and Virtual grid.
+WARNING: [Device 21-2174] Failed to initialize Virtual grid.
+report_clock_utilization: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 4728.902 ; gain = 0.000
+INFO: [Vivado 12-24828] Executing command : report_bus_skew -warn_on_violation -file pq_merged_board_top_bus_skew_routed.rpt -pb pq_merged_board_top_bus_skew_routed.pb -rpx pq_merged_board_top_bus_skew_routed.rpx
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+generate_parallel_reports: Time (s): cpu = 00:02:17 ; elapsed = 00:02:25 . Memory (MB): peak = 4728.902 ; gain = 694.020
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.150 . Memory (MB): peak = 4732.246 ; gain = 0.000
+Wrote PlaceDB: Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 4732.246 ; gain = 0.000
+Wrote PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4732.246 ; gain = 0.000
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Wrote RouteStorage: Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 4739.832 ; gain = 7.586
+Wrote Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.091 . Memory (MB): peak = 4739.832 ; gain = 0.000
+Wrote Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 4739.832 ; gain = 0.000
+Write Physdb Complete: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 4739.832 ; gain = 7.586
+INFO: [Common 17-1381] The checkpoint 'C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/pq_merged_board_top_routed.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 4739.832 ; gain = 10.930
+Command: phys_opt_design -directive AggressiveExplore
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Vivado_Tcl 4-241] Physical synthesis in post route mode 
+INFO: [Vivado_Tcl 4-137] Directive used for phys_opt_design is: AggressiveExplore
+
+Starting Initial Update Timing Task
+
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:28 . Memory (MB): peak = 5077.012 ; gain = 329.312
+INFO: [Vivado_Tcl 4-2280] Estimated Timing Summary | WNS= 0.182 | TNS= 0.000 | WHS= 0.007 |
+INFO: [Vivado_Tcl 4-383] Design worst setup slack (WNS) is greater than or equal to 0.000 ns. All physical synthesis setup optimizations will be skipped.
+INFO: [Vivado_Tcl 4-2291] Design worst hold slack (WHS) is greater than or equal to 0.000 ns. Hold fix optimization will be skipped.
+ 
+INFO: [Vivado_Tcl 4-232] No setup violation found. The netlist was not modified.
+INFO: [Common 17-83] Releasing license: Implementation
+134 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+phys_opt_design completed successfully
+phys_opt_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:30 . Memory (MB): peak = 5077.012 ; gain = 337.180
+INFO: [Vivado 12-24828] Executing command : report_timing_summary -max_paths 10 -report_unconstrained -warn_on_violation -file pq_merged_board_top_timing_summary_postroute_physopted.rpt -pb pq_merged_board_top_timing_summary_postroute_physopted.pb -rpx pq_merged_board_top_timing_summary_postroute_physopted.rpx
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+report_timing_summary: Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 5459.324 ; gain = 382.312
+INFO: [Vivado 12-24828] Executing command : report_bus_skew -warn_on_violation -file pq_merged_board_top_bus_skew_postroute_physopted.rpt -pb pq_merged_board_top_bus_skew_postroute_physopted.pb -rpx pq_merged_board_top_bus_skew_postroute_physopted.rpx
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+generate_parallel_reports: Time (s): cpu = 00:00:29 ; elapsed = 00:00:32 . Memory (MB): peak = 5459.324 ; gain = 382.312
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.109 . Memory (MB): peak = 5477.086 ; gain = 0.000
+Wrote PlaceDB: Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 5477.086 ; gain = 0.000
+Wrote PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 5477.086 ; gain = 0.000
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Wrote RouteStorage: Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.847 . Memory (MB): peak = 5483.980 ; gain = 6.895
+Wrote Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.086 . Memory (MB): peak = 5483.980 ; gain = 0.000
+Wrote Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 5483.980 ; gain = 0.000
+Write Physdb Complete: Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 5483.980 ; gain = 6.895
+INFO: [Common 17-1381] The checkpoint 'C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/pq_merged_board_top_postroute_physopt.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 5483.980 ; gain = 24.656
+source C:/vivado_verilog_proj/NOC_PQATTEST/scripts/gui_bitstream_pre.tcl
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
+Command: report_methodology -file C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/gate/methodology_routed.rpt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Vivado_Tcl 2-1520] The results of Report Methodology are in file C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/gate/methodology_routed.rpt.
+report_methodology completed successfully
+report_methodology: Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 5881.844 ; gain = 397.863
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Command: report_drc -name mg_drc -file C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/gate/drc_routed.rpt
+WARNING: [Vivado_Tcl 2-1291] -name option used when not in GUI mode. A DRC tab will not be created, but the results will be stored for use with 'get_drc_violations -name mg_drc'
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/gate/drc_routed.rpt.
+report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 5917.203 ; gain = 35.359
+MERGED BOARD GATE | top pq_merged_board_top | Sat Nov 14 22:02:23 +0530 2026 | Vivado 2024.1 | xc7a100tcsg324-1
+clock period 20.000 ns | MMCM CLKOUT0 clock clk50_mmcm generated from sys_clk_pin (10.000 ns) | flow S4 release (mesh split, rebuilt, AreaOptimized_high)
+MG_FW_IMEM_RAMS=4
+MG_FW_INITIALISED=4
+MG_FW_B_RAMS=4
+MG_FW_B_INITIALISED=4
+MG_WNS=0.182
+MG_TNS=0.000
+MG_WHS=0.007
+MG_THS=0.000
+MG_WPWS=3.000
+MG_ROUTE_ERRORS=0
+MG_DRC_ERRORS=0
+MG_CHECK_TIMING=clean
+MG_LUT=39962
+MG_LUTRAM=2098
+MG_FF=29187
+MG_BRAM=20
+MG_DSP=0
+MG_IOB=12
+VERDICT PASS - closed at 20 ns (MMCM), firmware in the netlist
+GUI_GATE PASS (summary: C:/vivado_verilog_proj/_r10g2/NOC_PQATTEST.runs/impl_merged/gate/gate_summary.txt)
+Command: write_bitstream -force pq_merged_board_top.bit
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+Running DRC as a precondition to command write_bitstream
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.

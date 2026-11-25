@@ -1,0 +1,3 @@
+﻿17:34:03 GATE free=2.4GB pagefile=19456MB need free>=1GB pagefile>=8192MB
+17:36:04 STARTED select=dsyn2 scheduler=36764 evidence= log=C:\Users\kalas\AppData\Local\Temp\i3_dsyn2reg_20261020_173402.log
+17:36:04 scheduler exited stopped=False

@@ -1,0 +1,110 @@
+--- a/scripts/prepare_dual_lane.py
++++ b/scripts/prepare_dual_lane.py
+@@ -13,8 +13,41 @@
+ def job(jid,top,sources,checks,**kw):
+     return dict(id=jid,kind='simulation',top=top,sources=sources,checks=checks,defines=[],dependencies=[],independent=True,build_timeout=1200,sim_timeout=600,**kw)
+ 
+-def main():
+-    generate_credit_window(ROOT)
++# I-2 (PQ-1 V7-V10). Teammate reference modules that the V7 adapter imports
++# (transitive closure of derive_tile_key / measure_tile / generate_attestation_tag /
++# tile_respond / verifier_check). Replaces the demoted repo software/kmac128_ref.py.
++TEAMMATE='software/pq_attest_final/PQ_Attest/software/'
++ADAPTER_REF=[TEAMMATE+f for f in ['kmac128_ref.py','keccak_ref.py','sha3_256_ref.py','measurement_ref.py','attestation_ref.py','attestation_protocol.py']]
++S8_ORACLE=['scripts/s8_golden.py']+ADAPTER_REF+['vectors/s8_golden.json','vectors/s8_golden.svh']
++# Frozen V9 count of the CURRENT tb_stg_8_golden.sv (8x7 + 4x3 + 3x(2+7) = 95).
++# If reports/i2_track_c/tb_stg_8_golden.proposed.sv is adopted, refreeze to 174
++# and map key_length -> KEY before the first run.
++S8_CHECKS=95
++S8_MUTANTS=[('lost_measurement','MEASUREMENT'),('lost_tag','TAG'),('key_length','TAG'),('wrong_transcript','TAG'),('field_order','EPOCH'),('stale_nonce','NONCE'),('wrong_key','TAG')]
++# post_format_compat: every production job that compiles NOC_PKG is re-run with
++# the Q-C variant package substituted (never both packages in one list).
++VARIANT_PKG='rtl/dual_lane/NOC_PKG.sv'
++# Benches whose packet sets / check loops are derived from message_length() or
++# message_payload_flits() and which drive an NI with attestation traffic: the
++# challenge length change (5->7) can change their count, so no prior count exists.
++PFC_FREEZE_REQUIRED={'n81_ni_m0w16','n81_ni_m0w1','n81_ni_m1w16','n81_ni_m1w1','n81_nitb','n81_sys_m0w16','n81_sys_m0w64','n81_sys_m0n0','n81_sys_m1w16','n81_sys_m1n0'}
++PFC_DEFERRED={'perf_m0','perf_m1'}  # production perf jobs not yet accepted; belongs with NOC-2 (I-3)
++
++def variant_pkg_job(j):
++    v=json.loads(json.dumps(j)); pkg=S+'NOC_PKG.sv'
++    if v['sources'].count(pkg)!=1 or VARIANT_PKG in v['sources']: raise ValueError('post_format_compat source swap '+j['id'])
++    v['sources']=[VARIANT_PKG if p==pkg else p for p in v['sources']]
++    v.update(id='pfc_'+j['id'],variant_of=j['id'],selection='pfc'); v.pop('historical_evidence',None)
++    if v['kind']=='reuse':
++        v.pop('evidence',None); v.update(kind='simulation',build_timeout=1200,sim_timeout=600)
++    v['dependencies']=['pfc_'+d for d in v.get('dependencies',[])]
++    if j['id'] in PFC_FREEZE_REQUIRED:
++        v.update(checks='FREEZE_REQUIRED',unimplemented='post_format_compat: expected count FREEZE_REQUIRED before first run (variant Q-C challenge 5->7 flits)')
++    elif 'checks' in v:
++        v['checks_basis']='carried from frozen '+j['id']+'; bench does not reference ATTEST_CHALLENGE_WIDTH or the challenge length'
++    return v
++
++def build_registry(check_files=True):
+     jobs=[]
+     n81=[('ni_m0w16','tb_ni_n81',[],115,dict(W=16,MAC_FLITS=0)),
+          ('ni_m0w1','tb_ni_n81',['N81_W=1'],114,dict(W=1,MAC_FLITS=0)),
+@@ -45,11 +78,16 @@
+         if pipe is not None: j.update(config={'TB_LINK_PIPE':pipe},config_pattern=r'^\s*(N-7 CONFIG:[^\r\n]+)$',extra_counts=dict(GuardChecks=111,ProtocolErrors=0,InjBlocked=0))
+         if tag=='tb1': j.update(judge='tb1')
+         jobs.append(j)
+-    jobs.append(dict(id='s8_python',kind='python',script='scripts/s8_golden.py',sources=['scripts/s8_golden.py','software/kmac128_ref.py','vectors/s8_golden.json','vectors/s8_golden.svh',T+'pq_kdf_tb.sv',T+'pq_measurement_tb.sv',T+'pqattest_tb.sv'],dependencies=[],independent=True,selection='golden'))
+-    g=job('s8_golden','tb_stg_8_golden',CRYPTO+[T+'tb_stg_8_golden.sv'],95,selection='golden',config=dict(TOP='tb_stg_8_golden',VECTORS=8,RESPONSE_BITS=776,DEMO=1),include_dirs=['vectors'],oracle_files=['scripts/s8_golden.py','software/kmac128_ref.py','vectors/s8_golden.json','vectors/s8_golden.svh']); g['dependencies']=['s8_python']; g['independent']=False; jobs.append(g)
+-    for m,oracle in [('lost_measurement','MEASUREMENT'),('lost_tag','TAG'),('key_length','TAG'),('wrong_transcript','TAG'),('field_order','EPOCH'),('stale_nonce','NONCE'),('wrong_key','TAG')]:
++    # V8 profile split: teammate 16-byte examples unchanged, and the 32-byte system profile; never mixed.
++    jobs.append(dict(id='py_teammate_examples',kind='python',script='scripts/py_teammate_examples.py',output_argument=True,positive_marker=r'^PY_TEAMMATE_EXAMPLES: PASS',sources=['scripts/py_teammate_examples.py']+ADAPTER_REF+[TEAMMATE+'kdf_vectors.py'],dependencies=[],independent=True,selection='golden',sim_timeout=300,profile='teammate_examples_unchanged'))
++    jobs.append(dict(id='py_rtl_profile_32',kind='python',script='scripts/py_rtl_profile_32.py',output_argument=True,positive_marker=r'^PY_RTL_PROFILE_32: PASS',sources=['scripts/py_rtl_profile_32.py','scripts/s8_golden.py']+ADAPTER_REF+['vectors/s8_golden.json','vectors/s8_golden.svh'],dependencies=[],independent=True,selection='golden',sim_timeout=300,tile_key_bytes=32))
++    jobs.append(dict(id='s8_python',kind='python',script='scripts/s8_golden.py',positive_marker=r'^ORACLE: PASS',sources=['scripts/s8_golden.py']+ADAPTER_REF+['vectors/s8_golden.json','vectors/s8_golden.svh',T+'pq_kdf_tb.sv',T+'pq_measurement_tb.sv',T+'pqattest_tb.sv'],dependencies=[],independent=True,selection='golden',tile_key_bytes=32))
++    g=job('s8_golden','tb_stg_8_golden',CRYPTO+[T+'tb_stg_8_golden.sv'],S8_CHECKS,selection='golden',config=dict(TOP='tb_stg_8_golden',VECTORS=8,RESPONSE_BITS=776,DEMO=1),include_dirs=['vectors'],oracle_files=S8_ORACLE); g['dependencies']=['s8_python']; g['independent']=False; jobs.append(g)
++    for m,oracle in S8_MUTANTS:
+         j=dict(g,id='s8_mut_'+m,mutant=m,oracle=r'^\[FAIL\] G\d\d_'+oracle); j['dependencies']=['s8_golden']; jobs.append(j)
+-    after=dict(g,id='s8_control_after'); after['dependencies']=['s8_golden']+['s8_mut_'+m for m in ['lost_measurement','lost_tag','key_length','wrong_transcript','field_order','stale_nonce','wrong_key']]; jobs.append(after)
++    after=dict(g,id='s8_control_after'); after['dependencies']=['s8_golden']+['s8_mut_'+m for m,_ in S8_MUTANTS]; jobs.append(after)
++    # V10 system-policy layer (outside the immutable reference): both verdicts recorded.
++    jobs.append(dict(id='policy_layer',kind='python',script='scripts/policy_layer.py',output_argument=True,positive_marker=r'^POLICY_LAYER: PASS',sources=['scripts/policy_layer.py']+ADAPTER_REF,dependencies=[],independent=True,selection='golden',sim_timeout=300,tile_key_bytes=32))
+     jobs.append(dict(id='ni_ooc',kind='ooc',top='noc_network_interface',sources=NOC[:1]+[S+'noc_network_interface.sv'],generics=['-generic','LOCAL_TILE_ID=0 WD_LIMIT=16'],dependencies=[],independent=True,selection='ooc',build_timeout=1800))
+     jobs.append(dict(id='mesh_gate',kind='implementation',top='noc_mesh_synth_top',sources=NOC[:10]+['synth/noc_mesh_synth_top.sv'],defines=[],constraints='synth/n25_mesh.xdc',gate_script='scripts/n25_gate.tcl',child_script='scripts/dual_lane_impl.tcl',oracle_files=['synth/n25_mesh.xdc','scripts/n25_gate.tcl','scripts/dual_lane_impl.tcl'],dependencies=[],independent=True,selection='i1',build_timeout=7200,historical_evidence='reports/n25_run3pe_2026-10-02'))
+     reference=json.loads((ROOT/'docs/decisions/dual_lane_config.json').read_text())['python_reference']
+@@ -65,22 +103,36 @@
+     for mac in [0,1]:
+         j=job('perf_m'+str(mac),'tb_noc_perf',NOC+[T+'tb_noc_perf.sv'],84,selection='perf',config=dict(TOP='tb_noc_perf',POINTS=28,MAC_FLITS=4*mac,SEED=305419896,CLOCK_NS=20),tb_time_limit='200ms')
+         j['defines']=['PQ_MAC_ON'] if mac else []; jobs.append(j)
++    # post_format_compat (PQ-1): variant-package re-run of every job compiling the production NOC_PKG.
++    pfc=[variant_pkg_job(j) for j in list(jobs) if S+'NOC_PKG.sv' in j.get('sources',[])]
++    jobs.extend(pfc)
++    pfc_i2=[j['id'] for j in pfc if j['variant_of'] not in PFC_DEFERRED]
+     # Missing required subgates stay explicit until prepared and executed.
+-    blockers={'perf_matrix':'consume both 28-point runs plus effective scoreboard/liveness controls and isolated-hop probes','pq_endpoint':'endpoint unit/system controls required in addition to full-chain test','post_format_compat':'accepted Q-C source list requires requalification','l2_auth':'independent transcript and all targeted security controls required','l3_enforce':'trusted gate controls and fault-register cases required','security_sec_1_4':'SEC-1 to SEC-4 new contract; positive cases and effective targeted bypasses required','N-11':'consume matching PQ-4 security matrix','N-12':'final integrated/reset/stress regression required','N-13':'integrated synthesis/route required'}
++    blockers={'perf_matrix':'consume both 28-point runs plus effective scoreboard/liveness controls and isolated-hop probes','pq_endpoint':'endpoint unit/system controls required in addition to full-chain test','l2_auth':'independent transcript and all targeted security controls required','l3_enforce':'trusted gate controls and fault-register cases required','security_sec_1_4':'SEC-1 to SEC-4 new contract; positive cases and effective targeted bypasses required','N-11':'consume matching PQ-4 security matrix','N-12':'final integrated/reset/stress regression required','N-13':'integrated synthesis/route required'}
+     for jid,reason in blockers.items(): jobs.append(dict(id=jid,kind='gate',sources=[],dependencies=[],unimplemented=reason))
+     stages=[('NOC-1',[],[j['id'] for j in jobs if j['id'].startswith(('n81_','wp0_','d7_'))]+['ni_ooc','mesh_gate']),
+-            ('PQ-1',['NOC-1'],['python_ref']+[j['id'] for j in jobs if j['id'].startswith('s8_')]+['post_format_compat']),
++            ('PQ-1',['NOC-1'],['python_ref','py_teammate_examples','py_rtl_profile_32']+[j['id'] for j in jobs if j['id'].startswith('s8_')]+['policy_layer']+pfc_i2),
+             ('NOC-2',['NOC-1','PQ-1'],['perf_matrix']),('PQ-2',['NOC-1','PQ-1'],['pq_endpoint']),
+             ('PQ-3',['PQ-2'],[j['id'] for j in jobs if j['id'].startswith('ooc_')]+['endpoint_ooc']),
+             ('NOC-3',['NOC-2','PQ-1','PQ-2'],['l2_auth']),('NOC-4',['NOC-3','PQ-2'],['l3_enforce']),
+             ('PQ-4',['NOC-4','PQ-2'],['security_sec_1_4']),('PQ-5',['PQ-1','PQ-2','PQ-3','PQ-4','NOC-4'],['full_chain']),
+             ('NOC-5',['NOC-2','NOC-3','NOC-4','PQ-3','PQ-4','PQ-5'],['N-11','N-12','N-13'])]
+-    for j in jobs:
+-        for p in j.get('sources',[]):
+-            if not (ROOT/p).is_file(): raise FileNotFoundError(p)
++    if check_files:
++        for j in jobs:
++            for p in j.get('sources',[]):
++                if not (ROOT/p).is_file(): raise FileNotFoundError(p)
+     i1=stages[0][2]+['python_ref']
+     if len(i1)!=24 or len(set(i1))!=24:raise ValueError('I-1 requires 23 NOC-1 jobs plus python_ref')
+-    atomic(ROOT/'scripts/dual_lane_jobs.json',dict(schema=2,active_increment='I-1',jobs=jobs,increments={'I-1':i1},stages=[dict(id=i,dependencies=d,jobs=j) for i,d,j in stages]))
++    i2=['py_teammate_examples','py_rtl_profile_32','s8_python','s8_golden']+['s8_mut_'+m for m,_ in S8_MUTANTS]+['s8_control_after']+pfc_i2+['policy_layer']
++    ids=[j['id'] for j in jobs]
++    if len(ids)!=len(set(ids)) or len(i2)!=len(set(i2)) or any(i not in ids for i in i2):raise ValueError('I-2 job list inconsistent')
++    return dict(schema=2,active_increment='I-1',jobs=jobs,increments={'I-1':i1,'I-2':i2},stages=[dict(id=i,dependencies=d,jobs=j) for i,d,j in stages])
++
++def main():
++    generate_credit_window(ROOT)
++    registry=build_registry()
++    jobs=registry['jobs']
++    atomic(ROOT/'scripts/dual_lane_jobs.json',registry)
+     baseline=json.loads((ROOT/'automation/dual_lane_payload/baseline_before.json').read_text())
+     payload=ROOT/'automation/dual_lane_payload'; rows=[]
+     changed=[p for d in ['scripts','docs/decisions','vectors','rtl/dual_lane'] for p in (ROOT/d).rglob('*') if p.is_file() and '__pycache__' not in str(p) and p.suffix!='.pyc' and baseline['files'].get(p.relative_to(ROOT).as_posix())!=sha(p)]

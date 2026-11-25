@@ -1,0 +1,32 @@
+
+****** xsim v2024.1 (64-bit)
+  **** SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+  **** Start of session at: Tue Oct 20 17:32:31 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/h/xsim_script.tcl
+# xsim {h} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+CONFIG: TOP=tb_dsyn2_measurement_equiv CONFIG_LENS=65 IMEM_LENS=65 PATTERNS=4 PROTOCOL=9
+B4_WINDOW_START t=18095100000
+
+Time: 18095115 ns Started: 18095115 ns Scope: /tb_dsyn2_measurement_equiv/u_ref File: C:/vivado_verilog_proj/NOC_PQATTEST/sim/dual_lane/dsyn2/pq_measurement_orig_dsyn2.sv Line:274
+Error: pq_measurement: request 136 bytes exceeds 135
+Time: 18095115 ns  Iteration: 1  Process: /tb_dsyn2_measurement_equiv/u_ref//tb_dsyn2_measurement_equiv/u_ref  Scope: tb_dsyn2_measurement_equiv.u_ref  File: C:/vivado_verilog_proj/NOC_PQATTEST/sim/dual_lane/dsyn2/pq_measurement_orig_dsyn2.sv Line: 276
+
+Time: 18095115 ns Started: 18095115 ns Scope: /tb_dsyn2_measurement_equiv/u_var File: C:/vivado_verilog_proj/NOC_PQATTEST/rtl/dual_lane/pq_measurement.sv Line:207
+Error: pq_measurement: request 136 bytes exceeds 135
+Time: 18095115 ns  Iteration: 1  Process: /tb_dsyn2_measurement_equiv/u_var//tb_dsyn2_measurement_equiv/u_var  Scope: tb_dsyn2_measurement_equiv.u_var  File: C:/vivado_verilog_proj/NOC_PQATTEST/rtl/dual_lane/pq_measurement.sv Line: 209
+B4_WINDOW_END t=18098120000
+CHECKS : 33809
+ERRORS : 0
+RESULT : PASS
+$finish called at time : 18098120 ns : File "C:/npqc_dbgb4/tb_dbg.sv" Line 120
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:35 . Memory (MB): peak = 231.133 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 14504 KB (Peak: 14504 KB), Simulation CPU Usage: 32468 ms
+INFO: [Common 17-206] Exiting xsim at Tue Oct 20 17:33:08 2026...

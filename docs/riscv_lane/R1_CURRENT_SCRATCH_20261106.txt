@@ -1,0 +1,18 @@
+xvlog errors: 0
+== tb_addr_decode_v2: ENDED | PASSlines=13 FAILlines=0 ErrorColon=0 | RESULT : PASS 
+== tb_tile_top: ENDED | PASSlines=2 FAILlines=0 ErrorColon=0 | PASS: A1 tile_top CPU advanced beyond 0x12C to its end loop; core transfers, adapter captures and responses match. RESULT : PASS 
+== tb_two_tiles: ENDED | PASSlines=0 FAILlines=0 ErrorColon=0 | Tile 1 passed 0x12C = 0 WARNING: CPU execution check failed. 
+== tb_conformance: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 |  CONFORMANCE RESULTS PASS: 1000 TMEM conformance transactions passed. 
+== tb_random_latency: ENDED | PASSlines=2 FAILlines=0 ErrorColon=0 | PASS: 1000/1000 randomized seeds passed. PASS: Adapter survived independent 1-100 cycle latency. 
+== tb_cpu_alu: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: CPU ALU/register architectural test passed. 
+== tb_cpu_branch: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: CPU branch/jump/PC test passed. 
+== tb_cpu_mem: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: CPU load/store/immediate test passed. 
+== tb_cpu_memory_integration: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: CPU/memory integration with stalls passed. 
+== tb_memory_tile: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | RESULT PASS: Memory tile tests passed. 
+== tb_memory_full: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 |  MEMORY VERIFICATION RESULT PASS: Full memory verification passed. 
+== tb_traffic_gen: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | PASS: Traffic generator completed successfully. 
+== tb_mutation_checks: ENDED | PASSlines=8 FAILlines=0 ErrorColon=0 |  MUTATION TEST RESULT PASS: All representative mutations were detected. 
+== tb_uart_tx: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | 
+== tb_uart_mmio: ENDED | PASSlines=1 FAILlines=0 ErrorColon=0 | 
+== tb_gpio: ENDED | PASSlines=0 FAILlines=0 ErrorColon=0 | 
+== tb_tile_status: ENDED | PASSlines=0 FAILlines=0 ErrorColon=0 | 

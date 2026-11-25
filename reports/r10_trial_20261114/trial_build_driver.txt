@@ -1,0 +1,1 @@
+SCRATCH_TRIAL: area/timing gate PASS; not a qualified release image

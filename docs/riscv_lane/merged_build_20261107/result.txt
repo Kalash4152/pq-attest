@@ -1,0 +1,1 @@
+merged_board: top pq_merged_board_top  LUT 34987  FF 25276  WNS 0.237 ns  WHS 0.035 ns  bitstream C:/vivado_verilog_proj/NOC_PQATTEST/NOC_PQATTEST.runs_merged/merged_board/pq_merged_board_top.bit

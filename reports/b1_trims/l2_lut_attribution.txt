@@ -1,0 +1,29 @@
+TOP_LEVEL_LUTS 4540
+GROUP tx_key_q endpoints 768 cone_luts 672
+GROUP rx_key_q endpoints 768 cone_luts 538
+GROUP tx_transcript endpoints 2049 cone_luts 520
+GROUP rx_transcript endpoints 2073 cone_luts 533
+GROUP rb_quarantine endpoints 2847 cone_luts 35
+GROUP tp_payload endpoints 1536 cone_luts 21
+GROUP tx_seq_and_seq_q endpoints 1344 cone_luts 242
+GROUP rx_seq endpoints 1152 cone_luts 1462
+GROUP rx_control_counters endpoints 315 cone_luts 1747
+GROUP tx_control endpoints 513 cone_luts 282
+GROUP ni_inputs endpoints 225 cone_luts 445
+GROUP kmac_inputs endpoints 2186 cone_luts 3
+GROUP output_ports endpoints 179 cone_luts 575
+EXCLUSIVE kmac_inputs 3
+EXCLUSIVE ni_inputs 130
+EXCLUSIVE output_ports 105
+EXCLUSIVE rb_quarantine 34
+EXCLUSIVE rx_control_counters 60
+EXCLUSIVE rx_key_q 515
+EXCLUSIVE rx_seq 12
+EXCLUSIVE rx_transcript 512
+EXCLUSIVE tp_payload 21
+EXCLUSIVE tx_control 84
+EXCLUSIVE tx_key_q 515
+EXCLUSIVE tx_seq_and_seq_q 74
+EXCLUSIVE tx_transcript 519
+SHARED_BY_2PLUS 1956
+UNATTRIBUTED 0

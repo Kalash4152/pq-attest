@@ -1,0 +1,21 @@
+﻿14:52:30 GATE free=1.16GB pagefile=19456MB need free>=2GB pagefile>=8192MB
+14:57:30 GATE free=2.58GB pagefile=19456MB need free>=2GB pagefile>=8192MB
+14:57:31 STARTED select=ooc scheduler=23276 evidence=C:\vivado_verilog_proj\NOC_PQATTEST\reports\dual_lane_10_20261020_145731_31d5e260 log=C:\Users\kalas\AppData\Local\Temp\i3_i4ooc_20261020_145228.log
+14:57:32 free=2.46GB
+14:59:32 DONE ooc_pq_kdf state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[vivado=1805MB] free=2.37GB
+15:02:34 free=1.23GB
+15:07:35 free=0.3GB
+15:12:36 free=1.33GB
+15:17:37 free=1.28GB
+15:22:39 free=1.07GB
+15:27:40 free=1.38GB
+15:32:41 free=1.68GB
+15:37:42 free=1.59GB
+15:42:43 free=1.86GB
+15:47:44 free=0.72GB
+15:52:46 free=1.74GB
+15:57:12 DONE ooc_pq_measurement state=FAIL xsimkernel_peak=NAKB proc_peak[vivado=2825MB] free=4.03GB
+16:16:28 free=3.4GB
+16:35:27 free=0.92GB
+16:36:49 DONE ooc_pq_attestation_tag state=PASS_FRESH xsimkernel_peak=NAKB proc_peak[vivado=1494MB] free=2.67GB
+16:40:28 free=0.81GB

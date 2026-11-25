@@ -1,0 +1,66 @@
+{
+  "NOC_PKG.sv": {
+    "base": "e741a32da93ed5981dfe37dec2a125cd66aa8e6574132874946e05c2ce68521b",
+    "variant": "e428af103c9a0096f47f9ad97215a33b919dc9035c2a5e9d1255ff9fdd33a7be"
+  },
+  "noc_network_interface.sv": {
+    "base": "83f3b884de6928abacedb7b7a2bee1c73d02882f484c9c364ee27c200f2e588d",
+    "variant": "341c46d25525e6e5bc5c7eae557be0dacb4345361cf8466530c71a3f86fe1cbb"
+  },
+  "pq_keccak_iota.sv": {
+    "base": "6cba7811dd5bba543e2df238ad425ebbe5c11546d714f3fd85049d64414b90af",
+    "variant": "d84b125dc8119c1b2f68421d62ef28b239df367f2692e9c4840ec384cc29b369",
+    "decision": "docs/decisions/D-SYN-1-crypto-synth-fixes.md"
+  },
+  "SHA3_PAD.sv": {
+    "base": "d247d5c24e156da66facb4327c66f330a093f8bfed14bb84fb25e818605e4cd3",
+    "variant": "41ff37e0694bfce7348b75866f4d460b384dae534a1f9220dcff6497338d5743",
+    "decision": "docs/decisions/D-SYN-1-crypto-synth-fixes.md"
+  },
+  "pq_measurement.sv": {
+    "base": "8c512a7fe277e95ff7670d550a44d2e34d9ae8d4fec9a931c72457c0b6e7e09e",
+    "variant": "76c7ebf003609620f662c8a8f7ef04a7e18347fb5fd7507d8112c140b56799dc",
+    "decision": "docs/decisions/D-SYN-2-measurement-architecture.md"
+  },
+  "noc_l2_auth.sv": {
+    "base": "f56ac1f56eada1bdcf94a61f5f40aa994aef58eab5d10e12b98f7275d96a91e3",
+    "base_commit": "90e8dca",
+    "variant": "3e9620d891346a3deeb59fcb86425f60a524fd0d8f216675334477d0a69c7a35",
+    "decision": "docs/decisions/M-F1-interface-freeze.md R7.8.1 (trims T1, T2); DECISION_REGISTER D-AREA-1"
+  },
+  "pq_kdf_xk.sv": {
+    "base": "596f0cc2ee669eea21837d30e54e238d494c908b1613279b6a72ddfe56c508cc",
+    "base_file": "NOC_PQATTEST.srcs/sources_1/new/pq_kdf.sv",
+    "variant": "9670eaa6a327a9ccd0603adb2680489446e2f84e59a33827effc77da4abc6f44",
+    "decision": "M-F1 rev 7 R7.8.2 (D); DECISION_REGISTER D-AREA-1",
+    "generator": "scripts/prepare_kshare.py"
+  },
+  "pq_attestation_tag_xk.sv": {
+    "base": "c7962f81086754088daf7c87fe27ac12c10ed4e82725ec463213bb7b142d5319",
+    "base_file": "NOC_PQATTEST.srcs/sources_1/new/pqattest_stg7.sv",
+    "variant": "dd0eaca4b609a725d541e0f4f2601af788ebcbf857a0255f36559fa08828b103",
+    "decision": "M-F1 rev 7 R7.8.2 (D); DECISION_REGISTER D-AREA-1",
+    "generator": "scripts/prepare_kshare.py"
+  },
+  "pq_attest_protocol.sv": {
+    "base": "07cae635a062bd0d7aacb02d4e711c81e4f50f7ac3a7bd65684d62b5f5bded5e",
+    "base_file": "NOC_PQATTEST.srcs/sources_1/new/pq_attest_protocol.sv",
+    "variant": "35aae596fa7d853beaf311bea8a20c344db48ef6bc8163e1a7ebb6ac9d0077ec",
+    "decision": "M-F1 rev 7 R7.8.2 (D); DECISION_REGISTER D-AREA-1",
+    "generator": "scripts/prepare_kshare.py"
+  },
+  "pq_rot_verifier.sv": {
+    "base": "2decf1c97e6059d810c98f42193bac7c279e480ebc6bd812fc5a07b081d6ecdf",
+    "base_commit": "10b217a",
+    "note": "dual-lane original edited in place",
+    "variant": "c52b198f8dad8a2053058288d6736607622105bdd6952348d3ff462584ab7b8b",
+    "decision": "M-F1 rev 7 R7.8.2 (D); F2 revoke-while-busy fix (Kalash addendum B, 2026-10-21; reproducer run 110813)"
+  },
+  "noc_network_interface_p7.sv": {
+    "base": "341c46d25525e6e5bc5c7eae557be0dacb4345361cf8466530c71a3f86fe1cbb",
+    "base_file": "rtl/dual_lane/noc_network_interface.sv",
+    "variant": "80a59a7f9a5cb14f7ae0ba2c3fc196026c7f23e5db489d07268ad618d2426064",
+    "decision": "M-F1 rev 7 R7.1 (per-type MAC framing), R7.4 / C2 (CONTROL_ALLOWED)",
+    "generator": "scripts/prepare_p7ni.py"
+  }
+}

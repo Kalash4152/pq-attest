@@ -1,0 +1,1 @@
+p7_board: top pq_p7_board_top  LUT 29319  FF 20425  WNS 0.017 ns  WHS 0.012 ns  bitstream C:/vivado_verilog_proj/NOC_PQATTEST/NOC_PQATTEST.runs_s4/p7_board/pq_p7_board_top.bit

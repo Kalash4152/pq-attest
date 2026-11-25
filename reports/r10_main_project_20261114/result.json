@@ -1,0 +1,15 @@
+{
+  "metrics": {
+    "LUT": 39962.0,
+    "FF": 29187.0,
+    "BRAM": 20.0,
+    "WNS": 0.182,
+    "WHS": 0.007
+  },
+  "bitstream": "C:\\vivado_verilog_proj\\NOC_PQATTEST\\NOC_PQATTEST.runs\\impl_merged\\pq_merged_board_top.bit",
+  "sha256": "8d951af86feb9085aee7f7316e231ba091d6969cb6f4b2133f8d7a96b7e1f92d",
+  "payload_sha256": "54228bfc7b7536a48cb27e1538574199d7088fd4ff2f849664d141317204c3dd",
+  "matches_both_g4_and_copy": true,
+  "hardware_validated": false,
+  "formal_proof": false
+}
